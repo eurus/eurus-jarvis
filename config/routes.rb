@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :projects
   resources :vacations
   resources :errands
   root 'dashboard#index'

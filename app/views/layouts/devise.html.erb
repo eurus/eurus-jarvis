@@ -6,9 +6,8 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-  <%= switch_user_select%>
-  <div class="container" id="devise-main">
+<body id="devise-main">
+  <div class="container">
     <%= yield %>
   </div>
 

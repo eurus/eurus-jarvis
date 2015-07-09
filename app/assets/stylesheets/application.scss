@@ -14,14 +14,38 @@
  *= require font-awesome
  *= require_self
  */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
-body {
+
+$sidbarblue: #34495e;
+
+html,body,.container{
+    height:100%;
+}
+#devise-main {
   background-color: #f5f5f5;
   background-image: image-url("laptop.jpeg");
   background-size: cover;
 }
-
+.sidebar-color{
+  position: absolute;
+  background-color: $sidbarblue;
+  top:0;
+  bottom:0;
+  padding-right: 0 !important;
+}
 .text-center{
   text-align: center;
+}
+.sign-in-margin{
+  margin: 50px;
+}
+.logo-img{
+  margin: 20px;
+}
+
+.nav-full{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }

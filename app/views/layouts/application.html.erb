@@ -7,8 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= switch_user_select%>
-  <%= yield %>
+  <div class="row">
+    <div class="col-md-2 sidebar-color hidden-sm hidden-xs">
+      <%= render 'shared/sidebar'%>
+    </div>
+    <div class="col-md-10 col-md-offset-2 nav-full">
+      <%= render 'shared/navbar'%>
+      <%= switch_user_select%>
+      <%= yield %>
+      
+    </div>
+  </div>
 
 </body>
 </html>

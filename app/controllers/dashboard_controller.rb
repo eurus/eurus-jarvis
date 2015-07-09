@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
 
   def index
     @client = YahooWeather::Client.new;
-    @response = @client.fetch(12712492)
+    @response = @client.fetch(12712492).doc["item"]["condition"]
   end
 
   def setting

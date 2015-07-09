@@ -1,0 +1,99 @@
+code:
+  0: 
+    text: tornado
+  1: 
+    text: tropical storm
+  2: 
+    text: hurricane
+  3: 
+    text: severe thunderstorms
+  4: 
+    text: thunderstorms
+  5: 
+    text: mixed rain and snow
+  6: 
+    text: mixed rain and sleet
+  7: 
+    text: mixed snow and sleet
+  8: 
+    text: freezing drizzle
+  9: 
+    text: drizzle
+  10:  
+    text: freezing rain
+  11:  
+    text: showers
+  12:  
+    text: showers
+  13:  
+    text: snow flurries
+  14:  
+    text: light snow showers
+  15:  
+    text: blowing snow
+  16:  
+    text: snow
+  17:  
+    text: hail
+  18:  
+    text: sleet
+  19:  
+    text: dust
+  20:  
+    text: foggy
+  21:  
+    text: haze
+  22:  
+    text: smoky
+  23:  
+    text: blustery
+  24:  
+    text: windy
+  25:  
+    text: cold
+  26:  
+    text: cloudy
+  27:  
+    text: mostly cloudy (night)
+  28:  
+    text: mostly cloudy (day)
+  29:  
+    text: partly cloudy (night)
+  30:  
+    text: partly cloudy (day)
+  31:  
+    text: clear (night)
+  32:  
+    text: sunny
+  33:  
+    text: fair (night)
+  34:  
+    text: fair (day)
+  35:  
+    text: mixed rain and hail
+  36:  
+    text: hot
+  37:  
+    text: isolated thunderstorms
+  38:  
+    text: scattered thunderstorms
+  39:  
+    text: scattered thunderstorms
+  40:  
+    text: scattered showers
+  41:  
+    text: heavy snow
+  42:  
+    text: scattered snow showers
+  43:  
+    text: heavy snow
+  44:  
+    text: partly cloudy
+  45:  
+    text: thundershowers
+  46:  
+    text: snow showers
+  47:  
+    text: isolated thundershowers
+  3200:  
+    text: not available

@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709030827) do
+ActiveRecord::Schema.define(version: 20150709031747) do
+
+  create_table "errands", force: :cascade do |t|
+    t.string   "location",   limit: 255
+    t.string   "content",    limit: 255
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.integer  "project_id", limit: 4
+    t.integer  "user_id",    limit: 4
+    t.float    "fee",        limit: 24
+    t.boolean  "check"
+    t.boolean  "issue"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

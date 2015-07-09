@@ -1,0 +1,37 @@
+h1 Listing errands
+
+table
+  thead
+    tr
+      th Location
+      th Content
+      th Start at
+      th End at
+      th Project
+      th User
+      th Fee
+      th Check
+      th Issue
+      th
+      th
+      th
+
+  tbody
+    - @errands.each do |errand|
+      tr
+        td = errand.location
+        td = errand.content
+        td = errand.start_at
+        td = errand.end_at
+        td = errand.project_id
+        td = errand.user_id
+        td = errand.fee
+        td = errand.check
+        td = errand.issue
+        td = link_to 'Show', errand
+        td = link_to 'Edit', edit_errand_path(errand)
+        td = link_to 'Destroy', errand, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Errand', new_errand_path

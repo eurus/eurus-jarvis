@@ -1,0 +1,16 @@
+= simple_form_for(@errand) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :location
+    = f.input :content
+    = f.input :start_at
+    = f.input :end_at
+    = f.input :project_id
+    = f.input :user_id
+    = f.input :fee
+    = f.input :check
+    = f.input :issue
+
+  .form-actions
+    = f.button :submit

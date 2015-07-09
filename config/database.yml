@@ -13,13 +13,15 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: eurusjavis
+  password: tonystark
+  host: eurusdata.mysql.rds.aliyuncs.com
+  port: 3306
+  timeout: 5000
 
 development:
   <<: *default
-  database: eurus-jarvis_development
+  database: eurus-jarvis_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -49,6 +51,6 @@ test:
 #
 production:
   <<: *default
-  database: eurus-jarvis_production
-  username: eurus-jarvis
+  database: eurus-jarvis_prod
+  username: <%= ENV['EURUS-JARVIS_DATABASE_USERNAME'] %>
   password: <%= ENV['EURUS-JARVIS_DATABASE_PASSWORD'] %>

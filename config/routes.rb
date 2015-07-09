@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :overtimes
   resources :feedbacks
   resources :weeklies
   resources :articals

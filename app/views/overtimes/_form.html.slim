@@ -1,0 +1,14 @@
+= simple_form_for(@overtime) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :start_at
+    = f.input :duration
+    = f.input :content
+    = f.input :user_id
+    = f.input :approve
+    = f.input :issue
+    = f.input :project_id
+
+  .form-actions
+    = f.button :submit

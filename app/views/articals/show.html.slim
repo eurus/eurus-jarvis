@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @artical.title
+p
+  strong Content:
+  = @artical.content
+p
+  strong User:
+  = @artical.user_id
+p
+  strong Origin:
+  = @artical.origin
+
+= link_to 'Edit', edit_artical_path(@artical)
+'|
+= link_to 'Back', articals_path

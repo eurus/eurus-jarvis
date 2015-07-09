@@ -1,0 +1,27 @@
+h1 Listing articals
+
+table
+  thead
+    tr
+      th Title
+      th Content
+      th User
+      th Origin
+      th
+      th
+      th
+
+  tbody
+    - @articals.each do |artical|
+      tr
+        td = artical.title
+        td = artical.content
+        td = artical.user_id
+        td = artical.origin
+        td = link_to 'Show', artical
+        td = link_to 'Edit', edit_artical_path(artical)
+        td = link_to 'Destroy', artical, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Artical', new_artical_path

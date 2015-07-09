@@ -30,5 +30,5 @@ nav.navbar.navbar-default
         li
           a href="#"  设置
         li
-          a href=".#"  退出
+          = link_to t("signout"), destroy_user_session_path, method: :delete
     /! /.nav-collapse

@@ -13,7 +13,7 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: eurusjavis
+  username: eurusjarvis
   password: tonystark
   host: eurusdata.mysql.rds.aliyuncs.com
   port: 3306

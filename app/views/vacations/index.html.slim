@@ -1,0 +1,27 @@
+h1 Listing vacations
+
+table
+  thead
+    tr
+      th Start at
+      th Duration
+      th Type
+      th Content
+      th
+      th
+      th
+
+  tbody
+    - @vacations.each do |vacation|
+      tr
+        td = vacation.start_at
+        td = vacation.duration
+        td = vacation.type
+        td = vacation.content
+        td = link_to 'Show', vacation
+        td = link_to 'Edit', edit_vacation_path(vacation)
+        td = link_to 'Destroy', vacation, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Vacation', new_vacation_path

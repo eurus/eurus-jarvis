@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Start at:
+  = @vacation.start_at
+p
+  strong Duration:
+  = @vacation.duration
+p
+  strong Type:
+  = @vacation.type
+p
+  strong Content:
+  = @vacation.content
+
+= link_to 'Edit', edit_vacation_path(@vacation)
+'|
+= link_to 'Back', vacations_path

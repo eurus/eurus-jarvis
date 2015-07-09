@@ -63,3 +63,4 @@ gem 'sweetalert-rails'
 gem 'kaminari'
 gem 'simple_form'
 gem 'devise'
+gem "font-awesome-rails"

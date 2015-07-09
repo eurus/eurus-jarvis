@@ -1,0 +1,10 @@
+= simple_form_for(@weekly) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :user_id
+    = f.input :sumary
+    = f.input :hope
+
+  .form-actions
+    = f.button :submit

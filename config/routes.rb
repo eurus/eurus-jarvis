@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :feedbacks
+  resources :weeklies
   resources :articals
   resources :projects
   resources :vacations

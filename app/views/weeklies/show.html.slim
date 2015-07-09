@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong User:
+  = @weekly.user_id
+p
+  strong Sumary:
+  = @weekly.sumary
+p
+  strong Hope:
+  = @weekly.hope
+
+= link_to 'Edit', edit_weekly_path(@weekly)
+'|
+= link_to 'Back', weeklies_path

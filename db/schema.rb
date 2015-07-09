@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709050324) do
+ActiveRecord::Schema.define(version: 20150709050840) do
 
   create_table "articals", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(version: 20150709050324) do
     t.boolean  "issue"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.text     "content",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "projects", force: :cascade do |t|
@@ -75,6 +82,14 @@ ActiveRecord::Schema.define(version: 20150709050324) do
     t.string   "content",    limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "weeklies", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.text     "sumary",     limit: 65535
+    t.text     "hope",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
 end

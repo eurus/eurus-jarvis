@@ -23,3 +23,6 @@ en:
   hello: "Hello world"
   signin: "Sign In"
   signout: "Sign Out"
+  today-news: "News Of Today"
+  today-weather: "Weather Of Today"
+  today-tool: "Tools"

@@ -1,4 +1,4 @@
-nav.navbar.navbar-default
+nav.navbar.navbar-default.navbar-custom
   .container
     .navbar-header
       button.navbar-toggle.collapsed aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" type="button" 
@@ -7,22 +7,21 @@ nav.navbar.navbar-default
         span.icon-bar
         span.icon-bar
     #navbar.navbar-collapse.collapse
+      = switch_user_select
       ul.nav.navbar-nav.hidden-md.hidden-lg.text-center
         li
-          = link_to "Dash"
+          a href="" = fa_icon("dashboard") + " 项目"
         li
-          = link_to "项目"
+          a href="" = fa_icon("paper-plane") + " 出差"
         li
-          = link_to "出差"
+          a href="" = fa_icon("bed") + " 假期"
         li
-          = link_to "假期"
+          a href="" = fa_icon("briefcase") + " 加班"
         li
-          = link_to "加班"
+          a href="" = fa_icon("newspaper-o") + " 周报"
         li
-          = link_to "周报"
-        li
-          = link_to "反馈"
-        
+          a href="" = fa_icon("heart") + " 反馈"
+
       ul.nav.navbar-nav.navbar-right.text-center
         li
           a href=""

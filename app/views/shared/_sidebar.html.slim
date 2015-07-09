@@ -1,10 +1,10 @@
 .logo-img.text-center
   = image_tag "logo.jpeg", width: '100',height: '100',class: "img-circle"
 ul.list-group.text-center
-  li.list-group-item.active Dash
-  li.list-group-item 项目
-  li.list-group-item 出差
-  li.list-group-item 假期
-  li.list-group-item 加班
-  li.list-group-item 周报
-  li.list-group-item 反馈
+  li.list-group-item.active = fa_icon("dashboard")+" Dash"
+  li.list-group-item = fa_icon("dashboard") + " 项目"
+  li.list-group-item = fa_icon("paper-plane") + " 出差"
+  li.list-group-item = fa_icon("bed") + " 假期"
+  li.list-group-item = fa_icon("briefcase") + " 加班"
+  li.list-group-item = fa_icon("newspaper-o") + " 周报"
+  li.list-group-item = fa_icon("heart") + " 反馈"

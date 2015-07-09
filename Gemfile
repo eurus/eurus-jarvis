@@ -63,4 +63,8 @@ gem 'sweetalert-rails'
 gem 'kaminari'
 gem 'simple_form'
 gem 'devise'
+#icons
 gem "font-awesome-rails"
+gem 'weather-icons-rails'
+# weather
+gem 'yahoo_weather'

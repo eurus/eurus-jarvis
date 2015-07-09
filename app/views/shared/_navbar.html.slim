@@ -25,7 +25,7 @@ nav.navbar.navbar-default.navbar-custom
       ul.nav.navbar-nav.navbar-right.text-center
         li
           a href="/"
-            = image_tag "logo.jpeg", width: '30',height: '30',class: "img-circle"
+            = image_tag(current_user.avatar_url(:micro),class:"img-circle") if current_user.avatar?
         li
           = link_to t("settings"), settings_path
         li

@@ -1,4 +1,7 @@
 .row
+  .jumbotron
+    h3 Welcome Aboard!
+    p = current_user.nickname
   .col-md-6#blog
     .panel.panel-default
       .panel-heading = t("today-news")
@@ -9,7 +12,7 @@
     .panel.panel-default
       .panel-heading = t('today-weather')
       .panel-body
-        p  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque sint recusandae id iste nulla, facilis praesentium voluptate ipsa velit earum.
+        p = @response.doc
   .col-md-3#useful
     .panel.panel-default
       .panel-heading = t('today-tool')

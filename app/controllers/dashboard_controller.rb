@@ -2,6 +2,8 @@ class DashboardController < ApplicationController
   # skip_before_action :authenticate_user!, only: [:index]
 
   def index
+    @client = YahooWeather::Client.new;
+    @response = @client.fetch(12712492)
   end
 
   def setting

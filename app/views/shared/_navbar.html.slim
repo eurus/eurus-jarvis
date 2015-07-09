@@ -24,10 +24,10 @@ nav.navbar.navbar-default.navbar-custom
 
       ul.nav.navbar-nav.navbar-right.text-center
         li
-          a href=""
+          a href="/"
             = image_tag "logo.jpeg", width: '30',height: '30',class: "img-circle"
         li
-          a href="#"  设置
+          = link_to t("settings"), settings_path
         li
           = link_to t("signout"), destroy_user_session_path, method: :delete
     /! /.nav-collapse

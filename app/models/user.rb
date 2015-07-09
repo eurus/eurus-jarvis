@@ -10,4 +10,6 @@ class User < ActiveRecord::Base
   has_many :weeklies
   has_many :feedbacks
   has_many :articals
+
+  mount_uploader :avatar, AvatarUploader
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'dashboard#index'
   resources :overtimes
   resources :feedbacks
   resources :weeklies
@@ -6,9 +7,10 @@ Rails.application.routes.draw do
   resources :projects
   resources :vacations
   resources :errands
-  root 'dashboard#index'
 
   devise_for :users
+  get "settings" => "dashboard#setting"
+  post "update_setting" => "dashboard#update_setting"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

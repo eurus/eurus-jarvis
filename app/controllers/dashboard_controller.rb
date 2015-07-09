@@ -4,4 +4,11 @@ class DashboardController < ApplicationController
   def index
   end
 
+  def setting
+  end
+
+  def update_setting
+    
+  end
+  
 end

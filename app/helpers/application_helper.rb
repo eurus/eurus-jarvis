@@ -10,4 +10,15 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
+  def notice_tag(msg="")
+    if msg && msg != ''
+      content_tag(:div, '', class:'alert alert-info', role:'alert') do
+        content_tag(:span, msg)+
+        content_tag(:button, class:'close', :'data-dismiss'=>'alert') do
+        content_tag(:span, fa_icon('times'), :'aria-hidden'=> 'true')
+      end
+      end
+    end
+  end
 end

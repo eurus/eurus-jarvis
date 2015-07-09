@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   get "settings" => "dashboard#setting"
-  post "update_setting" => "dashboard#update_setting"
+  put "update_setting" => "dashboard#update_setting"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

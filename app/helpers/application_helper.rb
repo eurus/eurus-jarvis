@@ -25,4 +25,12 @@ module ApplicationHelper
   def f_to_c (f)
       "#{(f.to_i - 36) / 1.8}℃"
   end
+
+  def boss?
+    current_user.role == "boss"
+  end
+
+  def stuff?
+    current_user.role != "boss"
+  end
 end

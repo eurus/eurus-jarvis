@@ -4,3 +4,24 @@
 #dashboard {
   background: #f5f5f5 !important;
 }
+.weather{
+  height: 100px;
+  width: 250px;
+  position: relative;
+  .icon{
+    font-size: 40px;
+  }
+  .text{
+    position: absolute;
+    bottom: 1px;
+    left: 5px;
+    font-size: 20px; 
+    font-weight: 100;
+  }
+  .temp{
+    position: absolute;
+    font-size: 50px;
+    top:10px;
+    right: 10px;
+  }
+}

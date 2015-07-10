@@ -1,20 +1,24 @@
 .row
   .jumbotron
+    .weather.pull-right
+      span.icon = wi_icon("#{@icon}")
+      span.text = @response["text"]
+      span.temp = f_to_c @response["temp"]
     h3 Welcome Aboard!
     p = current_user.nickname
   .col-md-6#blog
     .panel.panel-default
       .panel-heading = t("today-news")
       .panel-body
-        p  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum explicabo, accusantium, atque expedita magni quis harum nemo unde consectetur, aliquid ad! A iure doloribus ea dolorum omnis necessitatibus laboriosam quasi ex nobis sint non iste laudantium saepe totam quos, quas, illum hic nam tenetur molestiae est! Odio corrupti voluptatum, impedit delectus deleniti quo, numquam blanditiis voluptates itaque similique dolorem tempora.  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit architecto cum ipsam, velit saepe omnis. Quas aut aliquam aspernatur, odit perspiciatis. Explicabo porro, laborum nulla cumque aspernatur vero, esse! Inventore iste odit nostrum aperiam exercitationem quia beatae a ab, obcaecati praesentium sint numquam cupiditate iure cumque porro distinctio voluptate totam dicta pariatur recusandae, fugiat commodi maxime aut? Temporibus aliquid natus unde, soluta, repudiandae eius modi molestiae culpa ducimus quia. Assumenda in quidem repellat odit rem tempora nisi, recusandae voluptates distinctio ipsam vel ex provident pariatur vitae, ea aliquid magni beatae facilis ducimus dolore eos molestiae exercitationem doloremque ratione. Provident, in.
+
 
   .col-md-3#weather
     .panel.panel-default
       .panel-heading = t('today-weather')
       .panel-body
-        p = @response
+        
   .col-md-3#useful
     .panel.panel-default
       .panel-heading = t('today-tool')
       .panel-body
-        p  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque sint recusandae id iste nulla, facilis praesentium voluptate ipsa velit earum.
+        

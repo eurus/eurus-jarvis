@@ -2,8 +2,10 @@ class DashboardController < ApplicationController
   # skip_before_action :authenticate_user!, only: [:index]
 
   def index
+    @config = YAML.load_file("config/weather.yml")["code"]
     @client = YahooWeather::Client.new;
     @response = @client.fetch(12712492).doc["item"]["condition"]
+    @icon = @config[@response['code'].to_i]['icon']
   end
 
   def setting

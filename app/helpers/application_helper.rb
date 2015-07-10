@@ -21,4 +21,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def f_to_c (f)
+      "#{(f.to_i - 36) / 1.8}℃"
+  end
 end

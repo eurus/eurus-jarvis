@@ -13,3 +13,7 @@
     origin: "http://fortawesome.github.io/Font-Awesome/icons/",
     user_id: 1)
 end
+
+20.times.each do |x|
+  Feedback.create(user_id: 1, content: "what the fuck")
+end

@@ -4,12 +4,12 @@ class FeedbacksController < ApplicationController
   # GET /feedbacks
   # GET /feedbacks.json
   def index
-    @feedbacks = Feedback.all
-  end
-
-  # GET /feedbacks/1
-  # GET /feedbacks/1.json
-  def show
+    @feedback = Feedback.new
+    if current_user.role == "boos"
+      @feedbacks = Feedback.all.order(created: :desc).page params[:page]
+    else
+      @feedbacks = current_user.feedbacks.page params[:page]
+    end
   end
 
   # GET /feedbacks/new
@@ -17,36 +17,16 @@ class FeedbacksController < ApplicationController
     @feedback = Feedback.new
   end
 
-  # GET /feedbacks/1/edit
-  def edit
-  end
-
   # POST /feedbacks
   # POST /feedbacks.json
   def create
     @feedback = Feedback.new(feedback_params)
-
+    @feedback.user_id = current_user.id
     respond_to do |format|
       if @feedback.save
-        format.html { redirect_to @feedback, notice: 'Feedback was successfully created.' }
-        format.json { render :show, status: :created, location: @feedback }
+        format.html { redirect_to feedbacks_path, notice: 'Feedback was successfully created.' }
       else
-        format.html { render :new }
-        format.json { render json: @feedback.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /feedbacks/1
-  # PATCH/PUT /feedbacks/1.json
-  def update
-    respond_to do |format|
-      if @feedback.update(feedback_params)
-        format.html { redirect_to @feedback, notice: 'Feedback was successfully updated.' }
-        format.json { render :show, status: :ok, location: @feedback }
-      else
-        format.html { render :edit }
-        format.json { render json: @feedback.errors, status: :unprocessable_entity }
+        format.html { redirect_to feedbacks_path, notice: 'Feedback was not successfully created.' }
       end
     end
   end
@@ -62,13 +42,13 @@ class FeedbacksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_feedback
-      @feedback = Feedback.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_feedback
+    @feedback = Feedback.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def feedback_params
-      params.require(:feedback).permit(:user_id, :content)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def feedback_params
+    params.require(:feedback).permit(:user_id, :content)
+  end
 end

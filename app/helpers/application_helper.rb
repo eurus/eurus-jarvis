@@ -23,7 +23,7 @@ module ApplicationHelper
   end
 
   def f_to_c (f)
-      "#{(f.to_i - 36) / 1.8}℃"
+      "#{((f.to_i - 36) / 1.8).round}℃"
   end
 
   def boss?

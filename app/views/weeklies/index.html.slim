@@ -1,25 +1,24 @@
-h1 Listing weeklies
+.row
+  = notice_tag notice
+  .col-md-12
+    h3 周报
 
-table
-  thead
-    tr
-      th User
-      th Sumary
-      th Hope
-      th
-      th
-      th
+    table.table
+      thead
+        tr
+          th User
+          th Sumary
+          th Hope
+          th
+          th
+          th
 
-  tbody
-    - @weeklies.each do |weekly|
-      tr
-        td = weekly.user_id
-        td = weekly.sumary
-        td = weekly.hope
-        td = link_to 'Show', weekly
-        td = link_to 'Edit', edit_weekly_path(weekly)
-        td = link_to 'Destroy', weekly, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Weekly', new_weekly_path
+      tbody
+        - @weeklies.each do |weekly|
+          tr
+            td = weekly.user_id
+            td = weekly.sumary
+            td = weekly.hope
+            td = link_to 'Show', weekly
+            td = link_to 'Edit', edit_weekly_path(weekly)
+            td = link_to 'Destroy', weekly, data: {:confirm => 'Are you sure?'}, :method => :delete

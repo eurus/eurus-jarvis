@@ -9,10 +9,10 @@
           span = a.try :user_id
           article
            = a.content[0..200]
-        .panel-footer
-          span = link_to 'Show', a
-          span = link_to 'Edit', edit_artical_path(a)
-          span = link_to 'Destroy', a, data: {:confirm => 'Are you sure?'}, :method => :delete
+        .panel-footer.text-center
+          span.pull-left = link_to fa_icon('eye'), a
+          span = link_to fa_icon('pencil'), edit_artical_path(a)
+          span.pull-right = link_to fa_icon('trash'), a, data: {:confirm => 'Are you sure?'}, :method => :delete
 .text-center
   = paginate @articals,theme: 'twitter-bootstrap-3'
   /= link_to 'New Artical', new_artical_path,class: "btn btn-primary"

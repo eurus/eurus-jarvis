@@ -17,7 +17,7 @@
           tr
             td = project.name
             td = project.content
-            td = project.owner
+            td = owner_name project.owner
             td = project.status
             td 
               = link_to 'Edit', edit_project_path(project)

@@ -68,3 +68,5 @@ gem "font-awesome-rails"
 gem 'weather-icons-rails'
 # weather
 gem 'yahoo_weather'
+gem 'bootstrap-kaminari-views'
+

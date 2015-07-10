@@ -14,6 +14,7 @@
  *= require font-awesome
  *= require weather-icons
  *= require sweet-alert
+ *= require select2
  *= require_self
  */
 $sidbarblue: #698aab;
@@ -54,4 +55,7 @@ html,body,.container{
 .nav-full{
   padding-left: 0 !important;
   padding-right: 0 !important;
+}
+.bigdrop {
+    width: 300px !important;
 }

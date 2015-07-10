@@ -1,11 +1,29 @@
-= simple_form_for(@project) do |f|
-  = f.error_notification
+.col-md-3
+.col-md-6
+  = simple_form_for(@project) do |f|
+    = f.error_notification
 
-  .form-inputs
-    = f.input :name
-    = f.input :content
-    = f.input :owner
-    = f.input :status
+    .form-groups
+      = f.label :name
+      = f.text_field :name,class: "form-control"
+    .form-groups
+      = f.label :content
+      = f.text_field :content,class: "form-control"
+    .form-groups
+      = f.input :owner,collection: User.all.collect {|p| [ p.email, p.id ]}
+    .form-groups
+      = f.input :status, collection: ["blue print","on going","maintainning","pause","done"]
 
-  .form-actions
-    = f.button :submit
+
+    .form-actions
+      = f.submit '保存',class:"btn btn-block btn-primary"
+.col-md-3
+coffee:
+  $ ->
+    config = {
+      dropdownCssClass : 'bigdrop', 
+      width: '300px',
+      containerCss : {"display":"block"}
+    }
+    $("#project_status").select2(config)
+    $("#project_owner").select2(config)

@@ -69,4 +69,4 @@ gem 'weather-icons-rails'
 # weather
 gem 'yahoo_weather'
 gem 'bootstrap-kaminari-views'
-
+gem "select2-rails"

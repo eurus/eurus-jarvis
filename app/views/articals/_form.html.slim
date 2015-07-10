@@ -1,15 +1,18 @@
-= simple_form_for(@artical) do |f|
-  = f.error_notification
+.col-md-3
+.col-md-6
+  = simple_form_for(@artical) do |f|
+    = f.error_notification
 
-  .form-groups
-    = f.label :title
-    = f.text_field :title,class: "form-control"
-  .form-groups
-    = f.label :origin
-    = f.text_field :origin,class: "form-control"
-  .form-group
-    = f.label :content
-    = f.text_area :content,class: "form-control",rows: 10
+    .form-groups
+      = f.label :title
+      = f.text_field :title,class: "form-control"
+    .form-groups
+      = f.label :origin
+      = f.text_field :origin,class: "form-control"
+    .form-group
+      = f.label :content
+      = f.text_area :content,class: "form-control",rows: 10
 
-  .form-actions
-    = f.submit '保存',class:"btn btn-block btn-primary"
+    .form-actions
+      = f.submit '保存',class:"btn btn-block btn-primary"
+.col-md-3

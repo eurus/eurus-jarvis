@@ -1,27 +1,27 @@
-h1 Listing projects
+.row
+  = notice_tag notice
+  .col-md-8
+    h3 项目
+    table.table.table-bordered
+      thead
+        tr
+          th Name
+          th Content
+          th Owner
+          th Status
+          th
 
-table
-  thead
-    tr
-      th Name
-      th Content
-      th Owner
-      th Status
-      th
-      th
-      th
 
-  tbody
-    - @projects.each do |project|
-      tr
-        td = project.name
-        td = project.content
-        td = project.owner
-        td = project.status
-        td = link_to 'Show', project
-        td = link_to 'Edit', edit_project_path(project)
-        td = link_to 'Destroy', project, data: {:confirm => 'Are you sure?'}, :method => :delete
+      tbody
+        - @projects.each do |project|
+          tr
+            td = project.name
+            td = project.content
+            td = project.owner
+            td = project.status
+            td 
+              = link_to 'Edit', edit_project_path(project)
+              = link_to 'Destroy', project, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-br
+  .col-md-4
 
-= link_to 'New Project', new_project_path

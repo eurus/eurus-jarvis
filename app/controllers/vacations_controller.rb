@@ -7,11 +7,6 @@ class VacationsController < ApplicationController
     @vacations = Vacation.all
   end
 
-  # GET /vacations/1
-  # GET /vacations/1.json
-  def show
-  end
-
   # GET /vacations/new
   def new
     @vacation = Vacation.new
@@ -25,11 +20,11 @@ class VacationsController < ApplicationController
   # POST /vacations.json
   def create
     @vacation = Vacation.new(vacation_params)
-
+    @vacation.user_id = current_user.id
     respond_to do |format|
       if @vacation.save
-        format.html { redirect_to @vacation, notice: 'Vacation was successfully created.' }
-        format.json { render :show, status: :created, location: @vacation }
+        format.html { redirect_to vacations_url, notice: 'Vacation was successfully created.' }
+        
       else
         format.html { render :new }
         format.json { render json: @vacation.errors, status: :unprocessable_entity }
@@ -42,8 +37,8 @@ class VacationsController < ApplicationController
   def update
     respond_to do |format|
       if @vacation.update(vacation_params)
-        format.html { redirect_to @vacation, notice: 'Vacation was successfully updated.' }
-        format.json { render :show, status: :ok, location: @vacation }
+        format.html { redirect_to vacations_url, notice: 'Vacation was successfully updated.' }
+        
       else
         format.html { render :edit }
         format.json { render json: @vacation.errors, status: :unprocessable_entity }
@@ -69,6 +64,6 @@ class VacationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vacation_params
-      params.require(:vacation).permit(:start_at, :duration, :type, :content)
+      params.require(:vacation).permit(:start_at, :duration, :cut, :content)
     end
 end

@@ -70,3 +70,4 @@ gem 'weather-icons-rails'
 gem 'yahoo_weather'
 gem 'bootstrap-kaminari-views'
 gem "select2-rails"
+gem 'bootstrap-datepicker-rails'

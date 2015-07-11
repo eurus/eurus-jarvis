@@ -16,4 +16,5 @@
 //= require bootstrap-sprockets
 //= require sweet-alert
 //= require select2
+//= require bootstrap-datepicker
 //= require_tree .

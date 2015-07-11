@@ -20,7 +20,7 @@
             td = owner_name project.owner
             td = project.status
             td 
-              = link_to fa_icon('eye'), edit_project_path(project),class: "pull-left" if boss?
+              = link_to fa_icon('edit'), edit_project_path(project),class: "pull-left" if boss?
               = link_to fa_icon('trash'), project, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
   .col-md-4
 

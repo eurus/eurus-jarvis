@@ -20,9 +20,10 @@
             td = vacation.duration
             td = vacation.cut
             td = vacation.content
-            td = vacation.try :approve
+            td = status vacation.try :approve
             td 
-              = link_to 'Edit', edit_vacation_path(vacation)
-              = link_to 'Destroy', vacation, data: {:confirm => 'Are you sure?'}, :method => :delete
+              - unless vacation.approve
+                = link_to fa_icon("pencil"), edit_vacation_path(vacation),class: "pull-left" 
+                = link_to fa_icon('trash'), vacation, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
   .col-md-4
     h3 统计

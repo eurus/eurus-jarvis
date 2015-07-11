@@ -1,7 +1,10 @@
 .col-md-3
 .col-md-6
   = simple_form_for(@project) do |f|
-    = f.error_notification
+    -if @project.errors.any?
+      ul
+        - @project.errors.full_messages.each do |msg|
+          li = msg 
 
     .form-groups
       = f.label :name

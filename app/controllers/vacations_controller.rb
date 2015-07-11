@@ -56,6 +56,10 @@ class VacationsController < ApplicationController
     end
   end
 
+  def approve
+    
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_vacation

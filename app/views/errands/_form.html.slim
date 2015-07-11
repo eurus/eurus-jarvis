@@ -1,5 +1,8 @@
 = simple_form_for(@errand) do |f|
-  = f.error_notification
+  -if @errand.errors.any?
+      ul
+        - @errand.errors.full_messages.each do |msg|
+          li = msg 
 
   .form-inputs
     = f.input :location

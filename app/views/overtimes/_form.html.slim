@@ -1,5 +1,8 @@
 = simple_form_for(@overtime) do |f|
-  = f.error_notification
+  -if @overtime.errors.any?
+      ul
+        - @overtime.errors.full_messages.each do |msg|
+          li = msg 
 
   .form-inputs
     = f.input :start_at

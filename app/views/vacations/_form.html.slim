@@ -21,4 +21,6 @@ coffee:
       containerCss : {"display":"block"}
     }
     $("#vacation_cut").select2(config)
-    $('.datepicker').datepicker()
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd'
+    })

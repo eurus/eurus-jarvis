@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150711052802) do
+ActiveRecord::Schema.define(version: 20150711053453) do
 
   create_table "articals", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(version: 20150711052802) do
     t.integer  "project_id", limit: 4
     t.integer  "user_id",    limit: 4
     t.float    "fee",        limit: 24
-    t.boolean  "check"
-    t.boolean  "issue"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.boolean  "check",                  default: false
+    t.boolean  "issue",                  default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   create_table "feedbacks", force: :cascade do |t|
@@ -48,11 +48,11 @@ ActiveRecord::Schema.define(version: 20150711052802) do
     t.float    "duration",   limit: 24
     t.string   "content",    limit: 255
     t.integer  "user_id",    limit: 4
-    t.boolean  "approve"
-    t.boolean  "issue"
+    t.boolean  "approve",                default: false
+    t.boolean  "issue",                  default: false
     t.integer  "project_id", limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   create_table "projects", force: :cascade do |t|
@@ -92,10 +92,10 @@ ActiveRecord::Schema.define(version: 20150711052802) do
     t.date     "start_at"
     t.float    "duration",   limit: 24
     t.string   "content",    limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.integer  "user_id",    limit: 4
-    t.boolean  "approve"
+    t.boolean  "approve",                default: false
     t.string   "cut",        limit: 255
   end
 

@@ -21,7 +21,7 @@
             td = project.status
             td 
               = link_to fa_icon('edit'), edit_project_path(project),class: "pull-left" if boss?
-              = link_to fa_icon('trash'), project, data: {:confirm => 'Are you sure?'}, :method => :
+              = link_to fa_icon('trash'), project, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 .text-center
   = paginate @projects,theme: 'twitter-bootstrap-3'

@@ -1,6 +1,6 @@
 .row
   = notice_tag notice
-  .col-md-8
+  .col-md-12
     h3 加班
     table.table.table-bordered
       thead
@@ -27,4 +27,5 @@
               - unless overtime.approve
                 = link_to fa_icon("pencil"), edit_overtime_path(overtime),class: "pull-left" 
                 = link_to fa_icon('trash'), overtime, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right" 
-
+.text-center
+  = paginate @overtimes,theme: 'twitter-bootstrap-3'

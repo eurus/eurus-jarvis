@@ -1,6 +1,6 @@
 .row
   = notice_tag notice
-  .col-md-8
+  .col-md-12
     h3 项目
     table.table.table-bordered
       thead
@@ -21,8 +21,7 @@
             td = project.status
             td 
               = link_to fa_icon('edit'), edit_project_path(project),class: "pull-left" if boss?
-              = link_to fa_icon('trash'), project, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
-  .col-md-4
+              = link_to fa_icon('trash'), project, data: {:confirm => 'Are you sure?'}, :method => :
 
 .text-center
   = paginate @projects,theme: 'twitter-bootstrap-3'

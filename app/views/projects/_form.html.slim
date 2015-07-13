@@ -7,15 +7,17 @@
           li = msg 
 
     .form-groups
-      = f.label :name
+      = f.label "项目名称"
       = f.text_field :name,class: "form-control"
     .form-groups
-      = f.label :content
+      = f.label "项目简介"
       = f.text_field :content,class: "form-control"
     .form-groups
-      = f.input :owner,collection: User.all.collect {|p| [ p.email, p.id ]}
+      = f.label "项目经理"
+      = f.input :owner,collection: User.all.collect {|p| [ p.email, p.id ]},label: false
     .form-groups
-      = f.input :status, collection: ["blue print","on going","maintainning","pause","done"]
+      = f.label "项目状态"
+      = f.input :status, collection: ["blue print","on going","maintainning","pause","done"],label: false
 
 
     .form-actions

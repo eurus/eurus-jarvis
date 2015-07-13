@@ -1,33 +1,30 @@
-h1 Listing overtimes
+.row
+  = notice_tag notice
+  .col-md-8
+    h3 加班
+    table.table.table-bordered
+      thead
+        tr
+          th 加班日期
+          th 加班时长
+          th 加班内容
+          th 审核状态
+          th 发放状态
+          th 加班项目
+          th
 
-table
-  thead
-    tr
-      th Start at
-      th Duration
-      th Content
-      th User
-      th Approve
-      th Issue
-      th Project
-      th
-      th
-      th
 
-  tbody
-    - @overtimes.each do |overtime|
-      tr
-        td = overtime.start_at
-        td = overtime.duration
-        td = overtime.content
-        td = overtime.user_id
-        td = overtime.approve
-        td = overtime.issue
-        td = overtime.project_id
-        td = link_to 'Show', overtime
-        td = link_to 'Edit', edit_overtime_path(overtime)
-        td = link_to 'Destroy', overtime, data: {:confirm => 'Are you sure?'}, :method => :delete
+      tbody
+        - @overtimes.each do |overtime|
+          tr
+            td = overtime.start_at
+            td = overtime.duration
+            td = overtime.content
+            td = overtime.approve
+            td = overtime.issue
+            td = get_project_name overtime.project_id
+            td 
+              - unless overtime.approve
+                = link_to fa_icon("pencil"), edit_overtime_path(overtime),class: "pull-left" 
+                = link_to fa_icon('trash'), overtime, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right" 
 
-br
-
-= link_to 'New Overtime', new_overtime_path

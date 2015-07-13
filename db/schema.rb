@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150713140011) do
+ActiveRecord::Schema.define(version: 20150713140551) do
 
   create_table "articals", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -55,6 +55,11 @@ ActiveRecord::Schema.define(version: 20150713140011) do
     t.datetime "updated_at",                             null: false
   end
 
+  create_table "project_users", id: false, force: :cascade do |t|
+    t.integer "project_id", limit: 4
+    t.integer "user_id",    limit: 4
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "content",    limit: 255
@@ -87,11 +92,6 @@ ActiveRecord::Schema.define(version: 20150713140011) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "users_projects", id: false, force: :cascade do |t|
-    t.integer "user_id",    limit: 4
-    t.integer "project_id", limit: 4
-  end
 
   create_table "vacations", force: :cascade do |t|
     t.date     "start_at"

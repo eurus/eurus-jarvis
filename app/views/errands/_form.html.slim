@@ -6,18 +6,33 @@
           - @errand.errors.full_messages.each do |msg|
             li = msg 
     .form-groups
-      = f.input :location
+      = f.label "相关项目"
+      = f.input :location, input_html: {class: "form-control"},label: false
     .form-groups
-      = f.input :content
+      = f.label "开始时间"
+      = f.text_field :start_at,{class: "form-control datepicker"}
     .form-groups
-      = f.input :start_at
+      = f.label "结束时间"
+      = f.text_field :end_at,{class: "form-control datepicker"}
     .form-groups
-      = f.input :end_at
+      = f.label "相关项目"
+      = f.input :project_id,collection: Project.all.collect {|p| [ p.name, p.id ]},label: false
     .form-groups
-      = f.input :project_id
+      = f.label "加班费用"
+      = f.text_field :fee,class: "form-control"
     .form-groups
-      = f.input :fee
+      = f.label "加班内容"
+      = f.text_field :content,class: "form-control" 
     .form-actions
       = f.submit '保存',class:"btn btn-block btn-primary"
 .col-md-3
 coffee:
+  config = {
+    dropdownCssClass : 'bigdrop', 
+    width: '300px',
+    containerCss : {"display":"block"}
+  }
+  $("#errand_project_id").select2(config)
+  $('.datepicker').datepicker({
+      format: 'yyyy-mm-dd'
+  })

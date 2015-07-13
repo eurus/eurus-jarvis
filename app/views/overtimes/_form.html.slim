@@ -13,7 +13,7 @@
       = f.number_field :duration, class: "form-control", placeholder: "0.5的整数倍"
     .form-groups
       = f.label "相关项目"
-      = f.input :project_id,collection: Project.all.collect {|p| [ p.name, p.id ]}
+      = f.input :project_id,collection: Project.all.collect {|p| [ p.name, p.id ]},label: false
     .form-groups
       = f.label "加班内容"
       = f.text_field :content,class: "form-control" 

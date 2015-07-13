@@ -1,19 +1,23 @@
-= simple_form_for(@errand) do |f|
-  -if @errand.errors.any?
-      ul
-        - @errand.errors.full_messages.each do |msg|
-          li = msg 
-
-  .form-inputs
-    = f.input :location
-    = f.input :content
-    = f.input :start_at
-    = f.input :end_at
-    = f.input :project_id
-    = f.input :user_id
-    = f.input :fee
-    = f.input :check
-    = f.input :issue
-
-  .form-actions
-    = f.button :submit
+.col-md-3
+.col-md-6
+  = simple_form_for(@errand) do |f|
+    -if @errand.errors.any?
+        ul
+          - @errand.errors.full_messages.each do |msg|
+            li = msg 
+    .form-groups
+      = f.input :location
+    .form-groups
+      = f.input :content
+    .form-groups
+      = f.input :start_at
+    .form-groups
+      = f.input :end_at
+    .form-groups
+      = f.input :project_id
+    .form-groups
+      = f.input :fee
+    .form-actions
+      = f.submit '保存',class:"btn btn-block btn-primary"
+.col-md-3
+coffee:

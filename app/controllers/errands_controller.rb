@@ -11,11 +11,6 @@ class ErrandsController < ApplicationController
     end
   end
 
-  # GET /errands/1
-  # GET /errands/1.json
-  def show
-  end
-
   # GET /errands/new
   def new
     @errand = Errand.new
@@ -29,11 +24,10 @@ class ErrandsController < ApplicationController
   # POST /errands.json
   def create
     @errand = Errand.new(errand_params)
-
+    @errand.user_id = current_user.id
     respond_to do |format|
       if @errand.save
-        format.html { redirect_to @errand, notice: 'Errand was successfully created.' }
-        format.json { render :show, status: :created, location: @errand }
+        format.html { redirect_to errands_url, notice: 'Errand was successfully created.' }
       else
         format.html { render :new }
         format.json { render json: @errand.errors, status: :unprocessable_entity }
@@ -46,8 +40,7 @@ class ErrandsController < ApplicationController
   def update
     respond_to do |format|
       if @errand.update(errand_params)
-        format.html { redirect_to @errand, notice: 'Errand was successfully updated.' }
-        format.json { render :show, status: :ok, location: @errand }
+        format.html { redirect_to errands_url, notice: 'Errand was successfully updated.' }
       else
         format.html { render :edit }
         format.json { render json: @errand.errors, status: :unprocessable_entity }

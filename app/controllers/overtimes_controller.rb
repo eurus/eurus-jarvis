@@ -11,11 +11,6 @@ class OvertimesController < ApplicationController
     end
   end
 
-  # GET /overtimes/1
-  # GET /overtimes/1.json
-  def show
-  end
-
   # GET /overtimes/new
   def new
     @overtime = Overtime.new
@@ -32,8 +27,8 @@ class OvertimesController < ApplicationController
     @overtime.user_id = current_user.id
     respond_to do |format|
       if @overtime.save
-        format.html { redirect_to @overtime, notice: 'Overtime was successfully created.' }
-        format.json { render :show, status: :created, location: @overtime }
+        format.html { redirect_to overtimes_url, notice: 'Overtime was successfully created.' }
+        
       else
         format.html { render :new }
         format.json { render json: @overtime.errors, status: :unprocessable_entity }
@@ -46,8 +41,7 @@ class OvertimesController < ApplicationController
   def update
     respond_to do |format|
       if @overtime.update(overtime_params)
-        format.html { redirect_to @overtime, notice: 'Overtime was successfully updated.' }
-        format.json { render :show, status: :ok, location: @overtime }
+        format.html { redirect_to overtimes_url, notice: 'Overtime was successfully updated.' }
       else
         format.html { render :edit }
         format.json { render json: @overtime.errors, status: :unprocessable_entity }

@@ -4,7 +4,11 @@ class VacationsController < ApplicationController
   # GET /vacations
   # GET /vacations.json
   def index
-    @vacations = Vacation.all
+    if current_user.role == "boss"
+      @vacations = Vacation.all.order(created_at: :desc).page params[:page]
+    else
+      @vacations = current_user.vacations.page params[:page]
+    end
   end
 
   # GET /vacations/new

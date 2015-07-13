@@ -1,17 +1,29 @@
-= simple_form_for(@overtime) do |f|
-  -if @overtime.errors.any?
+.col-md-3
+.col-md-6
+  = simple_form_for(@overtime) do |f|
+    -if @overtime.errors.any?
       ul
         - @overtime.errors.full_messages.each do |msg|
           li = msg 
+    .form-groups
+      = f.label "开始时间"
+      = f.text_field :start_at,{class: "form-control datepicker"}
+    .form-groups
+      = f.label "开始时间"
+      = f.number_field :duration, class: "form-control", placeholder: "0.5的整数倍"
+    .form-groups
+      = f.label "加班内容"
+      = f.text_field :content,class: "form-control" 
+    .form-groups
+      = f.label "相关项目"
+      = f.text_field :project_id,class: "form-control" 
 
-  .form-inputs
-    = f.input :start_at
-    = f.input :duration
-    = f.input :content
-    = f.input :user_id
-    = f.input :approve
-    = f.input :issue
-    = f.input :project_id
+    .form-actions
+      = f.submit '保存',class:"btn btn-block btn-primary"
+.col-md-3
 
-  .form-actions
-    = f.button :submit
+coffee:
+  $ ->
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd'
+    })

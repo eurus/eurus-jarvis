@@ -4,7 +4,11 @@ class OvertimesController < ApplicationController
   # GET /overtimes
   # GET /overtimes.json
   def index
-    @overtimes = Overtime.all
+    if current_user.role == "boss"
+      @overtimes = Overtime.all.order(created_at: :desc).page params[:page]
+    else
+      @overtimes = current_user.overtimes.page params[:page]
+    end
   end
 
   # GET /overtimes/1
@@ -25,7 +29,7 @@ class OvertimesController < ApplicationController
   # POST /overtimes.json
   def create
     @overtime = Overtime.new(overtime_params)
-
+    @overtime.user_id = current_user.id
     respond_to do |format|
       if @overtime.save
         format.html { redirect_to @overtime, notice: 'Overtime was successfully created.' }

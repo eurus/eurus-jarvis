@@ -64,7 +64,7 @@ code:
     icon: fog
   21:  
     text: haze
-    icon: day-haze
+    icon: fog
   22:  
     text: smoky
     icon: smog

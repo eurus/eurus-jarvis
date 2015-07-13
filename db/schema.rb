@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150711053453) do
+ActiveRecord::Schema.define(version: 20150713081241) do
 
   create_table "articals", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20150711053453) do
     t.string   "location",   limit: 255
     t.string   "content",    limit: 255
     t.date     "start_at"
-    t.datetime "end_at"
+    t.date     "end_at"
     t.integer  "project_id", limit: 4
     t.integer  "user_id",    limit: 4
     t.float    "fee",        limit: 24

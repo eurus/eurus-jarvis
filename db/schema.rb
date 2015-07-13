@@ -55,11 +55,6 @@ ActiveRecord::Schema.define(version: 20150713140551) do
     t.datetime "updated_at",                             null: false
   end
 
-  create_table "project_users", id: false, force: :cascade do |t|
-    t.integer "project_id", limit: 4
-    t.integer "user_id",    limit: 4
-  end
-
   create_table "projects", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "content",    limit: 255
@@ -67,6 +62,11 @@ ActiveRecord::Schema.define(version: 20150713140551) do
     t.string   "status",     limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "projects_users", id: false, force: :cascade do |t|
+    t.integer "project_id", limit: 4
+    t.integer "user_id",    limit: 4
   end
 
   create_table "users", force: :cascade do |t|

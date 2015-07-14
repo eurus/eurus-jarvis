@@ -29,7 +29,7 @@
             td = u.try :join_at
             td = u.try :leave_at
             td
-              a href="/supervise/users/edit/#{u.id}" 
+              a.pull-left href="/supervise/users/edit/#{u.id}" 
                 = fa_icon('pencil')
-              = link_to fa_icon("trash"), "/supervise/users/#{u.id}",data: {:confirm => 'Are you sure?'}, :method => :delete
+              = link_to fa_icon("trash"), "/supervise/users/#{u.id}",data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
     

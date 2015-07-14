@@ -3,6 +3,7 @@
   .col-md-12
     h3 控制面板
     table.table.table-bordered
+      = link_to "新员工", supervise_users_new_path
       thead
         tr
           td 工号
@@ -28,7 +29,8 @@
             td = u.try :join_at
             td = u.try :leave_at
             td
-              = link_to fa_icon("pencil")
+              a href="/supervise/users/edit/#{u.id}" 
+                = fa_icon('pencil')
               = link_to fa_icon("trash")
 
     

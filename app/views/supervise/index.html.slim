@@ -2,8 +2,8 @@
   = notice_tag notice
   .col-md-12
     h3 控制面板
+    = link_to "新员工", supervise_users_new_path,class: "btn btn-primary pull-right"
     table.table.table-bordered
-      = link_to "新员工", supervise_users_new_path
       thead
         tr
           td 工号
@@ -31,5 +31,5 @@
             td
               a.pull-left href="/supervise/users/edit/#{u.id}" 
                 = fa_icon('pencil')
-              = link_to fa_icon("trash"), "/supervise/users/#{u.id}",data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
+              = link_to fa_icon("trash"), "/supervise/users/#{u.id}",data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right" if not current_user.id == u.id
     

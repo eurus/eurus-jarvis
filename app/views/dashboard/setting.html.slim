@@ -1,6 +1,26 @@
 .row
   = notice_tag notice
   .col-md-6
+    .panel.panel-default
+      .panel-heading 用户资料
+      .panel-body
+        table.table.table-bordered
+          tbody
+            tr
+              td 姓名
+              td = current_user.try :realname
+            tr
+              td 性别
+              td = current_user.try :gender
+            tr
+              td 编号
+              td = current_user.try :user_number
+            tr
+              td 昵称
+              td = current_user.try :nickname
+            tr
+              td 职位
+              td = current_user.try :occupation
   .col-md-6
     = simple_form_for @user, url: update_setting_path,method: :put ,html: { multipart: true }do |f|
       .text-center
@@ -9,11 +29,17 @@
         = f.label :avatar
         = f.file_field :avatar, class: "form-control"
       .form-group
+        = f.label :realname
+        = f.text_field :realname, class: "form-control"
+      .form-group
         = f.label :username
         = f.text_field :username, class: "form-control"
       .form-group
         = f.label :nickname
         = f.text_field :nickname, class: "form-control"
+      .form-group
+        = f.label :gender
+        = f.input :gender, collection: ["男","女","其他"],label: false,input_html: {class: "form-control"}
       
       .form-group
         = f.submit "更新", class: "btn btn-primary btn-block"

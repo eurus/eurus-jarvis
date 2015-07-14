@@ -25,7 +25,7 @@ class DashboardController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :nickname, :password,:avatar)
+    params.require(:user).permit(:username, :nickname, :password,:avatar,:realname,:gender)
   end
 
 end

@@ -15,4 +15,10 @@
     .panel.panel-default
       .panel-heading = t('today-tool')
       .panel-body
+
+  .col-md-3#useful
+    .panel.panel-default
+      .panel-heading 常用链接
+      .panel-body
+        = link_to "反馈" ,feedbacks_path , class: "btn btn-primary"
         

@@ -9,9 +9,6 @@
           th Content
           th Owner
           th Status
-          th
-
-
       tbody
         - @projects.each do |project|
           tr
@@ -20,9 +17,6 @@
             td = project.content
             td = owner_name project.owner
             td = project.status
-            td 
-              = link_to fa_icon('edit'), edit_project_path(project),class: "pull-left" if boss?
-              = link_to fa_icon('trash'), project, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
 
 .text-center
   = paginate @projects,theme: 'twitter-bootstrap-3'

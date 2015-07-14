@@ -1,0 +1,2 @@
+class SuperviseController < ApplicationController
+end

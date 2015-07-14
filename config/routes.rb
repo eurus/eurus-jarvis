@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root 'dashboard#index'
   resources :overtimes
   resources :feedbacks
@@ -11,6 +12,9 @@ Rails.application.routes.draw do
   devise_for :users
   get "settings" => "dashboard#setting"
   put "update_setting" => "dashboard#update_setting"
+  
+  # supervise actions
+  get 'supervise/index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

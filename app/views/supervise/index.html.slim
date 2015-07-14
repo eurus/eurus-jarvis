@@ -31,6 +31,5 @@
             td
               a href="/supervise/users/edit/#{u.id}" 
                 = fa_icon('pencil')
-              = link_to fa_icon("trash")
-
+              = link_to fa_icon("trash"), "/supervise/users/#{u.id}",data: {:confirm => 'Are you sure?'}, :method => :delete
     

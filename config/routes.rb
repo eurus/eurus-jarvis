@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'supervise/users/edit/:id' => "supervise#edit_user"
   put 'supervise/users/:id' => "supervise#update_user"
   post 'supervise/users' => "supervise#create_user"
+  delete 'supervise/users/:id' => 'supervise#destroy_user'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

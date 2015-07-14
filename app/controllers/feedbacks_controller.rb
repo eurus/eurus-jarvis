@@ -5,11 +5,8 @@ class FeedbacksController < ApplicationController
   # GET /feedbacks.json
   def index
     @feedback = Feedback.new
-    if current_user.role == "boss"
-      @feedbacks = Feedback.all.order(created_at: :desc).page params[:page]
-    else
-      @feedbacks = current_user.feedbacks.page params[:page]
-    end
+
+    @feedbacks = current_user.feedbacks.page params[:page]
   end
 
   # GET /feedbacks/new

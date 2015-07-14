@@ -26,11 +26,7 @@ module ApplicationHelper
       "#{((f.to_i - 36) / 1.8).round}℃"
   end
 
-  def boss?
-    current_user.role == "boss"
-  end
-
-  def stuff?
-    current_user.role != "boss"
+  def ceo?
+    current_user.occupation == "ceo"
   end
 end

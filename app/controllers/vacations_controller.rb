@@ -4,11 +4,7 @@ class VacationsController < ApplicationController
   # GET /vacations
   # GET /vacations.json
   def index
-    if current_user.role == "boss"
-      @vacations = Vacation.all.order(created_at: :desc).page params[:page]
-    else
-      @vacations = current_user.vacations.page params[:page]
-    end
+    @vacations = current_user.vacations.page params[:page]
   end
 
   # GET /vacations/new
@@ -28,7 +24,7 @@ class VacationsController < ApplicationController
     respond_to do |format|
       if @vacation.save
         format.html { redirect_to vacations_url, notice: 'Vacation was successfully created.' }
-        
+
       else
         format.html { render :new }
         format.json { render json: @vacation.errors, status: :unprocessable_entity }
@@ -42,7 +38,7 @@ class VacationsController < ApplicationController
     respond_to do |format|
       if @vacation.update(vacation_params)
         format.html { redirect_to vacations_url, notice: 'Vacation was successfully updated.' }
-        
+
       else
         format.html { render :edit }
         format.json { render json: @vacation.errors, status: :unprocessable_entity }
@@ -61,17 +57,17 @@ class VacationsController < ApplicationController
   end
 
   def approve
-    
-  end
-  
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_vacation
-      @vacation = Vacation.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def vacation_params
-      params.require(:vacation).permit(:start_at, :duration, :cut, :content)
-    end
+  end
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_vacation
+    @vacation = Vacation.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def vacation_params
+    params.require(:vacation).permit(:start_at, :duration, :cut, :content)
+  end
 end

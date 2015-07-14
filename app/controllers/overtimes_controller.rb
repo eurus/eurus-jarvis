@@ -4,11 +4,7 @@ class OvertimesController < ApplicationController
   # GET /overtimes
   # GET /overtimes.json
   def index
-    if current_user.role == "boss"
-      @overtimes = Overtime.all.order(created_at: :desc).page params[:page]
-    else
-      @overtimes = current_user.overtimes.page params[:page]
-    end
+    @overtimes = current_user.overtimes.page params[:page]
   end
 
   # GET /overtimes/new
@@ -28,7 +24,7 @@ class OvertimesController < ApplicationController
     respond_to do |format|
       if @overtime.save
         format.html { redirect_to overtimes_url, notice: 'Overtime was successfully created.' }
-        
+
       else
         format.html { render :new }
         format.json { render json: @overtime.errors, status: :unprocessable_entity }
@@ -60,13 +56,13 @@ class OvertimesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_overtime
-      @overtime = Overtime.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_overtime
+    @overtime = Overtime.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def overtime_params
-      params.require(:overtime).permit(:start_at, :duration, :content, :user_id, :approve, :issue, :project_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def overtime_params
+    params.require(:overtime).permit(:start_at, :duration, :content, :user_id, :approve, :issue, :project_id)
+  end
 end

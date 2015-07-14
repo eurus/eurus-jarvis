@@ -12,7 +12,7 @@
       tbody
         - @feedbacks.each do |feedback|
           tr
-            td = boss_or_stuff feedback.user_id
+            td = feedback.user_id
             td = feedback.content
             td = link_to fa_icon('trash'), feedback, data: {:confirm => 'Are you sure?'}, :method => :delete
     .text-center

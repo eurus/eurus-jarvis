@@ -2,7 +2,6 @@
   = notice_tag notice
   .col-md-12
     h3 控制面板
-    = link_to "新员工", supervise_users_new_path,class: "btn btn-primary pull-right"
     div
       ul.nav.nav-tabs role="tablist" 
         li.active role="presentation" 
@@ -21,7 +20,10 @@
           = render 'users'
         #group.tab-pane role="tabpanel" 
           = render 'groups'
-        #errands.tab-pane role="tabpanel"  ...
-        #overtimes.tab-pane role="tabpanel"  ...
-        #vacations.tab-pane role="tabpanel"  ...
+        #errands.tab-pane role="tabpanel"  
+          = render 'errands'
+        #overtimes.tab-pane role="tabpanel"  
+          = render 'overtimes'
+        #vacations.tab-pane role="tabpanel"  
+          = render 'vacations'
 

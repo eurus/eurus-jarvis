@@ -22,14 +22,6 @@ Rails.application.routes.draw do
   post 'supervise/users' => "supervise#create_user"
   delete 'supervise/users/:id' => 'supervise#destroy_user'
 
-
-  # supervise groups
-
-  get 'supervise/groups/new' => "supervise#new_group"
-  get 'supervise/groups/edit/:id' => "supervise#edit_group"
-  put 'supervise/groups/:id' => "supervise#update_group"
-  post 'supervise/groups' => "supervise#create_group"
-  delete 'supervise/groups/:id' => 'supervise#destroy_group'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

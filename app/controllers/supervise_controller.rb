@@ -1,6 +1,6 @@
 class SuperviseController < ApplicationController
   before_action :set_user, only: [:edit_user, :update_user, :destroy_user]
-  before_action :set_group, only: [:edit_group, :update_group, :destroy_group]
+  
   def index
     @users = User.all.page params[:page]
     @groups = Group.all.page params[:page]
@@ -48,79 +48,9 @@ class SuperviseController < ApplicationController
     end
   end
 
-  # group
-  def new_group
-    @group = Group.new
-    group_collection
-  end
-
-  def edit_group
-    group_collection
-  end
-
-  def group_collection
-    case current_user.occupation
-    when "ceo"
-      ids = User.ceo.map { |e| e.id }
-      @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
-    when "director"
-      ids = User.ceo.or.director.map { |e| e.id }
-      @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
-    when "pm"
-      ids = User.ceo.or.director.or.pm.map { |e| e.id }
-      @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
-    else
-      @collection = []
-    end
-  end
-
-  def create_group
-    @group = Group.new(group_params)
-    @group.id_array = params[:group][:id_array]
-    .delete_if{|i|i==""}
-    .map { |e| e.to_i }
-    # @group.ids = (group_params[:ids] ).map { |e| e.to_i }
-    @user = User.find(@group.leader)
-    @user.occupation = User::USERROLE[User::USERROLE.index(current_user.occupation) + 1]
-    respond_to do |format|
-      if @group.save && @user.save
-        format.html { redirect_to supervise_index_path, notice: 'Group was successfully created.' }
-      else
-        format.html { render :new_group }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update_group
-    respond_to do |format|
-      if @group.update(group_params)
-        format.html { redirect_to supervise_index_path, notice: 'Group was successfully updated.' }
-      else
-        format.html { render :edit }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def destroy_group
-    @user = @user = User.find(@group.leader)
-    @user.occupation = "stuff"
-    @user.save
-    @group.destroy
-    respond_to do |format|
-      format.html { redirect_to supervise_index_path, notice: 'Group was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
   def set_user
     @user = User.find(params[:id])
-  end
-
-  def set_group
-    @group = Group.find(params[:id])
   end
 
   def user_params
@@ -128,10 +58,6 @@ class SuperviseController < ApplicationController
       :username,:user_number,
       :nickname,:realname,:gender,:occupation,
     :join_at,:leave_at, :email)
-  end
-
-  def group_params
-    params.require(:group).permit(:name, :leader,:id_array)
   end
 
 end

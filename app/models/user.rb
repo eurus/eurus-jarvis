@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable
 
   has_many :errands
   has_many :overtimes
@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
   paginates_per 10
+
+  def self.all_except(id)
+    where.not(id: id)
+  end
 end

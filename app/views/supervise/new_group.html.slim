@@ -12,7 +12,7 @@
         = f.text_field :name, class: "form-control"
       .form-group
         = f.label "负责人"
-        = f.input :leader,collection: User.all.collect {|p| [ "#{p.email}:#{p.nickname}", p.id ]},label: false
+        = f.input :leader,collection: @collection,label: false
       
       .form-group
         = f.submit "创建", class: "btn btn-primary btn-block"

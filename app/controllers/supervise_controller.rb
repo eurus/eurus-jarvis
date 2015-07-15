@@ -50,6 +50,22 @@ class SuperviseController < ApplicationController
   # group
   def new_group
     @group = Group.new
+    case current_user.occupation
+    when "ceo"
+      ids = []
+      @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
+    when "director"
+      ids = []
+      @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
+    when "pm"
+      ids = []
+      @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
+    when "stuff"
+      ids = []
+      @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
+    else
+      @collection = []
+    end
   end
 
   def edit_group
@@ -57,10 +73,11 @@ class SuperviseController < ApplicationController
   end
 
   def create_group
-    @group = Group.new(user_params)
-    @user = User.find(group.leader)
+    @group = Group.new(group_params)
+    @user = User.find(@group.leader)
+    @user.occupation = User::USERROLE[User::USERROLE.index(current_user.occupation) + 1]
     respond_to do |format|
-      if @group.save
+      if @group.save && @user.save
         format.html { redirect_to supervise_index_path, notice: 'Group was successfully created.' }
       else
         format.html { render :new_group }
@@ -97,15 +114,15 @@ class SuperviseController < ApplicationController
     @group = Group.find(params[:id])
   end
 
-  def group_params
+  def user_params
     params.require(:user).permit(
       :username,:user_number,
       :nickname,:realname,:gender,:occupation,
     :join_at,:leave_at, :email)
   end
 
-  def user_params
-    params.require(:user).permit(:name, :leader)
+  def group_params
+    params.require(:group).permit(:name, :leader)
   end
 
 end

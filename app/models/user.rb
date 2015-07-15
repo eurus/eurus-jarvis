@@ -26,11 +26,11 @@ class User < ActiveRecord::Base
     where.not(id: id)
   end
 
-  def self.buddies(role)
-    if role == 'ceo'
-      where(superviosr: self.id).or.where(superviosr: nil)
+  def self.buddies(user)
+    if user.role == 'ceo'
+      where(supervisor_id: user.id).or.where(supervisor_id: nil)
     else
-      where(superviosr: self.id)
+      where(supervisor_id: user.id)
     end
   end
 end

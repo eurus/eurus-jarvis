@@ -86,7 +86,7 @@ class SuperviseController < ApplicationController
   end
 
   def supervisor_params
-    params.require(:supervisor).permit(:occupation,:supervisor)
+    params.require(:supervisor).permit(:occupation,:supervisor_id)
   end
 
 end

@@ -48,6 +48,22 @@ class SuperviseController < ApplicationController
     end
   end
 
+  def user_group_new
+    @buddies = []
+  end
+
+  def user_group_edit
+    
+  end
+
+  def user_group_create
+    
+  end
+
+  def user_group_destroy
+    
+  end
+
   private
   def set_user
     @user = User.find(params[:id])
@@ -57,7 +73,7 @@ class SuperviseController < ApplicationController
     params.require(:user).permit(
       :username,:user_number,
       :nickname,:realname,:gender,:occupation,
-    :join_at,:leave_at, :email)
+    :join_at,:leave_at, :email,:supervisor_id)
   end
 
 end

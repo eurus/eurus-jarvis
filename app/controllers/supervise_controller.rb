@@ -53,16 +53,13 @@ class SuperviseController < ApplicationController
     @group = Group.new
     case current_user.occupation
     when "ceo"
-      ids = []
+      ids = User.ceo.map { |e| e.id }
       @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
     when "director"
-      ids = []
+      ids = User.ceo.or.director.map { |e| e.id }
       @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
     when "pm"
-      ids = []
-      @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
-    when "stuff"
-      ids = []
+      ids = User.ceo.or.director.or.pm.map { |e| e.id }
       @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
     else
       @collection = []
@@ -123,7 +120,7 @@ class SuperviseController < ApplicationController
   end
 
   def group_params
-    params.require(:group).permit(:name, :leader)
+    params.require(:group).permit(:name, :leader,:ids)
   end
 
 end

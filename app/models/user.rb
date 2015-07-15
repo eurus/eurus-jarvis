@@ -16,7 +16,14 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   paginates_per 10
 
+  scope :ceo, -> { where(occupation: "ceo") }
+  scope :director, -> { where(occupation: "director") }
+  scope :pm, -> { where(occupation: "pm") }
+  scope :stuff, -> { where(occupation: "stuff") }
+  scope :intern, -> { where(occupation: "intern") }
+
   def self.all_except(id)
     where.not(id: id)
   end
+
 end

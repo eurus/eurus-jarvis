@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714081730) do
+ActiveRecord::Schema.define(version: 20150715060047) do
 
   create_table "articals", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -44,11 +44,11 @@ ActiveRecord::Schema.define(version: 20150714081730) do
   end
 
   create_table "groups", force: :cascade do |t|
-    t.integer  "leader",      limit: 4
-    t.string   "leader_role", limit: 255
-    t.string   "name",        limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "leader",     limit: 4
+    t.string   "name",       limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.text     "ids",        limit: 65535
   end
 
   create_table "overtimes", force: :cascade do |t|

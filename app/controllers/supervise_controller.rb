@@ -67,7 +67,19 @@ class SuperviseController < ApplicationController
   end
 
   def edit_group
-
+    case current_user.occupation
+    when "ceo"
+      ids = User.ceo.map { |e| e.id }
+      @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
+    when "director"
+      ids = User.ceo.or.director.map { |e| e.id }
+      @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
+    when "pm"
+      ids = User.ceo.or.director.or.pm.map { |e| e.id }
+      @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
+    else
+      @collection = []
+    end
   end
 
   def create_group
@@ -96,6 +108,9 @@ class SuperviseController < ApplicationController
   end
 
   def destroy_group
+    @user = @user = User.find(@group.leader)
+    @user.occupation = "stuff"
+    @user.save
     @group.destroy
     respond_to do |format|
       format.html { redirect_to supervise_index_path, notice: 'Group was successfully destroyed.' }

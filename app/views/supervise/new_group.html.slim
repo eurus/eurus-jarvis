@@ -13,7 +13,17 @@
       .form-group
         = f.label "负责人"
         = f.input :leader,collection: @collection,label: false,input_html:{class: 'form-control'}
-      
+      .form-group
+        = f.label "属下们"
+        = f.input :ids ,collection: @collection,label: false,input_html: {multiple:"multiple"}
       .form-group
         = f.submit "创建", class: "btn btn-primary btn-block"
         = link_to "返回", supervise_index_path,class: "btn btn-default btn-block"
+coffee:
+  $ ->
+    config = {
+          dropdownCssClass : 'bigdrop', 
+          width: '300px',
+          containerCss : {"display":"block"},
+    }
+    $('#group_ids').select2(config)

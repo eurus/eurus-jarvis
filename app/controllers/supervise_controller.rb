@@ -49,7 +49,16 @@ class SuperviseController < ApplicationController
   end
 
   def user_group_new
-    @buddies = []
+    case current_user.role
+    when "ceo"
+      @buddies = []
+    when "director"
+      @buddies = []
+    when "pm"
+      @buddies = []
+    else 
+      @buddies = []
+    end
   end
 
   def user_group_edit
@@ -71,9 +80,13 @@ class SuperviseController < ApplicationController
 
   def user_params
     params.require(:user).permit(
-      :username,:user_number,
+      :username,:user_number,:role,
       :nickname,:realname,:gender,:occupation,
     :join_at,:leave_at, :email,:supervisor_id)
+  end
+
+  def supervisor_params
+    params.require(:supervisor).permit(:occupation,:supervisor)
   end
 
 end

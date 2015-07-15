@@ -16,14 +16,21 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   paginates_per 10
 
-  scope :ceo, -> { where(occupation: "ceo") }
-  scope :director, -> { where(occupation: "director") }
-  scope :pm, -> { where(occupation: "pm") }
-  scope :stuff, -> { where(occupation: "stuff") }
-  scope :intern, -> { where(occupation: "intern") }
+  scope :ceo, -> { where(role: "ceo") }
+  scope :director, -> { where(role: "director") }
+  scope :pm, -> { where(role: "pm") }
+  scope :stuff, -> { where(role: "stuff") }
+  scope :intern, -> { where(role: "intern") }
 
   def self.all_except(id)
     where.not(id: id)
   end
 
+  def self.buddies(role)
+    if role == 'ceo'
+      where(superviosr: self.id).or.where(superviosr: nil)
+    else
+      where(superviosr: self.id)
+    end
+  end
 end

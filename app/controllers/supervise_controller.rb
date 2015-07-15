@@ -51,22 +51,14 @@ class SuperviseController < ApplicationController
   # group
   def new_group
     @group = Group.new
-    case current_user.occupation
-    when "ceo"
-      ids = User.ceo.map { |e| e.id }
-      @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
-    when "director"
-      ids = User.ceo.or.director.map { |e| e.id }
-      @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
-    when "pm"
-      ids = User.ceo.or.director.or.pm.map { |e| e.id }
-      @collection = User.all_except(ids).collect {|p| [ "#{p.email}:#{p.nickname}",p.id ]}
-    else
-      @collection = []
-    end
+    group_collection
   end
 
   def edit_group
+    group_collection
+  end
+
+  def group_collection
     case current_user.occupation
     when "ceo"
       ids = User.ceo.map { |e| e.id }
@@ -84,6 +76,10 @@ class SuperviseController < ApplicationController
 
   def create_group
     @group = Group.new(group_params)
+    @group.id_array = params[:group][:id_array]
+    .delete_if{|i|i==""}
+    .map { |e| e.to_i }
+    # @group.ids = (group_params[:ids] ).map { |e| e.to_i }
     @user = User.find(@group.leader)
     @user.occupation = User::USERROLE[User::USERROLE.index(current_user.occupation) + 1]
     respond_to do |format|
@@ -135,7 +131,7 @@ class SuperviseController < ApplicationController
   end
 
   def group_params
-    params.require(:group).permit(:name, :leader,:ids)
+    params.require(:group).permit(:name, :leader,:id_array)
   end
 
 end

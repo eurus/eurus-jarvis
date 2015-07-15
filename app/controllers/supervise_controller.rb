@@ -3,6 +3,7 @@ class SuperviseController < ApplicationController
   before_action :set_group, only: [:edit_group, :update_group, :destroy_group]
   def index
     @users = User.all.page params[:page]
+    @groups = Group.all.page params[:page]
   end
 
   # user operation without users_controller

@@ -1,1 +1,19 @@
 = link_to "新建组", supervise_groups_new_path,class: "btn btn-primary pull-right"
+
+table.table.table-bordered
+  thead
+    tr
+      td 组名
+      td 负责人
+      td 操作
+  tbody
+    - @groups.each do |g|
+      tr
+        td = g.try :name
+        td = supervisor_name g.try :leader
+        td
+          a.pull-left href="/supervise/groups/edit/#{g.id}" 
+            = fa_icon('pencil')
+          = link_to fa_icon("trash"), "/supervise/groups/#{g.id}",data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
+  = paginate @users,theme: 'twitter-bootstrap-3' 
+

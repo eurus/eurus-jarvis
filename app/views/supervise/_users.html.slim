@@ -1,0 +1,30 @@
+table.table.table-bordered
+  thead
+    tr
+      td 工号
+      td 头像
+      td 职位
+      td 用户名
+      td 姓名
+      td 昵称
+      td 性别
+      td 加入时间
+      td 离开时间
+      td 操作
+  tbody
+    - @users.each do |u|
+      tr
+        td = u.try :user_number
+        td = u.try :avatar_url
+        td = u.try :occupation
+        td = u.try :username
+        td = u.try :realname
+        td = u.try :nickname
+        td = u.try :gender
+        td = u.try :join_at
+        td = u.try :leave_at
+        td
+          a.pull-left href="/supervise/users/edit/#{u.id}" 
+            = fa_icon('pencil')
+          = link_to fa_icon("trash"), "/supervise/users/#{u.id}",data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right" if not current_user.id == u.id
+  = paginate @users,theme: 'twitter-bootstrap-3'   

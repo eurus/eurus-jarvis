@@ -3,33 +3,25 @@
   .col-md-12
     h3 控制面板
     = link_to "新员工", supervise_users_new_path,class: "btn btn-primary pull-right"
-    table.table.table-bordered
-      thead
-        tr
-          td 工号
-          td 头像
-          td 职位
-          td 用户名
-          td 姓名
-          td 昵称
-          td 性别
-          td 加入时间
-          td 离开时间
-          td 操作
-      tbody
-        - @users.each do |u|
-          tr
-            td = u.try :user_number
-            td = u.try :avatar_url
-            td = u.try :occupation
-            td = u.try :username
-            td = u.try :realname
-            td = u.try :nickname
-            td = u.try :gender
-            td = u.try :join_at
-            td = u.try :leave_at
-            td
-              a.pull-left href="/supervise/users/edit/#{u.id}" 
-                = fa_icon('pencil')
-              = link_to fa_icon("trash"), "/supervise/users/#{u.id}",data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right" if not current_user.id == u.id
-    
+    div
+      ul.nav.nav-tabs role="tablist" 
+        li.active role="presentation" 
+          a aria-controls="user" data-toggle="tab" href="#user" role="tab"  用户
+        li role="presentation" 
+          a aria-controls="group" data-toggle="tab" href="#group" role="tab"  项目组
+        li role="presentation" 
+          a aria-controls="errands" data-toggle="tab" href="#errands" role="tab"  出差
+        li role="presentation" 
+          a aria-controls="overtimes" data-toggle="tab" href="#overtimes" role="tab"  加班
+        li role="presentation" 
+          a aria-controls="vacations" data-toggle="tab" href="#vacations" role="tab"  假期
+      /! Tab panes
+      .tab-content
+        #user.tab-pane.active role="tabpanel"  
+          = render 'users'
+        #group.tab-pane role="tabpanel" 
+          = render 'groups'
+        #errands.tab-pane role="tabpanel"  ...
+        #overtimes.tab-pane role="tabpanel"  ...
+        #vacations.tab-pane role="tabpanel"  ...
+

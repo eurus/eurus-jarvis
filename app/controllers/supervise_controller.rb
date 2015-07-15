@@ -2,7 +2,7 @@ class SuperviseController < ApplicationController
   before_action :set_user, only: [:edit_user, :update_user, :destroy_user]
 
   def index
-    @users = User.all
+    @users = User.all.page params[:page]
   end
 
   # user operation without users_controller

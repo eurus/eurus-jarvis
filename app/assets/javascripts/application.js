@@ -10,12 +10,13 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require sweet-alert
 //= require jquery
-//= require jquery.multi-select
 //= require jquery_ujs
+//= require sweet-alert-confirm
+//= require jquery.multi-select
 //= require turbolinks
 //= require bootstrap-sprockets
-//= require sweet-alert
 //= require select2
 //= require bootstrap-datepicker
 //= require_tree .

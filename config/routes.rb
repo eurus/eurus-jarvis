@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   delete 'supervise/users/:id' => 'supervise#destroy_user'
 
   get 'user/group/new' => 'supervise#user_group_new'
+  put 'user/groups' => 'supervise#user_group_update'
+  get 'user/group/edit/:id' => 'supervise#user_group_edit', as: "edit_user_group"
   post 'user/group/create' => 'supervise#user_group_create'
   delete 'user/group/cancel/:id' => 'supervise#user_group_cancel', as: 'cancel_group'
   # The priority is based upon order of creation: first created -> highest priority.

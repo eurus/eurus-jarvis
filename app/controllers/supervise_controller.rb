@@ -1,6 +1,6 @@
 class SuperviseController < ApplicationController
   before_action :set_user, only: [:edit_user, :update_user, :destroy_user]
-  
+
   def index
     @users = User.all.page params[:page]
     @groups = Group.all.page params[:page]
@@ -50,26 +50,37 @@ class SuperviseController < ApplicationController
   end
 
   def user_group_new
-    case current_user.role
-    when "ceo"
-      @buddies = User.buddies current_user
-    when "director"
-      @buddies = User.buddies current_user
-    when "pm"
-      @buddies = User.buddies current_user
-    else 
-      @buddies = []
-    end
+
+    @buddies = User.buddies current_user rescue []
   end
 
   def user_group_edit
-    
+    @supervisor = User.find(params[:id])
+    @buddies = User.buddies current_user
+  end
+
+  def user_group_update
+    @supervisor = User.find(params[:sp][:id])
+    @supervisor.occupation = params[:sp][:occupation]
+    @supervisor.save
+
+    params[:sp][:buddies]
+    .delete_if {|e| e == "" or e == "#{params[:sp][:supervisor_id]}"}
+    .map do |u|
+      u = User.find(u.to_i)
+      u.supervisor_id = params[:sp][:supervisor_id]
+      u.save
+    end
+
+    respond_to do |format|
+      format.html { redirect_to supervise_index_path, notice: 'Leader was successfully selected.' }
+    end
   end
 
   def user_group_create
     # find this supervisor and set its supervisor_id
     # to current_user.id
-    
+
     @supervisor = User.find(supervisor_params[:supervisor_id])
     @supervisor.supervisor_id = current_user.id
     @supervisor.role = User::USERROLE[User::USERROLE.index(current_user.role) + 1]

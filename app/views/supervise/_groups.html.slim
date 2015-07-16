@@ -4,4 +4,6 @@
   p = x.email
   p = x.occupation
   p = x.role
+
+  p = link_to '修改任命', edit_user_group_path(id:x.id)
   p = link_to '撤销任命', cancel_group_path(id:x.id),data: {:confirm => 'Are you sure?'}, :method => :delete

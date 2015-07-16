@@ -211,6 +211,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    sweet-alert-confirm (0.3.0)
     sweetalert-rails (0.5.0)
       railties (>= 3.1.0)
     switch_user (1.1.0)
@@ -267,6 +268,7 @@ DEPENDENCIES
   simple_form
   slim-rails
   spring
+  sweet-alert-confirm
   sweetalert-rails
   switch_user
   turbolinks

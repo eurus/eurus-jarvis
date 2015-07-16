@@ -1,2 +1,7 @@
-= link_to '组织管理', user_group_new_path
+= link_to '任命', user_group_new_path if ceo? or director?
 
+- @buddies.try :each do |x|
+  p = x.email
+  p = x.occupation
+  p = x.role
+  p = link_to '撤销任命', cancel_group_path(id:x.id),data: {:confirm => 'Are you sure?'}, :method => :delete

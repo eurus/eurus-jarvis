@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.multi-select
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets

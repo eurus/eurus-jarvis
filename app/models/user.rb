@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
 
   def self.buddies(user)
     if user.role == 'ceo'
-      where(supervisor_id: user.id).or.where(supervisor_id: nil)
+      where(supervisor_id: [user.id,nil])
     else
       where(supervisor_id: user.id)
     end

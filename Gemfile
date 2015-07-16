@@ -60,6 +60,7 @@ gem 'carrierwave'
 gem 'awesome_print'
 # sweet alert
 gem 'sweetalert-rails'
+gem 'sweet-alert-confirm'
 gem 'kaminari'
 gem 'simple_form'
 gem 'devise'

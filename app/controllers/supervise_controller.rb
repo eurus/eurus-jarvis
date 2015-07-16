@@ -4,6 +4,7 @@ class SuperviseController < ApplicationController
   def index
     @users = User.all.page params[:page]
     @groups = Group.all.page params[:page]
+    @buddies = User.buddies current_user
   end
 
   # user operation without users_controller
@@ -51,11 +52,11 @@ class SuperviseController < ApplicationController
   def user_group_new
     case current_user.role
     when "ceo"
-      @buddies = []
+      @buddies = User.buddies current_user
     when "director"
-      @buddies = []
+      @buddies = User.buddies current_user
     when "pm"
-      @buddies = []
+      @buddies = User.buddies current_user
     else 
       @buddies = []
     end
@@ -66,11 +67,34 @@ class SuperviseController < ApplicationController
   end
 
   def user_group_create
+    # find this supervisor and set its supervisor_id
+    # to current_user.id
     
+    @supervisor = User.find(supervisor_params[:supervisor_id])
+    @supervisor.supervisor_id = current_user.id
+    @supervisor.role = User::USERROLE[User::USERROLE.index(current_user.role) + 1]
+    @supervisor.occupation = supervisor_params[:occupation]
+    @supervisor.save
+    # find each buddy and set thier supervisor id to
+    # params supervisor_id
+    supervisor_params[:buddies]
+    .delete_if {|e| e == "" or e == "#{supervisor_params[:supervisor_id]}"}
+    .map do |u|
+      u = User.find(u.to_i)
+      u.supervisor_id = supervisor_params[:supervisor_id]
+      u.save
+    end
+    respond_to do |format|
+      format.html { redirect_to supervise_index_path, notice: 'Leader was successfully selected.' }
+    end
+
   end
 
-  def user_group_destroy
-    
+  def user_group_cancel
+    ap params
+    respond_to do |format|
+      format.html { redirect_to supervise_index_path, notice: 'Leader was successfully unselected.' }
+    end
   end
 
   private
@@ -86,7 +110,7 @@ class SuperviseController < ApplicationController
   end
 
   def supervisor_params
-    params.require(:supervisor).permit(:occupation,:supervisor_id)
+    params.require(:supervisor).permit(:occupation,:supervisor_id,buddies: [])
   end
 
 end

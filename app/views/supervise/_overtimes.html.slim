@@ -1,0 +1,31 @@
+.row
+  = notice_tag notice
+  .col-md-12
+    h3 加班
+    table.table.table-bordered
+      thead
+        tr
+          th 加班日期
+          th 加班时长
+          th 加班内容
+          th 审核状态
+          th 发放状态
+          th 加班项目
+          th
+
+
+      tbody
+        - @overtimes.each do |overtime|
+          tr
+            td = overtime.start_at
+            td = overtime.duration
+            td = overtime.content
+            td = status overtime.approve
+            td = overtime.issue
+            td = get_project_name overtime.project_id
+            td 
+              
+              = link_to fa_icon("check"),class: "pull-left" 
+              = link_to fa_icon('usd'),class: "pull-right" 
+.text-center
+  = paginate @overtimes,theme: 'twitter-bootstrap-3'

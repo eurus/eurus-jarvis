@@ -5,6 +5,9 @@ class SuperviseController < ApplicationController
     @users = User.all.page params[:page]
     @groups = Group.all.page params[:page]
     @buddies = User.buddies current_user
+    @errands = Errand.all.page params[:page]
+    @overtimes = Overtime.all.page params[:page]
+    @vacations = Vacation.all.page params[:page]
   end
 
   # user operation without users_controller
@@ -103,7 +106,7 @@ class SuperviseController < ApplicationController
 
   def user_group_cancel
     @user = User.find(params[:id])
-    @user.role = nil 
+    @user.role = nil
     @user.occupation = nil
     @user.save
 
@@ -118,6 +121,10 @@ class SuperviseController < ApplicationController
     end
   end
 
+  def check_record_by_type
+    
+  end
+  
   private
   def set_user
     @user = User.find(params[:id])

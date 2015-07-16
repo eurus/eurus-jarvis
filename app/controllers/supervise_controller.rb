@@ -102,7 +102,17 @@ class SuperviseController < ApplicationController
   end
 
   def user_group_cancel
-    ap params
+    @user = User.find(params[:id])
+    @user.role = nil 
+    @user.occupation = nil
+    @user.save
+
+    (User.dfs @user).each do |u|
+      u.role = nil
+      u.occupation = nil
+      u.supervisor_id = nil
+      u.save
+    end
     respond_to do |format|
       format.html { redirect_to supervise_index_path, notice: 'Leader was successfully unselected.' }
     end

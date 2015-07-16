@@ -33,4 +33,13 @@ class User < ActiveRecord::Base
       where(supervisor_id: user.id)
     end
   end
+
+  def self.dfs(node)
+    if (User.buddies node).count == 0
+      return node
+    else
+      (User.buddies node).map { |u| User.dfs u }
+    end
+  end
+
 end

@@ -63,20 +63,20 @@ class SuperviseController < ApplicationController
   end
 
   def user_group_update
-    @supervisor = User.find(params[:sp][:id])
-    @supervisor.occupation = params[:sp][:occupation]
-    @supervisor.save
+    ap @supervisor = User.find(params[:sp][:id])
+    ap @supervisor.occupation = params[:sp][:occupation]
+    ap @supervisor.save
 
     params[:sp][:buddies]
-    .delete_if {|e| e == "" or e == "#{params[:sp][:supervisor_id]}"}
+    .delete_if {|e| e == "" or e == "#{@supervisor.id}"}
     .map do |u|
-      u = User.find(u.to_i)
-      u.supervisor_id = params[:sp][:supervisor_id]
+      ap u = User.find(u.to_i)
+      u.supervisor_id = @supervisor.id
       u.save
     end
 
     respond_to do |format|
-      format.html { redirect_to supervise_index_path(view: 'users'), notice: 'Leader was successfully selected.' }
+      format.html { redirect_to supervise_index_path(view: 'groups'), notice: 'Leader was successfully selected.' }
     end
   end
 
@@ -96,10 +96,10 @@ class SuperviseController < ApplicationController
     .map do |u|
       u = User.find(u.to_i)
       u.supervisor_id = supervisor_params[:supervisor_id]
-      u.save
+      ap u.save
     end
     respond_to do |format|
-      format.html { redirect_to supervise_index_path, notice: 'Leader was successfully selected.' }
+      format.html { redirect_to supervise_index_path(view: "groups"), notice: 'Leader was successfully selected.' }
     end
 
   end
@@ -110,7 +110,7 @@ class SuperviseController < ApplicationController
     @user.occupation = nil
     @user.save
 
-    (User.dfs @user).each do |u|
+    (User.dfs @user).try :each do |u|
       u.role = nil
       u.occupation = nil
       u.supervisor_id = nil

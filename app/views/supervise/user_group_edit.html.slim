@@ -12,6 +12,6 @@
         = f.input :buddies,label: false,input_html:{class: "form-control"},collection: @buddies.collect {|p| [ p.email, p.id ]},input_html: { multiple: true }
       .form-group
         = f.submit "保存", class: "btn btn-primary btn-block"
-        = link_to "返回", supervise_index_path,class: "btn btn-default btn-block"
+        = link_to "返回", supervise_index_path(view: "groups"),class: "btn btn-default btn-block"
 coffee:
   $('#sp_buddies').multiSelect();

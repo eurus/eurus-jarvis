@@ -23,7 +23,10 @@ Rails.application.configure do
     port:         25,
     domain:       'exmail.qq.com',
     user_name:    'info@eurus.cn',
-    password:     'eurus123456'
+    password:     'woshi007',
+    enable_starttls_auto: true, 
+    openssl_verify_mode:'none',
+    authentication: 'login'
   }
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

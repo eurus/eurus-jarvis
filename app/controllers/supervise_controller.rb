@@ -117,7 +117,7 @@ class SuperviseController < ApplicationController
       u.save
     end
     respond_to do |format|
-      format.html { redirect_to supervise_index_path, notice: 'Leader was successfully unselected.' }
+      format.html { redirect_to supervise_index_path(view: 'groups'), notice: 'Leader was successfully unselected.' }
     end
   end
 

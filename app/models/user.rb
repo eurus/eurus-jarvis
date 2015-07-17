@@ -45,7 +45,4 @@ class User < ActiveRecord::Base
       (User.buddies node).map { |u| User.dfs u }
     end
   end
-
-
-
 end

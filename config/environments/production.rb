@@ -76,4 +76,17 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.default_url_options = { :host => 'admin.eurus.cn' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:      'smtp.exmail.qq.com',
+    port:         25,
+    domain:       'exmail.qq.com',
+    user_name:    'info@eurus.cn',
+    password:     'woshi007',
+    enable_starttls_auto: true,
+    openssl_verify_mode:'none',
+    authentication: 'login'
+  }
 end

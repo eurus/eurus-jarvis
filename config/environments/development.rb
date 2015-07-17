@@ -17,7 +17,14 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:      'smtp.exmail.qq.com',
+    port:         25,
+    domain:       'exmail.qq.com',
+    user_name:    'info@eurus.cn',
+    password:     'eurus123456'
+  }
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

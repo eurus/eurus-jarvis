@@ -122,18 +122,27 @@ class SuperviseController < ApplicationController
   end
 
   def check_record_by_type
-    ap klassify(params[:cut],params[:id])
+    obj = klassify(params[:cut],params[:id])
     respond_to do |format|
-      format.html { redirect_to supervise_index_path, notice: 'Record was successfully checked.' }
+      if obj
+        obj.approve = true
+        obj.save
+        format.html { redirect_to supervise_index_path, notice: 'Record was successfully checked.' }
+      else
+        format.html { redirect_to supervise_index_path, notice: 'Record was not successfully checked.' }
+      end
     end
   end
 
   private
 
   def klassify(str, id)
-    klass = str[0].capitalize+str[1..-1]
-    
-    return klass.constantize.find(id)
+    if ["errand","overtime","vacation"].include? str
+      klass = str[0].capitalize+str[1..-1]
+      return klass.constantize.find(id)
+    else
+      return nil
+    end
   end
 
   def set_user

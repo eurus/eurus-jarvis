@@ -1,13 +1,15 @@
-= simple_form_for(@weekly) do |f|
-  -if @weekly.errors.any?
-      ul
-        - @weekly.errors.full_messages.each do |msg|
-          li = msg 
+.col-md-12
+  = simple_form_for(@weekly) do |f|
+    -if @weekly.errors.any?
+        ul
+          - @weekly.errors.full_messages.each do |msg|
+            li = msg 
 
-  .form-inputs
-    = f.input :user_id
-    = f.input :sumary
-    = f.input :hope
+    .form-groups
 
-  .form-actions
-    = f.button :submit
+      = f.input :sumary, as: :wysihtml5, input_html: {class: "form-control"},error: false
+    .form-groups
+      = f.input :hope, as: :wysihtml5, input_html: {class: "form-control"},error: false
+
+    .form-groups
+      = f.submit '保存',class:"btn btn-block btn-primary"

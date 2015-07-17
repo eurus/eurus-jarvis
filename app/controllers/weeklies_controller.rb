@@ -25,7 +25,7 @@ class WeekliesController < ApplicationController
   # POST /weeklies.json
   def create
     @weekly = Weekly.new(weekly_params)
-
+    @weekly.user_id = current_user.id
     respond_to do |format|
       if @weekly.save
         format.html { redirect_to @weekly, notice: 'Weekly was successfully created.' }

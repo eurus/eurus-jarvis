@@ -1,8 +1,4 @@
-h1 Editing weekly
-
-== render 'form'
-
-= link_to 'Show', @weekly
-'|
-= link_to 'Back', weeklies_path
-
+.row
+  = notice_tag notice
+  .col-md-12
+    == render 'form'

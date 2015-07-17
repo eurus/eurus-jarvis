@@ -19,4 +19,5 @@
 //= require bootstrap-sprockets
 //= require select2
 //= require bootstrap-datepicker
+//= require bootstrap-wysihtml5
 //= require_tree .

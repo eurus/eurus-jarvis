@@ -73,4 +73,5 @@ gem 'bootstrap-kaminari-views'
 gem "select2-rails"
 gem 'bootstrap-datepicker-rails'
 
+gem 'bootstrap-wysihtml5-rails'
 gem 'sidekiq'

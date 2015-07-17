@@ -1,5 +1,8 @@
 html
   head 
     title Mailer
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
   body
-    = yield
+    .container
+      .row
+        = yield

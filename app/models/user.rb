@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
   scope :stuff, -> { where(role: "stuff") }
   scope :intern, -> { where(role: "intern") }
 
+  def supervisor
+    User.find self.supervisor_id
+  end
+
   def self.all_except(id)
     where.not(id: id)
   end
@@ -41,5 +45,7 @@ class User < ActiveRecord::Base
       (User.buddies node).map { |u| User.dfs u }
     end
   end
+
+
 
 end

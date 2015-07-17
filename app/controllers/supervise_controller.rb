@@ -134,6 +134,19 @@ class SuperviseController < ApplicationController
     end
   end
 
+  def issue_record_by_type
+    obj = klassify(params[:cut],params[:id])
+    respond_to do |format|
+      if obj
+        obj.issue = true
+        obj.save
+        format.html { redirect_to supervise_index_path, notice: 'Record was successfully checked.' }
+      else
+        format.html { redirect_to supervise_index_path, notice: 'Record was not successfully checked.' }
+      end
+    end
+  end
+  
   private
 
   def klassify(str, id)

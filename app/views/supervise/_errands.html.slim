@@ -26,7 +26,7 @@
           td = issue errand.issue
           td 
             = link_to fa_icon("check"),checkrecord_path(id: errand.id, cut: 'errand'), class: "pull-left"  unless errand.approve
-            = link_to fa_icon('usd'), '#',class: "pull-right"
+            = link_to fa_icon('usd'), issuerecord_path(id: errand.id, cut: 'errand'),class: "pull-right"
 
 .text-center
   = paginate @errands,theme: 'twitter-bootstrap-3'

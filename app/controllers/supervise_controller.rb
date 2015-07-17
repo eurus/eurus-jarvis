@@ -122,10 +122,20 @@ class SuperviseController < ApplicationController
   end
 
   def check_record_by_type
-    
+    ap klassify(params[:cut],params[:id])
+    respond_to do |format|
+      format.html { redirect_to supervise_index_path, notice: 'Record was successfully checked.' }
+    end
   end
-  
+
   private
+
+  def klassify(str, id)
+    klass = str[0].capitalize+str[1..-1]
+    
+    return klass.constantize.find(id)
+  end
+
   def set_user
     @user = User.find(params[:id])
   end

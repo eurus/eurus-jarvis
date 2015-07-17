@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715130430) do
+ActiveRecord::Schema.define(version: 20150717025954) do
 
   create_table "articals", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20150715130430) do
     t.integer  "project_id", limit: 4
     t.integer  "user_id",    limit: 4
     t.float    "fee",        limit: 24
-    t.boolean  "check",                  default: false
+    t.boolean  "approve",                default: false
     t.boolean  "issue",                  default: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false

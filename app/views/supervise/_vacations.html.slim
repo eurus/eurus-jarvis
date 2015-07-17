@@ -1,28 +1,28 @@
-.row
-  = notice_tag notice
-  .col-md-12
-    h3 请假
 
-    table.table.table-bordered
-      thead
+.col-md-12
+  h3 请假
+
+  table.table.table-bordered
+    thead
+      tr
+        th 请假日期
+        th 请假天数
+        th 假期类型
+        th 请假内容
+        th 状态
+        th
+
+    tbody
+      - @vacations.each do |vacation|
         tr
-          th 请假日期
-          th 请假天数
-          th 假期类型
-          th 请假内容
-          th 状态
-          th
-
-      tbody
-        - @vacations.each do |vacation|
-          tr
-            td = vacation.start_at
-            td = vacation.duration
-            td = vacation.cut
-            td = vacation.content
-            td = status vacation.try :approve
-            td    
-              = link_to fa_icon("check"),class: "pull-left" 
+          td = vacation.start_at
+          td = vacation.duration
+          td = vacation.cut
+          td = vacation.content
+          td = status vacation.try :approve
+          td    
+            = link_to fa_icon("check"),checkrecord_path(id: vacation.id, cut: 'vacation'), class: "pull-left" 
+              
 .text-center
   = paginate @vacations,theme: 'twitter-bootstrap-3'
 

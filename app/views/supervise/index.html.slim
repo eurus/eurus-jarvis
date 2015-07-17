@@ -3,22 +3,22 @@
   .col-md-12
     h3 控制面板
     div
-      ul.nav.nav-tabs role="tablist" 
+      ul#select-tab.nav.nav-tabs role="tablist" 
         li.active role="presentation" 
-          a aria-controls="user" data-toggle="tab" href="#user" role="tab"  用户
+          a aria-controls="users" data-toggle="tab" href="#users" role="tab" data-target="#users" 用户
         li role="presentation" 
-          a aria-controls="group" data-toggle="tab" href="#group" role="tab"  组织
+          a aria-controls="groups" data-toggle="tab" href="#groups" role="tab" data-target="#groups" 组织
         li role="presentation" 
-          a aria-controls="errands" data-toggle="tab" href="#errands" role="tab"  出差
+          a aria-controls="errands" data-toggle="tab" href="#errands" role="tab" data-target="#errands" 出差
         li role="presentation" 
-          a aria-controls="overtimes" data-toggle="tab" href="#overtimes" role="tab"  加班
+          a aria-controls="overtimes" data-toggle="tab" href="#overtimes" role="tab" data-target="#overtimes" 加班
         li role="presentation" 
-          a aria-controls="vacations" data-toggle="tab" href="#vacations" role="tab"  假期
+          a aria-controls="vacations" data-toggle="tab" href="#vacations" data-target="#vacation" role="tab"  假期
       /! Tab panes
       .tab-content
-        #user.tab-pane.active role="tabpanel"  
+        #users.tab-pane.active role="tabpanel"  
           = render 'users'
-        #group.tab-pane role="tabpanel" 
+        #groups.tab-pane role="tabpanel" 
           = render 'groups'
         #errands.tab-pane role="tabpanel"  
           = render 'errands'
@@ -26,3 +26,9 @@
           = render 'overtimes'
         #vacations.tab-pane role="tabpanel"  
           = render 'vacations'
+coffee:
+  $ ->
+  parmas = window.location.search.substring 1
+  str = parmas.split("=")[1]
+  console.log high = "li a[href='##{str}']"
+  $("#{high}").tab('show')

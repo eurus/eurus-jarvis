@@ -20,7 +20,7 @@
           td = overtime.duration
           td = overtime.content
           td = status overtime.approve
-          td = overtime.issue
+          td = issue overtime.issue
           td = get_project_name overtime.project_id
           td      
             = link_to fa_icon("check"),checkrecord_path(id: overtime.id, cut: 'overtime'), class: "pull-left" unless overtime.approve

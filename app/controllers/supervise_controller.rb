@@ -25,7 +25,7 @@ class SuperviseController < ApplicationController
     @user.password = '12345678'
     respond_to do |format|
       if @user.save
-        format.html { redirect_to supervise_index_path, notice: 'User was successfully created.' }
+        format.html { redirect_to supervise_index_path(view: 'users'), notice: 'User was successfully created.' }
       else
         format.html { render :new_user }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -36,7 +36,7 @@ class SuperviseController < ApplicationController
   def update_user
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to supervise_index_path, notice: 'User was successfully updated.' }
+        format.html { redirect_to supervise_index_path(view: 'users'), notice: 'User was successfully updated.' }
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class SuperviseController < ApplicationController
   def destroy_user
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to supervise_index_path, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to supervise_index_path(view: 'users'), notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -76,7 +76,7 @@ class SuperviseController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to supervise_index_path, notice: 'Leader was successfully selected.' }
+      format.html { redirect_to supervise_index_path(view: 'users'), notice: 'Leader was successfully selected.' }
     end
   end
 
@@ -127,9 +127,9 @@ class SuperviseController < ApplicationController
       if obj
         obj.approve = true
         obj.save
-        format.html { redirect_to supervise_index_path, notice: 'Record was successfully checked.' }
+        format.html { redirect_to supervise_index_path(view: "#{params[:cut]}s"), notice: 'Record was successfully checked.' }
       else
-        format.html { redirect_to supervise_index_path, notice: 'Record was not successfully checked.' }
+        format.html { redirect_to supervise_index_path(view: "#{params[:cut]}s"), notice: 'Record was not successfully checked.' }
       end
     end
   end
@@ -140,13 +140,13 @@ class SuperviseController < ApplicationController
       if obj
         obj.issue = true
         obj.save
-        format.html { redirect_to supervise_index_path, notice: 'Record was successfully checked.' }
+        format.html { redirect_to supervise_index_path(view: "#{params[:cut]}s"), notice: 'Record was successfully checked.' }
       else
-        format.html { redirect_to supervise_index_path, notice: 'Record was not successfully checked.' }
+        format.html { redirect_to supervise_index_path(view: "#{params[:cut]}s"), notice: 'Record was not successfully checked.' }
       end
     end
   end
-  
+
   private
 
   def klassify(str, id)

@@ -1,5 +1,5 @@
 # paths
-app_path = "/home/deploy/app/linkers-on-wall-rails"
+app_path = "/var/www/eurus-jarvis"
 working_directory "#{app_path}/current"
 pid               "#{app_path}/current/tmp/pids/unicorn.pid"
 

@@ -7,7 +7,7 @@ nav.navbar.navbar-default.navbar-custom
         span.icon-bar
         span.icon-bar
     #navbar.navbar-collapse.collapse
-      = switch_user_select
+      = switch_user_select if Rails.env == "development"
       ul.nav.navbar-nav.hidden-sm.hidden-md.hidden-lg.text-center
         li
           a href="" = fa_icon("dashboard") + " 项目"

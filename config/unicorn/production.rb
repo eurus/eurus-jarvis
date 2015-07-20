@@ -4,7 +4,7 @@ working_directory "#{app_path}/current"
 pid               "#{app_path}/current/tmp/pids/unicorn.pid"
 
 # listen
-listen 3000
+listen 4000
 # logging
 stderr_path "log/unicorn.stderr.log"
 stdout_path "log/unicorn.stdout.log"

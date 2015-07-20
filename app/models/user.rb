@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   scope :intern, -> { where(role: "intern") }
 
   def supervisor
-    User.find self.supervisor_id
+    User.find self.supervisor_id rescue nil
   end
 
   def self.all_except(id)

@@ -4,7 +4,7 @@ class WeekliesController < ApplicationController
   # GET /weeklies
   # GET /weeklies.json
   def index
-    @weeklies = Weekly.all
+    @weeklies = current_user.weeklies.page params[:page]
   end
 
   # GET /weeklies/1
@@ -26,8 +26,17 @@ class WeekliesController < ApplicationController
   def create
     @weekly = Weekly.new(weekly_params)
     @weekly.user_id = current_user.id
+
     respond_to do |format|
       if @weekly.save
+        # send email to current_user.manger
+        if current_user.supervisor
+          NotifyMailer.weekly_report(current_user.supervisor, @weekly).deliver_later
+        end
+        # send eamil to current_user.ceo
+        User.ceo.try :each do |u|
+          NotifyMailer.weekly_report(u, @weekly).deliver_later
+        end
         format.html { redirect_to @weekly, notice: 'Weekly was successfully created.' }
         format.json { render :show, status: :created, location: @weekly }
       else

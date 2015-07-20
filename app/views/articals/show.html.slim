@@ -1,7 +1,9 @@
 .row
   = notice_tag notice
   .col-md-12.text-center
-    = link_to '修改', edit_artical_path(@artical),class: "btn btn-primary pull-right"
+    = link_to '返回', articals_path,class: "btn btn-primary pull-right"
+    = link_to fa_icon('pencil'), edit_artical_path(@artical),class: "btn btn-primary pull-right"
+    .clearfix
     h3
       = @artical.title
     h5

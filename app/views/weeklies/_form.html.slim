@@ -6,10 +6,11 @@
             li = msg 
     .row
       .form-groups.col-md-6
-
-        = f.input :sumary, as: :wysihtml5, input_html: {class: "form-control",rows: 20},error: false,placeholder: "请保持字数在100-800之间"
+        = f.label "总结"
+        = f.input :sumary, as: :wysihtml5, input_html: {class: "form-control",rows: 20},error: false,placeholder: "请保持字数在100-800之间",label: false
       .form-groups.col-md-6
-        = f.input :hope,as: :wysihtml5, input_html: {class: "form-control",rows: 20},error: false,placeholder: "请保持字数在100-800之间"
+        = f.label "期望"
+        = f.input :hope,as: :wysihtml5, input_html: {class: "form-control",rows: 20},error: false,placeholder: "请保持字数在100-800之间",label: false
 
     .form-groups
       = f.submit '保存',class:"btn btn-block btn-primary"

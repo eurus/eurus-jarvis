@@ -75,3 +75,9 @@ gem 'bootstrap-datepicker-rails'
 
 gem 'bootstrap-wysihtml5-rails'
 gem 'sidekiq'
+
+# capstrino setup
+gem 'unicorn'
+gem 'capistrano'
+gem 'capistrano-rails'
+gem 'capistrano3-unicorn'

@@ -8,7 +8,7 @@ class NotifyMailer < ApplicationMailer
   def weekly_report(user,report)
     @user = user
     @report = report
-    mail(to: @user.email, subject: "#{@user.try :nickname} 写了一封新的周报")
+    mail(to: @user.email, subject: "你有一封特别周报")
   end
 
 

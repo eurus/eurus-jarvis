@@ -26,7 +26,7 @@ Rails.application.configure do
     password:     'woshi007',
     enable_starttls_auto: true, 
     openssl_verify_mode:'none',
-    authentication: 'login'
+    authentication: 'plain'
   }
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

@@ -1,15 +1,12 @@
-p#notice = notice
-
-p
-  strong User:
-  = @weekly.user_id
-p
-  strong Sumary:
-  = @weekly.sumary
-p
-  strong Hope:
-  = @weekly.hope
-
-= link_to 'Edit', edit_weekly_path(@weekly)
-'|
-= link_to 'Back', weeklies_path
+.row
+  = notice_tag notice
+  .col-md-12.text-center
+    = link_to '返回', weeklies_path,class: "btn btn-primary pull-right"
+    = link_to fa_icon('pencil'), edit_weekly_path(@weekly),class: "btn btn-primary pull-right"
+    .clearfix
+    h3 总结
+    article
+      = raw @weekly.sumary
+    h3 期望
+    article
+      = raw @weekly.hope

@@ -52,5 +52,5 @@ test:
 production:
   <<: *default
   database: eurus-jarvis_prod
-  username: <%= ENV['EURUS_JARVIS_DATABASE_USERNAME'] %>
-  password: <%= ENV['EURUS_JARVIS_DATABASE_PASSWORD'] %>
+  # username: <%= ENV['EURUS_JARVIS_DATABASE_USERNAME'] %>
+  # password: <%= ENV['EURUS_JARVIS_DATABASE_PASSWORD'] %>

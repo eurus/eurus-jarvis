@@ -2,6 +2,14 @@ class DashboardController < ApplicationController
   # skip_before_action :authenticate_user!, only: [:index]
 
   def index
+
+    num = Artical.count
+    if num==0
+      num=1
+    end
+    num = Random.new.rand(num) 
+    @art = Artical.all[num]
+
     @config = YAML.load_file("config/weather.yml")["code"]
     @client = YahooWeather::Client.new;
     @response = @client.fetch(12712492).doc["item"]["condition"]

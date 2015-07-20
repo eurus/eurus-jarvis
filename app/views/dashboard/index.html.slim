@@ -10,7 +10,9 @@
     .panel.panel-default
       .panel-heading = t("today-news")
       .panel-body
-        
+        h3 = @art.try :title
+        article 
+          = @art.try :content
   .col-md-3#useful
     .panel.panel-default
       .panel-heading = t('today-tool')

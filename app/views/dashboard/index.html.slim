@@ -1,11 +1,12 @@
 .row
-  .jumbotron
-    .weather.pull-right
-      span.icon = wi_icon("#{@icon}")
-      span.text = @response["text"]
-      span.temp = f_to_c @response["temp"]
-    h3 Welcome Aboard!
-    p = current_user.nickname
+  .container
+    .jumbotron
+      .weather.pull-right
+        span.icon = wi_icon("#{@icon}")
+        span.text = @response["text"]
+        span.temp = f_to_c @response["temp"]
+      h3 Welcome Aboard!
+      p = current_user.nickname
   .col-md-6#blog
     .panel.panel-default
       .panel-heading = t("today-news")

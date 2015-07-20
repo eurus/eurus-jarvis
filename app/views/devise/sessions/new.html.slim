@@ -1,3 +1,5 @@
+.row
+  = notice_tag notice
 h2.text-center.sign-in-margin = t("signin")
 .col-md-3
 .col-md-6
@@ -6,7 +8,8 @@ h2.text-center.sign-in-margin = t("signin")
       .input-group
         span.input-group-addon
           = fa_icon "envelope-o"
-        = f.text_field :email, class: "form-control", required: false, autofocus: true,placeholder: "example@eurus.cn"
+        = f.text_field :login, class: "form-control", required: false, autofocus: true,placeholder: "example"
+        span.input-group-addon @eurus.cn
     .form-group
       .input-group
         span.input-group-addon

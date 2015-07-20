@@ -1,6 +1,6 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
-app_name = "jarvis"
+app_name = "eurus-jarvis"
 set :application, "#{app_name}"
 set :repo_url, 'git@git.coding.net:sevenbanana/eurus-jarvis.git'
 
@@ -8,7 +8,7 @@ set :repo_url, 'git@git.coding.net:sevenbanana/eurus-jarvis.git'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/home/deploy/app/#{app_name}"
+set :deploy_to, "/var/www/#{app_name}"
 set :deploy_via, :remote_cache
 
 set :rvm_type, :system

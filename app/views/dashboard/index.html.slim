@@ -9,19 +9,21 @@
       p = current_user.nickname
   .col-md-6#blog
     .panel.panel-default
-      .panel-heading = t("today-news")
+      .panel-heading 今日推荐
       .panel-body
         h3 = @art.try :title
         article 
           = @art.try :content
   .col-md-3#useful
     .panel.panel-default
-      .panel-heading = t('today-tool')
+      .panel-heading 管理工具
       .panel-body
         = link_to "管理" ,supervise_index_path , class: "btn btn-primary btn-block"
   .col-md-3#useful
     .panel.panel-default
       .panel-heading 常用链接
       .panel-body
+        = link_to "风豪科技" ,'http://www.eurus.cn' , class: "btn btn-primary btn-block",target: "_blank"
+        = link_to "维基百科" ,'http://wiki.eurus.cn' , class: "btn btn-primary btn-block",target: "_blank"
         = link_to "反馈" ,feedbacks_path , class: "btn btn-primary btn-block"
         

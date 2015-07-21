@@ -21,9 +21,15 @@
 //= require bootstrap-datepicker
 //= require bootstrap-wysihtml5
 //= require_tree .
-$(function() {
-  return $('#menu-toggle').click(function(e) {
-    e.preventDefault();
+
+$(window).bind('page:load', function() {
+  initPage();
+});
+$(window).bind('page:change', function() {
+  initPage();
+});
+function initPage() {
+  $('#menu-toggle').click(function(e) {
     $('#wrapper').toggleClass('toggled');
   });
-});
+}

@@ -22,9 +22,7 @@
 //= require bootstrap-wysihtml5
 //= require_tree .
 
-$(window).bind('page:load', function() {
-  initPage();
-});
+
 $(window).bind('page:change', function() {
   initPage();
 });

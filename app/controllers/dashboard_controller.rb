@@ -7,13 +7,15 @@ class DashboardController < ApplicationController
     if num==0
       num=1
     end
-    num = Random.new.rand(num) 
+    num = Random.new.rand(num)
     @art = Artical.all[num]
 
     @config = YAML.load_file("config/weather.yml")["code"]
-    @client = YahooWeather::Client.new;
-    @response = @client.fetch(12712492).doc["item"]["condition"]
-    @icon = @config[@response['code'].to_i]['icon']
+    ap @response = YahooWeather::Client.new.fetch(12712492)
+    if @response
+      code = @response.condition.code 
+      @icon = @config[code.to_i]['icon']
+    end
   end
 
   def setting

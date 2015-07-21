@@ -21,3 +21,9 @@
 //= require bootstrap-datepicker
 //= require bootstrap-wysihtml5
 //= require_tree .
+$(function() {
+  return $('#menu-toggle').click(function(e) {
+    e.preventDefault();
+    $('#wrapper').toggleClass('toggled');
+  });
+});

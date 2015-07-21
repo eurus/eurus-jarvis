@@ -1,6 +1,6 @@
 .row
   = notice_tag notice
-  .col-md-8
+  .col-md-12
     h3 请假
 
     table.table.table-bordered
@@ -25,5 +25,4 @@
               - unless vacation.approve
                 = link_to fa_icon("pencil"), edit_vacation_path(vacation),class: "pull-left" 
                 = link_to fa_icon('trash'), vacation, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
-  .col-md-4
-    h3 统计
+

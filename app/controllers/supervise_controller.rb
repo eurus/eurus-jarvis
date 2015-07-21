@@ -23,6 +23,7 @@ class SuperviseController < ApplicationController
     @user = User.new(user_params)
     # set default password to 12345678
     @user.password = '12345678'
+    default_user_avatar @user
     respond_to do |format|
       if @user.save
         format.html { redirect_to supervise_index_path(view: 'users'), notice: 'User was successfully created.' }
@@ -148,6 +149,14 @@ class SuperviseController < ApplicationController
   end
 
   private
+
+  def default_user_avatar(u)
+    image_arr = ["user1.jpg","user2.jpg","user3.jpg","user4.jpg","user5.jpg"]
+    File.open(Rails.root.join("app/assets/images/user/#{image_arr[rand 5]}")) do |f|
+      u.avatar = f
+    end
+    return u
+  end
 
   def klassify(str, id)
     if ["errand","overtime","vacation"].include? str

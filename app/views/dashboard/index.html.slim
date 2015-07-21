@@ -30,6 +30,7 @@
           = @art.try :content
   .col-md-4
     .panel.panel-default
-      .panel-heading 加班统计
+      .panel-heading 统计
       .panel-body
-        
+        span.badge
+          = "#{sabbatical_gone}/#{sabbatical_remain}"

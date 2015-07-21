@@ -2,7 +2,7 @@ class DashboardController < ApplicationController
   # skip_before_action :authenticate_user!, only: [:index]
   include Common
   def index
-    get_user_annual_vacation current_user
+
     num = Artical.count
     if num==0
       num=1

@@ -11,7 +11,7 @@ class DashboardController < ApplicationController
     @art = Artical.all[num]
 
     @config = YAML.load_file("config/weather.yml")["code"]
-    ap @response = YahooWeather::Client.new.fetch(12712492)
+    @response = YahooWeather::Client.new.fetch(12712492)
     if @response
       code = @response.condition.code 
       @icon = @config[code.to_i]['icon']

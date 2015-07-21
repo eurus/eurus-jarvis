@@ -152,7 +152,7 @@ class SuperviseController < ApplicationController
 
   def default_user_avatar(u)
     image_arr = ["user1.jpg","user2.jpg","user3.jpg","user4.jpg","user5.jpg"]
-    File.open(Rails.root.join("app/assets/images/user/#{image_arr[rand 5]}")) do |f|
+    File.open(Rails.root.join("app/assets/images/user/#{image_arr[rand image_arr.length]}")) do |f|
       u.avatar = f
     end
     return u

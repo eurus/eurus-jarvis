@@ -1,0 +1,33 @@
+h1 Listing plans
+
+table
+  thead
+    tr
+      th Title
+      th Descripiton
+      th User
+      th Status
+      th Cut
+      th Start at
+      th End at
+      th
+      th
+      th
+
+  tbody
+    - @plans.each do |plan|
+      tr
+        td = plan.title
+        td = plan.descripiton
+        td = plan.user_id
+        td = plan.status
+        td = plan.cut
+        td = plan.start_at
+        td = plan.end_at
+        td = link_to 'Show', plan
+        td = link_to 'Edit', edit_plan_path(plan)
+        td = link_to 'Destroy', plan, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Plan', new_plan_path

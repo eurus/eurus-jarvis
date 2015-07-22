@@ -1,0 +1,27 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @plan.title
+p
+  strong Descripiton:
+  = @plan.descripiton
+p
+  strong User:
+  = @plan.user_id
+p
+  strong Status:
+  = @plan.status
+p
+  strong Cut:
+  = @plan.cut
+p
+  strong Start at:
+  = @plan.start_at
+p
+  strong End at:
+  = @plan.end_at
+
+= link_to 'Edit', edit_plan_path(@plan)
+'|
+= link_to 'Back', plans_path

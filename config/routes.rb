@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :plans
   root 'dashboard#index'
   resources :overtimes
   resources :feedbacks

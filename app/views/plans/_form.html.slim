@@ -1,14 +1,27 @@
-= simple_form_for(@plan) do |f|
-  = f.error_notification
-
-  .form-inputs
-    = f.input :title
-    = f.input :description
-    = f.input :user_id
-    = f.input :status
-    = f.input :cut
-    = f.input :start_at
-    = f.input :end_at
-
-  .form-actions
-    = f.button :submit
+.col-md-3
+.col-md-6
+  = simple_form_for(@plan) do |f|
+    -if @plan.errors.any?
+        ul
+          - @plan.errors.full_messages.each do |msg|
+            li = msg 
+    .form-groups.row
+      .col-md-6
+        = f.input :title, input_html: {class: 'form-control '}, label: "标题",required: false
+      .col-md-6
+        = f.input :cut, input_html: {class: 'form-control '}, label: "类型",required: false, collection: ["出差","公司"]
+    / .form-groups
+    .form-groups
+      = f.label "开始时间"
+      = f.text_field :start_at,{class: "form-control datepicker"}
+    .form-groups
+      = f.label "结束时间"
+      = f.text_field :end_at,{class: "form-control datepicker"}   
+    .form-groups
+      = f.input :description, input_html: {class: 'form-control', rows: 10}, label: "内容",required: false
+    .form-actions
+      = f.submit '保存',class:"btn btn-block btn-primary"
+coffee:
+  $('.datepicker').datepicker({
+      format: 'yyyy-mm-dd'
+  })

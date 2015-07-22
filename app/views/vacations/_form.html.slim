@@ -20,6 +20,7 @@
       = f.text_area :content,class: "form-control" 
     .form-actions
       = f.submit '保存',class:"btn btn-block btn-primary"
+      = link_to "返回", vacations_path ,class: "btn btn-default btn-block"
 .col-md-3
 coffee:
   $ ->

@@ -1,4 +1,3 @@
-/! Fixed navbar
 nav.navbar.navbar-default.navbar-fixed-top
   .container
     .navbar-header
@@ -33,13 +32,12 @@ nav.navbar.navbar-default.navbar-fixed-top
               a href="#"  Separated link
             li
               a href="#"  One more separated link
+
       ul.nav.navbar-nav.navbar-right
         li
-          a href="../navbar/"  Default
+          a href="/"
+            = image_tag(current_user.avatar_url(:micro),class:"img-circle") if current_user.avatar?
         li
-          a href="../navbar-static-top/"  Static top
-        li.active
-          a href="./" 
-            | Fixed top
-            span.sr-only (current)
-    /! /.nav-collapse
+          = link_to fa_icon("gear"), settings_path
+        li
+          = link_to fa_icon("plug"), destroy_user_session_path, method: :delete

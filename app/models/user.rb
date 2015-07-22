@@ -28,6 +28,11 @@ class User < ActiveRecord::Base
     User.find self.supervisor_id rescue nil
   end
 
+  def plans_i_can_see
+    ids = (User.dfs self).flatten.map(&:id)
+    Plan.where(user_id: ids)
+  end
+
   def self.all_except(id)
     where.not(id: id)
   end
@@ -64,4 +69,5 @@ class User < ActiveRecord::Base
       where(conditions.to_h).first
     end
   end
+
 end

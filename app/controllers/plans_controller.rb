@@ -4,7 +4,11 @@ class PlansController < ApplicationController
   # GET /plans
   # GET /plans.json
   def index
-    @plans = Plan.all
+    if current_user.supervisor
+      @plans = current_user.plans 
+    else
+      @plans = current_user.plans
+    end
   end
 
   # GET /plans/1
@@ -26,7 +30,7 @@ class PlansController < ApplicationController
   def create
     @plan = Plan.new(plan_params)
     @plan.user_id = current_user.id
-    
+
     respond_to do |format|
       if @plan.save
         format.html { redirect_to @plan, notice: 'Plan was successfully created.' }
@@ -63,13 +67,13 @@ class PlansController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_plan
-      @plan = Plan.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_plan
+    @plan = Plan.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def plan_params
-      params.require(:plan).permit(:title, :description, :user_id, :status, :cut, :start_at, :end_at)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def plan_params
+    params.require(:plan).permit(:title, :description, :user_id, :status, :cut, :start_at, :end_at)
+  end
 end

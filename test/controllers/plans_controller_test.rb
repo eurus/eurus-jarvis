@@ -18,7 +18,7 @@ class PlansControllerTest < ActionController::TestCase
 
   test "should create plan" do
     assert_difference('Plan.count') do
-      post :create, plan: { cut: @plan.cut, descripiton: @plan.descripiton, end_at: @plan.end_at, start_at: @plan.start_at, status: @plan.status, title: @plan.title, user_id: @plan.user_id }
+      post :create, plan: { cut: @plan.cut, description: @plan.description, end_at: @plan.end_at, start_at: @plan.start_at, status: @plan.status, title: @plan.title, user_id: @plan.user_id }
     end
 
     assert_redirected_to plan_path(assigns(:plan))
@@ -35,7 +35,7 @@ class PlansControllerTest < ActionController::TestCase
   end
 
   test "should update plan" do
-    patch :update, id: @plan, plan: { cut: @plan.cut, descripiton: @plan.descripiton, end_at: @plan.end_at, start_at: @plan.start_at, status: @plan.status, title: @plan.title, user_id: @plan.user_id }
+    patch :update, id: @plan, plan: { cut: @plan.cut, description: @plan.description, end_at: @plan.end_at, start_at: @plan.start_at, status: @plan.status, title: @plan.title, user_id: @plan.user_id }
     assert_redirected_to plan_path(assigns(:plan))
   end
 

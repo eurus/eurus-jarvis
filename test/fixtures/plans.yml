@@ -2,7 +2,7 @@
 
 one:
   title: MyString
-  descripiton: MyText
+  description: MyText
   user_id: 1
   status: MyString
   cut: MyString
@@ -11,7 +11,7 @@ one:
 
 two:
   title: MyString
-  descripiton: MyText
+  description: MyText
   user_id: 1
   status: MyString
   cut: MyString

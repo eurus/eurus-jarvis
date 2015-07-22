@@ -2,7 +2,7 @@ class CreatePlans < ActiveRecord::Migration
   def change
     create_table :plans do |t|
       t.string :title
-      t.text :descripiton
+      t.text :description
       t.integer :user_id
       t.string :status
       t.string :cut

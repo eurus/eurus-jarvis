@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :weeklies
   has_many :feedbacks
   has_many :articals
+  has_many :plans
   has_and_belongs_to_many :projects
 
   mount_uploader :avatar, AvatarUploader

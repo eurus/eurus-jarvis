@@ -49,7 +49,9 @@ class User < ActiveRecord::Base
     if (User.buddies node).count == 0
       return node
     else
-      (User.buddies node).map { |u| User.dfs u }
+      res = (User.buddies node).map { |u| User.dfs u }
+      res.push node
+      return res
     end
   end
 

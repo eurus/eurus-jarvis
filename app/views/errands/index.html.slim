@@ -23,10 +23,10 @@
             td = errand.end_at
             td = get_project_name errand.project_id
             td = errand.fee
-            td = errand.check
+            td = errand.approve
             td = errand.issue
             td 
-              - unless errand.check
+              - unless errand.approve
                 = link_to fa_icon("pencil"), edit_errand_path(errand),class: "pull-left" 
                 = link_to fa_icon('trash'), errand, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
 

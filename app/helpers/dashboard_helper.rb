@@ -27,4 +27,20 @@ module DashboardHelper
         ((v.to-v.start)/1.day).to_f
     }.reduce(:+) || 0
   end
+
+  def translate_title (name)
+    case name
+    when "ceo"
+      "首席执行官"
+    when "director"
+      "部门总监"
+    when "pm"
+      "项目经理"
+    when "stuff"
+      "普通猿工"
+    else
+      "实习猿工"
+    end
+    
+  end
 end

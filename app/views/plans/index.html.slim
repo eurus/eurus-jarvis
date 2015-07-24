@@ -27,7 +27,7 @@
               td
                 = simple_form_for(:plan, url:update_status_plans_path,method: :post, remote: true) do |f|
                   = f.hidden_field :id, value: plan.id
-                  = f.input :status, collection: ["ongoing","done","overtime"], input_html: {onchange: '$(this.form).submit();'},label: false,selected: plan.status
+                  = f.input :status, collection: ["ongoing","done","overtime"], input_html: {onchange: '$(this.form).submit();',class: 'form-control'},label: false,selected: plan.status
               
             td = plan.cut
             td = plan.start_at

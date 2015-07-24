@@ -20,7 +20,7 @@
               td = current_user.try :nickname
             tr
               td 职位
-              td = current_user.try :occupation
+              td = translate_title current_user.try :occupation
   .col-md-6
     = simple_form_for @user, url: update_setting_path,method: :put ,html: { multipart: true }do |f|
       .text-center

@@ -27,6 +27,10 @@
 
     = link_to articals_path , class: "list-group-item #{'active' if params['controller'] == 'articals'}" do
       =fa_icon("book") +" 文章"
+
+    = link_to supervise_index_path , class: "list-group-item #{'active' if params['controller'] == 'supervise'}" do
+      =fa_icon("cog") +" 管理"
+
   div
     = link_to '新出差', new_errand_path,class: "btn btn-primary btn-block" if params['controller'] == 'errands'
     = link_to '新假期', new_vacation_path,class: "btn btn-primary btn-block" if params['controller'] == 'vacations'

@@ -57,9 +57,20 @@ class PlansController < ApplicationController
   end
 
   def update_status
-    ap params
+    @plan = Plan.find(params[:plan][:id])
+    @plan.status = params[:plan][:status]
     respond_to do |format|
-      format.js{}
+      if @plan.save
+        format.js{
+          render action: 'update_status',
+          locals: {status: :ok}
+        }
+      else
+        format.js{
+          render action: 'update_status',
+          locals: {status: :ok}
+        }
+      end
     end
   end
 

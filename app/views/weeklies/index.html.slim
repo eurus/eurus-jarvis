@@ -1,21 +1,22 @@
 .row
   = notice_tag notice
-  - @weeklies.each do |weekly|
-    .col-md-4
-      .panel.panel-default
-        .panel-heading
-          = weekly.created_at.strftime("%Y-%m-%d")
-          .actions.pull-right
-            = link_to fa_icon('eye'), weekly
-            = link_to fa_icon('pencil'), edit_weekly_path(weekly)
-            = link_to fa_icon('times'), weekly, data: {:confirm => 'Are you sure?'}, :method => :delete
-        .panel-body
-          article
-            h4 总结
-            = raw (weekly.try :sumary)[0..100]
-          article
-            h4 期望
-            = raw (weekly.try :hope)[0..100]
+  .p-40.pt-15
+    - @weeklies.each do |weekly|
+      .col-md-4
+        .panel.panel-default
+          .panel-heading
+            = weekly.created_at.strftime("%Y-%m-%d")
+            .actions.pull-right
+              = link_to fa_icon('eye'), weekly
+              = link_to fa_icon('pencil'), edit_weekly_path(weekly)
+              = link_to fa_icon('times'), weekly, data: {:confirm => 'Are you sure?'}, :method => :delete
+          .panel-body
+            article
+              h4 总结
+              = raw (weekly.try :sumary)[0..100]
+            article
+              h4 期望
+              = raw (weekly.try :hope)[0..100]
 
 .text-center
   = paginate @weeklies,theme: 'twitter-bootstrap-3'

@@ -1,31 +1,40 @@
 .row
   = notice_tag notice
-  .col-md-12
-    h3 加班
-    table.table.table-bordered
-      thead
-        tr
-          th 加班日期
-          th 加班时长
-          th 加班内容
-          th 审核状态
-          th 发放状态
-          th 加班项目
-          th
+  .banner
+    .title 加班
+    .breadcrumb-wrapper
+      label 您现在的位置:
+      ul.breadcrumb
+        li
+          a href='#' 加班
+        li.active  所有加班
+  .col-md-12.p-40.pt-15
+    .panel
+      .panel-body
+        table.table
+          thead
+            tr
+              th 加班日期
+              th 加班时长
+              th 加班内容
+              th 审核状态
+              th 发放状态
+              th 加班项目
+              th
 
 
-      tbody
-        - @overtimes.each do |overtime|
-          tr
-            td = overtime.start_at
-            td = overtime.duration
-            td = overtime.content
-            td = overtime.approve
-            td = overtime.issue
-            td = get_project_name overtime.project_id
-            td 
-              - unless overtime.approve
-                = link_to fa_icon("pencil"), edit_overtime_path(overtime),class: "pull-left" 
-                = link_to fa_icon('trash'), overtime, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right" 
+          tbody
+            - @overtimes.each do |overtime|
+              tr
+                td = overtime.start_at
+                td = overtime.duration
+                td = overtime.content
+                td = overtime.approve
+                td = overtime.issue
+                td = get_project_name overtime.project_id
+                td 
+                  - unless overtime.approve
+                    = link_to fa_icon("pencil"), edit_overtime_path(overtime),class: "pull-left" 
+                    = link_to fa_icon('trash'), overtime, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right" 
 .text-center
   = paginate @overtimes,theme: 'twitter-bootstrap-3'

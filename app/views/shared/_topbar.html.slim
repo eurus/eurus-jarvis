@@ -1,22 +1,23 @@
 nav.navbar.navbar-default.navbar-fixed-top
-  .container
-    .navbar-header
-      button.navbar-toggle.collapsed aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" type="button" 
-        span.sr-only Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.navbar-brand href="#"  Project name
-    #navbar.navbar-collapse.collapse
-      ul.nav.navbar-nav
-        li.active
-          a href="#"  Home
-        li
-          a href="#about"  About
-        li
-          a href="#contact"  Contact
-        li.dropdown
-          a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+  .navbar-header.text-center
+    a.navbar-brand href="/"
+      =image_tag "logo-dark.png", class:'img-responsive inline mr-10', width:'30px'
+      span.bold(style="margin-right:3px;") Eurus
+      span Studio
+
+    button.navbar-toggle.collapsed aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" type="button"
+      span.sr-only Toggle navigation
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
+
+  #navbar.navbar-collapse.collapse
+    ul.nav.navbar-nav
+      li
+        a#menu-toggle href='#' =fa_icon 'th-large'
+
+      / li.dropdown
+          a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
             | Dropdown
             span.caret
           ul.dropdown-menu
@@ -26,18 +27,18 @@ nav.navbar.navbar-default.navbar-fixed-top
               a href="#"  Another action
             li
               a href="#"  Something else here
-            li.divider role="separator" 
+            li.divider role="separator"
             li.dropdown-header Nav header
             li
               a href="#"  Separated link
             li
               a href="#"  One more separated link
 
-      ul.nav.navbar-nav.navbar-right
-        li
-          a href="/"
-            = image_tag(current_user.avatar_url(:micro),class:"img-circle") if current_user.avatar?
-        li
-          = link_to fa_icon("gear"), settings_path
-        li
-          = link_to fa_icon("plug"), destroy_user_session_path, method: :delete
+    ul.nav.navbar-nav.navbar-right
+      li
+        a href="/"
+          = image_tag(current_user.avatar_url(:micro),class:"img-circle") if current_user.avatar?
+      li
+        = link_to fa_icon("gear"), settings_path
+      li
+        = link_to fa_icon("plug"), destroy_user_session_path, method: :delete

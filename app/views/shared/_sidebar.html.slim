@@ -1,31 +1,35 @@
-.logo-img.text-center
-  = image_tag "logo.jpg", width: '100',height: '100',class: "img-circle"
-div.list-group.text-center
-  = link_to root_path , class: "list-group-item #{'active' if params['controller'] == 'dashboard'}" do
-    = fa_icon("dashboard")+" Dash"
-  = link_to projects_path , class: "list-group-item #{'active' if params['controller'] == 'projects'}" do
-    = fa_icon("building") + " 项目"
+.sidebar
+  .logo-img.text-center
+    = image_tag "user/user1.jpg", class: "img-circle"
+  .text-center
+    .name simonzg
+    .occupation 技术总监
+  div.list-group.text-center
+    = link_to root_path , class: "list-group-item #{'active' if params['controller'] == 'dashboard'}" do
+      = fa_icon("dashboard")+" Dash"
+    = link_to projects_path , class: "list-group-item #{'active' if params['controller'] == 'projects'}" do
+      = fa_icon("building") + " 项目"
 
-  = link_to errands_path , class: "list-group-item #{'active' if params['controller'] == 'errands'}" do
-    = fa_icon("paper-plane") + " 出差"
+    = link_to errands_path , class: "list-group-item #{'active' if params['controller'] == 'errands'}" do
+      = fa_icon("paper-plane") + " 出差"
 
-  = link_to vacations_path , class: "list-group-item #{'active' if params['controller'] == 'vacations'}" do
-    = fa_icon("bed") + " 假期"
-  = link_to plans_path , class: "list-group-item #{'active' if params['controller'] == 'plans'}" do
-    = fa_icon("clock-o") + " 计划"
-  = link_to overtimes_path , class: "list-group-item #{'active' if params['controller'] == 'overtimes'}" do
-    = fa_icon("briefcase") + " 加班"
+    = link_to vacations_path , class: "list-group-item #{'active' if params['controller'] == 'vacations'}" do
+      = fa_icon("bed") + " 假期"
+    = link_to plans_path , class: "list-group-item #{'active' if params['controller'] == 'plans'}" do
+      = fa_icon("clock-o") + " 计划"
+    = link_to overtimes_path , class: "list-group-item #{'active' if params['controller'] == 'overtimes'}" do
+      = fa_icon("briefcase") + " 加班"
 
-  = link_to weeklies_path , class: "list-group-item #{'active' if params['controller'] == 'weeklies'}" do
-    = fa_icon("newspaper-o") + " 周报"
+    = link_to weeklies_path , class: "list-group-item #{'active' if params['controller'] == 'weeklies'}" do
+      = fa_icon("newspaper-o") + " 周报"
 
-  = link_to articals_path , class: "list-group-item #{'active' if params['controller'] == 'articals'}" do 
-    =fa_icon("book") +" 文章"
-div
-  = link_to '新出差', new_errand_path,class: "btn btn-primary btn-block" if params['controller'] == 'errands'
-  = link_to '新假期', new_vacation_path,class: "btn btn-primary btn-block" if params['controller'] == 'vacations'
-  = link_to '新加班', new_overtime_path,class: "btn btn-primary btn-block" if params['controller'] == 'overtimes'
-  = link_to '新周报', new_weekly_path,class: "btn btn-primary btn-block" if params['controller'] == 'weeklies'
-  = link_to '新文章', new_artical_path,class: "btn btn-primary btn-block" if params['controller'] == 'articals'
+    = link_to articals_path , class: "list-group-item #{'active' if params['controller'] == 'articals'}" do
+      =fa_icon("book") +" 文章"
+  div
+    = link_to '新出差', new_errand_path,class: "btn btn-primary btn-block" if params['controller'] == 'errands'
+    = link_to '新假期', new_vacation_path,class: "btn btn-primary btn-block" if params['controller'] == 'vacations'
+    = link_to '新加班', new_overtime_path,class: "btn btn-primary btn-block" if params['controller'] == 'overtimes'
+    = link_to '新周报', new_weekly_path,class: "btn btn-primary btn-block" if params['controller'] == 'weeklies'
+    = link_to '新文章', new_artical_path,class: "btn btn-primary btn-block" if params['controller'] == 'articals'
 
   = link_to '新计划', new_plan_path,class: "btn btn-primary btn-block" if params['controller'] == 'plans'

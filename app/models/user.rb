@@ -72,4 +72,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.（╯‵□′）╯︵┻━┻
+    ap "Calm Down, Bro"
+  end
 end

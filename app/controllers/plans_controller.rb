@@ -56,6 +56,24 @@ class PlansController < ApplicationController
     end
   end
 
+  def update_status
+    @plan = Plan.find(params[:plan][:id])
+    @plan.status = params[:plan][:status]
+    respond_to do |format|
+      if @plan.save
+        format.js{
+          render action: 'update_status',
+          locals: {status: :ok}
+        }
+      else
+        format.js{
+          render action: 'update_status',
+          locals: {status: :ok}
+        }
+      end
+    end
+  end
+
   # DELETE /plans/1
   # DELETE /plans/1.json
   def destroy

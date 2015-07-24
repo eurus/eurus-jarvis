@@ -34,3 +34,4 @@ bower.json
 .powenv
 public/uploads
 .DS_Store
+**/.DS_Store

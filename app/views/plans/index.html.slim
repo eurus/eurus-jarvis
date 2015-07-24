@@ -1,33 +1,40 @@
-h1 Listing plans
+.row
+  = notice_tag notice
+  .col-md-12
+    h3 计划
 
-table
-  thead
-    tr
-      th Title
-      th Description
-      th User
-      th Status
-      th Cut
-      th Start at
-      th End at
-      th
-      th
-      th
+    table.table.table-bordered
+      thead
+        tr
+          th 计划标题
+          th 请假内容
+          th 计划作者
+          th 计划状态
+          th 计划种类
+          th 计划开始时间
+          th 计划结束时间
+          th
 
-  tbody
-    - @plans.each do |plan|
-      tr
-        td = plan.title
-        td = plan.description
-        td = plan.user_id
-        td = plan.status
-        td = plan.cut
-        td = plan.start_at
-        td = plan.end_at
-        td = link_to 'Show', plan
-        td = link_to 'Edit', edit_plan_path(plan)
-        td = link_to 'Destroy', plan, data: {:confirm => 'Are you sure?'}, :method => :delete
+      tbody
+        - @plans.each do |plan|
+          tr
+            td = plan.title
+            td = plan.description[0..10]
+            td = owner_name plan.user_id
+            - if pm?
+              td = plan.status
+            - else
+              td
+                = simple_form_for(:plan, url:update_status_plans_path,method: :post, remote: true) do |f|
+                  = f.hidden_field :id, value: plan.id
+                  = f.input :status, collection: ["ongoing","done","overtime"], input_html: {onchange: '$(this.form).submit();'},label: false,selected: plan.status
+              
+            td = plan.cut
+            td = plan.start_at
+            td = plan.end_at
+            td.text-center
+              = link_to fa_icon('eye'), plan,class: "pull-left" 
+              = link_to fa_icon("pencil"), edit_plan_path(plan) if plan.user_id = current_user.id
+              = link_to fa_icon('trash'), plan, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
 
-br
 
-= link_to 'New Plan', new_plan_path

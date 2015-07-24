@@ -32,4 +32,10 @@ function initPage() {
   });
 
   $('.fademein').fadeIn(1000);
+  $('.panel').hover(function(){
+    $(this).find('.actions').fadeIn(500);
+  });
+  $('.panel').mouseleave(function(){
+    $(this).find('.actions').fadeOut(200);
+  })
 }

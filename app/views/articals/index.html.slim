@@ -3,15 +3,16 @@
   - @articals.try :each do |a|
     .col-md-6
       .panel.panel-default
-        .panel-heading = a.try :title
+        .panel-heading
+          = a.try :title
+          .actions.pull-right
+            = link_to fa_icon('eye'), a
+            = link_to fa_icon('pencil'), edit_artical_path(a)
+            = link_to fa_icon('times'), a, data: {:confirm => 'Are you sure?'}, :method => :delete
         .panel-body
           span = a.try :origin
           span = a.try :user_id
           article
            = a.content[0..200]
-        .panel-footer.text-center
-          span.pull-left = link_to fa_icon('eye'), a
-          span = link_to fa_icon('pencil'), edit_artical_path(a)
-          span.pull-right = link_to fa_icon('trash'), a, data: {:confirm => 'Are you sure?'}, :method => :delete
 .text-center
   = paginate @articals,theme: 'twitter-bootstrap-3'

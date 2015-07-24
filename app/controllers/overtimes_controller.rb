@@ -4,7 +4,11 @@ class OvertimesController < ApplicationController
   # GET /overtimes
   # GET /overtimes.json
   def index
-    @overtimes = current_user.overtimes.page params[:page]
+    if current_user.role == 'ceo'
+      @overtimes = Overtime.all.order(created_at: :desc).page params[:page]
+    else
+      @overtimes = current_user.overtimes.page params[:page]
+    end
   end
 
   # GET /overtimes/new

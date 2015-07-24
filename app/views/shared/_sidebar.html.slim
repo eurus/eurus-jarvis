@@ -16,11 +16,12 @@
 
     = link_to vacations_path , class: "list-group-item #{'active' if params['controller'] == 'vacations'}" do
       = fa_icon("bed") + " 假期"
-    = link_to plans_path , class: "list-group-item #{'active' if params['controller'] == 'plans'}" do
-      = fa_icon("clock-o") + " 计划"
     = link_to overtimes_path , class: "list-group-item #{'active' if params['controller'] == 'overtimes'}" do
       = fa_icon("briefcase") + " 加班"
 
+    = link_to plans_path , class: "list-group-item #{'active' if params['controller'] == 'plans'}" do
+      = fa_icon("clock-o") + " 计划"
+      
     = link_to weeklies_path , class: "list-group-item #{'active' if params['controller'] == 'weeklies'}" do
       = fa_icon("newspaper-o") + " 周报"
 

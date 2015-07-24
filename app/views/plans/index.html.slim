@@ -21,13 +21,20 @@
             td = plan.title
             td = plan.description[0..10]
             td = owner_name plan.user_id
-            td = plan.status
+            - if pm?
+              td = plan.status
+            - else
+              td
+                = simple_form_for(:plan, url:update_status_plans_path,method: :post, remote: true) do |f|
+                  = f.hidden_field :id, value: plan.id
+                  = f.input :status, collection: ["ongoing","done","overtime"], input_html: {onchange: '$(this.form).submit();' }
+              
             td = plan.cut
             td = plan.start_at
             td = plan.end_at
             td.text-center
               = link_to fa_icon('eye'), plan,class: "pull-left" 
-              = link_to fa_icon("pencil"), edit_plan_path(plan)
+              = link_to fa_icon("pencil"), edit_plan_path(plan) if plan.user_id = current_user.id
               = link_to fa_icon('trash'), plan, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
 
 

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :plans
   root 'dashboard#index'
   resources :overtimes
   resources :feedbacks
@@ -9,6 +8,11 @@ Rails.application.routes.draw do
   resources :projects
   resources :vacations
   resources :errands
+  resources :plans do
+    collection do
+      post 'update_status'
+    end
+  end
 
   devise_for :users
   get "settings" => "dashboard#setting"

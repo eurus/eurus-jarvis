@@ -56,6 +56,13 @@ class PlansController < ApplicationController
     end
   end
 
+  def update_status
+    ap params
+    respond_to do |format|
+      format.js{}
+    end
+  end
+
   # DELETE /plans/1
   # DELETE /plans/1.json
   def destroy

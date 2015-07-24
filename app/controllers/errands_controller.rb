@@ -4,6 +4,11 @@ class ErrandsController < ApplicationController
   # GET /errands
   # GET /errands.json
   def index
+    if current_user.role == 'ceo'
+      @errands = Errand.all.order(:created_at :desc).page params[:page]
+    else
+
+    end
     @errands = current_user.errands.page params[:page]
   end
 

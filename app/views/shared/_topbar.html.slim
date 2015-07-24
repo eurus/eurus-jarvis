@@ -35,9 +35,9 @@ nav.navbar.navbar-default.navbar-fixed-top
               a href="#"  One more separated link
 
     ul.nav.navbar-nav.navbar-right
-      li
-        a href="/"
-          = image_tag(current_user.avatar_url(:micro),class:"img-circle") if current_user.avatar?
+      / li
+      /   a href="/"
+      /     = image_tag(current_user.avatar_url(:micro),class:"img-circle") if current_user.avatar?
       li
         = link_to fa_icon("gear"), settings_path
       li

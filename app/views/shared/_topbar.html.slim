@@ -15,6 +15,7 @@ nav.navbar.navbar-default.navbar-fixed-top
     ul.nav.navbar-nav
       li
         a#menu-toggle href='#' =fa_icon 'th-large'
+      li= switch_user_select if Rails.env == 'development'
 
       / li.dropdown
           a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"

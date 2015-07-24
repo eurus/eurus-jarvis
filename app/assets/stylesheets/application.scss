@@ -34,6 +34,9 @@ $brand-primary: lighten(#1abb9c, 2%);
 $panel-default-heading-bg: white;
 $panel-default-text: #575757;
 
+// breadcrumb
+$breadcrumb-bg: #f6f8f8;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -82,6 +85,10 @@ html,body,.container{
   width:200px;
 }
 
+.navbar-nav{
+  margin-left:15px;
+}
+
 // panel
 .panel{
   border:none !important;
@@ -106,6 +113,32 @@ html,body,.container{
       }
     }
   }
+}
+
+// banner
+.banner{
+  background:#f6f8f8;
+  padding: 8px 25px 8px 40px;
+  border-bottom:1px solid #dce0e6;
+  @extend .clearfix;
+  .title{
+    @extend .pull-left;
+    font-size:20px;
+    font-weight: bold;
+    margin-top: 8px;
+  }
+  .breadcrumb-wrapper{
+    @extend .pull-right;
+    label, .breadcrumb{
+      display:inline-block;
+      margin-bottom:0;
+    }
+    label{
+      font-weight: normal;
+      color:#c7c7c7;
+    }
+  }
+
 }
 
 // multiselect.css
@@ -269,7 +302,7 @@ html,body,.container{
 #page-content-wrapper {
     width: 100%;
     position: absolute;
-    padding: 15px;
+    // padding: 15px;
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -297,7 +330,7 @@ html,body,.container{
     }
 
     #page-content-wrapper {
-        padding: 20px;
+        // padding: 20px;
         position: relative;
     }
 

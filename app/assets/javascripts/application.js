@@ -30,4 +30,6 @@ function initPage() {
   $('#menu-toggle').click(function(e) {
     $('#wrapper').toggleClass('toggled');
   });
+
+  $('.fademein').fadeIn(1000);
 }

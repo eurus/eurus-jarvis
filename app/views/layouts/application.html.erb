@@ -17,7 +17,7 @@
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <%= button_tag fa_icon('th-large'),id: "menu-toggle"%>
+
             <%= switch_user_select if Rails.env == 'development' %>
             <%= yield %>
         </div>
@@ -34,7 +34,7 @@
         <h4 class="modal-title">项目详情</h4>
       </div>
       <div class="modal-body">
-        
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

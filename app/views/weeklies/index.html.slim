@@ -3,19 +3,20 @@
   - @weeklies.each do |weekly|
     .col-md-4
       .panel.panel-default
-        .panel-heading 
+        .panel-heading
           = weekly.created_at.strftime("%Y-%m-%d")
+          .actions.pull-right
+            = link_to fa_icon('eye'), weekly
+            = link_to fa_icon('pencil'), edit_weekly_path(weekly)
+            = link_to fa_icon('times'), weekly, data: {:confirm => 'Are you sure?'}, :method => :delete
         .panel-body
-          article 
+          article
             h4 总结
             = raw (weekly.try :sumary)[0..100]
-          article 
+          article
             h4 期望
             = raw (weekly.try :hope)[0..100]
-        .panel-footer.text-center
-          span.pull-left = link_to fa_icon('eye'), weekly
-          span = link_to fa_icon('pencil'), edit_weekly_path(weekly)
-          span.pull-right = link_to fa_icon('trash'), weekly, data: {:confirm => 'Are you sure?'}, :method => :delete       
+
 .text-center
   = paginate @weeklies,theme: 'twitter-bootstrap-3'
 

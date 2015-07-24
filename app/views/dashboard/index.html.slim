@@ -1,12 +1,12 @@
 .row
   .col-md-4
-    .panel.panel-default
+    .panel.panel-default.fademein
       .panel-body
         h3 Welcome Aboard!
         = image_tag(current_user.avatar_url(:thumb),class:"img-circle") if current_user.avatar?
         = current_user.nickname
   .col-md-3
-    .panel.panel-default
+    .panel.panel-default.fademein
       .panel-body
         - if @response
           .weather
@@ -19,7 +19,7 @@
             span.text Out Of Service
             span.temp  NaN
   .col-md-4#useful
-    .panel.panel-default
+    .panel.panel-default.fademein
       .panel-body
         = link_to "管理" ,supervise_index_path , class: "btn btn-primary btn-block"
         = link_to "风豪科技" ,'http://www.eurus.cn' , class: "btn btn-primary btn-block",target: "_blank"
@@ -27,15 +27,15 @@
         = link_to "反馈" ,feedbacks_path , class: "btn btn-primary btn-block"
 
   .col-md-6
-    .panel.panel-default
+    .panel.panel-default.fademein
       .panel-heading 今日推荐
       .panel-body
         h3 = @art.try :title
-        article 
+        article
           = @art.try :content
           = @art.try :content
   .col-md-4
-    .panel.panel-default
+    .panel.panel-default.fademein
       .panel-heading 统计
       .panel-body
         span.badge

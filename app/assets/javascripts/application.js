@@ -31,7 +31,7 @@ function initPage() {
     $('#wrapper').toggleClass('toggled');
   });
 
-  $('.fademein').fadeIn(1000);
+  $('.panel').fadeIn(1000);
   $('.panel').hover(function(){
     $(this).find('.actions').fadeIn(500);
   });

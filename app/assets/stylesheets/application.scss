@@ -115,6 +115,41 @@ html,body,.container{
   }
 }
 
+.panel.panel-board{
+  .heading, .hint, .num{
+    color:#565656;
+  }
+  .heading{
+    float:left;
+    font-size:16px;
+  }
+  .num{
+    font-size:30px;
+    font-family:  Lato, Consolas,"Helvetica Neue", Helvetica, 微软雅黑, "Microsoft Yahei", sans-serif;
+    font-weight: bold;
+    text-align: center;
+  }
+  .hint{
+    font-size:14px;
+    text-align: center;
+  }
+}
+
+.panel.panel-board.board-green{
+  .heading, .hint, .num{
+    color:white;
+  }
+
+  background: $brand-primary;
+}
+
+.panel.panel-board.board-blue{
+  background: #1f7bb6;
+  .heading,.hint,.num{
+    color:white;
+  }
+}
+
 // banner
 .banner{
   background:#f6f8f8;
@@ -287,7 +322,7 @@ html,body,.container{
           }
           &.active{
             background:$brand-primary;
-            border-radius:5px;
+            border-radius:4px;
           color:lighten($font-gray, 30%);
           }
         }

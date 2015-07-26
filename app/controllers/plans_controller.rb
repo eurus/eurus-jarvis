@@ -5,9 +5,9 @@ class PlansController < ApplicationController
   # GET /plans.json
   def index
     if current_user.supervisor
-      @plans = current_user.plans 
+      @plans = current_user.plans.page params[:page]
     else
-      @plans = current_user.plans
+      @plans = current_user.plans.page params[:page]
     end
   end
 

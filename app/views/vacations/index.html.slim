@@ -1,28 +1,40 @@
 .row
   = notice_tag notice
-  .col-md-12
-    h3 请假
+  .banner
+    .title 请假
+    .breadcrumb-wrapper
+      label 您现在的位置:
+      ul.breadcrumb
+        li
+          a href='#' 请假
+        li.active  所有请假
+  .col-md-12.p-40.pt-15
+    .panel
+      .panel-body
+        table.table
+          thead
+            tr
+              th 请假日期
+              th 请假天数
+              th 假期类型
+              th 请假内容
+              th 状态
+              th
 
-    table.table.table-bordered
-      thead
-        tr
-          th 请假日期
-          th 请假天数
-          th 假期类型
-          th 请假内容
-          th 状态
-          th
+          tbody
+            - @vacations.each do |vacation|
+              tr
+                td = vacation.start_at
+                td = vacation.duration
+                td = vacation.cut
+                td = vacation.content
+                td = status vacation.try :approve
+                td 
+                  - unless vacation.approve
+                    = link_to fa_icon("pencil"), edit_vacation_path(vacation),class: "pull-left" 
+                    = link_to fa_icon('trash'), vacation, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
+text-center
+  = paginate @vacations,theme: 'twitter-bootstrap-3'
 
-      tbody
-        - @vacations.each do |vacation|
-          tr
-            td = vacation.start_at
-            td = vacation.duration
-            td = vacation.cut
-            td = vacation.content
-            td = status vacation.try :approve
-            td 
-              - unless vacation.approve
-                = link_to fa_icon("pencil"), edit_vacation_path(vacation),class: "pull-left" 
-                = link_to fa_icon('trash'), vacation, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
+
 

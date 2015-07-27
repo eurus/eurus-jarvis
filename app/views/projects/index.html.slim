@@ -22,6 +22,11 @@
               th 项目状态
           tbody
             - @projects.each do |project|
+              div.hidden id= "project#{project.id}"
+                - project.users.try :each do |x|
+                  div
+                  span = image_tag(x.avatar_url(:thumb),class:"img-circle") if x.avatar?
+                  span = x.email
               tr
                 td = project.id
                 td

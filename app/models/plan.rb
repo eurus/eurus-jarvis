@@ -3,7 +3,7 @@ class Plan < ActiveRecord::Base
     :status, :cut, :start_at,
     :end_at, presence: true
   validates :status,
-    inclusion: { in: %w(ongoing done overtime),
+    inclusion: { in: %w(ongoing done overtime new),
                  message: "%{value} is not a valid status" }
     validates :cut,
     inclusion: { in: %w(出差 公司),

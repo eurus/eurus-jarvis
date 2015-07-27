@@ -20,7 +20,7 @@
     .form-groups
       = f.label "结束时间"
       = f.text_field :end_at,{class: "form-control datepicker"}   
-    - if pm?
+    - if pm? or ceo? or director?
       .form-groups
         = f.input :user_id,label: "计划执行者",input_html:{class: ""},collection: @col.collect {|p| [ p.email, p.id ]}, require: false
     .form-groups

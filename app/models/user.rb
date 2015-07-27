@@ -28,6 +28,10 @@ class User < ActiveRecord::Base
     User.find self.supervisor_id rescue nil
   end
 
+  def buddies
+    User.where(supervisor_id: self.id)
+  end
+
   def plans_i_can_see
     ids = (User.dfs self).flatten.map(&:id)
     Plan.where(user_id: ids)

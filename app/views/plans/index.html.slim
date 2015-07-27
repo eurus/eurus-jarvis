@@ -29,7 +29,7 @@
                 td = plan.title
                 td = plan.description[0..10]
                 td = owner_name plan.user_id
-                - if pm?
+                - if stuff? or intern?
                   td = plan.status
                 - else
                   td

@@ -4,7 +4,16 @@ class WeekliesController < ApplicationController
   # GET /weeklies
   # GET /weeklies.json
   def index
-    @weeklies = current_user.weeklies.page params[:page]
+    case current_user.role
+    when 'ceo'
+      @weeklies = Weekly.all.page params[:page]
+    when 'stuff', 'intern',nil
+      @weeklies = current_user.weeklies.page params[:page]
+    else 
+      @weeklies = Weekly.where(user_id: (current_user.buddies.push current_user.id)).page params[:page]
+        
+
+    end
   end
 
   # GET /weeklies/1
@@ -71,13 +80,13 @@ class WeekliesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_weekly
-      @weekly = Weekly.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_weekly
+    @weekly = Weekly.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def weekly_params
-      params.require(:weekly).permit(:user_id, :sumary, :hope)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def weekly_params
+    params.require(:weekly).permit(:user_id, :sumary, :hope)
+  end
 end

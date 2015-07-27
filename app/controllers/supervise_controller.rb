@@ -111,7 +111,7 @@ class SuperviseController < ApplicationController
     @user.occupation = nil
     @user.save
 
-    (User.dfs @user).flatten.try :each do |u|
+    ((User.dfs @user).try :flatten).try :each do |u|
       u.role = nil
       u.occupation = nil
       u.supervisor_id = nil

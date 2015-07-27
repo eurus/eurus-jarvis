@@ -1,0 +1,8 @@
+.col-md-12
+  .logo-img.text-center
+    = image_tag "logo.jpeg", width: '100',height: '100',class: "img-circle"
+    p.text-center = "#{User.find(@plan.user_id).try :nickname}创建于#{@plan.created_at.strftime('%Y-%m-%d')}"
+    .text-center 
+      h1 = "#{@plan.title}(#{@plan.cut})"
+      .content
+        = @plan.description

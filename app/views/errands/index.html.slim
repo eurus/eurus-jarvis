@@ -32,8 +32,8 @@
                 td = errand.end_at
                 td = get_project_name errand.project_id
                 td = errand.fee
-                td = errand.approve
-                td = errand.issue
+                td = status errand.approve
+                td = issue errand.issue
                 td 
                   - unless errand.approve
                     = link_to fa_icon("pencil"), edit_errand_path(errand),class: "pull-left" 

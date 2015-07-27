@@ -12,5 +12,10 @@ class Plan < ActiveRecord::Base
 
   belongs_to :user
   paginates_per 10
-  
+  after_create :send_it_to_supervisor
+
+  private
+  def send_it_to_supervisor
+    
+  end
 end

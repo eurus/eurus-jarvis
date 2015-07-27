@@ -17,8 +17,8 @@
         .panel.panel-board
           .panel-body
             =fa_icon 'calendar',class: 'heading'
-            .num 4
-            .hint 剩余假期
+            .num = "#{sabbatical_remain - sabbatical_gone}"
+            .hint 剩余年假
       .col-md-6
         .panel.panel-board.board-blue
           .panel-body
@@ -40,9 +40,9 @@
           li
             = link_to "管理" ,supervise_index_path
           li
-            = link_to "风豪科技" ,'http://www.eurus.cn'
+            = link_to "风豪科技" ,'http://www.eurus.cn', target: "_blank"
           li
-            = link_to "维基百科" ,'http://wiki.eurus.cn'
+            = link_to "维基百科" ,'http://wiki.eurus.cn', target: "_blank"
           li
             = link_to "反馈" ,feedbacks_path
   .col-md-3
@@ -71,5 +71,5 @@
     .panel.panel-default
       .panel-heading 统计
       .panel-body
-        span.badge
-          = "#{sabbatical_gone}/#{sabbatical_remain}"
+
+          

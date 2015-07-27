@@ -11,8 +11,6 @@ class WeekliesController < ApplicationController
       @weeklies = current_user.weeklies.page params[:page]
     else 
       @weeklies = Weekly.where(user_id: (current_user.buddies.push current_user.id)).page params[:page]
-        
-
     end
   end
 

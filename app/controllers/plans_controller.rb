@@ -4,10 +4,13 @@ class PlansController < ApplicationController
   # GET /plans
   # GET /plans.json
   def index
-    if current_user.supervisor
+    case current_user.role
+    when 'ceo'
+      @plans = Plan.all.page params[:page]
+    when 'stuff', 'intern',nil
       @plans = current_user.plans.page params[:page]
     else
-      @plans = current_user.plans.page params[:page]
+      @plans = Plan.where(user_id: (current_user.buddies.push current_user.id)).page params[:page]
     end
   end
 

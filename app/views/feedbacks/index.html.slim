@@ -1,8 +1,15 @@
 .row
   = notice_tag notice
-  .col-md-8
-    h3 反馈
-    table.table.table-bordered
+  .banner
+    .title 反馈
+    .breadcrumb-wrapper
+      label 您现在的位置:
+      ul.breadcrumb
+        li
+          a href='#' 反馈
+        li.active  所有反馈
+  .col-md-8.p-40.pt-15
+    table.table
       thead
         tr
           th.col-md-3 用户

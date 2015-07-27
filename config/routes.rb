@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   resources :feedbacks
   resources :weeklies
   resources :articals
-  resources :projects
+  resources :projects do
+    collection  do
+      post 'join'
+    end
+  end
   resources :vacations
   resources :errands
   resources :plans do

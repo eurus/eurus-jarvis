@@ -57,6 +57,23 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def join
+    # find the current project
+    project = Project.find(params[:puser][:pid])
+    # get users ids from params 
+    users = params[:puser][:buddies]
+    .delete_if {|e| e == "" }
+    .map { |e| e.to_i }
+    # remove all user from prject.users
+    # then add the users selected again
+    project.users.delete_all
+    project.users << User.find(users)
+
+    respond_to do |format|
+      format.html { redirect_to projects_url, notice: 'My little good buddy was successfully added.' }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project

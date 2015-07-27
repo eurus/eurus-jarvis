@@ -22,24 +22,26 @@ class PlansController < ApplicationController
   # GET /plans/new
   def new
     @plan = Plan.new
+    set_local
   end
 
   # GET /plans/1/edit
   def edit
+    set_local
   end
 
   # POST /plans
   # POST /plans.json
   def create
     @plan = Plan.new(plan_params)
-    @plan.user_id = current_user.id
+    @plan.user_id = current_user.id if @plan.user_id = nil
 
     respond_to do |format|
       if @plan.save
         format.html { redirect_to @plan, notice: 'Plan was successfully created.' }
         format.json { render :show, status: :created, location: @plan }
       else
-        format.html { render :new }
+        format.html { render :new , locals: {col: set_local }}
         format.json { render json: @plan.errors, status: :unprocessable_entity }
       end
     end
@@ -53,7 +55,7 @@ class PlansController < ApplicationController
         format.html { redirect_to @plan, notice: 'Plan was successfully updated.' }
         format.json { render :show, status: :ok, location: @plan }
       else
-        format.html { render :edit }
+        format.html { render :edit ,  locals: {col: set_local }}
         format.json { render json: @plan.errors, status: :unprocessable_entity }
       end
     end
@@ -96,5 +98,10 @@ class PlansController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def plan_params
     params.require(:plan).permit(:title, :description, :user_id, :status, :cut, :start_at, :end_at)
+  end
+
+  def set_local
+    available_collection = (User.dfs current_user).flatten.map { |e| e.id }
+    @col = User.where(id: available_collection)
   end
 end

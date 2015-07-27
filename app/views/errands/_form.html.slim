@@ -19,8 +19,7 @@
       = f.label "结束时间"
       = f.text_field :end_at,{class: "form-control datepicker"}
     .form-groups
-      = f.label "相关项目"
-      = f.input :project_id,collection: Project.all.collect {|p| [ p.name, p.id ]},label: false
+      = f.input :project_id,collection: Project.all.collect {|p| [ p.name, p.id ]},label: "相关项目"
     .form-groups
       = f.label "费用"
       = f.text_field :fee,class: "form-control"

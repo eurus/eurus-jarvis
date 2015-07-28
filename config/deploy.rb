@@ -41,6 +41,17 @@ set :conditionally_migrate, true           # Defaults to false. If true, it's sk
 
 
 namespace :deploy do
+  
+  desc "whenever task for the cron job"
+  task :whenever do
+    on roles(:app), in: :groups, limit: 3, wait: 10 do
+      within "#{current_path}" do
+        with rails_env: fetch(:rails_env) do         
+          execute :bundle, :exec, "whenever -i"
+        end
+      end
+    end
+  end
 
   after :restart, :clear_cache do
     on roles(:app), in: :groups, limit: 3, wait: 10 do

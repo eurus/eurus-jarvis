@@ -21,6 +21,7 @@
               th 计划种类
               th 计划开始时间
               th 计划结束时间
+              th 计划完成
               th
 
           tbody
@@ -34,6 +35,7 @@
                 td = plan.cut
                 td = plan.start_at
                 td = plan.end_at
+                td = plan.done
                 td
                   - if pm? or director? or ceo?
                     = simple_form_for(:plan, url:update_status_plans_path,method: :post, remote: true) do |f|

@@ -37,7 +37,7 @@ class PlansController < ApplicationController
     if plan_params[:user_id] == ""
       @plan.user_id = current_user.id
     end
-    
+
     respond_to do |format|
       if @plan.save
         format.html { redirect_to @plan, notice: 'Plan was successfully created.' }
@@ -66,7 +66,8 @@ class PlansController < ApplicationController
   def update_status
     # status == 1 done
     # status == 0 new
-    @plan = Plan.find(params[:plan][:id])
+    ap @plan = Plan.find(params[:plan][:id])
+
     # if params[:plan][:done] == "1"
     #   @plan.status = "done"
     # else

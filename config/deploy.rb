@@ -41,17 +41,6 @@ set :conditionally_migrate, true           # Defaults to false. If true, it's sk
 
 
 namespace :deploy do
-  
-  desc "whenever task for the cron job"
-  task :whenever do
-    on roles(:app), in: :groups, limit: 3, wait: 10 do
-      within "#{current_path}" do
-        with rails_env: fetch(:rails_env) do         
-          execute :bundle, :exec, "whenever -i"
-        end
-      end
-    end
-  end
 
   after :restart, :clear_cache do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
@@ -108,6 +97,34 @@ namespace :deploy do
   after 'deploy:redeploy',"start"
 end
 
+# whenever task namespane
+# start whenever task by 
+# cap production whenever:deploy
+# clean the whenever task by
+# cap production whenever:clean
+namespace :whenever do
+  desc "start whenever task for the cron job"
+  task :deploy do
+    on roles(:app), in: :groups, limit: 3, wait: 10 do
+      within "#{current_path}" do
+        with rails_env: fetch(:rails_env) do
+          execute :bundle, :exec, "whenever -i"
+        end
+      end
+    end
+  end
+
+  desc "clean whenever task for the cron job"
+  task :clean do
+    on roles(:app), in: :groups, limit: 3, wait: 10 do
+      within "#{current_path}" do
+        with rails_env: fetch(:rails_env) do
+          execute "crontab -r"
+        end
+      end
+    end
+  end
+end
 
 ###使用方法###
 ## 默认任务
@@ -115,10 +132,3 @@ end
 # => 运行网站基础服务
 # cap production deploy:redeploy
 ###使用方法###
-
-
-
-
-
-
-

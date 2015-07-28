@@ -11,7 +11,7 @@
   .col-md-12.p-40.pt-15
     .panel
       .panel-body
-        table.table
+        table.table.table-hover
           thead
             tr
               th 计划标题
@@ -29,7 +29,8 @@
                 td = plan.title
                 td = plan.description[0..10]
                 td = owner_name plan.user_id
-                td = plan.status   
+                td id="plan-status-#{plan.id}" class="#{status_highlight plan.status}"
+                 = plan.status   
                 td = plan.cut
                 td = plan.start_at
                 td = plan.end_at
@@ -37,7 +38,7 @@
                   - if pm? or director? or ceo?
                     = simple_form_for(:plan, url:update_status_plans_path,method: :post, remote: true) do |f|
                       = f.hidden_field :id, value: plan.id
-                      = f.input :status,input_html: {onchange: '$(this.form).submit();'},label: false,as: :boolean
+                      = f.input :status,input_html: {onchange: '$(this.form).submit();',checked: plan.status == "done" ? true : false},label: false,as: :boolean
                   = link_to fa_icon('eye'), plan,class: "pull-left" 
                   = link_to fa_icon("pencil"), edit_plan_path(plan) if plan.user_id = current_user.id
                   = link_to fa_icon('trash'), plan, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"

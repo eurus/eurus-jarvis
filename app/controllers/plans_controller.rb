@@ -64,23 +64,27 @@ class PlansController < ApplicationController
   def update_status
     # status == 1 done
     # status == 0 new
-    if params[:plan][:status] == 1
-
-    else
-
-    end
     @plan = Plan.find(params[:plan][:id])
-    @plan.status = params[:plan][:status]
+    if params[:plan][:status] == "1"
+      @plan.status = "done"
+    else
+      if @plan.end_at <= Date.current
+        @plan.status = "new"
+      else
+        @plan.status = "overtime"
+      end
+    end
+    # @plan.status = params[:plan][:status]
     respond_to do |format|
       if @plan.save
         format.js{
           render action: 'update_status',
-          locals: {status: :ok}
+          locals: {code: :ok, status: @plan.status, id: @plan.id}
         }
       else
         format.js{
           render action: 'update_status',
-          locals: {status: :sorry}
+          locals: {code: :sorry}
         }
       end
     end

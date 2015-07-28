@@ -1,6 +1,9 @@
+code = '<%= code %>'
+id = '<%= id %>'
 status = '<%= status %>'
-if status == "ok"
+if code == "ok"
   sweetAlert "Update successfully!"
+  $("#plan-status-#{id}").html status
 else
   sweetAlert "(╯‵□′)╯︵┻━┻"
 

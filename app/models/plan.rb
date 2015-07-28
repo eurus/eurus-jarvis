@@ -14,6 +14,26 @@ class Plan < ActiveRecord::Base
   paginates_per 10
   after_create :send_it_to_supervisor
 
+  def self.check_overtime
+    all.each do |plan|
+      ap "plan id #{plan.id}, this plan suppose to end at #{plan.end_at}"
+      #check the plan status
+      case plan.status
+      when "done"
+        ap "plan id #{plan.id}, this plan's status is done, skip"
+      when "overtime"
+        ap "plan id #{plan.id}, this plan's status is overtime, skip"
+      else
+        if plan.end_at > Date.current
+          plan.status = "overtime"
+          plan.save
+        else
+          ap "plan id #{plan.id}, this plan's status is #{plan.status}, but skip"
+        end
+      end
+    end
+  end
+
   private
   def send_it_to_supervisor
     user = self.user

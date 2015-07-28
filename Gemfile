@@ -82,3 +82,6 @@ gem 'capistrano'
 gem 'capistrano-rails'
 gem 'capistrano-rvm'
 gem 'capistrano3-unicorn'
+gem 'capistrano-sidekiq' , group: :development
+#
+gem 'whenever', '~> 0.8.4',require: false

@@ -1,7 +1,7 @@
 module PlansHelper
   def status_highlight(status)
     case status
-    when "done"
+    when "ontime"
       "success"
     when "overtime"
       "danger"

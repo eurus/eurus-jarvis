@@ -40,7 +40,7 @@ class PlansController < ApplicationController
 
     respond_to do |format|
       if @plan.save
-        format.html { redirect_to @plan, notice: 'Plan was successfully created.' }
+        format.html { redirect_to plans_url, notice: 'Plan was successfully created.' }
         format.json { render :show, status: :created, location: @plan }
       else
         format.html { render :new , locals: {col: set_local }}
@@ -64,20 +64,23 @@ class PlansController < ApplicationController
   end
 
   def update_status
-    # status == 1 done
-    # status == 0 new
-    ap @plan = Plan.find(params[:plan][:id])
+    # checkbox == 1 done
+    # checkbox == 0 new
+    ap @plan = Plan.find(params[:id])
+    if @plan.done = false
+      @plan.done = true
+      @plan.done_at = Date.current
+      if @plan.done_at <= @plan.end_at
+        @plan.status = 'ontime'
+      else
+        @plan.status = 'overtime'
+      end
+    else
+      # set plan status to wft on purpose so the plan
+      # won't be able to save
+      @plan.status = "wtf"
+    end
 
-    # if params[:plan][:done] == "1"
-    #   @plan.status = "done"
-    # else
-    #   if @plan.end_at <= Date.current
-    #     @plan.status = "new"
-    #   else
-    #     @plan.status = "overtime"
-    #   end
-    # end
-    # @plan.status = params[:plan][:status]
     respond_to do |format|
       if @plan.save
         format.js{
@@ -87,7 +90,7 @@ class PlansController < ApplicationController
       else
         format.js{
           render action: 'update_status',
-          locals: {code: :sorry}
+          locals: {code: :sorry,status: @plan.status, id: @plan.id}
         }
       end
     end

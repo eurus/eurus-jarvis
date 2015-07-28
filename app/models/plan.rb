@@ -19,33 +19,27 @@ class Plan < ActiveRecord::Base
       ap "plan id #{plan.id}, this plan suppose to end at #{plan.end_at}"
       #check the plan status
       case plan.status
-      when "done"
-        ap "plan id #{plan.id}, this plan's status is done, skip"
-      when "overtime"
-        ap "plan id #{plan.id}, this plan's status is overtime, skip"
+      when "notbegin","ongoing"
+        ap "current status is #{plan.status}"
+        plan.status = 'overtime' if plan.end_at < Date.current
       else
-        if plan.end_at > Date.current
-          plan.status = "overtime"
-          plan.save
-        else
-          ap "plan id #{plan.id}, this plan's status is #{plan.status}, but skip"
-        end
+        ap "this record is #{plan.status}, skip"
+      end
+      plan.save
+    end
+
+    private
+    def send_it_to_supervisor
+      user = self.user
+      if user.supervisor
+        ids = User.ceo.map { |e| e.id }.push user.supervisor.id if user
+      else
+        ids = User.ceo.map { |e| e.id }
+      end
+
+      sps = User.where(id:ids)
+      sps.each do |s|
+        NotifyMailer.plan_maker(s, self).deliver_later
       end
     end
   end
-
-  private
-  def send_it_to_supervisor
-    user = self.user
-    if user.supervisor
-      ids = User.ceo.map { |e| e.id }.push user.supervisor.id if user
-    else
-      ids = User.ceo.map { |e| e.id }
-    end
-
-    sps = User.where(id:ids)
-    sps.each do |s|
-      NotifyMailer.plan_maker(s, self).deliver_later
-    end
-  end
-end

@@ -3,15 +3,13 @@ id = '<%= id %>'
 status = '<%= status %>'
 
 switch status
-  when "done"
+  when "ontime"
     hover_sytle = "success"
   when "overtime"
     hover_sytle = "danger"
   else
     hover_sytle = ""
-    # ...
   
-
 if code == "ok"
   sweetAlert "Update successfully!"
   $("#plan-status-#{id}").html status

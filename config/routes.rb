@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :errands
   resources :plans do
     collection do
-      post 'update_status'
+      get 'update_status'
     end
   end
 

@@ -36,13 +36,11 @@
                 td = plan.start_at
                 td = plan.end_at
                 td = plan.done
-                td
+                td.text-center
                   - if pm? or director? or ceo?
-                    = simple_form_for(:plan, url:update_status_plans_path,method: :post, remote: true) do |f|
-                      = f.hidden_field :id, value: plan.id
-                      = f.input :done,input_html: {onchange: '$(this.form).submit();',checked: plan.done ? true : false},label: false,as: :boolean
-                  = link_to fa_icon('eye'), plan,class: "pull-left" 
+                    = link_to fa_icon('check'), update_status_plans_path(id:plan.id), data: {:confirm => 'Are you sure?'},remote: true,class: "" 
+                  = link_to fa_icon('eye'), plan,class: "" 
                   = link_to fa_icon("pencil"), edit_plan_path(plan) if plan.user_id = current_user.id
-                  = link_to fa_icon('trash'), plan, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
+                  = link_to fa_icon('trash'), plan, data: {:confirm => 'Are you sure?'}, :method => :delete,class: ""
 .text-center
   = paginate @plans,theme: 'twitter-bootstrap-3'

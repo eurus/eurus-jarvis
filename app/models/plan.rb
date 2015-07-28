@@ -37,7 +37,12 @@ class Plan < ActiveRecord::Base
   private
   def send_it_to_supervisor
     user = self.user
-    ids = User.ceo.map { |e| e.id }.push user.supervisor.id
+    if user.supervisor
+      ids = User.ceo.map { |e| e.id }.push user.supervisor.id if user
+    else
+      ids = User.ceo.map { |e| e.id }
+    end
+
     sps = User.where(id:ids)
     sps.each do |s|
       NotifyMailer.plan_maker(s, self).deliver_later

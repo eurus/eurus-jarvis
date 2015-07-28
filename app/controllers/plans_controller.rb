@@ -34,8 +34,10 @@ class PlansController < ApplicationController
   # POST /plans.json
   def create
     @plan = Plan.new(plan_params)
-    @plan.user_id = current_user.id if @plan.user_id = nil
-
+    if plan_params[:user_id] == ""
+      @plan.user_id = current_user.id
+    end
+    
     respond_to do |format|
       if @plan.save
         format.html { redirect_to @plan, notice: 'Plan was successfully created.' }
@@ -65,15 +67,15 @@ class PlansController < ApplicationController
     # status == 1 done
     # status == 0 new
     @plan = Plan.find(params[:plan][:id])
-    if params[:plan][:status] == "1"
-      @plan.status = "done"
-    else
-      if @plan.end_at <= Date.current
-        @plan.status = "new"
-      else
-        @plan.status = "overtime"
-      end
-    end
+    # if params[:plan][:done] == "1"
+    #   @plan.status = "done"
+    # else
+    #   if @plan.end_at <= Date.current
+    #     @plan.status = "new"
+    #   else
+    #     @plan.status = "overtime"
+    #   end
+    # end
     # @plan.status = params[:plan][:status]
     respond_to do |format|
       if @plan.save

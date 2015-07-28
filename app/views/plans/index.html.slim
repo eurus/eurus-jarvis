@@ -38,7 +38,7 @@
                   - if pm? or director? or ceo?
                     = simple_form_for(:plan, url:update_status_plans_path,method: :post, remote: true) do |f|
                       = f.hidden_field :id, value: plan.id
-                      = f.input :status,input_html: {onchange: '$(this.form).submit();',checked: plan.status == "done" ? true : false},label: false,as: :boolean
+                      = f.input :done,input_html: {onchange: '$(this.form).submit();',checked: plan.done ? true : false},label: false,as: :boolean
                   = link_to fa_icon('eye'), plan,class: "pull-left" 
                   = link_to fa_icon("pencil"), edit_plan_path(plan) if plan.user_id = current_user.id
                   = link_to fa_icon('trash'), plan, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"

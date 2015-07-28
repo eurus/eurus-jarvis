@@ -3,6 +3,6 @@ module ProjectsHelper
     "#{User.find(id).try :email}"
   end
   def owner_name(id)
-    "#{User.find(id).try :nickname}"
+    "#{User.find(id).try :realname}"
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150727080644) do
+ActiveRecord::Schema.define(version: 20150728065430) do
 
   create_table "articals", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20150727080644) do
     t.date     "end_at"
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
+    t.boolean  "done",                      default: false
   end
 
   create_table "projects", force: :cascade do |t|

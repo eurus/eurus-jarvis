@@ -22,7 +22,8 @@ class SuperviseController < ApplicationController
   def create_user
     @user = User.new(user_params)
     # set default password to 12345678
-    @user.username = user_params[:email].split("@")[0]
+    @user.email = "#{user_params[:username]}@eurus.cn"
+    @user.username = user_params[:username]
     @user.password = '12345678'
     default_user_avatar @user
     respond_to do |format|

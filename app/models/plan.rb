@@ -27,19 +27,20 @@ class Plan < ActiveRecord::Base
       end
       plan.save
     end
+  end
+  
+  private
+  def send_it_to_supervisor
+    user = self.user
+    if user.supervisor
+      ids = User.ceo.map { |e| e.id }.push user.supervisor.id if user
+    else
+      ids = User.ceo.map { |e| e.id }
+    end
 
-    private
-    def send_it_to_supervisor
-      user = self.user
-      if user.supervisor
-        ids = User.ceo.map { |e| e.id }.push user.supervisor.id if user
-      else
-        ids = User.ceo.map { |e| e.id }
-      end
-
-      sps = User.where(id:ids)
-      sps.each do |s|
-        NotifyMailer.plan_maker(s, self).deliver_later
-      end
+    sps = User.where(id:ids)
+    sps.each do |s|
+      NotifyMailer.plan_maker(s, self).deliver_later
     end
   end
+end

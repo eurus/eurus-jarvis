@@ -1,5 +1,13 @@
 .row
   = notice_tag notice
+  .banner
+    .title 周报
+    .breadcrumb-wrapper
+      label 您现在的位置:
+      ul.breadcrumb
+        li
+          a href='#' 周报
+        li.active  所有周报
   .p-40.pt-15
     - @weeklies.each do |weekly|
       .col-md-4

@@ -55,26 +55,32 @@ class SuperviseController < ApplicationController
   end
 
   def user_group_new
-
     @buddies = User.buddies current_user rescue []
   end
 
   def user_group_edit
     @supervisor = User.find(params[:id])
-    @buddies = User.buddies current_user
+    @buddies = User.buddies @supervisor
   end
 
   def user_group_update
-    ap @supervisor = User.find(params[:sp][:id])
-    ap @supervisor.occupation = params[:sp][:occupation]
-    ap @supervisor.save
+    @supervisor = User.find(params[:sp][:id])
+    @supervisor.occupation = params[:sp][:occupation]
+    @supervisor.save
 
-    params[:sp][:buddies]
-    .delete_if {|e| e == "" or e == "#{@supervisor.id}"}
-    .map do |u|
-      ap u = User.find(u.to_i)
-      u.supervisor_id = @supervisor.id
-      u.save
+    remain_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
+    current_buddies =  (User.buddies @supervisor).map { |e| e.id }
+    ap opt_buddies = current_buddies - remain_buddies
+
+    opt_buddies
+    .map { |e| User.find e }
+    .map { |e|
+      User.dfs e
+    }.flatten.map do |e|
+      e.role = 'intern'
+      e.occupation = nil
+      e.supervisor_id = nil
+      e.save
     end
 
     respond_to do |format|

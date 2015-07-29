@@ -1,5 +1,8 @@
 .row
   = notice_tag notice
+  .banner
+    .title 新用户
+    
   .col-md-3
   .col-md-6
     = simple_form_for @user, url: supervise_users_path,method: :post ,html: { multipart: true }do |f|
@@ -16,9 +19,6 @@
       .form-group
         = f.label "邮箱"
         = f.text_field :email, class: "form-control"
-      .form-group
-        = f.label "用户名"
-        = f.text_field :username, class: "form-control"
       .form-groups
         .row
           .col-md-6

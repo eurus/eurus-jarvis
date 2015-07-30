@@ -78,7 +78,7 @@ class SuperviseController < ApplicationController
     .map { |e|
       User.dfs e
     }.flatten.map do |e|
-      e.role = 'intern'
+      e.role = 'staff' unless e.role == 'intern'
       e.occupation = nil
       e.supervisor_id = nil
       e.save
@@ -181,7 +181,7 @@ class SuperviseController < ApplicationController
 
   def user_params
     params.require(:user).permit(
-      :username,:user_number,:role,
+      :username,:user_number,:role,:birthday,
       :nickname,:realname,:gender,:occupation,
     :join_at,:leave_at, :email,:supervisor_id)
   end

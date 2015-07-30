@@ -4,26 +4,22 @@ table.table.table-hover.table-bordered
     tr
       td 工号
       td 头像
-      td 角色
-      td 用户名
       td 姓名
-      td 昵称
+      td 用户名
       td 性别
       td 加入时间
-      td 离开时间
+      td 生日
       td 操作
   tbody
     - @users.each do |u|
       tr
         td = u.try :user_number
-        td = u.try :avatar_url
-        td = u.try :role
-        td = u.try :username
+        td = image_tag(u.avatar_url(:thumb),class:"img-circle") if u.avatar?
         td = u.try :realname
-        td = u.try :nickname
+        td = u.try :username
         td = u.try :gender
         td = u.try :join_at
-        td = u.try :leave_at
+        td = u.try :birthday
         td
           - if current_user.role == 'ceo'
             a.pull-left href="/supervise/users/edit/#{u.id}" 

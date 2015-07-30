@@ -35,3 +35,4 @@ bower.json
 public/uploads
 .DS_Store
 **/.DS_Store
+/dump_data

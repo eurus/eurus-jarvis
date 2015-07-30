@@ -1,20 +1,18 @@
 module DashboardHelper
   def sabbatical_remain
+    
     if current_user.join_at
-      if Date.current < current_user.join_at + 1.year
-      0
-      elsif Date.current >= (current_user.join_at + 1.year)
-        if Date.current.year == (current_user.join_at + 1.year).year
-          ((Date.current.end_of_year - current_user.join_at - 1.year)/1.day).round*6/365
-        elsif  Date.current < (current_user.join_at + 10.year)
+      time_diff = (Date.current - current_user.join_at - 365).to_i
+      if time_diff > 0
+        if time_diff >  365
           6
-        elsif Date.current >= (current_user.join_at + 10.year) && Date.current < (current_user.join_at + 20.year)
-          10
         else
-          15
+          d = current_user.join_at.end_of_year - current_user.join_at
+          return ((d / 365) * 6).round
         end
+      else
+        0
       end
-      
     else
       0
     end

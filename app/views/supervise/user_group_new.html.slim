@@ -1,5 +1,5 @@
 .row
-  = notice_tag notice
+  table.table.table-hover
   .col-md-3
   .col-md-6
     = simple_form_for :supervisor, url: user_group_create_path,method: :post ,html: { multipart: true }do |f|

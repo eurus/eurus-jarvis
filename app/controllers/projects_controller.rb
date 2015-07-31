@@ -1,10 +1,10 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy,:done]
 
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all.page params[:page]
+    @projects =current_user.projects.page params[:page]
   end
 
   # GET /projects/new
@@ -74,6 +74,18 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'My little good buddy was successfully added.' }
     end
+  end
+
+  def done
+    @project.status = 'done'
+    @project.done_at = Date.current
+    @project.save
+    
+
+    respond_to do |format|
+      format.html { redirect_to projects_url, notice: 'Project successfully finished!' }
+    end
+
   end
 
   private

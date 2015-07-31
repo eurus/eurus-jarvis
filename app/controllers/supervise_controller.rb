@@ -1,15 +1,33 @@
 class SuperviseController < ApplicationController
   before_action :set_user, only: [:edit_user, :update_user, :destroy_user]
-
+  before_action :set_buddies, only: [:users,:groups, :overtimes,:errands,:vacations,:projects]
   def index
+     
+  end
+
+  def users
     @users = User.all.page params[:page]
+  end
+
+  def groups
     @groups = Group.all.page params[:page]
-    @buddies = User.buddies current_user
-    @errands = Errand.all.page params[:page]
+  end
+
+  def overtimes
     @overtimes = Overtime.all.page params[:page]
+  end
+
+  def errands
+    @errands = Errand.all.page params[:page]
+  end
+
+  def vacations
     @vacations = Vacation.all.page params[:page]
   end
 
+  def projects
+    @projects = Project.all.page params[:page]
+  end
   # user operation without users_controller
   def new_user
     @user = User.new
@@ -179,6 +197,9 @@ class SuperviseController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def set_buddies
+    @buddies = User.buddies current_user
+  end
   def user_params
     params.require(:user).permit(
       :username,:user_number,:role,:birthday,

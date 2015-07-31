@@ -1,10 +1,10 @@
-= link_to '任命', user_group_new_path,class: 'btn btn-primary' if ceo? or director?
-= link_to '新建项目', new_project_path,class: 'btn btn-primary' if pm?
-.row
+.banner
+  .title 组织管理
+.p-20.pt-15
   - @buddies.try :each do |x|
     .col-md-3
       .panel.panel-default
-        .panel-heading = "#{x.try :nickname}(#{x.email})"
+        .panel-heading = "#{x.try :realname}  #{x.username.capitalize}"
         .panel-body
           p = "职位：#{x.occupation}"
           p = "角色：#{x.role}"

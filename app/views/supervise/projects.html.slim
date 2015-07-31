@@ -1,33 +1,33 @@
 
-.col-md-12
-  h3 项目
-  table.table.table-hover
-    thead
-      tr
-        th
-        th 项目名称
-        th 项目简介
-        th 项目拥有人
-        th 项目状态
-        th
-    tbody
-      - @projects.each do |project|
-        div.hidden id= "project#{project.id}"
-          - project.users.try :each do |x|
-            div
-            span = image_tag(x.avatar_url(:thumb),class:"img-circle") if x.avatar?
-            span = x.email
-        tr
-          td = project.id
-          td
-            button.project-btn.btn.btn-default value="#{project.id}" data-toggle="modal" data-target="#projectM" = project.name
-          td = project.content
-          td = owner_name project.owner
-          td = project.status
-          td 
-            = link_to fa_icon('pencil'), edit_project_path(project)
-            = link_to fa_icon('check'), done_projects_path(id:project.id) unless project.status == "done"
+.banner
+  .title 项目管理
+.p-20.pt-15
+  .panel
+    .panel-body
+      table.table.table-hover
+        thead
+          tr
+            th 项目
+            th 简介
+            th 负责人
+            th 状态
+            th
+        tbody
+          - @projects.each do |project|
+            div.hidden id= "project#{project.id}"
+              - project.users.try :each do |x|
+                div
+                span = image_tag(x.avatar_url(:thumb),class:"img-circle") if x.avatar?
+                span = x.email
+            tr
+              td
+                button.project-btn.btn.btn-default value="#{project.id}" data-toggle="modal" data-target="#projectM" = project.name
+              td
+                p.limit-text= project.content
+              td = owner_name project.owner
+              td = project.status
+              td.ops
+                = link_to fa_icon('pencil'), edit_project_path(project)
+                = link_to fa_icon('check'), done_projects_path(id:project.id) unless project.status == "done"
 .text-center
   = paginate @projects,theme: 'twitter-bootstrap-3'
-
-

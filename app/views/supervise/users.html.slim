@@ -1,29 +1,34 @@
-= link_to "新员工", supervise_users_new_path,class: "btn btn-primary pull-right" if current_user.role == 'ceo'
-table.table.table-hover
-  thead
-    tr
-      td 工号
-      td 头像
-      td 姓名
-      td 用户名
-      td 性别
-      td 加入时间
-      td 生日
-      td 操作
-  tbody
-    - @users.each do |u|
-      tr
-        td = u.try :user_number
-        td = image_tag(u.avatar_url(:thumb),class:"img-circle") if u.avatar?
-        td = u.try :realname
-        td = u.try :username
-        td = u.try :gender
-        td = u.try :join_at
-        td = u.try :birthday
-        td
-          - if current_user.role == 'ceo'
-            a.pull-left href="/supervise/users/edit/#{u.id}"
-              = fa_icon('pencil')
-            = link_to fa_icon("trash"), "/supervise/users/#{u.id}",data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right" if not current_user.id == u.id
-.text-center
-  = paginate @users,theme: 'twitter-bootstrap-3'
+.banner
+  .title 用户管理
+
+.p-20.pt-15
+  .panel
+    .panel-body
+      table.table.table-hover
+        thead
+          tr
+            th 工号
+            th 头像
+            th 姓名
+            th 用户名
+            th 性别
+            th 加入时间
+            th 生日
+            th 操作
+        tbody
+          - @users.each do |u|
+            tr
+              td = u.try :user_number
+              td = image_tag(u.avatar_url(:thumb),class:"img-circle") if u.avatar?
+              td = u.try :realname
+              td = u.try :username
+              td = u.try :gender
+              td = u.try :join_at
+              td = u.try :birthday
+              td.ops
+                - if current_user.role == 'ceo'
+                  a href="/supervise/users/edit/#{u.id}"
+                    = fa_icon('pencil')
+                  = link_to fa_icon("trash"), "/supervise/users/#{u.id}",data: {:confirm => 'Are you sure?'}, :method => :delete if not current_user.id == u.id
+  .text-center
+    = paginate @users,theme: 'twitter-bootstrap-3'

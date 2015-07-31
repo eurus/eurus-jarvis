@@ -1,32 +1,34 @@
-
-.col-md-12
-  h3 出差
-  table.table.table-hover
-    thead
-      tr
-        th 出差地点
-        th 出差项目
-        th 开始日期
-        th 结束日期
-        th 出差内容
-        th 费用
-        th 审核状态
-        th 发放状态
-        th
-    tbody
-      - @errands.each do |errand|
-        tr
-          td = errand.location
-          td = errand.content
-          td = errand.start_at
-          td = errand.end_at
-          td = get_project_name errand.project_id
-          td = errand.fee
-          td = status errand.approve
-          td = issue errand.issue
-          td
-            = link_to fa_icon("check"),checkrecord_path(id: errand.id, cut: 'errand'), class: "pull-left"  unless errand.approve
-            = link_to fa_icon('usd'), issuerecord_path(id: errand.id, cut: 'errand'),class: "pull-right" unless errand.issue
+.banner
+  .title 出差审批
+.p-20.pt-15
+  .panel
+    .panel-body
+      table.table.table-hover
+        thead
+          tr
+            th 开始日期
+            th 结束日期
+            th 项目
+            / th 地点
+            / th 内容
+            th 费用
+            th 审核
+            th 发放
+            th
+        tbody
+          - @errands.each do |errand|
+            tr
+              td = errand.start_at
+              td = errand.end_at
+              td = get_project_name errand.project_id
+              / td = errand.location
+              / td = errand.content
+              td = errand.fee
+              td = status errand.approve
+              td = issue errand.issue
+              td
+                = link_to fa_icon("check"),checkrecord_path(id: errand.id, cut: 'errand'), class: "pull-left"  unless errand.approve
+                = link_to fa_icon('usd'), issuerecord_path(id: errand.id, cut: 'errand'),class: "pull-right" unless errand.issue
 
 .text-center
   = paginate @errands,theme: 'twitter-bootstrap-3'

@@ -13,6 +13,8 @@
             a aria-controls="overtimes" data-toggle="tab" href="#overtimes" role="tab" data-target="#overtimes" 加班
           li role="presentation" 
             a aria-controls="vacations" data-toggle="tab" href="#vacations" data-target="#vacations" role="tab"  假期
+          li role="presentation" 
+            a aria-controls="projects" data-toggle="tab" href="#projects" data-target="#projects" role="tab"  项目
         li role="presentation" 
           a aria-controls="groups" data-toggle="tab" href="#groups" role="tab" data-target="#groups" 组织
       /! Tab panes
@@ -26,6 +28,8 @@
             = render 'overtimes'
           #vacations.tab-pane role="tabpanel"  
             = render 'vacations'
+          #vacations.tab-pane role="tabpanel"  
+            = render 'projects'
         #groups.tab-pane role="tabpanel" 
           = render 'groups'
 coffee:

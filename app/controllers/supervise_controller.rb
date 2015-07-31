@@ -8,6 +8,7 @@ class SuperviseController < ApplicationController
     @errands = Errand.all.page params[:page]
     @overtimes = Overtime.all.page params[:page]
     @vacations = Vacation.all.page params[:page]
+    @projects = Project.all.page params[:page]
   end
 
   # user operation without users_controller

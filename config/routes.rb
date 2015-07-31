@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :projects do
     collection  do
       post 'join'
+      get 'done'
     end
   end
   resources :vacations

@@ -20,6 +20,7 @@
               th 项目简介
               th 项目拥有人
               th 项目状态
+              th
           tbody
             - @projects.each do |project|
               div.hidden id= "project#{project.id}"
@@ -34,6 +35,8 @@
                 td = project.content
                 td = owner_name project.owner
                 td = project.status
+                td 
+                  = link_to fa_icon('pencil'), edit_project_path(project)
 
 .text-center
   = paginate @projects,theme: 'twitter-bootstrap-3'

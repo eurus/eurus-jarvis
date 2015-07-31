@@ -76,6 +76,12 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def done
+    respond_to do |format|
+      format.html { redirect_to projects_url, notice: 'My little good buddy was successfully added.' }
+    end
+  end
+  
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_project

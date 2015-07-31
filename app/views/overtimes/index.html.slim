@@ -23,7 +23,7 @@ div
 
 
           tbody
-            - @overtimes.each do |overtime|
+            - @overtimes.try :each do |overtime|
               tr
                 td = overtime.start_at
                 td = overtime.duration

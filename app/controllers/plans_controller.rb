@@ -118,7 +118,7 @@ class PlansController < ApplicationController
   end
 
   def set_local
-    if (User.dfs current_user).try :flatten
+    if (User.dfs current_user)
       available_collection = (User.dfs current_user).flatten.map { |e| e.id }
       @col = User.where(id: available_collection)
     else

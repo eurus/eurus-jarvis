@@ -3,7 +3,7 @@ class OvertimesController < ApplicationController
 
   # GET /overtimes
   # GET /overtimes.json
-  def indexß
+  def index
     @overtimes = current_user.overtimes.page params[:page]
   end
 

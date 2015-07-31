@@ -36,6 +36,7 @@ div
                 td = project.status
                 td 
                   = link_to fa_icon('pencil'), edit_project_path(project)
+                  = link_to fa_icon('check'), done_projects_path(id:project.id)
 
 .text-center
   = paginate @projects,theme: 'twitter-bootstrap-3'

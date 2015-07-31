@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy,:done]
 
   # GET /projects
   # GET /projects.json
@@ -77,11 +77,17 @@ class ProjectsController < ApplicationController
   end
 
   def done
+    @project.status = 'done'
+    @project.done_at = Date.current
+    @project.save
+    
+
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'My little good buddy was successfully added.' }
+      format.html { redirect_to projects_url, notice: 'Project successfully finished!' }
     end
+
   end
-  
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_project

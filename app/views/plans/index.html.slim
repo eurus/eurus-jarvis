@@ -1,5 +1,4 @@
-.row
-  table.table.table-hover
+div
   .banner
     .title 计划
     .breadcrumb-wrapper
@@ -31,15 +30,15 @@
                 td = plan.description[0..10]
                 td = owner_name plan.user_id
                 td id="plan-status-#{plan.id}" class="#{status_highlight plan.status}"
-                 = plan.status   
+                 = plan.status
                 td = plan.cut
                 td = plan.start_at
                 td = plan.end_at
                 td = plan.done
                 td.text-center
                   - if pm? or director? or ceo?
-                    = link_to fa_icon('check'), update_status_plans_path(id:plan.id), data: {:confirm => 'Are you sure?'},remote: true,class: "" 
-                  = link_to fa_icon('eye'), plan,class: "" 
+                    = link_to fa_icon('check'), update_status_plans_path(id:plan.id), data: {:confirm => 'Are you sure?'},remote: true,class: ""
+                  = link_to fa_icon('eye'), plan,class: ""
                   = link_to fa_icon("pencil"), edit_plan_path(plan) if plan.user_id = current_user.id
                   = link_to fa_icon('trash'), plan, data: {:confirm => 'Are you sure?'}, :method => :delete,class: ""
 .text-center

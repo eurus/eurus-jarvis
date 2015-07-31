@@ -25,6 +25,15 @@ Rails.application.routes.draw do
 
   # supervise actions
   get 'supervise/index'
+  get 'supervise/users' => 'supervise#users'
+  get 'supervise/projects' => 'supervise#projects'
+  get 'supervise/overtimes' => 'supervise#overtimes'
+  get 'supervise/vacations' => 'supervise#vacations'
+  get 'supervise/errands' => 'supervise#errands'
+  get 'supervise/groups' => 'supervise#groups'
+
+
+
   # supervise users
   get 'supervise/users/new' => "supervise#new_user"
   get 'supervise/users/edit/:id' => "supervise#edit_user"

@@ -133,12 +133,12 @@ class SuperviseController < ApplicationController
 
   def user_group_cancel
     @user = User.find(params[:id])
-    @user.role = nil
+    @user.role = 'staff' unless @user.role == 'intern'
     @user.occupation = nil
     @user.save
 
     ((User.dfs @user).try :flatten).try :each do |u|
-      u.role = nil
+      e.role = 'staff' unless e.role == 'intern'
       u.occupation = nil
       u.supervisor_id = nil
       u.save

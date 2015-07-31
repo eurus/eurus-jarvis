@@ -17,7 +17,7 @@ h2.text-center.sign-in-margin = t("signin")
     .form-group
       = f.check_box :remember_me, as: :boolean if devise_mapping.rememberable?
       |  
-      = f.label :remember_me, class: "pull-right"
+      = f.label :remember_me
     .form-group
       = f.submit "Log In", class: "btn btn-primary btn-block"
 .col-md-3

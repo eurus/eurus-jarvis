@@ -1,7 +1,7 @@
 
 .col-md-12
   h3 加班
-  table.table.table-hover.table-bordered
+  table.table.table-hover
     thead
       tr
         th 加班日期
@@ -22,7 +22,7 @@
           td = status overtime.approve
           td = issue overtime.issue
           td = get_project_name overtime.project_id
-          td      
+          td
             = link_to fa_icon("check"),checkrecord_path(id: overtime.id, cut: 'overtime'), class: "pull-left" unless overtime.approve
             = link_to fa_icon('usd'), issuerecord_path(id: overtime.id, cut: 'overtime'),class: "pull-right" unless overtime.issue
 .text-center

@@ -5,6 +5,7 @@
   .text-center
     .name = current_user.nickname
     .occupation = current_user.occupation
+  .title management
   div.list-group.text-center
     = link_to root_path , class: "list-group-item #{'active' if params['controller'] == 'dashboard'}" do
       = fa_icon("dashboard")+" Dash"
@@ -21,7 +22,7 @@
 
     = link_to plans_path , class: "list-group-item #{'active' if params['controller'] == 'plans'}" do
       = fa_icon("clock-o") + " 计划"
-      
+
     = link_to weeklies_path , class: "list-group-item #{'active' if params['controller'] == 'weeklies'}" do
       = fa_icon("newspaper-o") + " 周报"
 
@@ -31,11 +32,10 @@
       = link_to supervise_index_path , class: "list-group-item #{'active' if params['controller'] == 'supervise'}" do
         =fa_icon("cog") +" 管理"
 
-  div
-    = link_to '新出差', new_errand_path,class: "btn btn-primary btn-block" if params['controller'] == 'errands'
-    = link_to '新假期', new_vacation_path,class: "btn btn-primary btn-block" if params['controller'] == 'vacations'
-    = link_to '新加班', new_overtime_path,class: "btn btn-primary btn-block" if params['controller'] == 'overtimes'
-    = link_to '新周报', new_weekly_path,class: "btn btn-primary btn-block" if params['controller'] == 'weeklies'
-    = link_to '新文章', new_artical_path,class: "btn btn-primary btn-block" if params['controller'] == 'articals'
-
-  = link_to '新计划', new_plan_path,class: "btn btn-primary btn-block" if params['controller'] == 'plans'
+  div.pl-20.pr-20
+    = link_to fa_icon('plus')+'出差汇报', new_errand_path,class: "btn btn-outstand btn-block" if params['controller'] == 'errands'
+    = link_to fa_icon('plus')+'假期申请', new_vacation_path,class: "btn btn-outstand btn-block" if params['controller'] == 'vacations'
+    = link_to fa_icon('plus')+'加班申请', new_overtime_path,class: "btn btn-outstand btn-block" if params['controller'] == 'overtimes'
+    = link_to fa_icon('plus')+'书写周报', new_weekly_path,class: "btn btn-outstand btn-block" if params['controller'] == 'weeklies'
+    = link_to fa_icon('plus')+'撰写文章', new_artical_path,class: "btn btn-outstand btn-block" if params['controller'] == 'articals'
+    = link_to fa_icon('plus')+'拟定计划', new_plan_path,class: "btn btn-outstand btn-block" if params['controller'] == 'plans'

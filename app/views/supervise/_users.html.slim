@@ -1,5 +1,5 @@
 = link_to "新员工", supervise_users_new_path,class: "btn btn-primary pull-right" if current_user.role == 'ceo'
-table.table.table-hover.table-bordered
+table.table.table-hover
   thead
     tr
       td 工号
@@ -22,7 +22,7 @@ table.table.table-hover.table-bordered
         td = u.try :birthday
         td
           - if current_user.role == 'ceo'
-            a.pull-left href="/supervise/users/edit/#{u.id}" 
+            a.pull-left href="/supervise/users/edit/#{u.id}"
               = fa_icon('pencil')
             = link_to fa_icon("trash"), "/supervise/users/#{u.id}",data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right" if not current_user.id == u.id
-  = paginate @users,theme: 'twitter-bootstrap-3'   
+  = paginate @users,theme: 'twitter-bootstrap-3'

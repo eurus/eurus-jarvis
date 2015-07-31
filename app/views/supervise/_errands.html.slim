@@ -1,7 +1,7 @@
 
 .col-md-12
   h3 出差
-  table.table.table-hover.table-bordered
+  table.table.table-hover
     thead
       tr
         th 出差地点
@@ -20,11 +20,11 @@
           td = errand.content
           td = errand.start_at
           td = errand.end_at
-          td = get_project_name errand.project_id 
+          td = get_project_name errand.project_id
           td = errand.fee
           td = status errand.approve
           td = issue errand.issue
-          td 
+          td
             = link_to fa_icon("check"),checkrecord_path(id: errand.id, cut: 'errand'), class: "pull-left"  unless errand.approve
             = link_to fa_icon('usd'), issuerecord_path(id: errand.id, cut: 'errand'),class: "pull-right" unless errand.issue
 

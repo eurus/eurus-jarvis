@@ -1,13 +1,17 @@
 .row
   .banner
     .title 加班
-.col-md-3
-.col-md-6
+    .breadcrumb-wrapper
+      label 您现在的位置:
+      ul.breadcrumb
+        li=link_to "加班", overtimes_path
+        li.active 加班申请
+.col-md-6.col-md-offset-3
   = simple_form_for(@overtime) do |f|
     -if @overtime.errors.any?
       ul
         - @overtime.errors.full_messages.each do |msg|
-          li = msg 
+          li = msg
     .form-groups
       = f.label "开始时间"
       = f.text_field :start_at,{class: "form-control datepicker"}
@@ -19,17 +23,19 @@
       = f.input :project_id,collection: Project.all.collect {|p| [ p.name, p.id ]},label: false
     .form-groups
       = f.label "加班内容"
-      = f.text_field :content,class: "form-control" 
+      = f.text_field :content,class: "form-control"
 
-    .form-actions
-      = f.submit '保存',class:"btn btn-block btn-primary"
-      = link_to "返回", overtimes_path ,class: "btn btn-default btn-block"
+    .form-actions.pt-20.row
+      .col-md-6
+        = link_to "返回", overtimes_path ,class: "btn btn-default btn-block"
+      .col-md-6
+        = f.submit '保存',class:"btn btn-block btn-primary"
 .col-md-3
 
 coffee:
   $ ->
     config = {
-      dropdownCssClass : 'bigdrop', 
+      dropdownCssClass : 'bigdrop',
       width: '300px',
       containerCss : {"display":"block"}
     }

@@ -46,7 +46,7 @@ class SuperviseController < ApplicationController
     default_user_avatar @user
     respond_to do |format|
       if @user.save
-        format.html { redirect_to supervise_index_path(view: 'users'), notice: 'User was successfully created.' }
+        format.html { redirect_to supervise_users_path, notice: 'User was successfully created.' }
       else
         format.html { render :new_user }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -57,7 +57,7 @@ class SuperviseController < ApplicationController
   def update_user
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to supervise_index_path(view: 'users'), notice: 'User was successfully updated.' }
+        format.html { redirect_to supervise_users_path, notice: 'User was successfully updated.' }
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -68,7 +68,7 @@ class SuperviseController < ApplicationController
   def destroy_user
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to supervise_index_path(view: 'users'), notice: 'User was successfully destroyed.' }
+      format.html { redirect_to supervise_users_path, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -103,7 +103,7 @@ class SuperviseController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to supervise_index_path(view: 'groups'), notice: 'Leader was successfully selected.' }
+      format.html { redirect_to supervise_groups_path, notice: 'Leader was successfully selected.' }
     end
   end
 
@@ -126,7 +126,7 @@ class SuperviseController < ApplicationController
       ap u.save
     end
     respond_to do |format|
-      format.html { redirect_to supervise_index_path(view: "groups"), notice: 'Leader was successfully selected.' }
+      format.html { redirect_to supervise_groups_path, notice: 'Leader was successfully selected.' }
     end
 
   end
@@ -144,7 +144,7 @@ class SuperviseController < ApplicationController
       u.save
     end
     respond_to do |format|
-      format.html { redirect_to supervise_index_path(view: 'groups'), notice: 'Leader was successfully unselected.' }
+      format.html { redirect_to supervise_groups_path, notice: 'Leader was successfully unselected.' }
     end
   end
 

@@ -17,5 +17,5 @@ if code == "ok"
   $("#plan-status-#{id}").addClass(hover_sytle)
 
 else
-  sweetAlert "(╯‵□′)╯︵┻━┻"
+  sweetAlert "(╯‵□′)╯︵┻━┻","Calm down, Bro"
 

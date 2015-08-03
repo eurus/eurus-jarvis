@@ -11,8 +11,8 @@
         .panel.panel-board
           .panel-body
             =fa_icon 'check-square-o', class:'heading'
-            .num 2
-            .hint 完成项目(敬请期待)
+            .num = get_done current_user
+            .hint  本年完成项目
       .col-md-6
         .panel.panel-board
           .panel-body

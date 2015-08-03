@@ -41,4 +41,8 @@ module DashboardHelper
     end
     
   end
+
+  def get_done(user)
+    user.projects.done.count    
+  end
 end

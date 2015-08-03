@@ -5,4 +5,6 @@ module ProjectsHelper
   def owner_name(id)
     "#{User.find(id).try :realname}"
   end
+
+  
 end

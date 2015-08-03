@@ -2,7 +2,7 @@ class SuperviseController < ApplicationController
   before_action :set_user, only: [:edit_user, :update_user, :destroy_user]
   before_action :set_buddies, only: [:users,:groups, :overtimes,:errands,:vacations,:projects]
   def index
-     
+
   end
 
   def users
@@ -133,12 +133,12 @@ class SuperviseController < ApplicationController
 
   def user_group_cancel
     @user = User.find(params[:id])
-    @user.role = nil
+    @user.role = 'staff' unless @user.role == 'intern'
     @user.occupation = nil
     @user.save
 
     ((User.dfs @user).try :flatten).try :each do |u|
-      u.role = nil
+      e.role = 'staff' unless e.role == 'intern'
       u.occupation = nil
       u.supervisor_id = nil
       u.save
@@ -154,9 +154,23 @@ class SuperviseController < ApplicationController
       if obj
         obj.approve = true
         obj.save
-        format.html { redirect_to supervise_index_path(view: "#{params[:cut]}s"), notice: 'Record was successfully checked.' }
+        case params[:cut]
+        when "overtime"
+          format.html { redirect_to supervise_overtimes_path, notice: 'Record was successfully checked.' }
+        when "errand"
+          format.html { redirect_to supervise_errands_path, notice: 'Record was successfully checked.' }
+        else
+          format.html { redirect_to supervise_vacations_path, notice: 'Record was successfully checked.' }
+        end
       else
-        format.html { redirect_to supervise_index_path(view: "#{params[:cut]}s"), notice: 'Record was not successfully checked.' }
+        case params[:cut]
+        when "overtime"
+          format.html { redirect_to supervise_overtimes_path, notice: 'Record was not successfully checked.' }
+        when "errand"
+          format.html { redirect_to supervise_errands_path, notice: 'Record was not successfully checked.' }
+        else
+          format.html { redirect_to supervise_vacations_path, notice: 'Record was not successfully checked.' }
+        end
       end
     end
   end
@@ -167,9 +181,23 @@ class SuperviseController < ApplicationController
       if obj
         obj.issue = true
         obj.save
-        format.html { redirect_to supervise_index_path(view: "#{params[:cut]}s"), notice: 'Record was successfully checked.' }
+        case params[:cut]
+        when "overtime"
+          format.html { redirect_to supervise_overtimes_path, notice: 'Record was successfully checked.' }
+        when "errand"
+          format.html { redirect_to supervise_errands_path, notice: 'Record was successfully checked.' }
+        else
+          format.html { redirect_to supervise_vacations_path, notice: 'Record was successfully checked.' }
+        end
       else
-        format.html { redirect_to supervise_index_path(view: "#{params[:cut]}s"), notice: 'Record was not successfully checked.' }
+        case params[:cut]
+        when "overtime"
+          format.html { redirect_to supervise_overtimes_path, notice: 'Record was not successfully checked.' }
+        when "errand"
+          format.html { redirect_to supervise_errands_path, notice: 'Record was not successfully checked.' }
+        else
+          format.html { redirect_to supervise_vacations_path, notice: 'Record was not successfully checked.' }
+        end
       end
     end
   end

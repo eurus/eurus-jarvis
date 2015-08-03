@@ -26,5 +26,10 @@ module EurusJarvis
     config.generators do |g|
       g.template_engine :slim
     end
+
+    config.to_prepare do
+      Devise::RegistrationsController.layout "application"
+    end
+    
   end
 end

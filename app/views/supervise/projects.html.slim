@@ -28,6 +28,6 @@
               td = project.status
               td.ops
                 = link_to fa_icon('pencil-square-o'), edit_project_path(project)
-                = link_to fa_icon('check'), done_projects_path(id:project.id) unless project.status == "done"
+                = link_to fa_icon('check'), done_projects_path(id:project.id),data: {:confirm => "确定完成#{project.try :name}"} unless project.status == "done"
 .text-center
   = paginate @projects,theme: 'twitter-bootstrap-3'

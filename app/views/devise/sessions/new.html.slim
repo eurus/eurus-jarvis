@@ -6,13 +6,13 @@ h2.text-center.sign-in-margin = t("signin")
       .input-group
         span.input-group-addon
           = fa_icon "envelope-o"
-        = f.text_field :login, class: "form-control", required: false, autofocus: true,placeholder: "example"
+        = f.text_field :login, class: "form-control", required: false, autofocus: true,placeholder: "input your username or email"
         span.input-group-addon @eurus.cn
     .form-group
       .input-group
         span.input-group-addon
           = fa_icon "lock"
-        = f.password_field :password, class: "form-control", required: false, autofocus: true, placeholder: "********"
+        = f.password_field :password, class: "form-control", required: false, autofocus: true, placeholder: "input your password"
 
     .form-group
       = f.check_box :remember_me, as: :boolean if devise_mapping.rememberable?

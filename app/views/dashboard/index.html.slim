@@ -5,8 +5,8 @@
         .panel.panel-board.board-green
           .panel-body
             =fa_icon 'plane',class: 'heading'
-            .num $20000
-            .hint 累积差旅(敬请期待)
+            .num = "￥#{get_errand current_user}"
+            .hint 累积差旅
       .col-md-6
         .panel.panel-board
           .panel-body

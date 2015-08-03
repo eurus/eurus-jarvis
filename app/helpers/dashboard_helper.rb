@@ -45,4 +45,8 @@ module DashboardHelper
   def get_done(user)
     user.projects.done.count    
   end
+
+  def get_errand(user)
+    user.total_fee
+  end
 end

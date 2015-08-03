@@ -79,4 +79,8 @@ class User < ActiveRecord::Base
   def self.（╯‵□′）╯︵┻━┻
     ap "Calm Down, Bro"
   end
+
+  def total_fee
+    self.errands.this_year.pluck(:fee).reduce(:+)
+  end
 end

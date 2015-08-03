@@ -1,12 +1,17 @@
+div
+  .banner
+    .title 周报
 .row
-  table.table.table-hover
-  .col-md-12.text-center
-    = link_to '返回', weeklies_path,class: "btn btn-primary pull-right"
-    = link_to fa_icon('pencil'), edit_weekly_path(@weekly),class: "btn btn-primary pull-right"
-    .clearfix
-    h3 总结
-    article
-      = raw @weekly.sumary
-    h3 期望
-    article
-      = raw @weekly.hope
+  .col-md-12
+    .p-15.pt-20
+      .panel.panel-board
+        .panel-heading.text-center
+          .actions.pull-right
+            = link_to fa_icon('book'), weeklies_path
+            = link_to fa_icon('pencil'), edit_weekly_path(@weekly)
+          h3 = @weekly.created_at
+          h5= "作者：#{User.find(@weekly.user_id).try :email}"
+        .panel-body
+          article
+            p = raw @weekly.sumary
+            p = raw @weekly.hope

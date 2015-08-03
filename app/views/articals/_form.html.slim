@@ -10,13 +10,13 @@
           li = msg 
 
     .form-groups
-      = f.label :title
+      = f.label "标题"
       = f.text_field :title,class: "form-control"
     .form-groups
-      = f.label :origin
+      = f.label "来源"
       = f.text_field :origin,class: "form-control"
     .form-group
-      = f.label :content
+      = f.label "内容"
       = f.text_area :content,class: "form-control",rows: 10
 
     .form-actions

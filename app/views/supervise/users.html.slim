@@ -28,7 +28,7 @@
               td.ops
                 - if current_user.role == 'ceo'
                   a href="/supervise/users/edit/#{u.id}"
-                    = fa_icon('pencil')
+                    = fa_icon('pencil-square-o')
                   = link_to fa_icon("trash"), "/supervise/users/#{u.id}",data: {:confirm => 'Are you sure?'}, :method => :delete if not current_user.id == u.id
   .text-center
     = paginate @users,theme: 'twitter-bootstrap-3'

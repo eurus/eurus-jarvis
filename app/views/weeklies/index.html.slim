@@ -15,7 +15,7 @@ div
             = weekly.created_at.strftime("%Y-%m-%d")
             .actions.pull-right
               = link_to fa_icon('eye'), weekly
-              = link_to fa_icon('pencil'), edit_weekly_path(weekly)
+              = link_to fa_icon('pencil-square-o'), edit_weekly_path(weekly)
               = link_to fa_icon('times'), weekly, data: {:confirm => 'Are you sure?'}, :method => :delete
           .panel-body
             article

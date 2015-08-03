@@ -22,7 +22,7 @@
               td = vacation.cut
               td = vacation.content
               td = status vacation.try :approve
-              td
+              td.ops
                 = link_to fa_icon("check"),checkrecord_path(id: vacation.id, cut: 'vacation'), class: "pull-left" unless vacation.approve
 
 .text-center

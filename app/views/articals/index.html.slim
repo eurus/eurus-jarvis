@@ -15,7 +15,7 @@ div
             = a.try :title
             .actions.pull-right
               = link_to fa_icon('eye'), a
-              = link_to fa_icon('pencil'), edit_artical_path(a)
+              = link_to fa_icon('pencil-square-o'), edit_artical_path(a)
               = link_to fa_icon('times'), a, data: {:confirm => 'Are you sure?'}, :method => :delete
           .panel-body
             span = a.try :origin

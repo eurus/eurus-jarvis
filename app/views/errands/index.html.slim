@@ -35,7 +35,7 @@ div
                 td = issue errand.issue
                 td
                   - unless errand.approve
-                    = link_to fa_icon("pencil"), edit_errand_path(errand),class: "pull-left"
+                    = link_to fa_icon("pencil-square-o"), edit_errand_path(errand),class: "pull-left"
                     = link_to fa_icon('trash'), errand, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
 
 .text-center

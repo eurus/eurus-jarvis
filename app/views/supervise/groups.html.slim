@@ -2,13 +2,18 @@
   .title 组织管理
 .p-20.pt-15
   - @buddies.try :each do |x|
-    .col-md-3
+    .col-md-2
       .panel.panel-default
-        .panel-heading = "#{x.try :realname}  #{x.username.capitalize}"
+        .panel-heading
+          ="#{x.try :realname}  #{x.username.capitalize}"
+          .actions.pull-right
+            = link_to fa_icon('pencil-square-o'), edit_user_group_path(id:x.id)
+            = link_to fa_icon('recycle'), cancel_group_path(id:x.id),data: {:confirm => "确认撤销 #{x.username} 的职务吗?"}, :method => :delete
         .panel-body
-          p = "职位：#{x.occupation}"
-          p = "角色：#{x.role}"
+          =image_tag "#{x.avatar_url(:middle)}", class:'img-responsive' if x.avatar?
+          div= "职位：#{x.occupation}"
+          div= "角色：#{x.role}"
         - if ceo? or director?
           .panel-footer
-            span = link_to '修改任命', edit_user_group_path(id:x.id)
-            span.pull-right = link_to '撤销任命', cancel_group_path(id:x.id),data: {:confirm => 'Are you sure?'}, :method => :delete
+            span
+            span.pull-right

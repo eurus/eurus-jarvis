@@ -26,7 +26,7 @@
               td = issue overtime.issue
               td = get_project_name overtime.project_id
               td.ops
-                = link_to fa_icon("check"),checkrecord_path(id: overtime.id, cut: 'overtime'), class: "pull-left" unless overtime.approve
-                = link_to fa_icon('usd'), issuerecord_path(id: overtime.id, cut: 'overtime'),class: "pull-right" unless overtime.issue
+                = link_to fa_icon("check"),checkrecord_path(id: overtime.id, cut: 'overtime') unless overtime.approve
+                = link_to fa_icon('usd'), issuerecord_path(id: overtime.id, cut: 'overtime') unless overtime.issue
 .text-center
   = paginate @overtimes,theme: 'twitter-bootstrap-3'

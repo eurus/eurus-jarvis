@@ -79,7 +79,7 @@ class SuperviseController < ApplicationController
 
   def user_group_edit
     @supervisor = User.find(params[:id])
-    
+
 
     if current_user.role == 'ceo'
       # @buddies = User.buddies User.ceo.first
@@ -96,23 +96,34 @@ class SuperviseController < ApplicationController
     @supervisor.occupation = params[:sp][:occupation]
     @supervisor.save
     if current_user.role == 'ceo'
-      ap "remain"
-      ap remain_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
-      ap "current"
-      ap current_buddies =  ((User.buddies @supervisor)+(User.buddies User.ceo.first)).map { |e| e.id }
-      # ap opt_buddies = current_buddies - remain_buddies
+      ap selected_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
+      ap origin_buddies = (User.buddies @supervisor).map { |e| e.id }
 
-      # opt_buddies
-      # .map { |e| User.find e }
-      # .map { |e|
-      #   User.dfs e
-      # }.flatten.map do |e|
-      #   e.role = 'staff' unless e.role == 'intern'
-      #   e.occupation = nil
-      #   e.supervisor_id = nil
-      #   e.save
-      # end
-    else   
+      if selected_buddies.count > origin_buddies.count
+        diff = selected_buddies - origin_buddies - [@supervisor.id]
+      else
+        diff = origin_buddies - selected_buddies - [@supervisor.id]
+      end
+      ap diff
+      diff
+      .map { |e| User.find e }
+      .try :each do |x|
+        if origin_buddies.include? x.id
+          ap "remove #{x.email}"
+          [(User.dfs x)].flatten.map do |e|
+            ap e.email
+            e.role = 'staff' unless e.role == 'intern'
+            e.occupation = nil
+            e.supervisor_id = nil
+            e.save
+          end
+        else
+          ap x
+          x.supervisor_id = @supervisor.id
+          x.save
+        end
+      end
+    else
       remain_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
       current_buddies =  (User.buddies @supervisor).map { |e| e.id }
       ap opt_buddies = current_buddies - remain_buddies

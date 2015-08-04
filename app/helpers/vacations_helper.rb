@@ -18,4 +18,14 @@ module VacationsHelper
     end
   end
 
+  def issue_class(verified, issued)
+    if not verified
+      ""
+    elsif issued
+      "success"
+    else
+      "warning"
+    end
+  end
+
 end

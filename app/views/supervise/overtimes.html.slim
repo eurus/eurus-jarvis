@@ -8,23 +8,21 @@
           tr
             th 日期
             th 天数
-            th 内容
-            th 审核
-            th 发放
             th 项目
+            th 内容
+            th 状态
             th
 
 
         tbody
           - @overtimes.each do |overtime|
-            tr
+            tr class="#{issue_class overtime.approve, overtime.issue}"
               td = overtime.start_at
               td = overtime.duration
+              td = get_project_name overtime.project_id
               td
                 p.limit-text = overtime.content
-              td = status overtime.approve
-              td = issue overtime.issue
-              td = get_project_name overtime.project_id
+              td = issue_status overtime.approve, overtime.issue
               td.ops
-                = link_to fa_icon("check"),checkrecord_path(id: overtime.id, cut: 'overtime'),  data: {:confirm => "确定通过#{overtime.user.try :realname}的加班"} unless overtime.approve
-                = link_to fa_icon('usd'), issuerecord_path(id: overtime.id, cut: 'overtime'), data: {:confirm => "确定发放#{overtime.user.try :realname}的加班费"} unless overtime.issue
+                = link_to fa_icon("check"), checkrecord_path(id: overtime.id, cut: 'overtime'), id: "check-overtime-#{overtime.id}",remote: true,data: {confirm:"确认同意 #{overtime.user.try :realname} 的加班申请？", text:"#{overtime.start_at}起，为期#{overtime.duration}天，项目：#{get_project_name overtime.project_id}"} unless overtime.approve
+                = link_to fa_icon('usd'), issuerecord_path(id: overtime.id, cut: 'overtime'), id: "issue-overtime-#{overtime.id}", remote: true, data: {:confirm => "确认发放加班费至: #{overtime.user.try :realname}", text:"#{overtime.start_at}起，为期#{overtime.duration}天，内容为：#{overtime.content}"} unless overtime.issue

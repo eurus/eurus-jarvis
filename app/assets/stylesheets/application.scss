@@ -85,7 +85,7 @@ form{
 
 // datatables
 .pagination-wrapper{
-  margin-top:40px;
+  margin-top:30px;
   display:table;
   width:100%;
   .dataTables_paginate{
@@ -93,6 +93,16 @@ form{
     text-align: center;
     vertical-align: middle;
   }
+}
+
+table.datatable{
+    border-bottom:2px solid #ddd;
+}
+
+.total-footer{
+  padding-top:10px;
+  font-weight:bold;
+  float:right;
 }
 
 table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after{
@@ -107,6 +117,17 @@ table.dataTable thead > tr > th {
 table.dataTable tr > td{
   // padding-left:30px;
 }
+
+.dataTables_filter{
+  input.form-control.input-sm{
+    border-radius: 30px !important;
+  }
+  label{
+    margin-right:10px;
+  }
+}
+
+
 
 // table-hover ops
 .ops{

@@ -42,15 +42,77 @@ function initPage() {
   });
 
   var dontSort = [];
-  $('.datatable thead th').each( function () {
+  var hidden = [];
+  var sumIndex = -1;
+  var sumType = 'count';
+  $('.datatable thead th').each( function (index, elem) {
+    // for sum up
+    if ($(this).hasClass('sum_up')){
+      sumIndex = index;
+      if ($(this).hasClass('rmb')){
+        sumType = 'rmb';
+      }
+    }
+    // for no sort
     if ( $(this).hasClass( 'no_sort' )) {
       dontSort.push( { "bSortable": false } );
     } else {
       dontSort.push( null );
     }
+
+    if ( $(this).hasClass('hidden')){
+      hidden.push({"targets":[index], "visible":false})
+    }
   });
 $('.datatable').dataTable({
-  "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"pagination-wrapper"p>>>',
-  "aoColumns": dontSort
+  "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row"<"col-sm-12 text-center"<"total-footer">>><"row view-pager"<"col-sm-12"<"pagination-wrapper"p>>>',
+  "aoColumns": dontSort,
+  "autoWidth":false,
+  "aaSorting": [],
+  "columnDefs": hidden,
+  "footerCallback": function ( row, data, start, end, display ) {
+    if (sumIndex >= 0){
+    var api = this.api();
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+              return typeof i === 'string' ?
+              i.replace(/[￥ ]/g, '')*1 :
+              typeof i === 'number' ?
+              i : 0;
+            };
+
+            // Total over all pages
+            total = api
+            .column( sumIndex )
+            .data()
+            .reduce( function (a, b) {
+              return intVal(a) + intVal(b);
+            } );
+
+            // Total over this page
+            pageTotal = api
+            .column( sumIndex, { page: 'current'} )
+            .data()
+            .reduce( function (a, b) {
+              return intVal(a) + intVal(b);
+            }, 0 );
+            var totalStr = '';
+            if (sumType == 'rmb'){
+              pageTotal = parseInt(pageTotal*100)/100.0;
+              total = parseInt(total*100)/100.0;
+              totalStr = '本页小计: ￥'+pageTotal +' / 总计: ￥'+ total;
+            }else{
+              pageTotal = parseInt(pageTotal*10)/10.0;
+              total = parseInt(total*10)/10.0;
+              totalStr = '本页小计: '+pageTotal +' / 总计: '+ total;
+
+            }
+
+            $('.total-footer').html(totalStr);
+            // Update footer
+            // $( api.column( sumIndex ).footer() ).html(totalStr);
+          }
+        }
 });
 }

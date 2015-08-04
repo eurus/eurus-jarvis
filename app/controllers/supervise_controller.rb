@@ -14,15 +14,15 @@ class SuperviseController < ApplicationController
   end
 
   def overtimes
-    @overtimes = Overtime.all
+    @overtimes = Overtime.all.order(approve: :asc, issue: :asc)
   end
 
   def errands
-    @errands = Errand.all
+    @errands = Errand.all.order(approve: :asc, issue: :asc)
   end
 
   def vacations
-    @vacations = Vacation.all
+    @vacations = Vacation.all.order(approve: :asc)
   end
 
   def projects

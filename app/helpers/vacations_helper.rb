@@ -1,7 +1,7 @@
 module VacationsHelper
 
   def status(s)
-    s == true ? "已通过" : "待确认"
+    s ? "已审核" : "新"
   end
 
   def issue(s)

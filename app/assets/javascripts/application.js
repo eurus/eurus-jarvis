@@ -20,6 +20,8 @@
 //= require select2
 //= require bootstrap-datepicker
 //= require bootstrap-wysihtml5
+//= require jquery.dataTables.min
+//= require dataTables.bootstrap
 //= require_tree .
 
 
@@ -37,5 +39,18 @@ function initPage() {
   });
   $('.panel').mouseleave(function(){
     $(this).find('.actions').fadeOut(200);
-  })
+  });
+
+  var dontSort = [];
+  $('.datatable thead th').each( function () {
+    if ( $(this).hasClass( 'no_sort' )) {
+      dontSort.push( { "bSortable": false } );
+    } else {
+      dontSort.push( null );
+    }
+  });
+$('.datatable').dataTable({
+  "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"pagination-wrapper"p>>>',
+  "aoColumns": dontSort
+});
 }

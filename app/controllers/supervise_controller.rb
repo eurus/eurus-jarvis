@@ -6,7 +6,7 @@ class SuperviseController < ApplicationController
   end
 
   def users
-    @users = User.all.page params[:page]
+    @users = User.all
   end
 
   def groups
@@ -14,15 +14,15 @@ class SuperviseController < ApplicationController
   end
 
   def overtimes
-    @overtimes = Overtime.all.page params[:page]
+    @overtimes = Overtime.all
   end
 
   def errands
-    @errands = Errand.all.page params[:page]
+    @errands = Errand.all
   end
 
   def vacations
-    @vacations = Vacation.all.page params[:page]
+    @vacations = Vacation.all
   end
 
   def projects
@@ -180,6 +180,7 @@ class SuperviseController < ApplicationController
     respond_to do |format|
       if obj
         obj.issue = true
+        obj.approve = true
         obj.save
         case params[:cut]
         when "overtime"

@@ -3,7 +3,7 @@
 .p-20.pt-15
   .panel
     .panel-body
-      table.table.table-hover
+      table.table.table-hover.datatable
         thead
           tr
             th 日期
@@ -28,5 +28,3 @@
               td.ops
                 = link_to fa_icon("check"),checkrecord_path(id: overtime.id, cut: 'overtime'),  data: {:confirm => "确定通过#{overtime.user.try :realname}的加班"} unless overtime.approve
                 = link_to fa_icon('usd'), issuerecord_path(id: overtime.id, cut: 'overtime'), data: {:confirm => "确定发放#{overtime.user.try :realname}的加班费"} unless overtime.issue
-.text-center
-  = paginate @overtimes,theme: 'twitter-bootstrap-3'

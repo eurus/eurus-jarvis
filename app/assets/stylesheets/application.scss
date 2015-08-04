@@ -18,6 +18,7 @@
  *= require bootstrap-datepicker3
  *= require bootstrap-wysihtml5
  *= require eurus-css.0.1.0.min
+ *= require dataTables.bootstrap
  *= require_self
  */
 $sidbarblue: #1d212a;
@@ -80,6 +81,31 @@ form{
     opacity: 1; border:1px solid rgba(59,235,235,1);
     box-shadow:0 1px 10px rgba(59,255,255,1);
   }
+}
+
+// datatables
+.pagination-wrapper{
+  margin-top:40px;
+  display:table;
+  width:100%;
+  .dataTables_paginate{
+    display:table-cell;
+    text-align: center;
+    vertical-align: middle;
+  }
+}
+
+table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after{
+  left:8px !important;
+}
+
+table.dataTable thead > tr > th {
+  padding-left:30px;
+  padding-right:5px;
+}
+
+table.dataTable tr > td{
+  // padding-left:30px;
 }
 
 // table-hover ops

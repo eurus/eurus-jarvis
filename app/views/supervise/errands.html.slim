@@ -9,24 +9,20 @@
             th 开始日期
             th 结束日期
             th 项目
-            / th 地点
-            / th 内容
             th 费用
             th 状态
             th.no_sort
         tbody
           - @errands.each do |errand|
-            tr
+            tr id="tr-errand-#{errand.id}"
               td = errand.start_at
               td = errand.end_at
               td = get_project_name errand.project_id
-              / td = errand.location
-              / td = errand.content
               td = errand.fee
               td = issue_status errand.approve, errand.issue
               td.ops
-                = link_to fa_icon("check"),checkrecord_path(id: errand.id, cut: 'errand'),  data: {:confirm => "确定通过#{errand.user.try :realname}的出差嘛"} unless errand.approve
-                = link_to fa_icon('usd'), issuerecord_path(id: errand.id, cut: 'errand'), data: {:confirm => "确定发放#{errand.try :fee}的差旅费嘛"} unless errand.issue
+                = link_to fa_icon("check"),checkrecord_path(id: errand.id, cut: 'errand'),  data: {:confirm => "确定通过#{errand.user.try :realname}的出差嘛"}, id: "check-errand-#{errand.id}",remote: true unless errand.approve
+                = link_to fa_icon('usd'), issuerecord_path(id: errand.id, cut: 'errand'), data: {:confirm => "确定发放#{errand.try :fee}的差旅费嘛"},id: "issue-errand-#{errand.id}",remote: true unless errand.issue
 
 
 

@@ -30,5 +30,4 @@
                   a href="/supervise/users/edit/#{u.id}"
                     = fa_icon('pencil-square-o')
                   = link_to fa_icon("trash"), "/supervise/users/#{u.id}",data: {:confirm => "确定删除#{u.try :realname}嘛"}, :method => :delete if not current_user.id == u.id
-  .text-center
-    = paginate @users,theme: 'twitter-bootstrap-3'
+

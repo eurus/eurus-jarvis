@@ -154,14 +154,10 @@ class SuperviseController < ApplicationController
       if obj
         obj.approve = true
         obj.save
-        case params[:cut]
-        when "overtime"
-          format.html { redirect_to supervise_overtimes_path, notice: 'Record was successfully checked.' }
-        when "errand"
-          format.html { redirect_to supervise_errands_path, notice: 'Record was successfully checked.' }
-        else
-          format.html { redirect_to supervise_vacations_path, notice: 'Record was successfully checked.' }
-        end
+        format.js{
+          render 'check_record_by_type',
+          locals:{cut: params[:cut],id: obj.id}
+        }
       else
         case params[:cut]
         when "overtime"
@@ -181,15 +177,11 @@ class SuperviseController < ApplicationController
       if obj
         obj.issue = true
         obj.approve = true
-        obj.save
-        case params[:cut]
-        when "overtime"
-          format.html { redirect_to supervise_overtimes_path, notice: 'Record was successfully checked.' }
-        when "errand"
-          format.html { redirect_to supervise_errands_path, notice: 'Record was successfully checked.' }
-        else
-          format.html { redirect_to supervise_vacations_path, notice: 'Record was successfully checked.' }
-        end
+        # obj.save
+        format.js{
+          render 'issue_record_by_type',
+          locals:{cut: params[:cut],id: obj.id}
+        }
       else
         case params[:cut]
         when "overtime"

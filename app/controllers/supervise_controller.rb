@@ -99,11 +99,12 @@ class SuperviseController < ApplicationController
       ap selected_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
       ap origin_buddies = (User.buddies @supervisor).map { |e| e.id }
 
-      if selected_buddies.count > origin_buddies.count
-        diff = selected_buddies - origin_buddies - [@supervisor.id]
-      else
-        diff = origin_buddies - selected_buddies - [@supervisor.id]
-      end
+      # if selected_buddies.count > origin_buddies.count
+      #   diff = selected_buddies - origin_buddies - [@supervisor.id]
+      # else
+      #   diff = origin_buddies - selected_buddies - [@supervisor.id]
+      # end
+      diff = selected_buddies | origin_buddies - selected_buddies - [@supervisor.id]
       ap diff
       diff
       .map { |e| User.find e }

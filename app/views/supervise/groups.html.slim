@@ -5,15 +5,14 @@
     .col-md-2
       .panel.panel-default
         .panel-heading
-          ="#{x.try :realname}  #{x.username.capitalize}"
-          .actions.pull-right
-            = link_to fa_icon('pencil-square-o'), edit_user_group_path(id:x.id)
-            = link_to fa_icon('recycle'), cancel_group_path(id:x.id),data: {:confirm => "确认撤销 #{x.username} 的职务吗?"}, :method => :delete
+          ="#{x.try :realname}"
+          - if ceo? or director?
+            .actions.pull-right
+              = link_to fa_icon('pencil-square-o'), edit_user_group_path(id:x.id)
+              - unless staff? or intern?
+                = link_to fa_icon('recycle'), cancel_group_path(id:x.id),data: {:confirm => "确认撤销 #{x.username} 的职务?", text:"原职务：#{x.role}"}, :method => :delete unless x.staff? or x.intern?
         .panel-body
           =image_tag "#{x.avatar_url(:middle)}", class:'img-responsive' if x.avatar?
-          div= "职位：#{x.occupation}"
+          div.mt-10= "英文名：#{x.username}"
           div= "角色：#{x.role}"
-        - if ceo? or director?
-          .panel-footer
-            span = link_to '修改任命', edit_user_group_path(id:x.id)
-            span.pull-right = link_to '撤销任命', cancel_group_path(id:x.id),data: {:confirm => "确定撤销#{x.try :realname}的职位嘛"}, :method => :delete
+          div= "职位：#{x.occupation}" if x.occupation

@@ -110,13 +110,18 @@ table.dataTable tr > td{
 
 // table-hover ops
 .ops{
-  opacity:0;
   font-size:18px;
+  &:hover{
+    a{
+      opacity:1;
+    }
+  }
   a+a{
     margin-left:20px;
   }
   a{
-  color:$font-dark !important;
+    opacity:0;
+    color:$font-dark !important;
 
   &:hover{
     color:$brand-primary !important;

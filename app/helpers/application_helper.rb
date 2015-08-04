@@ -38,8 +38,8 @@ module ApplicationHelper
     current_user.role == "pm"
   end
 
-  def stuff?
-    current_user.role == "stuff"
+  def staff?
+    current_user.role == "staff"
   end
 
   def intern?

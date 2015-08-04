@@ -83,4 +83,24 @@ class User < ActiveRecord::Base
   def total_fee
     self.errands.this_year.pluck(:fee).reduce(:+)
   end
+
+  def ceo?
+    role == "ceo"
+  end
+
+  def director?
+    role == "director"
+  end
+
+  def pm?
+    role == "pm"
+  end
+
+  def staff?
+    role == "staff"
+  end
+
+  def intern?
+    role == "intern"
+  end
 end

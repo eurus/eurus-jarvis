@@ -177,7 +177,7 @@ class SuperviseController < ApplicationController
       if obj
         obj.issue = true
         obj.approve = true
-        # obj.save
+        obj.save
         format.js{
           render 'issue_record_by_type',
           locals:{cut: params[:cut],id: obj.id}

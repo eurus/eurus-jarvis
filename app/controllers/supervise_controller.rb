@@ -79,27 +79,54 @@ class SuperviseController < ApplicationController
 
   def user_group_edit
     @supervisor = User.find(params[:id])
-    @buddies = User.buddies @supervisor
+    
+
+    if current_user.role == 'ceo'
+      # @buddies = User.buddies User.ceo.first
+      @buddies = User.buddies @supervisor
+      @available_buddies = (User.buddies User.ceo.first) + @buddies
+    else
+      @available_buddies = User.buddies @supervisor
+      @buddies = User.buddies @supervisor
+    end
   end
 
   def user_group_update
     @supervisor = User.find(params[:sp][:id])
     @supervisor.occupation = params[:sp][:occupation]
     @supervisor.save
+    if current_user.role == 'ceo'
+      ap "remain"
+      ap remain_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
+      ap "current"
+      ap current_buddies =  ((User.buddies @supervisor)+(User.buddies User.ceo.first)).map { |e| e.id }
+      # ap opt_buddies = current_buddies - remain_buddies
 
-    remain_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
-    current_buddies =  (User.buddies @supervisor).map { |e| e.id }
-    ap opt_buddies = current_buddies - remain_buddies
+      # opt_buddies
+      # .map { |e| User.find e }
+      # .map { |e|
+      #   User.dfs e
+      # }.flatten.map do |e|
+      #   e.role = 'staff' unless e.role == 'intern'
+      #   e.occupation = nil
+      #   e.supervisor_id = nil
+      #   e.save
+      # end
+    else   
+      remain_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
+      current_buddies =  (User.buddies @supervisor).map { |e| e.id }
+      ap opt_buddies = current_buddies - remain_buddies
 
-    opt_buddies
-    .map { |e| User.find e }
-    .map { |e|
-      User.dfs e
-    }.flatten.map do |e|
-      e.role = 'staff' unless e.role == 'intern'
-      e.occupation = nil
-      e.supervisor_id = nil
-      e.save
+      opt_buddies
+      .map { |e| User.find e }
+      .map { |e|
+        User.dfs e
+      }.flatten.map do |e|
+        e.role = 'staff' unless e.role == 'intern'
+        e.occupation = nil
+        e.supervisor_id = nil
+        e.save
+      end
     end
 
     respond_to do |format|
@@ -138,7 +165,7 @@ class SuperviseController < ApplicationController
     @user.save
 
     ((User.dfs @user).try :flatten).try :each do |u|
-      e.role = 'staff' unless e.role == 'intern'
+      u.role = 'staff' unless u.role == 'intern'
       u.occupation = nil
       u.supervisor_id = nil
       u.save

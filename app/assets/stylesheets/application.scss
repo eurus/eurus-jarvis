@@ -139,13 +139,17 @@ table.dataTable tr > td{
 
 
 // table-hover ops
-.ops{
-  font-size:18px;
-  &:hover{
+.table-hover{
+  tr:hover{
+    .ops{
     a{
       opacity:1;
     }
+    }
   }
+}
+.ops{
+  font-size:18px;
   a+a{
     margin-left:20px;
   }

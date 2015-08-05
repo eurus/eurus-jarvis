@@ -13,30 +13,24 @@ div
         table.table.table-hover
           thead
             tr
-              th 出差地点
-              th 出差项目
               th 开始日期
               th 结束日期
-              th 出差内容
+              th 项目
               th 费用
-              th 审核状态
-              th 发放状态
+              th 状态
               th
           tbody
             - @errands.each do |errand|
-              tr
-                td = errand.location
-                td = errand.content
+              tr class="#{issue_class errand.approve, errand.issue}"
                 td = errand.start_at
                 td = errand.end_at
-                td = get_project_name errand.project_id
+                td = errand.project.try :name
                 td = errand.fee
-                td = status errand.approve
-                td = issue errand.issue
-                td
+                td = issue_status errand.approve, errand.issue
+                td.ops
                   - unless errand.approve
-                    = link_to fa_icon("pencil-square-o"), edit_errand_path(errand),class: "pull-left"
-                    = link_to fa_icon('trash'), errand, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
+                    = link_to fa_icon("pencil-square-o"), edit_errand_path(errand)
+                    = link_to fa_icon('trash'), errand, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 .text-center
   = paginate @errands,theme: 'twitter-bootstrap-3'

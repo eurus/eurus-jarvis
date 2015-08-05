@@ -5,4 +5,6 @@ class Errand < ActiveRecord::Base
   paginates_per 10
 
   scope :this_year, -> {where(created_at: Time.current.beginning_of_year..Time.current.end_of_year)}
+
+  default_scope {order(approve: :asc, issue: :asc)}
 end

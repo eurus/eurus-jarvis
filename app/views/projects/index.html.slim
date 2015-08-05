@@ -1,16 +1,18 @@
-div
-  .banner
-    .title 项目
-    .breadcrumb-wrapper
-      label 您现在的位置:
-      ul.breadcrumb
-        li
-          a href='#' 项目
-        li.active  所有项目
+.banner
+  .title 项目
+  .breadcrumb-wrapper
+    label 您现在的位置:
+    ul.breadcrumb
+      li
+        a href='#' 项目
+      li.active  所有项目
 
-  .col-md-12.p-40.pt-15
-    .panel
-      .panel-body
+.p-20.pt-15
+  .panel
+    .panel-body
+      - if @projects.length == 0
+        div 什么？你居然还是没有项目，难道你真的想当扫地僧……
+      - else
         table.table.table-hover
           thead
             tr

@@ -8,7 +8,7 @@ div
         .panel-heading.text-center
           .actions.pull-right
             = link_to fa_icon('book'), plans_path
-            = link_to fa_icon('pencil-square-o'), edit_plan_path(@plan)
+            = link_to fa_icon('pencil-square-o'), edit_plan_path(@plan) if @plan.user_id == current_user.id unless @plan.done
           h3 = @plan.title
           h4 = "#{@plan.start_at} ~ #{@plan.end_at}"
           h5 = "作者：#{User.find(@plan.user_id).try :email}"

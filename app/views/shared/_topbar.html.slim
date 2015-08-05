@@ -42,4 +42,4 @@ nav.navbar.navbar-default.navbar-fixed-top
       li
         = link_to fa_icon("gear"), settings_path
       li
-        = link_to fa_icon("plug"), destroy_user_session_path, method: :delete
+        = link_to fa_icon("plug"), destroy_user_session_path, method: :delete, data: {:confirm => '确认退出嘛？'}

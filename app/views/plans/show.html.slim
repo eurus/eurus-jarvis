@@ -1,27 +1,19 @@
-p#notice = notice
+div
+  .banner
+    .title 计划
+.row
+  .col-md-8.col-md-offset-2
+    .p-15.pt-20
+      .panel.panel-board
+        .panel-heading.text-center
+          .actions.pull-right
+            = link_to fa_icon('book'), plans_path
+            = link_to fa_icon('pencil-square-o'), edit_plan_path(@plan)
+          h3 = @plan.title
+          h4 = "#{@plan.start_at} ~ #{@plan.end_at}"
+          h5 = "作者：#{User.find(@plan.user_id).try :email}"
+          h5 = "计划类型：#{@plan.cut} 计划状态：#{@plan.status}"
 
-p
-  strong Title:
-  = @plan.title
-p
-  strong Description:
-  = @plan.description
-p
-  strong User:
-  = @plan.user_id
-p
-  strong Status:
-  = @plan.status
-p
-  strong Cut:
-  = @plan.cut
-p
-  strong Start at:
-  = @plan.start_at
-p
-  strong End at:
-  = @plan.end_at
-
-= link_to 'Edit', edit_plan_path(@plan)
-'|
-= link_to 'Back', plans_path
+        .panel-body
+          article
+            = raw @plan.description

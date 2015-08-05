@@ -1,29 +1,12 @@
 .banner
   .title 组织管理
 
-.row
-  .col-xs-12
+.panel.panel-default
+  .panel-body
     .tree
-      =user_tree current_user
-.row
-  .col-xs-12
-    .tree style='margin:0 auto;'
       ul
-        li
-          a href='#' P
-          ul
-            li
-              a href='#' Child
-              ul
-                li
-                  a href='#' G
-            li
-              a href='#' C
-              ul
-                li
-                  a href='#' G
-                li
-                  a href='#' G2
+        =user_tree current_user
+
 .p-20.pt-15
   - @buddies.try :each do |x|
     .col-md-2
@@ -32,7 +15,7 @@
           ="#{x.try :realname}"
           - if ceo? or director?
             .actions.pull-right
-              = link_to fa_icon('pencil-square-o'), edit_user_group_path(id:x.id)
+              = link_to fa_icon('pencil-square-o'), edit_user_group_path(id:x.id) unless x.staff? or x.intern?
               - unless staff? or intern?
                 = link_to fa_icon('recycle'), cancel_group_path(id:x.id),data: {:confirm => "确认撤销 #{x.username} 的职务?", text:"原职务：#{x.role}"}, :method => :delete unless x.staff? or x.intern?
         .panel-body

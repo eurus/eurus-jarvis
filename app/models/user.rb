@@ -36,6 +36,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def available_buddies
+    if role=='staff' or role=='intern'
+      []
+    else
+    buddies.where(role:['staff', 'intern']) rescue []
+  end
+  end
+
   def plans_i_can_see
     ids = (User.dfs self).flatten.map(&:id)
     Plan.where(user_id: ids)
@@ -47,9 +55,10 @@ class User < ActiveRecord::Base
 
   def self.dfs(node)
     if (node.buddies).count == 0
-      return node
+      return [node]
     else
       res = (node.buddies).map { |u| User.dfs u }
+      res = res.flatten
       res.push node
       return res
     end

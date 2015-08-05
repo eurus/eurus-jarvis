@@ -46,20 +46,41 @@ module ApplicationHelper
     current_user.role == "intern"
   end
 
-  def user_tree(user)
-    puts "user: #{user.username}"
-    puts "buddies: #{user.buddies.length}"
+  def user_tree_link(user)
+    unless user.staff? or user.intern?
+      link_to(
+        content_tag(:div, user.realname) +
+        content_tag(:div, user.username, class:'username'),
+        '#',
+        class:'popovers',
+          tabindex:'0',
+          role:'button',
+          :"data-trigger"=>"focus",
+          :"data-toggle"=>'popover',
+          :"data-content"=>"#{
+          link_to(fa_icon('pencil-square-o'), edit_user_group_path(id:user.id)) +
+          link_to(fa_icon('recycle'), cancel_group_path(id:user.id),data: {:confirm => "确认撤销 #{user.username} 的职务?", text:"原职务：#{user.role}"}, :method => :delete)
+          }")
+    else
+      link_to(
+        content_tag(:div, user.realname) +
+        content_tag(:div, user.username, class:'username'),
+        '#')
+    end
+    end
+
+    def user_tree(user)
     if user.buddies.length > 0
-      content_tag(:ul) do
-        content_tag(:li) do
-          concat link_to(user.username, '#')
+      content_tag(:li) do
+        user_tree_link(user) +
+        content_tag(:ul) do
           user.buddies.each do |u|
-            concat user_tree u
+            concat user_tree(u)
           end
         end
       end
     else
-      content_tag(:li, link_to(user.username, '#'))
+      content_tag(:li, user_tree_link(user))
     end
   end
 

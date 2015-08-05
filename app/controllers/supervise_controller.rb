@@ -74,71 +74,93 @@ class SuperviseController < ApplicationController
   end
 
   def user_group_new
-    @buddies = current_user.buddies rescue []
+    @buddies = current_user.available_buddies
   end
 
   def user_group_edit
     @supervisor = User.find(params[:id])
 
-    if current_user.role == 'ceo'
-      # @buddies = User.buddies User.ceo.first
-      @buddies = @supervisor.buddies
-      @available_buddies = (User.ceo.first.buddies) + @buddies
-    else
-      @available_buddies = current_user.buddies
-      @buddies = @supervisor.buddies
-    end
+    @buddies = User.dfs(@supervisor) - [@supervisor]
+    @available_buddies = current_user.available_buddies + @buddies
   end
 
   def user_group_update
     @supervisor = User.find(params[:sp][:id])
     @supervisor.occupation = params[:sp][:occupation]
     @supervisor.save
-    if current_user.role == 'ceo'
-      ap selected_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
-      ap origin_buddies = (@supervisor.buddies).map { |e| e.id }
 
-      # if selected_buddies.count > origin_buddies.count
-      #   diff = selected_buddies - origin_buddies - [@supervisor.id]
-      # else
-      #   diff = origin_buddies - selected_buddies - [@supervisor.id]
-      # end
-      diff = selected_buddies | origin_buddies - selected_buddies - [@supervisor.id]
-      ap diff
-      diff
-      .map { |e| User.find e }
-      .try :each do |x|
-        if origin_buddies.include? x.id
-          ap "remove #{x.email}"
-          [(User.dfs x)].flatten.map do |e|
-            ap e.email
-            e.role = 'staff' unless e.role == 'intern'
-            e.occupation = nil
-            e.supervisor_id = nil
-            e.save
-          end
-        else
-          ap x
-          x.supervisor_id = @supervisor.id
-          x.save
-        end
-      end
-    else
-      remain_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
-      current_buddies =  (User.buddies @supervisor).map { |e| e.id }
-      ap opt_buddies = current_buddies - remain_buddies
+    selected_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
+    origin_buddies = (@supervisor.buddies).map { |e| e.id }
 
-      opt_buddies
-      .map { |e| User.find e }
-      .map { |e|
-        User.dfs e
-      }.flatten.map do |e|
-        e.role = 'staff' unless e.role == 'intern'
-        e.occupation = nil
-        e.supervisor_id = nil
-        e.save
-      end
+    removed_buddies = origin_buddies - selected_buddies
+    added_buddies = selected_buddies - origin_buddies
+
+    orphan_buddies = removed_buddies.map{|ruid|
+      ru = User.find ruid
+      User.dfs ru
+      ru.occupation = nil
+      ru.role = 'staff' unless ru.role == 'intern'
+      ru.supervisor_id = current_user.id
+      ru.save
+      ap ru
+    }.flatten - removed_buddies
+
+    change_buddies = added_buddies+orphan_buddies
+
+    change_buddies.delete_if{|id| id.nil?}.each do |uid|
+      u = User.find uid
+      u.occupation = nil
+      u.role = 'staff' unless u.role == 'intern'
+      u.supervisor_id = @supervisor.id
+      u.save
     end
+
+
+    # if current_user.role == 'ceo'
+    #   ap selected_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
+    #   ap origin_buddies = (@supervisor.buddies).map { |e| e.id }
+
+    #   # if selected_buddies.count > origin_buddies.count
+    #   #   diff = selected_buddies - origin_buddies - [@supervisor.id]
+    #   # else
+    #   #   diff = origin_buddies - selected_buddies - [@supervisor.id]
+    #   # end
+    #   diff = selected_buddies | origin_buddies - selected_buddies - [@supervisor.id]
+    #   ap diff
+    #   diff
+    #   .map { |e| User.find e }
+    #   .try :each do |x|
+    #     if origin_buddies.include? x.id
+    #       ap "remove #{x.email}"
+    #       [(User.dfs x)].flatten.map do |e|
+    #         ap e.email
+    #         e.role = 'staff' unless e.role == 'intern'
+    #         e.occupation = nil
+    #         e.supervisor_id = nil
+    #         e.save
+    #       end
+    #     else
+    #       ap x
+    #       x.supervisor_id = @supervisor.id
+    #       x.save
+    #     end
+    #   end
+    # else
+    #   remain_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
+    #   current_buddies =  (User.buddies @supervisor).map { |e| e.id }
+    #   ap opt_buddies = current_buddies - remain_buddies
+
+    #   opt_buddies
+    #   .map { |e| User.find e }
+    #   .map { |e|
+    #     User.dfs e
+    #   }.flatten.map do |e|
+    #     e.role = 'staff' unless e.role == 'intern'
+    #     e.occupation = nil
+    #     e.supervisor_id = nil
+    #     e.save
+    #   end
+    # end
 
     respond_to do |format|
       format.html { redirect_to supervise_groups_path, notice: 'Leader was successfully selected.' }
@@ -171,14 +193,11 @@ class SuperviseController < ApplicationController
 
   def user_group_cancel
     @user = User.find(params[:id])
-    @user.role = 'staff' unless @user.role == 'intern'
-    @user.occupation = nil
-    @user.save
 
-    ((User.dfs @user).try :flatten).try :each do |u|
+    (User.dfs @user).try :each do |u|
       u.role = 'staff' unless u.role == 'intern'
       u.occupation = nil
-      u.supervisor_id = nil
+      u.supervisor_id = current_user.id
       u.save
     end
     respond_to do |format|

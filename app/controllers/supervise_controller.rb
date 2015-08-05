@@ -79,27 +79,65 @@ class SuperviseController < ApplicationController
 
   def user_group_edit
     @supervisor = User.find(params[:id])
-    @buddies = @supervisor.buddies
+
+    if current_user.role == 'ceo'
+      # @buddies = User.buddies User.ceo.first
+      @buddies = @supervisor.buddies
+      @available_buddies = (User.ceo.first.buddies) + @buddies
+    else
+      @available_buddies = current_user.buddies
+      @buddies = @supervisor.buddies
+    end
   end
 
   def user_group_update
     @supervisor = User.find(params[:sp][:id])
     @supervisor.occupation = params[:sp][:occupation]
     @supervisor.save
+    if current_user.role == 'ceo'
+      ap selected_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
+      ap origin_buddies = (@supervisor.buddies).map { |e| e.id }
 
-    remain_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
-    current_buddies =  (@supervisor.buddies).map { |e| e.id }
-    ap opt_buddies = current_buddies - remain_buddies
+      # if selected_buddies.count > origin_buddies.count
+      #   diff = selected_buddies - origin_buddies - [@supervisor.id]
+      # else
+      #   diff = origin_buddies - selected_buddies - [@supervisor.id]
+      # end
+      diff = selected_buddies | origin_buddies - selected_buddies - [@supervisor.id]
+      ap diff
+      diff
+      .map { |e| User.find e }
+      .try :each do |x|
+        if origin_buddies.include? x.id
+          ap "remove #{x.email}"
+          [(User.dfs x)].flatten.map do |e|
+            ap e.email
+            e.role = 'staff' unless e.role == 'intern'
+            e.occupation = nil
+            e.supervisor_id = nil
+            e.save
+          end
+        else
+          ap x
+          x.supervisor_id = @supervisor.id
+          x.save
+        end
+      end
+    else
+      remain_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
+      current_buddies =  (User.buddies @supervisor).map { |e| e.id }
+      ap opt_buddies = current_buddies - remain_buddies
 
-    opt_buddies
-    .map { |e| User.find e }
-    .map { |e|
-      User.dfs e
-    }.flatten.map do |e|
-      e.role = 'staff' unless e.role == 'intern'
-      e.occupation = nil
-      e.supervisor_id = nil
-      e.save
+      opt_buddies
+      .map { |e| User.find e }
+      .map { |e|
+        User.dfs e
+      }.flatten.map do |e|
+        e.role = 'staff' unless e.role == 'intern'
+        e.occupation = nil
+        e.supervisor_id = nil
+        e.save
+      end
     end
 
     respond_to do |format|

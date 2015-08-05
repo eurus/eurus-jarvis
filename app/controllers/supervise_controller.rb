@@ -42,6 +42,7 @@ class SuperviseController < ApplicationController
     # set default password to 12345678
     @user.email = "#{user_params[:username]}@eurus.cn"
     @user.username = user_params[:username]
+    @user.nickname = user_params[:username].capitalize
     @user.password = '12345678'
     default_user_avatar @user
     respond_to do |format|

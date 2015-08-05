@@ -1,29 +1,32 @@
-div
-  .banner
-    .title 周报
-    .breadcrumb-wrapper
-      label 您现在的位置:
-      ul.breadcrumb
-        li
-          a href='#' 周报
-        li.active  所有周报
-  .row.p-40.pt-15
-    - @weeklies.each do |weekly|
-      .col-md-6
-        .panel.panel-default
-          .panel-heading
-            = weekly.created_at.strftime("%Y-%m-%d")
-            .actions.pull-right
-              = link_to fa_icon('eye'), weekly
-              = link_to fa_icon('pencil-square-o'), edit_weekly_path(weekly)
-              = link_to fa_icon('times'), weekly, data: {:confirm => 'Are you sure?'}, :method => :delete
-          .panel-body
-            article
-              h4 总结
-              = raw (weekly.try :sumary)[0..100]
-            article
-              h4 期望
-              = raw (weekly.try :hope)[0..100]
+.banner
+  .title 周报
+  .breadcrumb-wrapper
+    label 您现在的位置:
+    ul.breadcrumb
+      li
+        a href='#' 周报
+      li.active  所有周报
+.p-20.pt-15
+  - if @weeklies.length == 0
+    .panel.panel-default
+      .panel-body
+        div 不是不报，时候未到……
+  - @weeklies.each do |weekly|
+    .col-md-6
+      .panel.panel-default
+        .panel-heading
+          = weekly.created_at.strftime("%Y-%m-%d")
+          .actions.pull-right
+            = link_to fa_icon('eye'), weekly
+            = link_to fa_icon('pencil-square-o'), edit_weekly_path(weekly)
+            = link_to fa_icon('times'), weekly, data: {:confirm => 'Are you sure?'}, :method => :delete
+        .panel-body
+          article
+            h4 总结
+            = raw (weekly.try :sumary)[0..100]
+          article
+            h4 期望
+            = raw (weekly.try :hope)[0..100]
 .row.text-center
   = paginate @weeklies,theme: 'twitter-bootstrap-3'
 

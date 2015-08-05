@@ -1,15 +1,17 @@
-div
-  .banner
-    .title 假期
-    .breadcrumb-wrapper
-      label 您现在的位置:
-      ul.breadcrumb
-        li
-          a href='#'
-        li.active  所有请假
-  .col-md-12.p-40.pt-15
-    .panel
-      .panel-body
+.banner
+  .title 假期
+  .breadcrumb-wrapper
+    label 您现在的位置:
+    ul.breadcrumb
+      li
+        a href='#'
+      li.active  所有请假
+.p-20.pt-15
+  .panel
+    .panel-body
+      - if @vacations.length == 0
+        div 居然从来没有请过假，难道你就是传说中的超人员工？
+      - else
         table.table.table-hover
           thead
             tr

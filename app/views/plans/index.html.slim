@@ -1,45 +1,46 @@
-div
-  .banner
-    .title 计划
-    .breadcrumb-wrapper
-      label 您现在的位置:
-      ul.breadcrumb
-        li
-          a href='#' 计划
-        li.active  所有计划
-  .col-md-12.p-40.pt-15
-    .panel
-      .panel-body
+.banner
+  .title 计划
+  .breadcrumb-wrapper
+    label 您现在的位置:
+    ul.breadcrumb
+      li
+        a href='#' 计划
+      li.active  所有计划
+.p-20.pt-15
+  .panel
+    .panel-body
+      - if @plans.length == 0
+        div 对于有计划的人来说，未来是可以触摸的
+      - else
         table.table.table-hover
           thead
             tr
-              th 计划标题
-              th 请假内容
-              th 计划作者
-              th 计划状态
-              th 计划种类
-              th 计划开始时间
-              th 计划结束时间
-              th 计划完成
+              th 开始时间
+              th 结束时间
+              th 作者
+              th 种类
+              th 标题
+              th 内容
+              th 状态
               th
 
           tbody
             - @plans.each do |plan|
               tr
-                td = plan.title
-                td = plan.description[0..10]
-                td = owner_name plan.user_id
-                td id="plan-status-#{plan.id}" class="#{status_highlight plan.status}"
-                 = plan.status
-                td = plan.cut
                 td = plan.start_at
                 td = plan.end_at
-                td = plan.done
-                td.text-center
-                  - if pm? or director? or ceo?
-                    = link_to fa_icon('check'), update_status_plans_path(id:plan.id), data: {:confirm => 'Are you sure?'},remote: true,class: ""
+                td = plan.user.try :realname
+                td = plan.cut
+                td = plan.title
+                td
+                  p.limit-text= plan.description
+                td id="plan-status-#{plan.id}" class="#{status_highlight plan.status}"
+                 = plan.status
+                td.ops
                   = link_to fa_icon('eye'), plan,class: ""
+                  - if (pm? or director? or ceo?) and plan.status != 'ontime'
+                    = link_to fa_icon('check'), update_status_plans_path(id:plan.id), data: {confirm: "计划完成？"},remote: true,class: ""
                   = link_to fa_icon("pencil-square-o"), edit_plan_path(plan) if plan.user_id = current_user.id
-                  = link_to fa_icon('trash'), plan, data: {:confirm => 'Are you sure?'}, :method => :delete,class: ""
+                  = link_to fa_icon('times'), plan, data: {:confirm => '确认删除计划?'}, :method => :delete,class: ""
 .text-center
   = paginate @plans,theme: 'twitter-bootstrap-3'

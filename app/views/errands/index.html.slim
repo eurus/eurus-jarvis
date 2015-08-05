@@ -1,15 +1,18 @@
-div
-  .banner
-    .title 出差
-    .breadcrumb-wrapper
-      label 您现在的位置:
-      ul.breadcrumb
-        li
-          a href='#' 出差
-        li.active  所有出差
-  .col-md-12.p-40.pt-15
-    .panel
-      .panel-body
+.banner
+  .title 出差
+  .breadcrumb-wrapper
+    label 您现在的位置:
+    ul.breadcrumb
+      li
+        a href='#' 出差
+      li.active  所有出差
+
+.p-20.pt-15
+  .panel
+    .panel-body
+      - if @errands.length == 0
+        div 快让你领导安排个差旅，去看看祖国的大好河山~
+      - else
         table.table.table-hover
           thead
             tr

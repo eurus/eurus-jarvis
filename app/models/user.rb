@@ -86,7 +86,12 @@ class User < ActiveRecord::Base
   end
 
   def total_fee
-    self.errands.this_year.pluck(:fee).reduce(:+)
+    self.errands.this_year.pluck(:fee).reduce(:+).to_i
+  end
+
+  def role_explain
+    dict = {ceo:'CEO', pm:'Project Manager', director: 'Director', staff:'Staff', intern: 'Intern'}
+    dict[role.to_sym]
   end
 
   def ceo?

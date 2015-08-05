@@ -45,4 +45,22 @@ module ApplicationHelper
   def intern?
     current_user.role == "intern"
   end
+
+  def user_tree(user)
+    puts "user: #{user.username}"
+    puts "buddies: #{user.buddies.length}"
+    if user.buddies.length > 0
+      content_tag(:ul) do
+        content_tag(:li) do
+          concat link_to(user.username, '#')
+          user.buddies.each do |u|
+            concat user_tree u
+          end
+        end
+      end
+    else
+      content_tag(:li, link_to(user.username, '#'))
+    end
+  end
+
 end

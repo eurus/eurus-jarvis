@@ -19,6 +19,7 @@
  *= require bootstrap-wysihtml5
  *= require eurus-css.0.1.0.min
  *= require dataTables.bootstrap
+ *= require tree
  *= require_self
  */
 $sidbarblue: #1d212a;
@@ -96,7 +97,10 @@ form{
 }
 
 table.datatable{
-    border-bottom:2px solid #ddd;
+  border-bottom:2px solid #ddd;
+  tr>td{
+    vertical-align: middle;
+  }
 }
 
 .total-footer{

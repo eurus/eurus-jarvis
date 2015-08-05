@@ -74,12 +74,12 @@ class SuperviseController < ApplicationController
   end
 
   def user_group_new
-    @buddies = User.buddies current_user rescue []
+    @buddies = current_user.buddies rescue []
   end
 
   def user_group_edit
     @supervisor = User.find(params[:id])
-    @buddies = User.buddies @supervisor
+    @buddies = @supervisor.buddies
   end
 
   def user_group_update
@@ -88,7 +88,7 @@ class SuperviseController < ApplicationController
     @supervisor.save
 
     remain_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
-    current_buddies =  (User.buddies @supervisor).map { |e| e.id }
+    current_buddies =  (@supervisor.buddies).map { |e| e.id }
     ap opt_buddies = current_buddies - remain_buddies
 
     opt_buddies
@@ -138,7 +138,7 @@ class SuperviseController < ApplicationController
     @user.save
 
     ((User.dfs @user).try :flatten).try :each do |u|
-      e.role = 'staff' unless e.role == 'intern'
+      u.role = 'staff' unless u.role == 'intern'
       u.occupation = nil
       u.supervisor_id = nil
       u.save
@@ -219,7 +219,7 @@ class SuperviseController < ApplicationController
   end
 
   def set_buddies
-    @buddies = User.buddies current_user
+    @buddies = current_user.buddies
   end
   def user_params
     params.require(:user).permit(

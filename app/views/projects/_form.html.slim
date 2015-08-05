@@ -4,7 +4,7 @@
     -if @project.errors.any?
       ul
         - @project.errors.full_messages.each do |msg|
-          li = msg 
+          li = msg
 
     .form-groups
       = f.label "项目名称"
@@ -14,11 +14,11 @@
       = f.text_field :content,class: "form-control"
     .form-groups
       = f.label "项目主管"
-      = f.input :owner,collection: (User.buddies current_user).collect {|p| [ p.email, p.id ]},label: false
+      = f.input :owner,collection: (current_user.buddies).collect {|p| [ p.email, p.id ]},label: false
     .form-groups
       = f.label "项目状态"
       = f.input :status, collection: ["blue print","on going","maintainning","pause","done"],label: false
-    
+
     .form-actions
       = f.submit '保存',class:"btn btn-block btn-primary"
       = link_to "返回", supervise_index_path(view: "groups"),class: "btn btn-default btn-block"
@@ -32,7 +32,7 @@
 coffee:
   $ ->
     config = {
-      dropdownCssClass : 'bigdrop', 
+      dropdownCssClass : 'bigdrop',
       width: '300px',
       containerCss : {"display":"block"}
     }

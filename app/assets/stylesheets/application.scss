@@ -19,6 +19,7 @@
  *= require bootstrap-wysihtml5
  *= require eurus-css.0.1.0.min
  *= require dataTables.bootstrap
+ *= require tree
  *= require_self
  */
 $sidbarblue: #1d212a;
@@ -83,6 +84,11 @@ form{
   }
 }
 
+// popover
+.popover a{
+  border:0px !important;
+}
+
 // datatables
 .pagination-wrapper{
   margin-top:30px;
@@ -96,7 +102,10 @@ form{
 }
 
 table.datatable{
-    border-bottom:2px solid #ddd;
+  border-bottom:2px solid #ddd;
+  tr>td{
+    vertical-align: middle;
+  }
 }
 
 .total-footer{
@@ -130,13 +139,17 @@ table.dataTable tr > td{
 
 
 // table-hover ops
-.ops{
-  font-size:18px;
-  &:hover{
+.table-hover{
+  tr:hover{
+    .ops{
     a{
       opacity:1;
     }
+    }
   }
+}
+.ops{
+  font-size:18px;
   a+a{
     margin-left:20px;
   }
@@ -441,6 +454,7 @@ table.dataTable tr > td{
       }
       .occupation{
         color: $font-dark;
+        font-size:13px;
       }
       .list-group{
         padding-left:20px;

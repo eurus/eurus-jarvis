@@ -3,4 +3,6 @@ class Vacation < ActiveRecord::Base
   validates :duration, numericality: { greater_than_or_equal_to: 0.5}
   validates :start_at, :duration, :cut, :content, :user_id, presence: true
   paginates_per 10
+
+  default_scope {order(approve: :asc)}
 end

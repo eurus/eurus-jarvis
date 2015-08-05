@@ -45,4 +45,32 @@ module ApplicationHelper
   def intern?
     current_user.role == "intern"
   end
+
+  def user_tree_link(user)
+    content_tag(:div, '', class:"elem #{user.role}") do
+      concat image_tag("#{user.avatar_url(:thumb)}", class:'avatar img-responsive')
+      concat link_to(user.realname, '#', class:'title', data:{toggle:'tooltip', placement:'bottom'}, title:"#{user.role.upcase}  #{user.occupation}", )
+      concat content_tag(:div, user.username.capitalize, class:'subtitle')
+      unless (user.staff? or user.intern?) or user.id == current_user.id
+        concat link_to(fa_icon('pencil-square-o'), edit_user_group_path(id:user.id), class:'op')
+        concat link_to(fa_icon('recycle'), cancel_group_path(id:user.id), class:'op', data: {:confirm => "确认撤销 #{user.username} 的职务?", text:"原职务：#{user.role}"}, :method => :delete)
+      end
+    end
+  end
+
+    def user_tree(user)
+    if user.buddies.length > 0
+      content_tag(:li) do
+        user_tree_link(user) +
+        content_tag(:ul) do
+          user.buddies.each do |u|
+            concat user_tree(u)
+          end
+        end
+      end
+    else
+      content_tag(:li, user_tree_link(user))
+    end
+  end
+
 end

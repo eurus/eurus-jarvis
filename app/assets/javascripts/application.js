@@ -41,6 +41,14 @@ function initPage() {
     $(this).find('.actions').fadeOut(200);
   });
 
+  // tooltip
+  $('[data-toggle="tooltip"]').tooltip()
+  // end of tooltip
+
+  // popover
+  // $('[data-toggle="popover"]').popover({html:true})
+  // end of popover
+
   var dontSort = [];
   var hidden = [];
   var sumIndex = -1;

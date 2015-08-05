@@ -29,7 +29,19 @@ class User < ActiveRecord::Base
   end
 
   def buddies
-    User.where(supervisor_id: self.id)
+    if role == 'ceo'
+      User.where(supervisor_id: [self.id, nil])
+    else
+      User.where(supervisor_id: self.id)
+    end
+  end
+
+  def available_buddies
+    if role=='staff' or role=='intern'
+      []
+    else
+    buddies.where(role:['staff', 'intern']) rescue []
+  end
   end
 
   def plans_i_can_see
@@ -41,19 +53,12 @@ class User < ActiveRecord::Base
     where.not(id: id)
   end
 
-  def self.buddies(user)
-    if user.role == 'ceo'
-      where(supervisor_id: [user.id,nil])
-    else
-      where(supervisor_id: user.id)
-    end
-  end
-
   def self.dfs(node)
-    if (User.buddies node).count == 0
-      return node
+    if (node.buddies).count == 0
+      return [node]
     else
-      res = (User.buddies node).map { |u| User.dfs u }
+      res = (node.buddies).map { |u| User.dfs u }
+      res = res.flatten
       res.push node
       return res
     end

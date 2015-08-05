@@ -13,25 +13,26 @@ div
         table.table.table-hover
           thead
             tr
-              th 请假日期
-              th 请假天数
-              th 假期类型
-              th 请假内容
+              th 开始日期
+              th 天数
+              th 类型
+              th 事由
               th 状态
               th
 
           tbody
             - @vacations.each do |vacation|
-              tr
+              tr class="#{'success' if vacation.approve}"
                 td = vacation.start_at
                 td = vacation.duration
                 td = vacation.cut
-                td = vacation.content
-                td = status vacation.try :approve
                 td
+                  p.limit-text= vacation.content
+                td = status vacation.try :approve
+                td.ops
                   - unless vacation.approve
-                    = link_to fa_icon("pencil-square-o"), edit_vacation_path(vacation),class: "pull-left"
-                    = link_to fa_icon('trash'), vacation, data: {:confirm => 'Are you sure?'}, :method => :delete,class: "pull-right"
+                    = link_to fa_icon("pencil-square-o"), edit_vacation_path(vacation)
+                    = link_to fa_icon('trash'), vacation, data: {:confirm => 'Are you sure?'}, :method => :delete
 .text-center
   = paginate @vacations,theme: 'twitter-bootstrap-3'
 

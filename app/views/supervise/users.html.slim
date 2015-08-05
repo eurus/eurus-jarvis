@@ -1,10 +1,11 @@
 .banner
   .title 用户管理
 
+
 .p-20.pt-15
   .panel
     .panel-body
-      table.table.table-hover
+      table.table.table-hover.datatable
         thead
           tr
             th 工号
@@ -14,7 +15,7 @@
             th 性别
             th 加入时间
             th 生日
-            th 操作
+            th.no_sort
         tbody
           - @users.each do |u|
             tr
@@ -29,5 +30,5 @@
                 - if current_user.role == 'ceo'
                   a href="/supervise/users/edit/#{u.id}"
                     = fa_icon('pencil-square-o')
-                  = link_to fa_icon("trash"), "/supervise/users/#{u.id}",data: {:confirm => "确定删除#{u.try :realname}嘛"}, :method => :delete if not current_user.id == u.id
+                  = link_to fa_icon("trash"), "/supervise/users/#{u.id}",data: {:confirm => "确定删除账号：#{u.try :realname} ？"}, :method => :delete if not current_user.id == u.id
 

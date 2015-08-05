@@ -1,6 +1,9 @@
 /*Now the CSS*/
 * {margin: 0; padding: 0;}
 
+.tree > ul{
+  display:inline-block;
+}
 .tree ul {
   padding-top: 20px; position: relative;
 
@@ -68,7 +71,7 @@ right connector from last child*/
   width: 0; height: 20px;
 }
 
-.tree li a{
+.tree li .elem{
   border: 1px solid #ccc;
   padding: 5px 10px;
   text-decoration: none;
@@ -77,9 +80,9 @@ right connector from last child*/
   font-size: 11px;
   display: inline-block;
 
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
 
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
@@ -88,16 +91,49 @@ right connector from last child*/
 
 /*Time for some hover effects*/
 /*We will apply the hover effect the the lineage of the element also*/
-.tree li a:hover, .tree li a:hover+ul li a {
+.tree li .elem:hover, .tree li .elem:hover+ul li .elem {
   background: #c8e4f8; color: #000; border: 1px solid #94a0b4;
 }
 /*Connector styles on hover*/
-.tree li a:hover+ul li::after,
-.tree li a:hover+ul li::before,
-.tree li a:hover+ul::before,
-.tree li a:hover+ul ul::before{
+.tree li .elem:hover+ul li::after,
+.tree li .elem:hover+ul li::before,
+.tree li .elem:hover+ul::before,
+.tree li .elem:hover+ul ul::before{
   border-color:  #94a0b4;
 }
 
 /*Thats all. I hope you enjoyed it.
 Thanks :)*/
+
+
+/* added by Simon.Z */
+.tree li .elem .avatar{
+  margin-bottom:5px;
+  border-radius: 2px;
+}
+
+.tree li .elem .title{
+  color:#767676;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.tree li .elem .subtitle{
+  color:#a7a7a7;
+  font-weight:normal;
+  font-size:12px;
+}
+.tree li .elem .ops{
+  margin-top: 8px;
+}
+.tree li .elem .op i{
+  color:#999;
+  font-size:14px;
+}
+.tree li .elem .op:hover i{
+  color:#333;
+}
+
+.tree li .elem .op+.op{
+  margin-left:5px;
+}

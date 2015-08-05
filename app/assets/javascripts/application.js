@@ -42,11 +42,11 @@ function initPage() {
   });
 
   // tooltip
-  // $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip()
   // end of tooltip
 
   // popover
-  $('[data-toggle="popover"]').popover({html:true})
+  // $('[data-toggle="popover"]').popover({html:true})
   // end of popover
 
   var dontSort = [];

@@ -9,7 +9,7 @@ class WeekliesController < ApplicationController
       @weeklies = Weekly.all.page params[:page]
     when 'stuff', 'intern',nil
       @weeklies = current_user.weeklies.page params[:page]
-    else 
+    else
       @weeklies = Weekly.where(user_id: (current_user.buddies.push current_user.id)).page params[:page]
     end
   end
@@ -37,13 +37,13 @@ class WeekliesController < ApplicationController
     respond_to do |format|
       if @weekly.save
         # send email to current_user.manger
-        if current_user.supervisor
-          NotifyMailer.weekly_report(current_user.supervisor, @weekly).deliver_later
-        end
+        ap @sp = current_user.supervisor rescue User.ceo.first
+        ap @cc = User.where(role: ["ceo","director"]).pluck(:email)
+          
+        NotifyMailer.weekly_report(@sp, @weekly,@cc).deliver_later
+
         # send eamil to current_user.ceo
-        User.ceo.try :each do |u|
-          NotifyMailer.weekly_report(u, @weekly).deliver_later
-        end
+
         format.html { redirect_to @weekly, notice: 'Weekly was successfully created.' }
         format.json { render :show, status: :created, location: @weekly }
       else

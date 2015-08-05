@@ -2,7 +2,7 @@ div
   .banner
     .title 周报
 .row
-  .col-md-12
+  .col-md-8.col-md-offset-2
     .p-15.pt-20
       .panel.panel-board
         .panel-heading.text-center
@@ -14,7 +14,7 @@ div
         .panel-body
           h3 总结
           article
-            p = raw @weekly.sumary
+            = raw @weekly.sumary
           h3 期望
           article
-            p = raw @weekly.hope
+            = raw @weekly.hope

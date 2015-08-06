@@ -24,12 +24,12 @@
               th
           tbody
             - @errands.each do |errand|
-              tr class="#{issue_class errand.approve, errand.issue}"
+              tr
                 td = errand.start_at
                 td = errand.end_at
                 td = errand.project.try :name
                 td = errand.fee
-                td = issue_status errand.approve, errand.issue
+                td class="text-center #{issue_class errand.approve, errand.issue}" = issue_status errand.approve, errand.issue
                 td.ops
                   - unless errand.approve
                     = link_to fa_icon("pencil-square-o"), edit_errand_path(errand)

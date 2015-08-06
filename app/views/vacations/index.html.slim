@@ -24,13 +24,13 @@
 
           tbody
             - @vacations.each do |vacation|
-              tr class="#{'success' if vacation.approve}"
+              tr
                 td = vacation.start_at
                 td = vacation.duration
                 td = vacation.cut
                 td
                   p.limit-text= vacation.content
-                td = status vacation.try :approve
+                td  class="text-center #{'success' if vacation.approve}"= status vacation.try :approve
                 td.ops
                   - unless vacation.approve
                     = link_to fa_icon("pencil-square-o"), edit_vacation_path(vacation)

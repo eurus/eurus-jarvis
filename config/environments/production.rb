@@ -77,7 +77,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { :host => 'admin.eurus.cn' }
+  config.action_mailer.default_url_options = { :host => 'jarvis.eurus.cn' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:      'smtp.exmail.qq.com',

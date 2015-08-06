@@ -2,14 +2,17 @@ class Plan < ActiveRecord::Base
   validates :title, :description,
     :status, :cut, :start_at,
     :end_at, presence: true
+
   validates :status,
     inclusion: { in: %w(notbegin ongoing ontime overtime),
                  message: "%{value} is not a valid status" }
-    validates :cut,
+
+  validates :cut,
     inclusion: { in: %w(出差 公司),
                  message: "%{value} is not a valid type" }
-    validates :description, length: {in: 100..50000}
 
+  validates :description, length: {in: 100..50000}
+  validate :end_should_greater_than_start
   belongs_to :user
   paginates_per 10
   after_create :send_it_to_supervisor
@@ -28,8 +31,15 @@ class Plan < ActiveRecord::Base
       plan.save
     end
   end
+
   
   private
+  def end_should_greater_than_start
+    if self.end_at <  self.start_at
+      errors.add("结束时间", "并不能比开始时间小")
+    end
+  end
+  
   def send_it_to_supervisor
     user = self.user
     if user.supervisor

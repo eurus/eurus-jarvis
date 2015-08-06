@@ -278,7 +278,12 @@ table.dataTable tr > td{
     color:white;
   }
 }
-
+.panel.panel-board.board-yellow{
+  background: #FCE835;
+  .heading,.hint,.num{
+    color:dark;
+  }
+}
 // banner
 .banner{
   background:#f6f8f8;

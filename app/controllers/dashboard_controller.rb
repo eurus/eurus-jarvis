@@ -16,6 +16,10 @@ class DashboardController < ApplicationController
       code = @response.condition.code 
       @icon = @config[code.to_i]['icon']
     end
+
+    ##出差天数
+    @errand_count = current_user.errands.this_year.map { |e| (e.end_at - e.start_at).to_f }.reduce(:+) || 0
+
   end
 
   def setting

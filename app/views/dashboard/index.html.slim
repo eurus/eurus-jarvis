@@ -22,27 +22,18 @@
       .col-md-6
         .panel.panel-board.board-blue
           .panel-body
-            =fa_icon 'smile-o',class: 'heading'
-            .num 78%
-            .hint 靠谱系数(敬请期待)
+            =fa_icon 'twitter',class: 'heading'
+            .num = "#{@errand_count}天"
+            .hint 累计出差天数
 
-  / .col-md-3
-      .panel.panel-default
-        .panel-body
-          h3 Welcome Aboard!
-          = image_tag(current_user.avatar_url(:thumb),class:"img-circle") if current_user.avatar?
-          = current_user.nickname
+
   .col-md-3#useful
-    .panel.panel-default style='min-height:206px'
-      .panel-heading 常用链接
+    .panel.panel-board.board-yellow
       .panel-body
-        ul
-          li
-            = link_to "风豪科技" ,'http://www.eurus.cn', target: "_blank"
-          li
-            = link_to "维基百科" ,'http://wiki.eurus.cn', target: "_blank"
-          li
-            = link_to "反馈" ,feedbacks_path
+        =fa_icon 'smile-o',class: 'heading'
+        .num 100%
+        .hint 靠谱系数(敬请期待)
+        
   .col-md-3
     .panel.panel-default style='min-height:206px'
       .panel-body
@@ -65,9 +56,16 @@
         article
           = @art.try :content
           = @art.try :content
-  .col-md-4
+  .col-md-3
     .panel.panel-default
-      .panel-heading 统计
+      .panel-heading 常用链接
       .panel-body
+        ul
+          li
+            = link_to "风豪科技" ,'http://www.eurus.cn', target: "_blank"
+          li
+            = link_to "维基百科" ,'http://wiki.eurus.cn', target: "_blank"
+          li
+            = link_to "反馈" ,feedbacks_path
 
 

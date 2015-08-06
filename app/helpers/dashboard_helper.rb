@@ -19,7 +19,7 @@ module DashboardHelper
 
   end
   def translate_title(name)
-    name ? name : "实习猿攻"
+    name ? name : "猿攻"
   end
   def sabbatical_gone
     days = 0

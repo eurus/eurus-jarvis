@@ -25,12 +25,12 @@
 
           tbody
             - @overtimes.try :each do |overtime|
-              tr class="#{issue_class overtime.approve, overtime.issue}"
+              tr
                 td = overtime.start_at
                 td = overtime.duration
                 td = overtime.project.try :name
                 td = overtime.content
-                td = issue_status overtime.approve, overtime.issue
+                td class="text-center #{issue_class overtime.approve, overtime.issue}" = issue_status overtime.approve, overtime.issue
                 td
                   - unless overtime.approve
                     = link_to fa_icon("pencil-square-o"), edit_overtime_path(overtime),class: "pull-left"

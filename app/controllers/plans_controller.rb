@@ -34,6 +34,7 @@ class PlansController < ApplicationController
   # POST /plans.json
   def create
     @plan = Plan.new(plan_params)
+    @plan.creator_id = current_user.id
     if plan_params[:user_id] == ""
       @plan.user_id = current_user.id
     end

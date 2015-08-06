@@ -32,14 +32,19 @@ class Plan < ActiveRecord::Base
     end
   end
 
-  
+  def status_explain
+    dict = {ontime:'准时', ongoing:'进行中', notbegin: '未开始', overtime:'延时'}
+
+    dict[status.to_sym]
+  end
+
   private
   def end_should_greater_than_start
     if self.end_at <  self.start_at
       errors.add("结束时间", "并不能比开始时间小")
     end
   end
-  
+
   def send_it_to_supervisor
     user = self.user
     if user.supervisor

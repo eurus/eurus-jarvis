@@ -18,13 +18,13 @@
 
         tbody
           - @vacations.each do |vacation|
-            tr id="tr-vacation-#{vacation.id}" class="#{'success' if vacation.approve}"
+            tr id="tr-vacation-#{vacation.id}"
               td = vacation.start_at
               td = vacation.duration
               td = vacation.user.try :realname
               td = vacation.cut
               td = vacation.content
-              td id="tr-status-vacation-#{vacation.id}" = status vacation.try :approve
+              td id="tr-status-vacation-#{vacation.id}" class="text-center #{'success' if vacation.approve}" = status vacation.try :approve
               td.ops
                 = link_to fa_icon("check"),checkrecord_path(id: vacation.id, cut: 'vacation'), id:"check-vacation-#{vacation.id}", data: {confirm:"确认同意 #{vacation.user.try :realname} 的#{vacation.cut}申请？", text:"#{vacation.start_at}起，为期#{vacation.duration}天，事由：#{vacation.content}"}, title:"审核", remote:true unless vacation.approve
               td=vacation.user.try :username

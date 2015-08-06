@@ -91,8 +91,10 @@ class User < ActiveRecord::Base
 
   def role_explain
     dict = {ceo:'CEO', pm:'项目经理', director: '部门主管', staff:'正式员工', intern: '实习生'}
-    unless occupation.nil?
+    if occupation.nil?
       dict[role.to_sym]
+    else
+      occupation
     end
   end
 

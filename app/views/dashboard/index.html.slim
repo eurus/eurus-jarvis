@@ -27,26 +27,37 @@
             .hint 累计出差天数
 
 
-  .col-md-3#useful
-    .panel.panel-board.board-yellow
-      .panel-body
-        =fa_icon 'smile-o',class: 'heading'
-        .num 100%
-        .hint 靠谱系数(敬请期待)
-        
+  .col-md-3
+    .row
+      .col-md-12#useful
+        .panel.panel-board.board-yellow
+          .panel-body
+            =fa_icon 'smile-o',class: 'heading'
+            .num 100%
+            .hint 靠谱系数(敬请期待)
+
+      .col-md-12
+        .panel.panel-board
+          .panel-body
+            -if @response
+              =wi_icon(@icon, class:'heading')
+              .num=f_to_c @response.condition.temp
+              .hint =@response.condition.text
+            -else
+              =wi_icon("alien", class:'heading')
+              .num No news is good news
+              .hint God Knowns
   .col-md-3
     .panel.panel-default style='min-height:206px'
+      .panel-heading 常用链接
       .panel-body
-        - if @response
-          .weather
-            span.icon = wi_icon("#{@icon}")
-            span.text = @response.condition.text
-            span.temp = f_to_c @response.condition.temp
-        - else
-          .weather
-            span.icon = wi_icon("alien")
-            span.text Out Of Service
-            span.temp  NaN
+        ul.list-unstyled.p-20.pt-5
+          li.mt-10
+            = link_to "风豪科技" ,'http://www.eurus.cn', target: "_blank"
+          li.mt-10
+            = link_to "维基百科" ,'http://wiki.eurus.cn', target: "_blank"
+          li.mt-10
+            = link_to "反馈" ,feedbacks_path
 
   .col-md-6
     .panel.panel-default
@@ -56,16 +67,6 @@
         article
           = @art.try :content
           = @art.try :content
-  .col-md-3
-    .panel.panel-default
-      .panel-heading 常用链接
-      .panel-body
-        ul
-          li
-            = link_to "风豪科技" ,'http://www.eurus.cn', target: "_blank"
-          li
-            = link_to "维基百科" ,'http://wiki.eurus.cn', target: "_blank"
-          li
-            = link_to "反馈" ,feedbacks_path
+
 
 

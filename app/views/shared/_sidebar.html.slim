@@ -14,12 +14,13 @@
         = fa_icon("group")+" 组织"
       = link_to supervise_projects_path , class: "list-group-item #{'active' if params['action'] == 'projects'}" do
         = fa_icon("building")+" 项目"
-      = link_to supervise_overtimes_path , class: "list-group-item #{'active' if params['action'] == 'overtimes'}" do
-        = fa_icon("briefcase")+" 加班"  if ceo? or director?
-      = link_to supervise_errands_path , class: "list-group-item #{'active' if params['action'] == 'errands'}" do
-        = fa_icon("paper-plane")+" 出差" if ceo? or director?
-      = link_to supervise_vacations_path , class: "list-group-item #{'active' if params['action'] == 'vacations'}" do
-        = fa_icon("bed")+" 假期" if ceo? or director?
+      - if ceo? or director?
+        = link_to supervise_overtimes_path , class: "list-group-item #{'active' if params['action'] == 'overtimes'}" do
+          = fa_icon("briefcase")+" 加班"
+        = link_to supervise_errands_path , class: "list-group-item #{'active' if params['action'] == 'errands'}" do
+          = fa_icon("paper-plane")+" 出差"
+        = link_to supervise_vacations_path , class: "list-group-item #{'active' if params['action'] == 'vacations'}" do
+          = fa_icon("bed")+" 假期"
     .pl-20.pr-20
       = link_to fa_icon('plus')+ "新增员工", supervise_users_new_path,class: "btn btn-outstand btn-block" if current_user.role == 'ceo' && params[:action] == 'users'
       = link_to fa_icon('plus')+'新建组织', user_group_new_path,class: 'btn btn-outstand btn-block' if (ceo? or director?) && params[:action] == 'groups'

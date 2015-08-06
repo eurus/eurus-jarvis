@@ -11,7 +11,7 @@
         = f.input :occupation,label: false, input_html:{value: @supervisor.occupation, class: "form-control"}
 
         = f.label "小弟们"
-        = f.input :buddies,label: false,input_html:{class: "form-control"},collection: @available_buddies.collect {|p| [ p.email, p.id ]},input_html: { multiple: true },selected: @buddies.map {|e| e.id}
+        = f.input :buddies,label: false,input_html:{class: "form-control"},collection: @available_buddies.collect {|p| [ "#{p.realname}(#{p.username})", p.id ]},input_html: { multiple: true },selected: @buddies.map {|e| e.id}
       .form-group
         = f.submit "保存", class: "btn btn-primary btn-block"
         = link_to "返回", supervise_groups_path,class: "btn btn-default btn-block"

@@ -22,7 +22,7 @@
       = f.text_field :end_at,{class: "form-control datepicker"}   
     - if pm? or ceo? or director?
       .form-groups
-        = f.input :user_id,label: "计划执行者",input_html:{class: ""},collection: @col.collect {|p| [ p.email, p.id ]}, require: false
+        = f.input :user_id,label: "计划执行者",input_html:{class: ""},collection: @col.collect {|p| [ "#{p.realname}(#{p.username})", p.id ]}, require: false
     .form-groups
       = f.input :description, input_html: {class: 'form-control', rows: 10}, label: "内容",required: false,as: :wysihtml5
     .form-actions

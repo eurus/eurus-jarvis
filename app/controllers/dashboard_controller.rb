@@ -38,9 +38,10 @@ class DashboardController < ApplicationController
   end
 
   def check_on_time
+    ap params
     @check = {
       status: 200,
-      info: "签到成功"
+      info: "welcome"
     }
     respond_to do |format|
       format.json { render json: @check, status: 200 }

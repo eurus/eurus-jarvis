@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   skip_before_action :authenticate_user!, only: [:check_on_time]
-  
+
   include Common
   def index
 
@@ -38,11 +38,22 @@ class DashboardController < ApplicationController
   end
 
   def check_on_time
-    ap params
-    @check = {
-      status: 200,
-      info: "welcome"
-    }
+    # this should not check more than once a day
+    # user device token to avoid check by another people
+    ap Time.now
+    @user = User.find_by_username(params[:username])
+    if @user
+      @check = {
+        status: 200,
+        info: "welcome"
+      }
+    else
+      @check = {
+        status: 200,
+        info: "who"
+      }
+    end
+
     respond_to do |format|
       format.json { render json: @check, status: 200 }
     end

@@ -85,3 +85,4 @@ gem 'capistrano3-unicorn'
 gem 'capistrano-sidekiq' , group: :development
 #
 gem 'whenever', '~> 0.8.4',require: false
+gem 'rack-cors', :require => 'rack/cors'

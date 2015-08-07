@@ -30,6 +30,13 @@ module EurusJarvis
     config.to_prepare do
       Devise::RegistrationsController.layout "application"
     end
+
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
     
   end
 end

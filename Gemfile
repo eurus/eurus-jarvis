@@ -49,6 +49,8 @@ group :development, :test do
 end
 # slim template
 gem "slim-rails"
+# cascading waterfall
+gem 'masonry-rails'
 # image processing
 # for linux
 gem 'rmagick', require: false

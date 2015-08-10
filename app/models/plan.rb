@@ -11,7 +11,7 @@ class Plan < ActiveRecord::Base
     inclusion: { in: %w(出差 公司),
                  message: "%{value} is not a valid type" }
 
-  validates :description, length: {in: 100..50000}
+  validates :description, length: {in: 40..50000}
   validate :end_should_greater_than_start
   belongs_to :user
   paginates_per 10

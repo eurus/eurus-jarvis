@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
-  # skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, only: [:check_on_time]
+
   include Common
   def index
 
@@ -13,7 +14,7 @@ class DashboardController < ApplicationController
     @config = YAML.load_file("config/weather.yml")["code"]
     @response = YahooWeather::Client.new.fetch(12712492)
     if @response
-      code = @response.condition.code 
+      code = @response.condition.code
       @icon = @config[code.to_i]['icon']
     end
 
@@ -36,12 +37,33 @@ class DashboardController < ApplicationController
     end
   end
 
+  def check_on_time
+    # this should not check more than once a day
+    # user device token to avoid check by another people
+    ap Time.now
+    @user = User.find_by_username(params[:username])
+    if @user
+      @check = {
+        status: 200,
+        info: "welcome"
+      }
+    else
+      @check = {
+        status: 200,
+        info: "who"
+      }
+    end
+
+    respond_to do |format|
+      format.json { render json: @check, status: 200 }
+    end
+  end
   private
 
   def user_params
-    params.require(:user).permit(:username, :nickname, 
-      :password,:avatar,:birthday,
-      :realname,:gender)
+    params.require(:user).permit(:username, :nickname,
+                                 :password,:avatar,:birthday,
+                                 :realname,:gender)
   end
 
 end

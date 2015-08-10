@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   get 'supervise/errands' => 'supervise#errands'
   get 'supervise/groups' => 'supervise#groups'
 
-
+  get 'jarvis/checkontime' => 'dashboard#check_on_time'
 
   # supervise users
   get 'supervise/users/new' => "supervise#new_user"

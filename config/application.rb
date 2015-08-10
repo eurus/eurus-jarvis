@@ -30,6 +30,5 @@ module EurusJarvis
     config.to_prepare do
       Devise::RegistrationsController.layout "application"
     end
-    
   end
 end

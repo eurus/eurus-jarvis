@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects =current_user.projects.merge( Project.where(owner: current_user.id)).page params[:page]
+    @projects = (Project.where(owner: current_user.id) + current_user.projects).uniq
   end
 
   # GET /projects/new

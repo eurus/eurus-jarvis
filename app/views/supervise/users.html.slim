@@ -20,7 +20,7 @@
           - @users.each do |u|
             tr
               td = u.try :user_number
-              td =image_tag "#{u.avatar_url(:thumb)}", class:'img-circle'
+              td =image_tag "#{u.avatar_url(:thumb)}", class:'img-circle' if u.avatar?
               td = u.try :realname
               td = u.try :username
               td = u.try :gender

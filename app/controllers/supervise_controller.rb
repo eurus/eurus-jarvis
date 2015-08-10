@@ -259,6 +259,7 @@ class SuperviseController < ApplicationController
     image_arr = ["user1.jpg","user2.jpg","user3.jpg","user4.jpg","user5.jpg"]
     File.open(Rails.root.join("app/assets/images/user/#{image_arr[rand image_arr.length]}")) do |f|
       u.avatar = f
+      u.save
     end
     return u
   end

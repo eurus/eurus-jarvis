@@ -19,9 +19,11 @@
 //= require bootstrap-sprockets
 //= require select2
 //= require bootstrap-datepicker
+//= require bootstrap-datepicker.zh-CN
 //= require bootstrap-wysihtml5
 //= require jquery.dataTables.min
 //= require dataTables.bootstrap
+//= require masonry/masonry.min
 //= require_tree .
 
 
@@ -33,6 +35,18 @@ function initPage() {
     $('#wrapper').toggleClass('toggled');
   });
 
+  var mc = $('.masonry-container');
+  mc.masonry({
+    columnWidth:'.item',
+    itemSelector:'.item'
+  })
+
+  // $('.datepicker').datepicker({
+  //   format: 'yyyy-mm-dd',
+  //   autoclose:true,
+  //   language:'zh-CN'
+  // })
+
   $('.panel').fadeIn(1000);
   $('.panel').hover(function(){
     $(this).find('.actions').fadeIn(500);
@@ -40,6 +54,15 @@ function initPage() {
   $('.panel').mouseleave(function(){
     $(this).find('.actions').fadeOut(200);
   });
+
+  // item
+  $('.item').hover(function(){
+    $(this).find('.actions').fadeIn(500);
+  });
+  $('.item').mouseleave(function(){
+    $(this).find('.actions').fadeOut(200);
+  });
+
 
   // tooltip
   $('[data-toggle="tooltip"]').tooltip()

@@ -49,6 +49,8 @@ group :development, :test do
 end
 # slim template
 gem "slim-rails"
+# cascading waterfall
+gem 'masonry-rails'
 # image processing
 # for linux
 gem 'rmagick', require: false
@@ -85,4 +87,4 @@ gem 'capistrano3-unicorn'
 gem 'capistrano-sidekiq' , group: :development
 #
 gem 'whenever', '~> 0.8.4',require: false
-gem 'rack-cors', :require => 'rack/cors'
+# gem 'rack-cors', :require => 'rack/cors'

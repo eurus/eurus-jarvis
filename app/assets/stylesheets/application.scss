@@ -19,6 +19,13 @@
  *= require bootstrap-wysihtml5
  *= require eurus-css.0.1.0.min
  *= require dataTables.bootstrap
+ *= require 'masonry/basic'
+*= require 'masonry/centered'
+*= require 'masonry/fluid'
+*= require 'masonry/gutters'
+*= require 'masonry/infinitescroll'
+*= require 'masonry/right-to-left'
+*= require 'masonry/transitions'
  *= require tree
  *= require_self
  */
@@ -51,7 +58,8 @@ $outstand: lighten(#1bc4a3, 10%);
 html,body,.container{
     height:100%;
 }
-.panel, .fademein{
+
+ .panel, .fademein{
   display:none;
 }
 form{
@@ -211,7 +219,7 @@ table.dataTable tr > td{
   border-bottom:1px solid #eee;
 }
 .navbar-header{
-  width:200px;
+  // width:200px;
 }
 
 .navbar-nav{
@@ -538,4 +546,46 @@ table.dataTable tr > td{
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
+}
+
+// item
+.item{
+  padding:15px;
+  .item-heading{
+    padding:10px 15px;
+    border-bottom:1px solid #eff2f7;
+    background:white;
+
+    font-weight: bold;
+    color: #767676;
+    .title{
+      font-size:18px;
+      font-weight: bold;
+    }
+    .subtitle{
+      font-size:14px;
+      font-weight: bold;
+      margin-left:10px;
+    }
+  .actions{
+      display:none;
+      a{
+        color: #767676;
+        &:hover{
+          color:$brand-primary;
+        }
+      }
+      a+a{
+        margin-left:10px;
+      }
+    }
+  }
+  .item-body{
+    padding:15px;
+    background:white;
+    *{
+      color:#767676;
+    }
+
+  }
 }

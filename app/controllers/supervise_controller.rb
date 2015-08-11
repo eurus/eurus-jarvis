@@ -29,7 +29,9 @@ class SuperviseController < ApplicationController
   # projects
 
   def projects
-    @projects = Project.all
+    # @projects = Project.all
+    uids = (User.dfs current_user).map{|u| u.id}
+    @projects = Project.where(owner_id: uids)
   end
 
   def new_project

@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :articals
   has_many :plans
   has_and_belongs_to_many :projects
+  has_many :owned_projects, foreign_key: 'owner_id', class_name: 'Project'
 
   mount_uploader :avatar, AvatarUploader
   paginates_per 10

@@ -30,7 +30,7 @@
               tr
                 td = plan.start_at
                 td = plan.end_at
-                td
+                td = plan.creator.try :realname
                 td = plan.user.try :realname
                 td = plan.cut
                 td = plan.title

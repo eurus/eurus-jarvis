@@ -89,6 +89,10 @@ class User < ActiveRecord::Base
     self.errands.this_year.pluck(:fee).reduce(:+).to_i
   end
 
+  def total_errand_day_count
+    errands.this_year.map { |e| (e.end_at - e.start_at).to_f }.reduce(:+) || 0
+  end
+
   def role_explain
     dict = {ceo:'CEO', pm:'项目经理', director: '部门主管', staff:'正式员工', intern: '实习生'}
     if occupation.nil?

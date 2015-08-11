@@ -14,6 +14,7 @@ class Plan < ActiveRecord::Base
   validates :description, length: {in: 40..50000}
   validate :end_should_greater_than_start
   belongs_to :user
+  belongs_to :creator, class_name:'User'
   paginates_per 10
   after_create :send_it_to_supervisor
 

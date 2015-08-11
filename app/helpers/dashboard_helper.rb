@@ -4,7 +4,7 @@ module DashboardHelper
     if current_user.join_at
       time_diff = (Date.current - current_user.join_at - 365).to_i
       if time_diff > 0
-        if time_diff >  365
+        if time_diff >  180
           6
         else
           d = current_user.join_at.end_of_year - current_user.join_at

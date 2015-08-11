@@ -14,7 +14,7 @@
       = f.text_field :content,class: "form-control"
     .form-groups
       = f.label "项目主管"
-      = f.input :owner,collection: (current_user.buddies).collect {|p| [ "#{p.realname}(#{p.username})", p.id ]},label: false
+      = f.input :owner,collection: (@col).collect {|p| [ "#{p.realname}(#{p.username})", p.id ]},label: false
     .form-groups
       = f.label "项目状态"
       = f.input :status, collection: ["blue print","on going","maintainning","pause","done"],label: false

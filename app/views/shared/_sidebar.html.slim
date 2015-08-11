@@ -8,11 +8,11 @@
   -if params[:controller] == 'supervise'
     .title management
     div.list-group.text-center
-      = link_to supervise_users_path , class: "list-group-item #{'active' if params['action'] == 'users'}" do
+      = link_to supervise_users_path , class: "list-group-item #{'active' if params[:action] == 'users' or params[:action].end_with? 'user'}" do
         = fa_icon("user")+" 用户"
-      = link_to supervise_groups_path , class: "list-group-item #{'active' if params['action'] == 'groups'}" do
+      = link_to supervise_groups_path , class: "list-group-item #{'active' if params[:action] == 'groups' or params[:action].start_with? 'user_group'}" do
         = fa_icon("group")+" 组织"
-      = link_to supervise_projects_path , class: "list-group-item #{'active' if params['action'] == 'projects'}" do
+      = link_to supervise_projects_path , class: "list-group-item #{'active' if params[:action] == 'projects' or params[:action].end_with? 'project'}" do
         = fa_icon("building")+" 项目"
       - if ceo? or director?
         = link_to supervise_overtimes_path , class: "list-group-item #{'active' if params['action'] == 'overtimes'}" do
@@ -23,8 +23,8 @@
           = fa_icon("bed")+" 假期"
     .pl-20.pr-20
       = link_to fa_icon('plus')+ "新增员工", supervise_users_new_path,class: "btn btn-outstand btn-block" if current_user.role == 'ceo' && params[:action] == 'users'
-      = link_to fa_icon('plus')+'新建组织', user_group_new_path,class: 'btn btn-outstand btn-block' if (ceo? or director?) && params[:action] == 'groups'
-      = link_to fa_icon('plus')+'新建项目', new_project_path,class: 'btn btn-outstand btn-block' if pm? && params[:action] == 'projects'
+      = link_to fa_icon('plus')+'新建组织', supervise_group_new_path,class: 'btn btn-outstand btn-block' if (ceo? or director?) && params[:action] == 'groups'
+      = link_to fa_icon('plus')+'新建项目', supervise_projects_new_path,class: 'btn btn-outstand btn-block' if pm? && params[:action] == 'projects'
 
   -else
     .title

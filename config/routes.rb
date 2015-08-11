@@ -41,11 +41,21 @@ Rails.application.routes.draw do
   post 'supervise/users' => "supervise#create_user"
   delete 'supervise/users/:id' => 'supervise#destroy_user'
 
-  get 'user/group/new' => 'supervise#user_group_new'
-  put 'user/groups' => 'supervise#user_group_update'
-  get 'user/group/edit/:id' => 'supervise#user_group_edit', as: "edit_user_group"
-  post 'user/group/create' => 'supervise#user_group_create'
-  delete 'user/group/cancel/:id' => 'supervise#user_group_cancel', as: 'cancel_group'
+  # supervise projects
+  get 'supervise/projects/new' => "supervise#new_project"
+  get 'supervise/projects/edit/:id' => "supervise#edit_project", as: 'supervise_edit_project'
+  put 'supervise/projects/:id' => "supervise#update_project"
+  post 'supervise/projects' => "supervise#create_project"
+  delete 'supervise/projects/:id' => 'supervise#destroy_project'
+  post 'supervise/projects/join' => "supervise#join_project", as: 'supervise_join_project'
+  get 'supervise/projects/done' => "supervise#done_project", as: 'supervise_done_project'
+
+
+  get 'supervise/group/new' => 'supervise#user_group_new'
+  put 'supervise/groups' => 'supervise#user_group_update'
+  get 'supervise/group/edit/:id' => 'supervise#user_group_edit', as: "edit_user_group"
+  post 'supervise/group/create' => 'supervise#user_group_create'
+  delete 'supervise/group/cancel/:id' => 'supervise#user_group_cancel', as: 'cancel_group'
 
   get 'checkrecord/:id' => 'supervise#check_record_by_type',as: 'checkrecord'
   get 'issuerecord/:id' => 'supervise#issue_record_by_type',as: 'issuerecord'

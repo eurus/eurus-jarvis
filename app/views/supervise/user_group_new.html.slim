@@ -2,7 +2,7 @@
   table.table.table-hover
   .col-md-3
   .col-md-6
-    = simple_form_for :supervisor, url: user_group_create_path,method: :post ,html: { multipart: true }do |f|
+    = simple_form_for :supervisor, url: supervise_group_create_path,method: :post ,html: { multipart: true }do |f|
       .form-group
         = f.label "职位"
         = f.input :occupation, input_html:{class: "form-control"},label: false
@@ -17,7 +17,7 @@
         = link_to "返回", supervise_index_path,class: "btn btn-default btn-block"
 coffee:
   config = {
-    dropdownCssClass : 'bigdrop', 
+    dropdownCssClass : 'bigdrop',
     width: '300px',
     containerCss : {"display":"block"}
   }

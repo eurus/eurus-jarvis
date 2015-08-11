@@ -1,5 +1,6 @@
 class SuperviseController < ApplicationController
   before_action :set_user, only: [:edit_user, :update_user, :destroy_user]
+  before_action :set_project, only: [:edit_project, :update_project, :destroy_project, :done_project]
   before_action :set_buddies, only: [:users,:groups, :overtimes,:errands,:vacations,:projects]
   def index
 
@@ -25,16 +26,89 @@ class SuperviseController < ApplicationController
     @vacations = Vacation.all
   end
 
+  # projects
+
   def projects
-    @projects = Project.all.page params[:page]
+    @projects = Project.all
   end
+
+  def new_project
+    @project = Project.new
+    set_local
+  end
+
+  def edit_project
+    set_local
+  end
+
+  def show_project
+
+  end
+
+  def create_project
+    @project = Project.new(project_params)
+
+    respond_to do |format|
+      if @project.save
+        format.html { redirect_to supervise_projects_url, notice: 'Project was successfully created.' }
+      else
+        format.html { render :new_project,locals: {col: set_local } }
+      end
+    end
+  end
+
+  def update_project
+    respond_to do |format|
+      if @project.update(project_params)
+        format.html { redirect_to supervise_projects_url, notice: 'Project was successfully updated.' }
+      else
+        format.html { render :edit_project , locals: {col: set_local }}
+      end
+    end
+  end
+
+  def destroy_project
+    @project.destroy
+    respond_to do |format|
+      format.html { redirect_to supervise_projects_url, notice: 'Project was successfully destroyed.' }
+    end
+  end
+
+    def join_project
+    # find the current project
+    project = Project.find(params[:puser][:pid])
+    # get users ids from params
+    users = params[:puser][:buddies]
+    .delete_if {|e| e == "" }
+    .map { |e| e.to_i }
+    # remove all user from prject.users
+    # then add the users selected again
+    project.users.delete_all
+    project.users << User.find(users)
+
+    respond_to do |format|
+      format.html { redirect_to supervise_projects_url, notice: 'My little good buddy was successfully added.' }
+    end
+  end
+
+  def done_project
+    @project.status = 'done'
+    @project.done_at = Date.current
+    @project.save
+
+
+    respond_to do |format|
+      format.html { redirect_to supervise_projects_url, notice: 'Project successfully finished!' }
+    end
+
+  end
+
   # user operation without users_controller
   def new_user
     @user = User.new
   end
 
   def edit_user
-
   end
 
   def create_user
@@ -115,53 +189,6 @@ class SuperviseController < ApplicationController
       u.supervisor_id = @supervisor.id
       u.save
     end
-
-
-    # if current_user.role == 'ceo'
-    #   ap selected_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
-    #   ap origin_buddies = (@supervisor.buddies).map { |e| e.id }
-
-    #   # if selected_buddies.count > origin_buddies.count
-    #   #   diff = selected_buddies - origin_buddies - [@supervisor.id]
-    #   # else
-    #   #   diff = origin_buddies - selected_buddies - [@supervisor.id]
-    #   # end
-    #   diff = selected_buddies | origin_buddies - selected_buddies - [@supervisor.id]
-    #   ap diff
-    #   diff
-    #   .map { |e| User.find e }
-    #   .try :each do |x|
-    #     if origin_buddies.include? x.id
-    #       ap "remove #{x.email}"
-    #       [(User.dfs x)].flatten.map do |e|
-    #         ap e.email
-    #         e.role = 'staff' unless e.role == 'intern'
-    #         e.occupation = nil
-    #         e.supervisor_id = nil
-    #         e.save
-    #       end
-    #     else
-    #       ap x
-    #       x.supervisor_id = @supervisor.id
-    #       x.save
-    #     end
-    #   end
-    # else
-    #   remain_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
-    #   current_buddies =  (User.buddies @supervisor).map { |e| e.id }
-    #   ap opt_buddies = current_buddies - remain_buddies
-
-    #   opt_buddies
-    #   .map { |e| User.find e }
-    #   .map { |e|
-    #     User.dfs e
-    #   }.flatten.map do |e|
-    #     e.role = 'staff' unless e.role == 'intern'
-    #     e.occupation = nil
-    #     e.supervisor_id = nil
-    #     e.save
-    #   end
-    # end
 
     respond_to do |format|
       format.html { redirect_to supervise_groups_path, notice: 'Leader was successfully selected.' }
@@ -289,6 +316,25 @@ class SuperviseController < ApplicationController
 
   def supervisor_params
     params.require(:supervisor).permit(:occupation,:supervisor_id,buddies: [])
+  end
+
+  def set_project
+    @project = Project.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def project_params
+    params.require(:project).permit(:name, :content, :owner_id, :status)
+  end
+
+  def set_local
+    @col = User.dfs current_user
+    # if (User.dfs current_user).try :flatten
+    #   available_collection = (User.dfs current_user).flatten.map { |e| e.id }
+    #   @col = User.where(id: available_collection)
+    # else
+    #   @col  = []
+    # end
   end
 
 end

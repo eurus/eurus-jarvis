@@ -2,7 +2,7 @@
 lock '3.4.0'
 app_name = "eurus-jarvis"
 set :application, "#{app_name}"
-set :repo_url, 'git@git.coding.net:sevenbanana/eurus-jarvis.git'
+set :repo_url, 'git@git.coding.net:eurus/eurus-jarvis.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call

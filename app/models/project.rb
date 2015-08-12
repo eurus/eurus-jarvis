@@ -18,4 +18,8 @@ class Project < ActiveRecord::Base
     dict = {done: 'success', :'on going'=>'info', :'blue print'=> '', pause:'danger', maintainning:'warning'}
     dict[status.to_sym]
   end
+
+  def include_uid?(user_id)
+    (users.map(&:id) + [owner_id]).include? user_id
+  end
 end

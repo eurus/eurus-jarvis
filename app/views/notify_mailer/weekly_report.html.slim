@@ -1,12 +1,31 @@
-.col-md-12
-  .logo-img.text-center
-    = image_tag "logo.jpeg", width: '100',height: '100',class: "img-circle"
-  p.text-center = "#{User.find(@report.user_id).try :nickname}创建于#{@report.created_at.strftime('%Y-%m-%d')}"
-  .text-center 
-    h1 本周总结
-    .content
-      = raw @report.sumary
-    h1 下周期望
-    .content
-      = raw @report.hope
-  
+css:
+  .small{
+    font-size:12px !important;
+    color:#666 !important;
+  }
+  .content{
+  padding:20px;
+  }
+  .content h2{
+  margin-top:20px;
+  }
+  .footer{
+  margin-top:20px;
+  }
+
+.text-center
+  = image_tag "http://7rflo0.com1.z0.glb.clouddn.com/logo-dark.png", width: '50',height: '50'
+  h1="#{@report.user.try :realname} 周报"
+  div.small="[#{@start_date} - #{@end_date}]"
+
+.content
+  h2 本周总结
+  = raw @report.sumary
+  h2 下周期望
+  = raw @report.hope
+
+.footer
+  hr
+  div 祝一切顺利！
+  div 风豪小秘书
+

@@ -27,16 +27,16 @@ div
     = simple_form_for :puser, url: supervise_join_project_path,method: :post ,html: {  } do |f|
       = f.hidden_field :pid, value: @project.id
       .form-groups
-        = f.input :buddies,label: "参与者",input_html:{class: "form-control"},collection: @col.collect {|p| [ "#{p.realname}(#{p.username})", p.id ]},input_html: { multiple: true },selected: @project.users.map {|e|e.id}
+        /= f.input :buddies,label: "参与者",input_html:{class: "form-control"},collection: @col.collect {|p| [ "#{p.realname}(#{p.username})", p.id ]},input_html: { multiple: true },selected: @project.users.map {|e|e.id}
+        select#xx name='buddies[]' multiple='multiple'
+          -@col.each do |u|
+            = content_tag(:option, "#{u.realname} #{u.username.capitalize}", value: u.id, selected: @project.include_uid?(u.id))
       = f.submit '保存',class:"btn btn-block btn-primary"
   .col-md-3
 coffee:
   $ ->
-    config = {
-      dropdownCssClass : 'bigdrop',
-      width: '300px',
-      containerCss : {"display":"block"}
-    }
+    config = {}
     $("#project_status").select2(config)
-    $("#project_owner_id").select2(config)
-    $('#puser_buddies').multiSelect();
+    #$("#project_owner_id").select2(config)
+    #$('#puser_buddies').multiSelect();
+    $('#xx').select2();

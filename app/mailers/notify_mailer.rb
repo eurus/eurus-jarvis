@@ -19,4 +19,11 @@ class NotifyMailer < ApplicationMailer
     mail(to: @user.email,subject: "#{@plan.user.try :realname} 新#{@plan.cut}计划：#{@plan.title}")
   end
 
+  def plan_assigned(user, creator, plan)
+    @user = user
+    @creator = creator
+    @plan = plan
+    mail(to: @user.email,subject: "#{@creator.try :realname} 新建了#{@plan.cut}计划：#{@plan.title}")
+  end
+
 end

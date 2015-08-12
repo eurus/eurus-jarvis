@@ -58,5 +58,9 @@ class Plan < ActiveRecord::Base
     sps.each do |s|
       NotifyMailer.plan_maker(s, self).deliver_later
     end
+
+    if creator and user and creator.try(:id) != user.try(:id)
+      NotifyMailer.plan_assigned(user, creator, self).deliver_later
+    end
   end
 end

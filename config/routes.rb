@@ -5,12 +5,7 @@ Rails.application.routes.draw do
   resources :feedbacks
   resources :weeklies
   resources :articals
-  resources :projects do
-    collection  do
-      post 'join'
-      get 'done'
-    end
-  end
+  resources :projects
   resources :vacations
   resources :errands
   resources :plans do
@@ -47,9 +42,7 @@ Rails.application.routes.draw do
   put 'supervise/projects/:id' => "supervise#update_project"
   post 'supervise/projects' => "supervise#create_project"
   delete 'supervise/projects/:id' => 'supervise#destroy_project'
-  post 'supervise/projects/join' => "supervise#join_project", as: 'supervise_join_project'
   get 'supervise/projects/done' => "supervise#done_project", as: 'supervise_done_project'
-
 
   get 'supervise/group/new' => 'supervise#user_group_new'
   put 'supervise/groups' => 'supervise#user_group_update'

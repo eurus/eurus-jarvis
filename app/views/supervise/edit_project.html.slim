@@ -11,32 +11,27 @@ div
         = f.label "名称"
         = f.text_field :name,class: "form-control"
       .form-groups
-        = f.label "简介"
-        = f.text_field :content,class: "form-control"
-      .form-groups
         = f.label "负责人"
-        = f.input :owner_id,collection: (@col).collect {|p| [ "#{p.realname}(#{p.username})", p.id ]},label: false
+        = f.select :owner_id,(@col).collect {|p| [ "#{p.realname}(#{p.username})", p.id ]},{}, {class:'form-control'}
       .form-groups
         = f.label "状态"
-        = f.input :status, collection: ["blue print","on going","maintainning","pause","done"],label: false
-
-      .form-actions
-        = f.submit '保存',class:"btn btn-block btn-primary"
-        = link_to "返回", supervise_index_path(view: "groups"),class: "btn btn-default btn-block"
-
-    = simple_form_for :puser, url: supervise_join_project_path,method: :post ,html: {  } do |f|
-      = f.hidden_field :pid, value: @project.id
+        = f.select :status, ["blue print","on going","maintainning","pause","done"],{}, {class:'form-control'}
       .form-groups
         /= f.input :buddies,label: "参与者",input_html:{class: "form-control"},collection: @col.collect {|p| [ "#{p.realname}(#{p.username})", p.id ]},input_html: { multiple: true },selected: @project.users.map {|e|e.id}
-        select#xx name='buddies[]' multiple='multiple'
+        label 成员
+        select#buddies name='buddies[]' multiple='multiple' style='min-width:500px'
           -@col.each do |u|
             = content_tag(:option, "#{u.realname} #{u.username.capitalize}", value: u.id, selected: @project.include_uid?(u.id))
-      = f.submit '保存',class:"btn btn-block btn-primary"
-  .col-md-3
+      .form-groups
+        = f.label "简介"
+        = f.text_area :content,class: "form-control", rows:'5'
+      .form-actions.mt-30
+        .row
+          .col-md-6
+            = link_to "返回", supervise_projects_path,class: "btn btn-default btn-block"
+          .col-md-6
+            = f.submit '保存',class:"btn btn-block btn-primary"
+
 coffee:
   $ ->
-    config = {}
-    $("#project_status").select2(config)
-    #$("#project_owner_id").select2(config)
-    #$('#puser_buddies').multiSelect();
-    $('#xx').select2();
+    $('#buddies').select2();

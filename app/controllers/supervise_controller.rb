@@ -49,6 +49,8 @@ class SuperviseController < ApplicationController
 
   def create_project
     @project = Project.new(project_params)
+    uids = params[:buddies].map { |e| e.to_i }
+    @project.users << User.find(uids)
 
     respond_to do |format|
       if @project.save
@@ -60,6 +62,11 @@ class SuperviseController < ApplicationController
   end
 
   def update_project
+    uids = params[:buddies].map { |e| e.to_i }
+    @project.users.delete_all
+    @project.users << User.find(uids)
+    @project.save
+
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to supervise_projects_url, notice: 'Project was successfully updated.' }
@@ -73,23 +80,6 @@ class SuperviseController < ApplicationController
     @project.destroy
     respond_to do |format|
       format.html { redirect_to supervise_projects_url, notice: 'Project was successfully destroyed.' }
-    end
-  end
-
-    def join_project
-    # find the current project
-    project = Project.find(params[:puser][:pid])
-    # get users ids from params
-    users = params[:puser][:buddies]
-    .delete_if {|e| e == "" }
-    .map { |e| e.to_i }
-    # remove all user from prject.users
-    # then add the users selected again
-    project.users.delete_all
-    project.users << User.find(users)
-
-    respond_to do |format|
-      format.html { redirect_to supervise_projects_url, notice: 'My little good buddy was successfully added.' }
     end
   end
 

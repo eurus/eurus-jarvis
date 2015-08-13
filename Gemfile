@@ -72,7 +72,8 @@ gem 'weather-icons-rails'
 # weather
 gem 'yahoo_weather'
 gem 'bootstrap-kaminari-views'
-gem "select2-rails"
+#gem "select2-rails"
+gem 'selectize-rails'
 gem 'bootstrap-datepicker-rails'
 
 gem 'bootstrap-wysihtml5-rails'

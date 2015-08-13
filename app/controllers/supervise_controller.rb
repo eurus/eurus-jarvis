@@ -141,7 +141,7 @@ class SuperviseController < ApplicationController
   end
 
   def user_group_new
-    @buddies = current_user.available_buddies
+    @available_buddies = current_user.available_buddies
   end
 
   def user_group_edit
@@ -156,7 +156,7 @@ class SuperviseController < ApplicationController
     @supervisor.occupation = params[:sp][:occupation]
     @supervisor.save
 
-    selected_buddies = params[:sp][:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
+    selected_buddies = params[:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
     origin_buddies = (@supervisor.buddies).map { |e| e.id }
 
     removed_buddies = origin_buddies - selected_buddies

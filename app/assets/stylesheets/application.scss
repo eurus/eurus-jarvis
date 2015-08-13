@@ -14,18 +14,19 @@
  *= require font-awesome
  *= require weather-icons
  *= require sweet-alert
- *= require select2
  *= require bootstrap-datepicker3
  *= require bootstrap-wysihtml5
  *= require eurus-css.0.1.0.min
  *= require dataTables.bootstrap
  *= require 'masonry/basic'
-*= require 'masonry/centered'
-*= require 'masonry/fluid'
-*= require 'masonry/gutters'
-*= require 'masonry/infinitescroll'
-*= require 'masonry/right-to-left'
-*= require 'masonry/transitions'
+ *= require 'masonry/centered'
+ *= require 'masonry/fluid'
+ *= require 'masonry/gutters'
+ *= require 'masonry/infinitescroll'
+ *= require 'masonry/right-to-left'
+ *= require 'masonry/transitions'
+ *= require selectize
+ *= require selectize.bootstrap3
  *= require tree
  *= require_self
  */
@@ -601,9 +602,4 @@ table.dataTable tr > td{
 
 .fa.fa-venus{
   color:#c0392b;
-}
-
-
-.select2-choices{
-  border-radius:4px;
 }

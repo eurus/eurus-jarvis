@@ -12,15 +12,16 @@
       ul
         - @overtime.errors.full_messages.each do |msg|
           li = msg
-    .form-groups
-      = f.label "开始时间"
-      = f.text_field :start_at,{class: "form-control datepicker"}
-    .form-groups
-      = f.label "开始时间"
-      = f.number_field :duration, class: "form-control", placeholder: "0.5的整数倍"
-    .form-groups
+    .form-groups.row
+      .col-md-6
+        = f.label "开始时间"
+        = f.text_field :start_at,{class: "form-control datepicker"}
+      .col-md-6
+        = f.label "开始时间"
+        = f.number_field :duration, class: "form-control", placeholder: "0.5的整数倍"
+    .form-group
       = f.label "相关项目"
-      = f.input :project_id,collection: Project.all.collect {|p| [ p.name, p.id ]},label: false
+      = f.select :project_id, Project.all.collect {|p| [ p.name, p.id ]}, {}, {class:'form-control'}
     .form-groups
       = f.label "加班内容"
       = f.text_field :content,class: "form-control"
@@ -39,5 +40,4 @@ coffee:
       width: '300px',
       containerCss : {"display":"block"}
     }
-    $("#overtime_project_id").select2(config)
 

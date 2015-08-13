@@ -18,9 +18,9 @@ div
         = f.select :status, ["blue print","on going","maintainning","pause","done"], {}, {class:'form-control'}
       .form-groups
         label 成员
-        select#buddies name='buddies[]' multiple='multiple' style='min-width:500px'
+        select#buddies name='buddies[]' multiple='multiple'
           -@col.each do |u|
-            = content_tag(:option, "#{u.realname} #{u.username.capitalize}", value: u.id, selected: @project.include_uid?(u.id))
+            = content_tag(:option, "#{u.realname} #{u.username.capitalize}", value: u.id, selected:false)
       .form-groups
         = f.label "简介"
         = f.text_area :content,class: "form-control", rows:'5'
@@ -34,4 +34,4 @@ div
 
 coffee:
   $ ->
-    $('#buddies').select2()
+    $('#buddies').selectize()

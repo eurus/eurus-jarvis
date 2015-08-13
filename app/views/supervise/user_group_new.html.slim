@@ -8,18 +8,17 @@
         = f.input :occupation, input_html:{class: "form-control"},label: false
 
         = f.label "负责人"
-        = f.input :supervisor_id,label: false,collection: @buddies.collect {|p| [ p.email, p.id ]}
+        = f.select :supervisor_id, @available_buddies.collect {|u| [ "#{u.fullname}", u.id ]}, {}, {class:'form-control'}
 
-        = f.label "小弟们"
-        = f.input :buddies,label: false,input_html:{class: "form-control"},collection: @buddies.collect {|p| [ "#{p.realname}(#{p.username})", p.id ]},input_html: { multiple: true }
+        = f.label "下属"
+        select#buddies name='buddies[]' multiple='multiple' style='min-width:500px'
+          -@available_buddies.each do |u|
+            = content_tag(:option, "#{u.fullname}", value: u.id, selected: false)
       .form-group
-        = f.submit "保存", class: "btn btn-primary btn-block"
-        = link_to "返回", supervise_index_path,class: "btn btn-default btn-block"
+        .row
+          .col-md-6
+            = link_to "返回", supervise_index_path,class: "btn btn-default btn-block"
+          .col-md-6
+            = f.submit "保存", class: "btn btn-primary btn-block"
 coffee:
-  config = {
-    dropdownCssClass : 'bigdrop',
-    width: '300px',
-    containerCss : {"display":"block"}
-  }
-  $("#supervisor_supervisor_id").select2(config)
-  $('#supervisor_buddies').multiSelect();
+  $('#buddies').selectize();

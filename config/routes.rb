@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   get 'supervise/projects/done' => "supervise#done_project", as: 'supervise_done_project'
 
   get 'supervise/group/new' => 'supervise#user_group_new'
-  put 'supervise/groups' => 'supervise#user_group_update'
+  put 'supervise/groups' => 'supervise#user_group_update', as: 'supervise_group_update'
   get 'supervise/group/edit/:id' => 'supervise#user_group_edit', as: "edit_user_group"
   post 'supervise/group/create' => 'supervise#user_group_create'
   delete 'supervise/group/cancel/:id' => 'supervise#user_group_cancel', as: 'cancel_group'

@@ -29,6 +29,10 @@ class User < ActiveRecord::Base
     User.find self.supervisor_id rescue nil
   end
 
+  def fullname
+    "#{realname} #{username.capitalize}"
+  end
+
   def buddies
     if role == 'ceo'
       User.where(supervisor_id: [self.id, nil])
@@ -41,8 +45,12 @@ class User < ActiveRecord::Base
     if role=='staff' or role=='intern'
       []
     else
-    buddies.where(role:['staff', 'intern']) rescue []
+      buddies.where(role:['staff', 'intern']) rescue []
+    end
   end
+
+  def has_buddy?(uid)
+    buddies.map(&:id).include? uid
   end
 
   def plans_i_can_see

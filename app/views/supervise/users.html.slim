@@ -30,7 +30,7 @@
                     b= "#{u.try :realname}"
                   div.ml-5= "#{u.try(:username).capitalize}"
               td = u.try :user_number
-              td = u.try :join_at
+              td.fromNow = u.try :join_at
               td = u.try :birthday
               td = "￥#{u.total_fee} / #{u.total_errand_day_count} 天"
               td = u.projects.done.count

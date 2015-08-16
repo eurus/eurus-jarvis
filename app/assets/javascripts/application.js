@@ -23,6 +23,8 @@
 //= require jquery.dataTables.min
 //= require dataTables.bootstrap
 //= require masonry/masonry.min
+//= require moment
+//= require moment/zh-cn
 //= require_tree .
 
 
@@ -33,6 +35,12 @@ function initPage() {
   $('#menu-toggle').click(function(e) {
     $('#wrapper').toggleClass('toggled');
   });
+
+  $('.fromNow').each(function(){
+    if ($(this).text().trim() != ''){
+      $(this).text(moment($(this).text()).fromNow())
+    }
+  })
 
   var mc = $('.masonry-container');
   mc.masonry({

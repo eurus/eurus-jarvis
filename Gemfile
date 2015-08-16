@@ -51,6 +51,8 @@ end
 gem "slim-rails"
 # cascading waterfall
 gem 'masonry-rails'
+# moment.js
+gem 'momentjs-rails'
 # image processing
 # for linux
 gem 'rmagick', require: false

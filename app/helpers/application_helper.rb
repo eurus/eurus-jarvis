@@ -22,6 +22,12 @@ module ApplicationHelper
     end
   end
 
+  def note_tag(msg='')
+    if msg && msg != ''
+      content_tag(:div, msg, class:'note', id:'note')
+    end
+  end
+
   def f_to_c (f)
     "#{((f.to_i - 36) / 1.8).round}℃"
   end

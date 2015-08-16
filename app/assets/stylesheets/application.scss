@@ -593,6 +593,8 @@ table.dataTable tr > td{
     background:white;
     *{
       color:#767676;
+      word-wrap: break-word;
+      word-break: normal;
     }
 
   }
@@ -609,4 +611,36 @@ table.dataTable tr > td{
 
 .fa.fa-venus{
   color:#c0392b;
+}
+
+
+// pop up notice
+#note {
+    position: absolute;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #dff0d8;
+    color:#3c763d;
+    text-align: center;
+    line-height: 2.5;
+    overflow: hidden;
+    border-bottom:1px solid #d6e9c6;
+}
+
+@-webkit-keyframes slideDown {
+    0%, 100% { -webkit-transform: translateY(-50px); }
+    10%, 90% { -webkit-transform: translateY(0px); }
+}
+@-moz-keyframes slideDown {
+    0%, 100% { -moz-transform: translateY(-50px); }
+    10%, 90% { -moz-transform: translateY(0px); }
+}
+
+#note {
+    -webkit-transform: translateY(-50px);
+    -webkit-animation: slideDown 3s 0.3s 1 ease forwards;
+    -moz-transform:    translateY(-50px);
+    -moz-animation:    slideDown 3s 0.3s 1 ease forwards;
 }

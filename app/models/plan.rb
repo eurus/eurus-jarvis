@@ -8,7 +8,7 @@ class Plan < ActiveRecord::Base
                  message: "%{value} is not a valid status" }
 
   validates :cut,
-    inclusion: { in: %w(出差 公司),
+    inclusion: { in: %w(出差 工作),
                  message: "%{value} is not a valid type" }
 
   validates :description, length: {in: 40..50000}

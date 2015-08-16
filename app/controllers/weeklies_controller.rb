@@ -4,14 +4,8 @@ class WeekliesController < ApplicationController
   # GET /weeklies
   # GET /weeklies.json
   def index
-    case current_user.role
-    when 'ceo'
-      @weeklies = Weekly.all.page params[:page]
-    when 'stuff', 'intern',nil
-      @weeklies = current_user.weeklies.page params[:page]
-    else
-      @weeklies = Weekly.where(user_id: (current_user.buddies.push current_user.id)).page params[:page]
-    end
+    user_ids = (User.dfs current_user).map(&:id)
+    @weeklies = Weekly.where(user_id: user_ids).page params[:page]
   end
 
   # GET /weeklies/1
@@ -39,7 +33,7 @@ class WeekliesController < ApplicationController
         # send email to current_user.manger
         ap @sp = current_user.supervisor rescue User.ceo.first
         ap @cc = User.where(role: ["ceo","director"]).pluck(:email)
-          
+
         NotifyMailer.weekly_report(@sp, @weekly,@cc).deliver_later
 
         # send eamil to current_user.ceo

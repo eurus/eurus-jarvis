@@ -16,11 +16,11 @@
       .item.col-md-6
         .item-heading
           span.title= weekly.user.try :realname
-          span.subtitle = "#{weekly.created_at.strftime('%Y-%m-%d')}"
+          span.subtitle = "[ #{weekly.created_at.beginning_of_week.strftime('%Y-%m-%d')} - #{weekly.created_at.end_of_week.strftime('%Y-%m-%d')} ]"
           .actions.pull-right
-            = link_to fa_icon('eye'), weekly
-            = link_to fa_icon('pencil-square-o'), edit_weekly_path(weekly)
-            = link_to fa_icon('times'), weekly, data: {:confirm => 'Are you sure?'}, :method => :delete
+            /= link_to fa_icon('eye'), weekly
+            = link_to fa_icon('pencil-square-o'), edit_weekly_path(weekly) if weekly.user.try(:id) == current_user.id
+            = link_to fa_icon('times'), weekly, data: {:confirm => 'Are you sure?'}, :method => :delete if weekly.user.try(:id) == current_user.id
         .item-body
           article
             h5 总结

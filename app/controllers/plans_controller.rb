@@ -68,7 +68,7 @@ class PlansController < ApplicationController
     # checkbox == 1 done
     # checkbox == 0 new
     ap @plan = Plan.find(params[:id])
-    if @plan.done = false
+    unless @plan.done
       @plan.done = true
       @plan.done_at = Date.current
       if @plan.done_at <= @plan.end_at
@@ -82,18 +82,12 @@ class PlansController < ApplicationController
       @plan.status = "wtf"
     end
 
-    respond_to do |format|
-      if @plan.save
-        format.js{
-          render action: 'update_status',
-          locals: {code: :ok, status: @plan.status, id: @plan.id}
-        }
-      else
-        format.js{
-          render action: 'update_status',
-          locals: {code: :sorry,status: @plan.status, id: @plan.id}
-        }
-      end
+    if @plan.save
+      render action: 'update_status',
+      locals: {code: :ok, statusCode: @plan.status, status:@plan.status_explain, id: @plan.id}
+    else
+      render action: 'update_status',
+      locals: {code: :sorry,statusCode: @plan.status, status:@plan.status_explain, id: @plan.id}
     end
   end
 

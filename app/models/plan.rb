@@ -33,10 +33,10 @@ class Plan < ActiveRecord::Base
     end
   end
 
-  def status_explain
-    dict = {ontime:'准时', ongoing:'进行中', notbegin: '未开始', overtime:'延时'}
+  STATUS_DICT = {ontime:'准时', ongoing:'进行中', notbegin: '未开始', overtime:'延时'}
 
-    dict[status.to_sym]
+  def status_explain
+    STATUS_DICT[status.to_sym]
   end
 
   private

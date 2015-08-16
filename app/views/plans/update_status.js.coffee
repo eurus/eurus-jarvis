@@ -1,20 +1,21 @@
 code = '<%= code %>'
 id = '<%= id %>'
-status = '<%= status %>'
+statusCode = '<%= statusCode %>'
+status = '<%=status%>'
 
-switch status
+switch statusCode
   when "ontime"
-    hover_sytle = "success"
+    hover_style = "success text-center"
   when "overtime"
-    hover_sytle = "danger"
+    hover_style = "danger text-center"
   else
-    hover_sytle = ""
-  
+    hover_style = "text-center"
+
 if code == "ok"
   sweetAlert "Update successfully!"
   $("#plan-status-#{id}").html status
   $("#plan-status-#{id}").removeAttr('class')
-  $("#plan-status-#{id}").addClass(hover_sytle)
+  $("#plan-status-#{id}").addClass(hover_style)
 
 else
   sweetAlert "(╯‵□′)╯︵┻━┻","Calm down, Bro"

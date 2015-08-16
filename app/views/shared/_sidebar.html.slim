@@ -24,7 +24,7 @@
     .pl-20.pr-20
       = link_to fa_icon('plus')+ "新增员工", supervise_users_new_path,class: "btn btn-outstand btn-block" if current_user.role == 'ceo' && params[:action] == 'users'
       = link_to fa_icon('plus')+'新建组织', supervise_group_new_path,class: 'btn btn-outstand btn-block' if (ceo? or director?) && params[:action] == 'groups'
-      = link_to fa_icon('plus')+'新建项目', supervise_projects_new_path,class: 'btn btn-outstand btn-block' if pm? && params[:action] == 'projects'
+      = link_to fa_icon('plus')+'新建项目', supervise_projects_new_path,class: 'btn btn-outstand btn-block' if (director? or ceo? or pm?) && params[:action] == 'projects'
 
   -else
     .title

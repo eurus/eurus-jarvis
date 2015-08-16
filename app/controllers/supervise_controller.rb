@@ -7,7 +7,7 @@ class SuperviseController < ApplicationController
   end
 
   def users
-    @users = User.all
+    @users = User.dfs(current_user)
   end
 
   def groups

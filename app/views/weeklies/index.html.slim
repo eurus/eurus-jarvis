@@ -22,12 +22,14 @@
             = link_to fa_icon('pencil-square-o'), edit_weekly_path(weekly) if weekly.user.try(:id) == current_user.id
             = link_to fa_icon('times'), weekly, data: {:confirm => 'Are you sure?'}, :method => :delete if weekly.user.try(:id) == current_user.id
         .item-body
-          article
-            h5 总结
-            = raw (weekly.try :sumary)
-          article
-            h5 期望
-            = raw (weekly.try :hope)
+          b.pull-left 总结
+          p.pull-right ="书于 #{weekly.created_at.strftime('%Y-%m-%d')}"
+          .clearfix
+          = raw (weekly.try :sumary)
+          .clearfix.mb-20
+          b 期望
+          .clearfix.mb-10
+          = raw (weekly.try :hope)
 .row.text-center
   = paginate @weeklies,theme: 'twitter-bootstrap-3'
 

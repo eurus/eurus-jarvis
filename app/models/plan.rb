@@ -1,10 +1,10 @@
 class Plan < ActiveRecord::Base
-  validates :title, :description,
+  validates :description,
     :status, :cut, :start_at,
     :end_at, presence: true
 
   validates :status,
-    inclusion: { in: %w(notbegin ongoing ontime overtime),
+    inclusion: { in: %w(未开始 进行中 准时 超期),
                  message: "%{value} is not a valid status" }
 
   validates :cut,
@@ -18,14 +18,16 @@ class Plan < ActiveRecord::Base
   paginates_per 10
   after_create :send_it_to_supervisor
 
+  default_scope {order("created_at desc")}
+
   def self.check_overtime
     all.each do |plan|
       ap "plan id #{plan.id}, this plan suppose to end at #{plan.end_at}"
       #check the plan status
       case plan.status
-      when "notbegin","ongoing"
+      when "未开始","进行中"
         ap "current status is #{plan.status}"
-        plan.status = 'overtime' if plan.end_at < Date.current
+        plan.status = '超期' if plan.end_at < Date.current
       else
         ap "this record is #{plan.status}, skip"
       end
@@ -33,10 +35,13 @@ class Plan < ActiveRecord::Base
     end
   end
 
-  STATUS_DICT = {ontime:'准时', ongoing:'进行中', notbegin: '未开始', overtime:'延时'}
-
   def status_explain
-    STATUS_DICT[status.to_sym]
+    status
+  end
+
+  def status_class
+  dict = {:'准时'=>'success', :'进行中'=>'info', :'未开始'=> 'default', :'超期'=>'danger'}
+  dict[status.to_sym]
   end
 
   private

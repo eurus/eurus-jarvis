@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811050115) do
+ActiveRecord::Schema.define(version: 20150816141023) do
 
   create_table "articals", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -67,12 +67,12 @@ ActiveRecord::Schema.define(version: 20150811050115) do
     t.string   "title",       limit: 255
     t.text     "description", limit: 65535
     t.integer  "user_id",     limit: 4
-    t.string   "status",      limit: 255,   default: "notbegin"
+    t.string   "status",      limit: 255,   default: "未开始"
     t.string   "cut",         limit: 255
     t.date     "start_at"
     t.date     "end_at"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.boolean  "done",                      default: false
     t.date     "done_at"
     t.integer  "creator_id",  limit: 4

@@ -12,7 +12,7 @@ div
           h3 = @plan.title
           h4 = "#{@plan.start_at} ~ #{@plan.end_at}"
           h5 = "作者：#{User.find(@plan.user_id).try :email}"
-          h5 = "计划类型：#{@plan.cut} 计划状态：#{@plan.status_explain}"
+          h5 = "计划类型：#{@plan.cut} 计划状态：#{@plan.status}"
 
         .panel-body
           article

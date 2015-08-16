@@ -66,9 +66,9 @@ class PlansController < ApplicationController
       @plan.done = true
       @plan.done_at = Date.current
       if @plan.done_at <= @plan.end_at
-        @plan.status = 'ontime'
+        @plan.status = '准时'
       else
-        @plan.status = 'overtime'
+        @plan.status = '超期'
       end
     else
       # set plan status to wft on purpose so the plan
@@ -78,10 +78,10 @@ class PlansController < ApplicationController
 
     if @plan.save
       render action: 'update_status',
-      locals: {code: :ok, statusCode: @plan.status, status:@plan.status_explain, id: @plan.id}
+      locals: {code: :ok, statusClass: @plan.status_class, status:@plan.status, id: @plan.id}
     else
       render action: 'update_status',
-      locals: {code: :sorry,statusCode: @plan.status, status:@plan.status_explain, id: @plan.id}
+      locals: {code: :sorry,status:@plan.status, id: @plan.id}
     end
   end
 

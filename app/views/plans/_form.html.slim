@@ -7,7 +7,7 @@
         ul
           - @plan.errors.full_messages.each do |msg|
             li = msg
-    .form-groups.row
+    /.form-groups.row
       .col-md-12
         = f.input :title, input_html: {class: 'form-control '}, label: "标题",required: false
 

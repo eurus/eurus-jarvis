@@ -35,6 +35,9 @@ class Plan < ActiveRecord::Base
         ap "this record is #{plan.status}, skip"
       end
       plan.save
+      if plan.status == '超期中'
+        NotifyMailer.plan_overtime_warning(plan).deliver_later
+      end
     end
   end
 

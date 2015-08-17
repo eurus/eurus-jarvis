@@ -19,7 +19,7 @@ class DashboardController < ApplicationController
     end
 
     ##出差天数
-    @errand_count = current_user.errands.this_year.map { |e| (e.end_at - e.start_at).to_f }.reduce(:+) || 0
+    @errand_count = current_user.errands.this_year.map { |e| (e.end_at - e.start_at).to_f+1 }.reduce(:+) || 0
 
   end
 

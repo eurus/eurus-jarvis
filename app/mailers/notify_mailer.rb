@@ -26,4 +26,8 @@ class NotifyMailer < ApplicationMailer
     mail(to: @user.email,subject: "#{@creator.try :realname} 新建了#{@plan.cut}计划：#{@plan.title}")
   end
 
+  def plan_overtime_warning(plan)
+    @plan = plan
+    mail(to:plan.creator.try(:email), cc: plan.user.try(:email), subject:"警告：#{plan.cut}计划已超期")
+  end
 end

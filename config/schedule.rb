@@ -18,6 +18,6 @@ set :output, "log/cron_log.log"
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 6.hours do
+every :day, at:'08:30am'  do
   runner "Plan.check_overtime"
 end

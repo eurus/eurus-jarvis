@@ -4,7 +4,7 @@ class Plan < ActiveRecord::Base
     :end_at, presence: true
 
   validates :status,
-    inclusion: { in: %w(未开始 进行中 准时 超期),
+    inclusion: { in: %w(未开始 进行中 准时 超期中 超期),
                  message: "%{value} is not a valid status" }
 
   validates :cut,
@@ -21,13 +21,16 @@ class Plan < ActiveRecord::Base
   default_scope {order("created_at desc")}
 
   def self.check_overtime
-    all.each do |plan|
+    Plan.where(done:false).each do |plan|
       ap "plan id #{plan.id}, this plan suppose to end at #{plan.end_at}"
       #check the plan status
       case plan.status
-      when "未开始","进行中"
+      when "未开始"
+        plan.status = '进行中' if plan.start_at <= Date.current
+        plan.status = '超期中' if plan.end_at < Date.current
+      when "进行中"
         ap "current status is #{plan.status}"
-        plan.status = '超期' if plan.end_at < Date.current
+        plan.status = '超期中' if plan.end_at < Date.current
       else
         ap "this record is #{plan.status}, skip"
       end
@@ -40,7 +43,7 @@ class Plan < ActiveRecord::Base
   end
 
   def status_class
-  dict = {:'准时'=>'success', :'进行中'=>'info', :'未开始'=> 'default', :'超期'=>'danger'}
+  dict = {:'准时'=>'success', :'进行中'=>'info', :'未开始'=> 'default',:'超期中'=>'warning', :'超期'=>'danger'}
   dict[status.to_sym]
   end
 

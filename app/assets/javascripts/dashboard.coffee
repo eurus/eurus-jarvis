@@ -5,3 +5,9 @@ $(window).bind 'page:change', ->
   $('.datepicker').datepicker
     format: 'yyyy-mm-dd'
     autoclose: true
+  if $('#weather').length > 0
+    $.get '/dashboard/weather', (data) ->
+      heading = $('#weather .heading')
+      heading.attr('class', 'wi wi-'+data.icon+" heading")
+      $('#weather .num').text(data.num)
+      $('#weather .hint').text(data.hint)

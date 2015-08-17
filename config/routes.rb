@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   get "settings" => "dashboard#setting"
+  get "dashboard/weather" => "dashboard#weather"
   put "update_setting" => "dashboard#update_setting"
 
   # supervise actions

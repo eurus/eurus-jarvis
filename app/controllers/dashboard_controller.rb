@@ -3,7 +3,6 @@ class DashboardController < ApplicationController
 
   include Common
   def index
-
     num = Artical.count
     if num==0
       num=1
@@ -11,16 +10,21 @@ class DashboardController < ApplicationController
     num = Random.new.rand(num)
     @art = Artical.all[num]
 
+    ##出差天数
+    @errand_count = current_user.errands.this_year.map { |e| (e.end_at - e.start_at).to_f+1 }.reduce(:+) || 0
+
+  end
+
+  def weather
     @config = YAML.load_file("config/weather.yml")["code"]
     @response = YahooWeather::Client.new.fetch(12712492)
     if @response
       code = @response.condition.code
-      @icon = @config[code.to_i]['icon']
+      ap @icon = @config[code.to_i]['icon']
+      render json: {icon: @icon, hint: @response.condition.text, num:f_to_c(@response.condition.temp)}
+    else
+      render json: {}
     end
-
-    ##出差天数
-    @errand_count = current_user.errands.this_year.map { |e| (e.end_at - e.start_at).to_f+1 }.reduce(:+) || 0
-
   end
 
   def setting
@@ -66,4 +70,7 @@ class DashboardController < ApplicationController
                                  :realname,:gender)
   end
 
+  def f_to_c (f)
+    "#{((f.to_i - 36) / 1.8).round}℃"
+  end
 end

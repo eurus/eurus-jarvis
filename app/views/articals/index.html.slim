@@ -21,6 +21,6 @@ div
             span = a.try :origin
             span = a.try :user_id
             article
-             = a.content[0..200]
+             = raw a.content[0..200]
 .row.text-center
   = paginate @articals,theme: 'twitter-bootstrap-3'

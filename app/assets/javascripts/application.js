@@ -203,8 +203,8 @@ function initPage() {
             ['help', ['help']],
         ]
     }
-    $('#weekly_sumary').summernote(config);
-    $('#weekly_hope').summernote(config);
+    // $('#weekly_sumary').summernote(config);
+    // $('#weekly_hope').summernote(config);
 }
 
 function sendFile(file, editor) {

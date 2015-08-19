@@ -186,7 +186,27 @@ function initPage() {
             console.log(html);
         }
     });
+
+    var config = {
+        height: 400,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['fontsize', ['fontsize']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['table', ['table']],
+            ['insert', ['link', 'hr']],
+            ['view', ['fullscreen', 'codeview']],
+            ['help', ['help']],
+        ]
+    }
+    $('#weekly_sumary').summernote(config);
+    $('#weekly_hope').summernote(config);
 }
+
 function sendFile(file, editor) {
 
     var filename = false;
@@ -220,7 +240,7 @@ function sendFile(file, editor) {
             editor.summernote('insertImage', url);
         },
         error: function() {
-            sweetAlert("Oops","图片上传失败，请重新上传");
+            sweetAlert("Oops", "图片上传失败，请重新上传");
         }
     });
 }

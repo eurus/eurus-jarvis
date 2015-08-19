@@ -17,7 +17,7 @@
       = f.text_field :origin,class: "form-control"
     .form-group
       = f.label "内容"
-      = f.text_area :content,class: "form-control",rows: 10
+      = f.text_area :content,id: 'summernote',token: @uptoken, urlhead: 'http://7xl7it.com1.z0.glb.clouddn.com/',class:"form-control"
 
     .form-actions
       = f.submit '保存',class:"btn btn-block btn-primary"

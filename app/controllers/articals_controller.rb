@@ -1,6 +1,6 @@
 class ArticalsController < ApplicationController
   before_action :set_artical, only: [:show, :edit, :update, :destroy]
-
+  before_action :uptoken, only: [:new, :edit]
   # GET /articals
   # GET /articals.json
   def index
@@ -62,13 +62,19 @@ class ArticalsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_artical
-      @artical = Artical.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_artical
+    @artical = Artical.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def artical_params
-      params.require(:artical).permit(:title, :content, :user_id, :origin)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def artical_params
+    params.require(:artical).permit(:title, :content, :user_id, :origin)
+  end
+  
+  def uptoken
+    put_policy = Qiniu::Auth::PutPolicy.new("jarvis")
+    @uptoken = Qiniu::Auth.generate_uptoken(put_policy)
+  end
+
 end

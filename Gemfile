@@ -68,6 +68,9 @@ gem 'sweet-alert-confirm'
 gem 'kaminari'
 gem 'simple_form'
 gem 'devise'
+
+#qiniu
+gem 'qiniu'
 #icons
 gem "font-awesome-rails"
 gem 'weather-icons-rails'
@@ -79,6 +82,7 @@ gem 'selectize-rails'
 gem 'bootstrap-datepicker-rails'
 
 gem 'bootstrap-wysihtml5-rails'
+gem 'summernote-rails', git:'https://github.com/lostpupil/summernote-rails.git'
 gem 'sidekiq'
 
 # capstrino setup

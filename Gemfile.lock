@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/lostpupil/summernote-rails.git
+  revision: aa6b8c21a8d70d7f0dc4731f980fd3e996830c8a
+  specs:
+    summernote-rails (0.6.10.0)
+      railties (>= 3.1)
+
 GEM
   remote: https://ruby.taobao.org/
   specs:
@@ -36,8 +43,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    arel (6.0.0)
-    autoprefixer-rails (5.2.1)
+    arel (6.0.3)
+    autoprefixer-rails (5.2.1.2)
       execjs
       json
     awesome_print (1.6.1)
@@ -55,8 +62,7 @@ GEM
     bootstrap-wysihtml5-rails (0.3.3.7)
       railties (>= 3.0)
     builder (3.2.2)
-    byebug (5.0.0)
-      columnize (= 0.9.0)
+    byebug (6.0.0)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
@@ -80,7 +86,7 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
-    celluloid (0.16.0)
+    celluloid (0.16.1)
       timers (~> 4.0.0)
     chronic (0.10.2)
     coderay (1.1.0)
@@ -92,10 +98,9 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     colorize (0.7.7)
-    columnize (0.9.0)
     connection_pool (2.2.0)
     debug_inspector (0.0.2)
-    devise (3.5.1)
+    devise (3.5.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -106,15 +111,15 @@ GEM
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
     erubis (2.7.0)
-    eventmachine (1.0.7)
-    execjs (2.5.2)
+    eventmachine (1.0.8)
+    execjs (2.6.0)
     ffi (1.9.10)
-    font-awesome-rails (4.3.0.0)
+    font-awesome-rails (4.4.0.0)
       railties (>= 3.2, < 5.0)
     formatador (0.2.5)
-    globalid (0.3.5)
+    globalid (0.3.6)
       activesupport (>= 4.1.0)
-    guard (2.12.8)
+    guard (2.13.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, <= 4.0)
       lumberjack (~> 1.0)
@@ -142,10 +147,10 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.3)
-    listen (3.0.1)
+    listen (3.0.3)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
-    loofah (2.0.2)
+    loofah (2.0.3)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.9)
     mail (2.6.3)
@@ -153,21 +158,22 @@ GEM
     masonry-rails (0.2.4)
       railties
     method_source (0.8.2)
-    mime-types (2.6.1)
-    mini_magick (4.2.7)
+    mime-types (2.4.3)
+    mini_magick (4.2.10)
     mini_portile (0.6.2)
-    minitest (5.7.0)
+    minitest (5.8.0)
     momentjs-rails (2.10.3)
       railties (>= 3.1)
     multi_json (1.11.2)
-    mysql2 (0.3.18)
+    mysql2 (0.3.19)
     nenv (0.2.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
+    netrc (0.10.3)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    notiffany (0.0.6)
+    notiffany (0.0.7)
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
@@ -175,6 +181,11 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    qiniu (6.5.0)
+      json (~> 1.8)
+      mime-types (~> 2.4.3)
+      rest-client (~> 1.7.3)
+      ruby-hmac (~> 0.4)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
@@ -193,7 +204,7 @@ GEM
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
-    rails-dom-testing (1.0.6)
+    rails-dom-testing (1.0.7)
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
@@ -204,7 +215,7 @@ GEM
       activesupport (= 4.2.3)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    raindrops (0.14.0)
+    raindrops (0.15.0)
     rake (10.4.2)
     rb-fsevent (0.9.5)
     rb-inotify (0.9.5)
@@ -215,8 +226,12 @@ GEM
       redis (~> 3.0, >= 3.0.4)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
-    rmagick (2.15.2)
-    sass (3.4.15)
+    rest-client (1.7.3)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
+    rmagick (2.15.4)
+    ruby-hmac (0.4.0)
+    sass (3.4.16)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
@@ -228,12 +243,12 @@ GEM
       rdoc (~> 4.0)
     selectize-rails (0.12.1)
     shellany (0.0.1)
-    sidekiq (3.4.1)
+    sidekiq (3.4.2)
       celluloid (~> 0.16.0)
-      connection_pool (>= 2.1.1)
-      json
-      redis (>= 3.0.6)
-      redis-namespace (>= 1.3.1)
+      connection_pool (~> 2.2, >= 2.2.0)
+      json (~> 1.0)
+      redis (~> 3.2, >= 3.2.1)
+      redis-namespace (~> 1.5, >= 1.5.2)
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -248,7 +263,7 @@ GEM
       slim (~> 3.0)
     slop (3.6.0)
     spring (1.3.6)
-    sprockets (3.2.0)
+    sprockets (3.3.1)
       rack (~> 1.0)
     sprockets-rails (2.3.2)
       actionpack (>= 3.0)
@@ -284,7 +299,7 @@ GEM
     weather-icons-rails (0.1.1)
       railties (>= 3.2, < 5.0)
       sass (~> 3.2)
-    web-console (2.1.3)
+    web-console (2.2.1)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
@@ -323,6 +338,7 @@ DEPENDENCIES
   mini_magick
   momentjs-rails
   mysql2
+  qiniu
   quiet_assets
   rails (= 4.2.3)
   rmagick
@@ -333,6 +349,7 @@ DEPENDENCIES
   simple_form
   slim-rails
   spring
+  summernote-rails!
   sweet-alert-confirm
   sweetalert-rails
   switch_user
@@ -345,4 +362,4 @@ DEPENDENCIES
   yahoo_weather
 
 BUNDLED WITH
-   1.10.5
+   1.10.6

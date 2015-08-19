@@ -61,8 +61,7 @@
       .panel-body
         h3 = @art.try :title
         article
-          = @art.try :content
-          = @art.try :content
-
+          = raw @art.try :content
+          
 
 

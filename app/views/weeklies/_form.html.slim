@@ -10,9 +10,9 @@
     .row
       .form-groups.col-md-6
         = f.label "总结"
-        = f.input :sumary, as: :wysihtml5, input_html: {class: "form-control",rows: 20},error: false,placeholder: "请保持字数在100-800之间",label: false
+        = f.text_area :sumary,class:"form-control"
         = link_to "返回", weeklies_path,class: "mt-15 btn btn-default btn-block"
       .form-groups.col-md-6
         = f.label "期望"
-        = f.input :hope,as: :wysihtml5, input_html: {class: "form-control",rows: 20},error: false,placeholder: "请保持字数在100-800之间",label: false
+        = f.text_area :hope,class:"form-control"
         = f.submit '保存',class:"mt-15 btn btn-block btn-primary"

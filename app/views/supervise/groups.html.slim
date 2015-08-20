@@ -20,7 +20,7 @@
                 - unless staff? or intern?
                   = link_to fa_icon('recycle'), cancel_group_path(id:x.id),data: {:confirm => "确认撤销 #{x.username} 的职务?", text:"原职务：#{x.role}"}, :method => :delete unless x.staff? or x.intern?
           .panel-body
-            =image_tag "#{x.avatar_url(:middle)}", class:'img-responsive' if x.avatar?
+            =image_tag "#{x.avatar_url(:middle)}", class:'img-responsive animated infinite jello' if x.avatar?
             div.mt-10= "英文名：#{x.username}"
             div= "角色：#{x.role_explain}"
             div= "职位：#{x.occupation}" if x.occupation

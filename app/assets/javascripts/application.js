@@ -18,7 +18,7 @@
 //= require bootstrap-sprockets
 //= require selectize
 //= require bootstrap-datepicker
-//= require bootstrap-datepicker.zh-CN
+// require bootstrap-datepicker.zh-CN
 //= require summernote
 //= require jquery.dataTables.min
 //= require dataTables.bootstrap

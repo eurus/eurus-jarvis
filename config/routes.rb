@@ -53,6 +53,10 @@ Rails.application.routes.draw do
 
   get 'checkrecord/:id' => 'supervise#check_record_by_type',as: 'checkrecord'
   get 'issuerecord/:id' => 'supervise#issue_record_by_type',as: 'issuerecord'
+
+  namespace :jarvis do
+    get 'wiki', to: 'jarviscore#wiki'
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

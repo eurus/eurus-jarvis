@@ -160,6 +160,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.3)
+    kramdown (1.7.0)
     liquid (2.5.5)
     listen (3.0.3)
       rb-fsevent (>= 0.9.3)
@@ -356,6 +357,7 @@ DEPENDENCIES
   jekyll
   jquery-rails
   kaminari
+  kramdown
   masonry-rails
   mini_magick
   momentjs-rails

@@ -15,7 +15,7 @@
 //= require jquery_ujs
 //= require sweet-alert-confirm
 //= require turbolinks
-//= require bootstrap
+//= require bootstrap-sprockets
 //= require selectize
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker.zh-CN

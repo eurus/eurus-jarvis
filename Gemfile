@@ -81,7 +81,7 @@ gem 'bootstrap-kaminari-views'
 gem 'selectize-rails'
 gem 'bootstrap-datepicker-rails'
 
-gem 'bootstrap-wysihtml5-rails'
+# gem 'bootstrap-wysihtml5-rails'
 gem 'summernote-rails', git:'https://github.com/lostpupil/summernote-rails.git'
 gem 'sidekiq'
 
@@ -91,7 +91,7 @@ gem 'capistrano'
 gem 'capistrano-rails'
 gem 'capistrano-rvm'
 gem 'capistrano3-unicorn'
-gem 'capistrano-sidekiq' , group: :development
+# gem 'capistrano-sidekiq' , group: :development
 #
 gem 'whenever', '~> 0.8.4',require: false
 # gem 'rack-cors', :require => 'rack/cors'

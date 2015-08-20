@@ -548,10 +548,12 @@ table.dataTable tr > td{
   text-overflow:ellipsis;
   white-space:nowrap;
 }
-
-// item
 .item{
   padding:15px;
+}
+
+// item
+.item, .panel{
   .item-heading{
     padding:10px 15px;
     border-bottom:1px solid #eff2f7;

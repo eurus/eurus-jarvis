@@ -62,6 +62,36 @@
         h3 = @art.try :title
         article
           = raw @art.try :content
-          
 
+
+
+  .col-md-6
+    .panel.panel-default
+      .panel-heading 今日推荐
+      .panel-body
+        h3 = @art.try :title
+        article
+          = raw @art.try :content
+
+  -unless @plan == nil
+    .col-md-6
+      .panel.panel-default
+        .panel-heading.item-heading
+          span.title 最近计划
+          span id="plan-status-#{@plan.id}" class="label label-#{@plan.status_class}" = @plan.status
+          span.subtitle = "[ #{@plan.start_at.strftime('%Y-%m-%d')} - #{@plan.end_at.strftime('%Y-%m-%d')} ]"
+          .actions.pull-right
+            /= link_to fa_icon('eye'), weekly
+            - if pm? or director? or ceo?
+              = link_to fa_icon('check'), update_status_plans_path(id:@plan.id), data: {:confirm => "确认此计划已完成？"},remote: true,class: "" unless @plan.done
+            = link_to fa_icon("pencil-square-o"), edit_plan_path(@plan) if @plan.creator_id == current_user.id unless @plan.done
+            = link_to fa_icon('times'), @plan, data: {:confirm => "确认删除此计划？"}, :method => :delete,class: "" if @plan.creator_id == current_user.id and not @plan.done
+
+        .panel-body.item-body
+          article
+            b.pull-left = "#{@plan.cut}计划"
+            p.pull-right=" 拟定于 #{@plan.created_at.strftime('%Y-%m-%d')}"
+            b.pull-right.mr-5 ="#{@plan.creator.try :realname}"
+            .clearfix
+            = raw (@plan.try :description)
 

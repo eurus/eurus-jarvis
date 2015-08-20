@@ -21,3 +21,7 @@ set :output, "log/cron_log.log"
 every :day, at:'08:30am'  do
   runner "Plan.check_overtime"
 end
+
+every 1.hours do
+  runner "Plan.check_overtime"
+end

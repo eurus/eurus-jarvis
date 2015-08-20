@@ -10,6 +10,7 @@ class DashboardController < ApplicationController
     num = Random.new.rand(num)
     @art = Artical.all[num]
 
+    @plan = Plan.where(user_id:current_user.id).first
     ##出差天数
     @errand_count = current_user.errands.this_year.map { |e| (e.end_at - e.start_at).to_f+1 }.reduce(:+) || 0
 

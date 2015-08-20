@@ -5,7 +5,7 @@ class JarviscoreController < ApplicationController
     ap "wiki task"
     ap params
     if Rails.env == 'production'
-      `cd /var/www/eurus-newbee && git pull origin master && jekyll build`
+      `cd /var/www/eurus-newbee && git pull origin master && rake hello`
     else
       ap 'do nothing'
     end

@@ -30,11 +30,11 @@
   .col-md-3
     .row
       .col-md-12#useful
-        .panel.panel-board.board-yellow.animate.lightSpeedIn
+        .panel.panel-board.board-yellow.animated.lightSpeedIn
           .panel-body
             =fa_icon 'smile-o',class: 'heading'
-            .num 100%
-            .hint 靠谱系数(敬请期待)
+            .num ="#{current_user.reliability}%"
+            .hint 靠谱系数
 
       .col-md-12
         .panel.panel-board

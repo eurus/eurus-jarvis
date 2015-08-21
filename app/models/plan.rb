@@ -7,11 +7,11 @@ class Plan < ActiveRecord::Base
     inclusion: { in: %w(未开始 进行中 准时 超期中 超期),
                  message: "%{value} is not a valid status" }
 
-  validates :cut,
+    validates :cut,
     inclusion: { in: %w(出差 工作),
                  message: "%{value} is not a valid type" }
 
-  validates :description, length: {in: 40..50000}
+    validates :description, length: {in: 40..50000}
   validate :end_should_greater_than_start
   belongs_to :user
   belongs_to :creator, class_name:'User'
@@ -46,10 +46,17 @@ class Plan < ActiveRecord::Base
   end
 
   def status_class
-  dict = {:'准时'=>'success', :'进行中'=>'info', :'未开始'=> 'default',:'超期中'=>'warning', :'超期'=>'danger'}
-  dict[status.to_sym]
+    dict = {:'准时'=>'success', :'进行中'=>'info', :'未开始'=> 'default',:'超期中'=>'warning', :'超期'=>'danger'}
+    dict[status.to_sym]
   end
 
+  def diff
+    if self.done_at
+      return (self.end_at - self.done_at).to_i
+    else
+      0
+    end
+  end
   private
   def end_should_greater_than_start
     if self.end_at <  self.start_at

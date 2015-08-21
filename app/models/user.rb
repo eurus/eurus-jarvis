@@ -130,4 +130,13 @@ class User < ActiveRecord::Base
   def intern?
     role == "intern"
   end
+
+  def reliability
+    sum = self.plans.map { |e| e.diff }.reduce(:+)
+    if sum > 0
+      100
+    else
+      100 - (sum / 3.0).round
+    end
+  end
 end

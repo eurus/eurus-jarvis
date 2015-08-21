@@ -132,11 +132,11 @@ class User < ActiveRecord::Base
   end
 
   def reliability
-    sum = self.plans.map { |e| e.diff }.reduce(:+) rescue 0
+    sum = self.plans.map { |e| e.diff }.reduce(:+) || 0
     if sum >= 0
       100
     else
-      100 - (sum / 3.0).round
+      100 + (sum / 3.0).round
     end
   end
 end

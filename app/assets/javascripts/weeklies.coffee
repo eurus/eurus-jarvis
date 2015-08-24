@@ -17,6 +17,7 @@ config = {
 $(window).bind 'page:change', ->
   $('#weekly_sumary').summernote(config)
   $('#weekly_hope').summernote(config)
+  $('#plan_description').summernote(config)
   imgs = $('article').find('img')
   for img in imgs
     $(img).addClass "img-responsive"

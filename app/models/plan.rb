@@ -59,8 +59,13 @@ class Plan < ActiveRecord::Base
   end
   private
   def end_should_greater_than_start
-    if self.end_at <  self.start_at
-      errors.add("结束时间", "并不能比开始时间小")
+    if self.end_at and self.start_at
+      if self.end_at <  self.start_at
+        errors.add("结束时间", "并不能比开始时间小")
+      end
+
+    else
+      errors.add("我猜", "你肯定忘记了什么")
     end
   end
 

@@ -27,7 +27,7 @@
           = f.label "执行者"
           = f.select :user_id, @col.collect {|p| [ "#{p.fullname}", p.id ]}, {}, {class:'form-control'}
     .form-groups
-      = f.input :description, input_html: {class: 'form-control', rows: 10}, label: "内容",required: false,as: :wysihtml5
+      = f.input :description, input_html: {class: 'form-control', rows: 10}, label: "内容",required: false
     .form-actions.row.mt-30
       .col-sm-6
         = link_to "返回", plans_path ,class: "btn btn-default btn-block"

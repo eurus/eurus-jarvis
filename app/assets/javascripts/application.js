@@ -33,6 +33,11 @@ $(window).bind('page:change', function() {
 });
 
 function initPage() {
+    $('.sidebar .list-group-item').click(function(){
+        $(this).find('i.fa').remove();
+        $(this).prepend('<i class="fa fa-spinner fa-spin fa-fw"></i>');
+        return true;
+    });
     $('#menu-toggle').click(function(e) {
         $('#wrapper').toggleClass('toggled');
     });

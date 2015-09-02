@@ -29,7 +29,7 @@ class PlansController < ApplicationController
   def create
     @plan = Plan.new(plan_params)
     @plan.creator_id = current_user.id
-    if plan_params[:user_id] == ""
+    unless plan_params[:user_id]
       @plan.user_id = current_user.id
     end
 

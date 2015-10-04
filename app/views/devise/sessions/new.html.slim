@@ -1,19 +1,21 @@
 h2.text-center.sign-in-margin = t("signin")
+
 .col-md-3
 .col-md-6
   = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    = f.error_notification
     .form-group
       .input-group
         span.input-group-addon
           = fa_icon "envelope-o"
-        = f.text_field :login, class: "form-control", required: false, autofocus: true,placeholder: "input your username or email"
+        = f.input :login, input_html:{class: "form-control"}, required: false, autofocus: true,placeholder: "input your username or email",label: false
         span.input-group-addon @eurus.cn
     .form-group
       .input-group
         span.input-group-addon
           = fa_icon "lock"
-        = f.password_field :password, class: "form-control", required: false, autofocus: true, placeholder: "input your password"
-
+        = f.input :password, input_html:{class: "form-control"}, required: false, autofocus: true, placeholder: "input your password",label:false
+    
     .form-group
       = f.check_box :remember_me, as: :boolean if devise_mapping.rememberable?
       |  

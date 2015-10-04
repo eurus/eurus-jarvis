@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/pludoni/simple-captcha.git
+  revision: 95b6d88a504c8f6975adb7bf5c84b417052b30f7
+  specs:
+    simple_captcha (0.3.4)
+      rails (>= 3.1)
+
+GIT
   remote: https://github.com/lostpupil/summernote-rails.git
   revision: aa6b8c21a8d70d7f0dc4731f980fd3e996830c8a
   specs:
@@ -340,6 +347,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   selectize-rails
   sidekiq
+  simple_captcha!
   simple_form
   slim-rails
   spring

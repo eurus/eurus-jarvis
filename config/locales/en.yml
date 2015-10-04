@@ -26,3 +26,10 @@ en:
   today-news: "News Of Today"
   today-weather: "Weather Of Today"
   today-tool: "Tools"
+  simple_captcha:
+    placeholder: "Enter the letters"
+    label: "Enter the code in the box:"
+    refresh_button_text: "Refresh"
+    message:
+      default: "Secret Code did not match with the Image"
+      user: "The secret Image and code were different"

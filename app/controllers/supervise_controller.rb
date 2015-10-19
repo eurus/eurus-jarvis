@@ -15,15 +15,15 @@ class SuperviseController < ApplicationController
   end
 
   def overtimes
-    @overtimes = Overtime.all
+    @overtimes = Overtime.includes(:user).includes(:project).all
   end
 
   def errands
-    @errands = Errand.all
+    @errands = Errand.includes(:user).includes(:project).all
   end
 
   def vacations
-    @vacations = Vacation.all
+    @vacations = Vacation.includes(:user).all
   end
 
   # projects
@@ -31,7 +31,7 @@ class SuperviseController < ApplicationController
   def projects
     # @projects = Project.all
     uids = (User.dfs current_user).map{|u| u.id}
-    @projects = Project.where(owner_id: uids)
+    @projects = Project.includes(:owner).includes(:users).where(owner_id: uids)
   end
 
   def new_project

@@ -5,7 +5,7 @@ class WeekliesController < ApplicationController
   # GET /weeklies.json
   def index
     user_ids = (User.dfs current_user).map(&:id)
-    @weeklies = Weekly.where(user_id: user_ids).page params[:page]
+    @weeklies = Weekly.includes(:user).where(user_id: user_ids).page params[:page]
   end
 
   # GET /weeklies/1

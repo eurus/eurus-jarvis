@@ -4,7 +4,7 @@ class OvertimesController < ApplicationController
   # GET /overtimes
   # GET /overtimes.json
   def index
-    @overtimes = current_user.overtimes.page params[:page]
+    @overtimes = current_user.overtimes.includes(:project).page params[:page]
   end
 
   # GET /overtimes/new

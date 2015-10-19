@@ -24,7 +24,7 @@ Rails.application.configure do
     domain:       'exmail.qq.com',
     user_name:    'info@eurus.cn',
     password:     'woshi007',
-    enable_starttls_auto: true, 
+    enable_starttls_auto: true,
     openssl_verify_mode:'none',
     authentication: 'plain'
   }
@@ -50,4 +50,11 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+  
+  end
 end

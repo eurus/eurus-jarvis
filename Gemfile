@@ -46,6 +46,8 @@ group :development, :test do
   gem 'guard'
   gem 'guard-livereload', require: false
   gem 'quiet_assets'
+  # gem 'ruby-growl'
+  gem 'bullet'
 end
 # slim template
 gem "slim-rails"

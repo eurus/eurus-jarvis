@@ -2,12 +2,12 @@ class Users::SessionsController < Devise::SessionsController
   # before_filter :configure_sign_in_params, only: [:create]
   # include SimpleCaptcha::ControllerHelpers
   # skip_before_filter :require_no_authentication, :only => [:new]
-  # GET /resource/sign_in
-  # prepend_before_filter :valify_captcha!, only: [:create]
+  prepend_before_filter :valify_captcha!, only: [:create]
 
-  def new
-    super
-  end
+  # GET /resource/sign_in
+  # def new
+  #   super
+  # end
 
   # POST /resource/sign_in
   def create

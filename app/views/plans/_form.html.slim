@@ -14,18 +14,18 @@
     .form-groups.row
       .col-md-6
         = f.label "开始时间"
-        = f.text_field :start_at,{class: "form-control datepicker"}
+        = f.text_field :start_at,{class: "form-control datepicker", value:"#{Date.today.beginning_of_week.strftime('%Y-%m-%d')}"}
       .col-md-6
         = f.label "结束时间"
-        = f.text_field :end_at,{class: "form-control datepicker"}
+        = f.text_field :end_at,{class: "form-control datepicker", value: "#{(Date.today.end_of_week - 1.days).strftime('%Y-%m-%d')}"}
     .form-groups.row
       .col-md-6
         =f.label "类型"
-        = f.select :cut, ["出差","工作"] , {}, {class: 'form-control '}
+        = f.select :cut, ["工作", "出差"] , {}, {class: 'form-control '}
       - if pm? or ceo? or director?
         .col-md-6
           = f.label "执行者"
-          = f.select :user_id, @col.collect {|p| [ "#{p.fullname}", p.id ]}, {}, {class:'form-control'}
+          = f.select :user_id, @col.collect {|p| [ "#{p.fullname}", p.id ]}, {}, {autofocus:true, class:'form-control'}
     .form-groups
       = f.text_area :description,class:"form-control"
     .form-actions.row.mt-30

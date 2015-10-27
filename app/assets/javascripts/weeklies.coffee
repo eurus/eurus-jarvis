@@ -4,7 +4,7 @@ config = {
       ['style', ['style']],
       ['font', ['bold', 'italic', 'underline', 'clear']],
       ['fontsize', ['fontsize']],
-      ['fontname', ['fontname']],
+
       ['color', ['color']],
       ['para', ['ul', 'ol', 'paragraph']],
       ['height', ['height']],
@@ -21,4 +21,4 @@ $(window).bind 'page:change', ->
   imgs = $('article').find('img')
   for img in imgs
     $(img).addClass "img-responsive"
-  
+

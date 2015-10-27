@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def fullname
-    "#{realname} #{username.capitalize}"
+    "#{username.capitalize}#{' '*(10-username.length)}#{realname}"
   end
 
   def buddies

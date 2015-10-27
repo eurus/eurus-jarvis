@@ -5,7 +5,7 @@ class PlansController < ApplicationController
   # GET /plans.json
   def index
     user_ids = (User.dfs current_user).map(&:id)
-    @plans = Plan.where(user_id: user_ids).page params[:page]
+    @plans = Plan.where(user_id: user_ids).includes(:user).includes(:creator).page params[:page]
   end
 
   # GET /plans/1

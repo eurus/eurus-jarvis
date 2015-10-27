@@ -22,6 +22,9 @@ h2.text-center.sign-in-margin = t("signin")
       = f.label :remember_me
       = link_to "Forgot your password?", new_password_path(resource_name),class:"pull-right"
     .form-group
+      = rucaptcha_input_tag(class: 'form-control', placeholder: 'Input Captcha')
+      = rucaptcha_image_tag(alt: 'Captcha')
+    .form-group
       = f.submit "Sign In", class: "btn btn-primary btn-block"
 .col-md-3
 / = render "devise/shared/links"

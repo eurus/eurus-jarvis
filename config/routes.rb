@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   root 'dashboard#index'
+
+  mount RuCaptcha::Engine => "/rucaptcha"
+  
   resources :overtimes
   resources :feedbacks
   resources :weeklies

@@ -3,14 +3,15 @@ class Users::SessionsController < Devise::SessionsController
   # include SimpleCaptcha::ControllerHelpers
   # skip_before_filter :require_no_authentication, :only => [:new]
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  # prepend_before_filter :valify_captcha!, only: [:create]
+
+  def new
+    super
+  end
 
   # POST /resource/sign_in
   def create
     super
-    ap session[:_rucaptcha]
   end
 
   # DELETE /resource/sign_out
@@ -24,4 +25,11 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.for(:sign_in) << :attribute
   # end
+  def valify_captcha!
+    if !verify_rucaptcha?
+      redirect_to new_user_session_path and return
+    end
+    true
+  end
+
 end

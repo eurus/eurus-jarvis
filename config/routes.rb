@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'dashboard#index'
 
   mount RuCaptcha::Engine => "/rucaptcha"
-  
+
   resources :overtimes
   resources :feedbacks
   resources :weeklies
@@ -16,8 +16,10 @@ Rails.application.routes.draw do
       get 'update_status'
     end
   end
-
-  devise_for :users
+  
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
   get "settings" => "dashboard#setting"
   get "dashboard/weather" => "dashboard#weather"
   put "update_setting" => "dashboard#update_setting"

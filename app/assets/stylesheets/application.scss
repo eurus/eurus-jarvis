@@ -17,7 +17,9 @@
  *= require bootstrap-datepicker3
  * require bootstrap-wysihtml5
  *= require eurus-css.0.1.0.min
- *= require dataTables.bootstrap
+ *= require dataTables.bootstrap.min
+ *= require buttons.bootstrap.min
+ *= require scroller.bootstrap.min
  *= require 'masonry/basic'
  *= require 'masonry/centered'
  *= require 'masonry/fluid'

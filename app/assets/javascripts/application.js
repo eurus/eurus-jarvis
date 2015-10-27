@@ -21,7 +21,13 @@
 //= require bootstrap-datepicker.zh-CN
 //= require summernote
 //= require jquery.dataTables.min
-//= require dataTables.bootstrap
+//= require dataTables.bootstrap.min
+//= require dataTables.buttons.min
+//= require dataTables.scroller.min
+//= require buttons.bootstrap.min
+//= require buttons.flash.min
+//= require buttons.html5.min
+//= require buttons.print.min
 //= require masonry/masonry.min
 //= require moment
 //= require moment/zh-cn
@@ -113,8 +119,11 @@ function initPage() {
             })
         }
     });
-    $('.datatable').dataTable({
-        "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row"<"col-sm-12 text-center"<"total-footer">>><"row view-pager"<"col-sm-12"<"pagination-wrapper"p>>>',
+    $('.datatable').DataTable({
+        buttons:[
+         'excel', 'pdf', 'print'
+        ],
+        "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"<"inline-block mr-20"B><"inline-block"f>><"clearfix">>>t<"row"<"col-sm-12 text-center"<"total-footer">>><"row view-pager"<"col-sm-12"<"pagination-wrapper"p>>>',
         "aoColumns": dontSort,
         "autoWidth": false,
         "aaSorting": [],

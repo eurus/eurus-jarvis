@@ -28,7 +28,7 @@ set :pty, false
 # set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/assets','public/uploads','public/css','lib/assets')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/assets','public/uploads','public/css')
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -98,7 +98,7 @@ namespace :deploy do
 end
 
 # whenever task namespane
-# start whenever task by 
+# start whenever task by
 # cap production whenever:deploy
 # clean the whenever task by
 # cap production whenever:clean

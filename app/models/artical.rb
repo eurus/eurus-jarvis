@@ -36,17 +36,16 @@ class Artical < ActiveRecord::Base
       JSON.parse(file.read)["access_token"]
     end
 
-    articles = [{
-                  "thumb_media_id": "66EuqwIrGQ2TIspZd5Z35j58pGsFeLO6RAIU4HOqyY4",
-                  "author": "#{self.user.try :realname}",
-                  "title": "#{self.title}",
-                  "content_source_url": "http://jarvis.eurus.cn",
-                  "content": "#{self.content}",
-                  "digest": "digest",
-                  "show_cover_pic": "1"
-    }]
     data = {
-      articles: articles
+      "articles": [{
+                     "thumb_media_id": "66EuqwIrGQ2TIspZd5Z35j58pGsFeLO6RAIU4HOqyY4",
+                     "author": "#{self.user.try :realname}",
+                     "title": "#{self.title}",
+                     "content_source_url": "http://jarvis.eurus.cn",
+                     "content": "#{self.content}",
+                     "digest": "digest",
+                     "show_cover_pic": "1"
+      }]
     }
 
     upload_url = URI.parse("https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token=#{access_token}")
@@ -59,6 +58,7 @@ class Artical < ActiveRecord::Base
       http.ssl_version = :SSLv3
       http.request req
     end
+    ap req.body
     send_media_id = JSON.parse(res.body)["media_id"]
   end
 

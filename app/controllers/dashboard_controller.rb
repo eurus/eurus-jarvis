@@ -68,6 +68,7 @@ class DashboardController < ApplicationController
       config["default"]["secret"],
       config["default"]["access_token"],
     false)
+
     ap @article.get_media_id
     respond_to do |format|
       format.js {}

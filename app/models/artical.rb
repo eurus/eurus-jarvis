@@ -40,7 +40,7 @@ class Artical < ActiveRecord::Base
                   "thumb_media_id": "66EuqwIrGQ2TIspZd5Z35j58pGsFeLO6RAIU4HOqyY4",
                   "author": "#{self.user.try :realname}",
                   "title": "#{self.title}",
-                  "content_source_url": "jarvis.eurus.cn",
+                  "content_source_url": "http://jarvis.eurus.cn",
                   "content": "#{self.content}",
                   "digest": "digest",
                   "show_cover_pic": "1"
@@ -49,8 +49,8 @@ class Artical < ActiveRecord::Base
       articles: articles
     }
 
-    upload_url = URI.parse("https://api.weixin.qq.com/cgi-bin/media/uploadnews")
-    req = Net::HTTP::Post.new(upload_url+"?access_token=#{access_token}",
+    upload_url = URI.parse("https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token=#{access_token}")
+    req = Net::HTTP::Post.new(upload_url.path+"?access_token=#{access_token}",
                               initheader = {'Content-Type' =>'application/json'})
     req.body = data.to_json
 

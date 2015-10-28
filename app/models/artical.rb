@@ -3,4 +3,64 @@ class Artical < ActiveRecord::Base
   validates :title, :content, :user_id, presence: true
 
   paginates_per 6
+
+  def send_to_all
+    access_token = File.open("public/token","rb") do |file|
+      JSON.parse(file.read)["access_token"]
+    end
+
+    content = {
+      "filter":{
+        "is_to_all": true
+      },
+      "mpnews":{
+        "media_id": get_media_id
+      },
+      "msgtype": "mpnews"
+    }
+
+    url = URI.parse("https://api.weixin.qq.com/cgi-bin/message/mass/sendall")
+    send_req = Net::HTTP::Post.new(url+"?access_token=#{access_token}", initheader = {'Content-Type' =>'application/json'})
+    send_req.body = content.to_json
+    send_res = Net::HTTP.start(url.host,url.port, use_ssl:true) do |http|
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      http.ssl_version = :SSLv3
+      http.request send_req
+    end
+
+    send_res.body
+  end
+
+  def get_media_id
+    access_token = File.open("public/token","rb") do |file|
+      JSON.parse(file.read)["access_token"]
+    end
+
+    articles = [{
+                  "thumb_media_id": "66EuqwIrGQ2TIspZd5Z35j58pGsFeLO6RAIU4HOqyY4",
+                  "author": "#{self.user.try :realname}",
+                  "title": "#{self.title}",
+                  "content_source_url": "jarvis.eurus.cn",
+                  "content": "#{self.content}",
+                  "digest": "digest",
+                  "show_cover_pic": "1"
+    }]
+    data = {
+      articles: articles
+    }
+
+    upload_url = URI.parse("https://api.weixin.qq.com/cgi-bin/media/uploadnews")
+    req = Net::HTTP::Post.new(upload_url+"?access_token=#{access_token}",
+                              initheader = {'Content-Type' =>'application/json'})
+    req.body = data.to_json
+
+    res = Net::HTTP.start(upload_url.host, upload_url.port, use_ssl:true) do |http|
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      http.ssl_version = :SSLv3
+      http.request req
+    end
+    send_media_id = JSON.parse(res.body)["media_id"]
+  end
+
+
 end

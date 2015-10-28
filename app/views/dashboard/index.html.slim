@@ -57,7 +57,12 @@
 
   .col-md-6
     .panel.panel-default
-      .panel-heading 今日推荐
+      .panel-heading 
+        p 
+          span 今日推荐
+          span.pull-right
+            = link_to "群发" ,jarvis_send_path(aid:@art),remote: true
+
       .panel-body
         h3 = @art.try :title
         article

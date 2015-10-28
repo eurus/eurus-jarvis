@@ -1,0 +1,13 @@
+default: &default
+  appid: "wx1ff99ae9b2fb33cb"
+  secret: "5b65ed41700bedcfeb9479f3306776f6"
+  access_token: "public/token"
+
+production:
+  <<: *default
+
+development:
+  <<: *default
+
+test:
+  <<: *default

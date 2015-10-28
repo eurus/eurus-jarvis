@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resource :wechat, only: [:show, :create]
   root 'dashboard#index'
 
   mount RuCaptcha::Engine => "/rucaptcha"
@@ -34,7 +35,7 @@ Rails.application.routes.draw do
   get 'supervise/groups' => 'supervise#groups'
 
   get 'jarvis/checkontime' => 'dashboard#check_on_time'
-
+  get 'jarvis/send' => 'dashboard#send_to_all'
   # supervise users
   get 'supervise/users/new' => "supervise#new_user"
   get 'supervise/users/edit/:id' => "supervise#edit_user"

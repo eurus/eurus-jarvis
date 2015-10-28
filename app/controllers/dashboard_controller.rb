@@ -3,12 +3,7 @@ class DashboardController < ApplicationController
 
   include Common
   def index
-    num = Artical.count
-    if num==0
-      num=1
-    end
-    num = Random.new.rand(num)
-    @art = Artical.all[num]
+    @art = Artical.last
 
     @plan = Plan.where(user_id:current_user.id).first
     ##出差天数
@@ -63,6 +58,23 @@ class DashboardController < ApplicationController
       format.json { render json: @check, status: 200 }
     end
   end
+
+  def send_to_all
+    @article = Artical.find(params[:aid])
+
+    config = YAML.load_file('config/wechat.yml')
+    @wechat = Wechat::Api.new(
+      config["default"]["appid"],
+      config["default"]["secret"],
+      config["default"]["access_token"],
+    false)
+    
+    ap @article.get_media_id
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
   private
 
   def user_params

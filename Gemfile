@@ -97,3 +97,5 @@ gem 'capistrano3-unicorn'
 #
 gem 'whenever', '~> 0.8.4',require: false
 gem 'rucaptcha'
+gem 'wechat'
+

@@ -50,15 +50,13 @@ class Artical < ActiveRecord::Base
     end
 
     data = {
-      "articles": [{
-                     "thumb_media_id": media_id,
-                     "author": "#{self.user.try :realname}",
-                     "title": "#{self.title}",
-                     "content_source_url": "http://jarvis.eurus.cn",
-                     "content": "#{self.content}",
-                     "digest": "digest",
-                     "show_cover_pic": "1"
-      }]
+      "articles" =>[{"thumb_media_id": media_id,
+                     "author" => "#{self.user.try :realname}",
+                     "title"=> "#{self.title}",
+                     "content_source_url" => "http://jarvis.eurus.cn",
+                     "content" => "#{self.content}",
+                     "digest" => "digest",
+                     "show_cover_pic" => "1"}]
     }
 
     upload_url = URI.parse("https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token=#{access_token}")

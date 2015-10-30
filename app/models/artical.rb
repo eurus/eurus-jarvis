@@ -28,7 +28,7 @@ class Artical < ActiveRecord::Base
       http.request send_req
     end
 
-    send_res.body
+    ap send_res.body
   end
 
   def get_media_id
@@ -36,9 +36,22 @@ class Artical < ActiveRecord::Base
       JSON.parse(file.read)["access_token"]
     end
 
+    config = YAML.load_file('config/wechat.yml')
+    @wechat = Wechat::Api.new(
+      config["default"]["appid"],
+      config["default"]["secret"],
+      config["default"]["access_token"],
+    false)
+
+    media_id=""
+
+    File.open('public/logo.jpg') do |f|
+      media_id = @wechat.media_create('image',f)["media_id"]
+    end
+
     data = {
       "articles": [{
-                     "thumb_media_id": "66EuqwIrGQ2TIspZd5Z35j58pGsFeLO6RAIU4HOqyY4",
+                     "thumb_media_id": media_id,
                      "author": "#{self.user.try :realname}",
                      "title": "#{self.title}",
                      "content_source_url": "http://jarvis.eurus.cn",
@@ -58,7 +71,7 @@ class Artical < ActiveRecord::Base
       http.ssl_version = :SSLv3
       http.request req
     end
-    ap req.body
+
     send_media_id = JSON.parse(res.body)["media_id"]
   end
 

@@ -62,14 +62,9 @@ class DashboardController < ApplicationController
   def send_to_all
     @article = Artical.find(params[:aid])
 
-    config = YAML.load_file('config/wechat.yml')
-    @wechat = Wechat::Api.new(
-      config["default"]["appid"],
-      config["default"]["secret"],
-      config["default"]["access_token"],
-    false)
+   
 
-    ap @article.get_media_id
+    @article.send_to_all
     respond_to do |format|
       format.js {}
     end

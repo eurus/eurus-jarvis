@@ -10,13 +10,13 @@ class Artical < ActiveRecord::Base
     end
 
     content = {
-      "filter":{
-        "is_to_all": true
+      "filter" =>{
+        "is_to_all" => true
       },
-      "mpnews":{
-        "media_id": get_media_id
+      "mpnews" => {
+        "media_id" => get_media_id
       },
-      "msgtype": "mpnews"
+      "msgtype" => "mpnews"
     }
 
     url = URI.parse("https://api.weixin.qq.com/cgi-bin/message/mass/sendall")
@@ -50,7 +50,7 @@ class Artical < ActiveRecord::Base
     end
 
     data = {
-      "articles" =>[{"thumb_media_id": media_id,
+      "articles" =>[{"thumb_media_id" => media_id,
                      "author" => "#{self.user.try :realname}",
                      "title"=> "#{self.title}",
                      "content_source_url" => "http://jarvis.eurus.cn",

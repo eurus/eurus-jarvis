@@ -61,9 +61,6 @@ class DashboardController < ApplicationController
 
   def send_to_all
     @article = Artical.find(params[:aid])
-
-   
-
     @article.send_to_all
     respond_to do |format|
       format.js {}

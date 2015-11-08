@@ -86,7 +86,7 @@ Rails.application.configure do
     user_name:    'info@eurus.cn',
     password:     'woshi007',
     enable_starttls_auto: true,
-    openssl_verify_mode:'true',
+    openssl_verify_mode:'none',
     authentication: 'login'
   }
 end

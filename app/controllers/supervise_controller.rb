@@ -2,28 +2,34 @@ class SuperviseController < ApplicationController
   before_action :set_user, only: [:edit_user, :update_user, :destroy_user]
   before_action :set_project, only: [:edit_project, :update_project, :destroy_project, :done_project]
   before_action :set_buddies, only: [:users,:groups, :overtimes,:errands,:vacations,:projects]
+ 
   def index
-
+    authorize! :supervise, current_user
   end
 
   def users
     @users = User.dfs(current_user)
+    authorize! :users, current_user
   end
 
   def groups
     @groups = Group.all.page params[:page]
+    authorize! :groups, current_user
   end
 
   def overtimes
     @overtimes = Overtime.includes(:user).includes(:project).all
+    authorize! :overtimes, current_user
   end
 
   def errands
     @errands = Errand.includes(:user).includes(:project).all
+    authorize! :errands, current_user
   end
 
   def vacations
     @vacations = Vacation.includes(:user).all
+    authorize! :vacations, current_user
   end
 
   # projects
@@ -32,6 +38,7 @@ class SuperviseController < ApplicationController
     # @projects = Project.all
     uids = (User.dfs current_user).map{|u| u.id}
     @projects = Project.includes(:owner).includes(:users).where(owner_id: uids)
+    authorize! :projects, current_user
   end
 
   def new_project

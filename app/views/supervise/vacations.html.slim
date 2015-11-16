@@ -28,6 +28,7 @@
               td id="tr-status-vacation-#{vacation.id}" class="text-center #{'success' if vacation.approve}" = status vacation.try :approve
               td id="tr-approve-time-#{vacation.id}" = vacation.approve_time
               td.ops
-                = link_to fa_icon("check"),checkrecord_path(id: vacation.id, cut: 'vacation'), id:"check-vacation-#{vacation.id}", data: {confirm:"确认同意 #{vacation.user.try :realname} 的#{vacation.cut}申请？", text:"#{vacation.start_at}起，为期#{vacation.duration}天，事由：#{vacation.content}"}, title:"审核", remote:true unless vacation.approve
+                 -if can? :check, :all
+                  = link_to fa_icon("check"),checkrecord_path(id: vacation.id, cut: 'vacation'), id:"check-vacation-#{vacation.id}", data: {confirm:"确认同意 #{vacation.user.try :realname} 的#{vacation.cut}申请？", text:"#{vacation.start_at}起，为期#{vacation.duration}天，事由：#{vacation.content}"}, title:"审核", remote:true unless vacation.approve
               td=vacation.user.try :username
 

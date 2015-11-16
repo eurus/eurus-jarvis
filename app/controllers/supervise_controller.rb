@@ -233,6 +233,7 @@ class SuperviseController < ApplicationController
   end
 
   def check_record_by_type
+    authorize! :check, current_user
     obj = klassify(params[:cut],params[:id])
     respond_to do |format|
       if obj
@@ -257,6 +258,7 @@ class SuperviseController < ApplicationController
   end
 
   def issue_record_by_type
+    authorize! :issue, current_user
     obj = klassify(params[:cut],params[:id])
     respond_to do |format|
       if obj

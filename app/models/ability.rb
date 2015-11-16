@@ -10,6 +10,8 @@ class Ability
       can :errands, :all
       can :vacations, :all
       can :projects, :all
+      can :check, :all
+      can :issue, :all
     else
       if user.occupation.split(",").include? 'office-manager'
         can :users, :all
@@ -18,6 +20,8 @@ class Ability
         can :errands, :all
         can :vacations, :all
         can :projects, :all
+        can :check, :all
+        can :issue, :all
       end
 
       if user.occupation.split(",").include? 'office-assitant'
@@ -25,6 +29,7 @@ class Ability
         can :users, :all
         can :errands, :all
         can :projects, :all
+        can :check, :all
       end
 
       if user.occupation.split(",").include? 'team-lead'

@@ -31,6 +31,8 @@
               td id="tr-approve-time-#{overtime.id}"= overtime.approve_time
               td id="tr-issue-time-#{overtime.id}" = overtime.issue_time
               td.ops
-                = link_to fa_icon("check"), checkrecord_path(id: overtime.id, cut: 'overtime'), id: "check-overtime-#{overtime.id}",remote: true,data: {confirm:"确认同意 #{overtime.user.try :realname} 的加班申请？", text:"#{overtime.start_at}起，为期#{overtime.duration}天，项目：#{overtime.project.try :name}"} unless overtime.approve
-                = link_to fa_icon('usd'), issuerecord_path(id: overtime.id, cut: 'overtime'), id: "issue-overtime-#{overtime.id}", remote: true, data: {:confirm => "确认发放加班费: #{overtime.user.try :realname}", text:"#{overtime.start_at}起，为期#{overtime.duration}天，项目：#{overtime.project.try :name}"} unless overtime.issue
+                 -if can? :check, :all
+                  = link_to fa_icon("check"), checkrecord_path(id: overtime.id, cut: 'overtime'), id: "check-overtime-#{overtime.id}",remote: true,data: {confirm:"确认同意 #{overtime.user.try :realname} 的加班申请？", text:"#{overtime.start_at}起，为期#{overtime.duration}天，项目：#{overtime.project.try :name}"} unless overtime.approve
+                 -if can? :issue, :all
+                  = link_to fa_icon('usd'), issuerecord_path(id: overtime.id, cut: 'overtime'), id: "issue-overtime-#{overtime.id}", remote: true, data: {:confirm => "确认发放加班费: #{overtime.user.try :realname}", text:"#{overtime.start_at}起，为期#{overtime.duration}天，项目：#{overtime.project.try :name}"} unless overtime.issue
               td = overtime.user.try :username

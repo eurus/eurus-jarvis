@@ -14,11 +14,13 @@
         = fa_icon("group")+" 组织"
       = link_to supervise_projects_path , class: "list-group-item #{'active' if params[:action] == 'projects' or params[:action].end_with? 'project'}" do
         = fa_icon("building")+" 项目"
-      - if ceo? or director?
+      - if can? :overtimes, :all
         = link_to supervise_overtimes_path , class: "list-group-item #{'active' if params['action'] == 'overtimes'}" do
           = fa_icon("briefcase")+" 加班"
+      - if can? :errands, :all
         = link_to supervise_errands_path , class: "list-group-item #{'active' if params['action'] == 'errands'}" do
           = fa_icon("paper-plane")+" 出差"
+      - if can? :vacations, :all
         = link_to supervise_vacations_path , class: "list-group-item #{'active' if params['action'] == 'vacations'}" do
           = fa_icon("bed")+" 假期"
     .pl-20.pr-20
@@ -49,7 +51,7 @@
 
       = link_to articals_path , class: "list-group-item #{'active' if params['controller'] == 'articals'}" do
         =fa_icon("book") +" 文章"
-      - if current_user.role == 'ceo' or current_user.role =='pm' or current_user.role == 'director'
+      - if can? :users, :all
         = link_to supervise_users_path , class: "list-group-item #{'active' if params['controller'] == 'supervise'}" do
           =fa_icon("cog") +" 管理"
 

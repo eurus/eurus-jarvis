@@ -84,7 +84,7 @@ function initPage() {
 
 
     // tooltip
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
     // end of tooltip
 
     // popover
@@ -93,6 +93,7 @@ function initPage() {
 
     var dontSort = [];
     var hidden = [];
+    var order = [];
     var sumIndex = -1;
     var sumType = 'count';
     $('.datatable thead th').each(function(index, elem) {
@@ -116,8 +117,14 @@ function initPage() {
             hidden.push({
                 "targets": [index],
                 "visible": false
-            })
+            });
         }
+
+        if ($(this).hasClass('asc')) {
+            var count = $(this).prevAll('th').size();
+            order.push([count, "asc"]);
+        }
+        // "order": [[ 3, "desc" ]]
     });
     $('.datatable').DataTable({
         buttons:[
@@ -128,6 +135,7 @@ function initPage() {
         "autoWidth": false,
         "aaSorting": [],
         "columnDefs": hidden,
+        order: order,
         "footerCallback": function(row, data, start, end, display) {
             if (sumIndex >= 0) {
                 var api = this.api();

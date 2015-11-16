@@ -3,8 +3,41 @@ class Ability
 
   def initialize(user)
     user ||= User.new
-    if user.ceo? or user.pm? or user.director?
+    if user.ceo?
+      can :users, :all
+      can :groups, :all
+      can :overtimes, :all
+      can :errands, :all
+      can :vacations, :all
+      can :projects, :all
+    else
+      if user.occupation.split(",").include? 'office-manager'
         can :users, :all
+        can :groups, :all
+        can :overtimes, :all
+        can :errands, :all
+        can :vacations, :all
+        can :projects, :all
+      end
+
+      if user.occupation.split(",").include? 'office-assitant'
+        can :groups, :all
+        can :users, :all
+        can :errands, :all
+        can :projects, :all
+      end
+
+      if user.occupation.split(",").include? 'team-lead'
+        can :users, :all
+        can :groups, :all
+        can :projects, :all
+      end
+
+      if user.occupation.split(",").include? 'tech-lead'
+        can :users, :all
+        can :groups, :all
+        can :projects, :all
+      end
     end
     # Define abilities for the passed in user here. For example:
     #

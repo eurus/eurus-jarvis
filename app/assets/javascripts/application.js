@@ -30,6 +30,7 @@
 //= require buttons.print.min
 //= require masonry/masonry.min
 //= require moment
+//= require bootstrap-tagsinput
 //= require moment/zh-cn
 //= require_tree .
 

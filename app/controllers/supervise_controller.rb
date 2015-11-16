@@ -230,10 +230,11 @@ class SuperviseController < ApplicationController
     respond_to do |format|
       if obj
         obj.approve = true
+        obj.approve_time = Date.current
         obj.save
         format.js{
           render 'check_record_by_type',
-          locals:{cut: params[:cut],id: obj.id}
+          locals:{cut: params[:cut],id: obj.id,approve_time: obj.approve_time.strftime("%Y-%m-%d")}
         }
       else
         case params[:cut]
@@ -254,10 +255,11 @@ class SuperviseController < ApplicationController
       if obj
         obj.issue = true
         obj.approve = true
+        obj.issue_time = Date.current
         obj.save
         format.js{
           render 'issue_record_by_type',
-          locals:{cut: params[:cut],id: obj.id}
+          locals:{cut: params[:cut],id: obj.id,issue_time: obj.issue_time.strftime("%Y-%m-%d")}
         }
       else
         case params[:cut]
@@ -321,12 +323,6 @@ class SuperviseController < ApplicationController
 
   def set_local
     @col = User.dfs current_user
-    # if (User.dfs current_user).try :flatten
-    #   available_collection = (User.dfs current_user).flatten.map { |e| e.id }
-    #   @col = User.where(id: available_collection)
-    # else
-    #   @col  = []
-    # end
   end
 
 end

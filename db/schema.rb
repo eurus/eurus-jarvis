@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151004194708) do
+ActiveRecord::Schema.define(version: 20151116025244) do
 
   create_table "articals", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -23,17 +23,19 @@ ActiveRecord::Schema.define(version: 20151004194708) do
   end
 
   create_table "errands", force: :cascade do |t|
-    t.string   "location",   limit: 255
-    t.string   "content",    limit: 255
+    t.string   "location",     limit: 255
+    t.string   "content",      limit: 255
     t.date     "start_at"
     t.date     "end_at"
-    t.integer  "project_id", limit: 4
-    t.integer  "user_id",    limit: 4
-    t.float    "fee",        limit: 24
-    t.boolean  "approve",                default: false
-    t.boolean  "issue",                  default: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.integer  "project_id",   limit: 4
+    t.integer  "user_id",      limit: 4
+    t.float    "fee",          limit: 24
+    t.boolean  "approve",                  default: false
+    t.boolean  "issue",                    default: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.date     "approve_time"
+    t.date     "issue_time"
   end
 
   create_table "feedbacks", force: :cascade do |t|
@@ -53,14 +55,16 @@ ActiveRecord::Schema.define(version: 20151004194708) do
 
   create_table "overtimes", force: :cascade do |t|
     t.date     "start_at"
-    t.float    "duration",   limit: 24
-    t.string   "content",    limit: 255
-    t.integer  "user_id",    limit: 4
-    t.boolean  "approve",                default: false
-    t.boolean  "issue",                  default: false
-    t.integer  "project_id", limit: 4
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.float    "duration",     limit: 24
+    t.string   "content",      limit: 255
+    t.integer  "user_id",      limit: 4
+    t.boolean  "approve",                  default: false
+    t.boolean  "issue",                    default: false
+    t.integer  "project_id",   limit: 4
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.date     "approve_time"
+    t.date     "issue_time"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -136,13 +140,15 @@ ActiveRecord::Schema.define(version: 20151004194708) do
 
   create_table "vacations", force: :cascade do |t|
     t.date     "start_at"
-    t.float    "duration",   limit: 24
-    t.string   "content",    limit: 255
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.integer  "user_id",    limit: 4
-    t.boolean  "approve",                default: false
-    t.string   "cut",        limit: 255
+    t.float    "duration",     limit: 24
+    t.string   "content",      limit: 255
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "user_id",      limit: 4
+    t.boolean  "approve",                  default: false
+    t.string   "cut",          limit: 255
+    t.date     "approve_time"
+    t.date     "issue_time"
   end
 
   create_table "weeklies", force: :cascade do |t|

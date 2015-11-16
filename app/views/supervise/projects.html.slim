@@ -12,6 +12,7 @@
             th 负责人
             th 参与
             th 状态
+            th.hidden.asc
             th
         tbody
           - @projects.each do |project|
@@ -22,6 +23,7 @@
               td
                 button.project-btn.btn.btn-default value="#{project.id}" data-toggle="modal" data-target="#projectM" = project.users.try :count
               td class=" text-center #{project.status_class}" = project.status_explain
+              td = project.status_no
               td.ops
                 = link_to fa_icon('pencil-square-o'), supervise_edit_project_path(project)
                 = link_to fa_icon('check'), supervise_done_project_path(id:project.id),data: {:confirm => "确定完成#{project.try :name}"} unless project.status == "done"

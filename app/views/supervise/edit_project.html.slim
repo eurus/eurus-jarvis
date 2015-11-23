@@ -15,7 +15,7 @@ div
         = f.select :owner_id,(@col).collect {|p| [ "#{p.realname}(#{p.username})", p.id ]},{}, {class:'form-control'}
       .form-groups
         = f.label "状态"
-        = f.select :status,  ["启动", "规划", "执行", "收尾", "中止"],{}, {class:'form-control'}
+        = f.select :status, Project::STATUS_LIST,{}, {class:'form-control'}
       .form-groups
         /= f.input :buddies,label: "参与者",input_html:{class: "form-control"},collection: @col.collect {|p| [ "#{p.realname}(#{p.username})", p.id ]},input_html: { multiple: true },selected: @project.users.map {|e|e.id}
         label 成员

@@ -15,7 +15,7 @@ div
         = f.select :owner_id, @col.collect {|p| [ "#{p.fullname} <#{p.role_explain}>", p.id ]}, {}, {class:'form-control'}
       .form-groups
         = f.label "状态"
-        = f.select :status,  ["启动", "规划", "执行", "收尾", "中止"], {}, {class:'form-control'}
+        = f.select :status,  Project::STATUS_LIST, {}, {class:'form-control'}
       .form-groups
         label 成员
         select#buddies name='buddies[]' multiple='multiple'

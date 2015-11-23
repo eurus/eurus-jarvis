@@ -3,6 +3,9 @@ class Project < ActiveRecord::Base
   paginates_per 10
   has_and_belongs_to_many :users
   belongs_to :owner, class_name:'User'
+
+  STATUS_LIST = ["启动", "规划", "执行", "收尾", "结束", "维护", "中止"]
+
   def self.done
     where(status: "done",
       created_at: Time.current.beginning_of_year..Time.current.end_of_year)

@@ -63,7 +63,6 @@ $outstand: lighten(#1bc4a3, 10%);
 html,body,.container{
     height:100%;
 }
-
  .panel, .fademein{
   display:none;
 }
@@ -72,6 +71,19 @@ form{
 }
 .form-groups{
   margin-top:8px;
+}
+
+.avatar-medium{
+  width:64px;
+  height:64px;
+  @extend .img-responsive;
+  @extend .img-circle;
+}
+
+.avatar-small{
+  @extend .avatar-medium;
+  width:40px;
+  height:40px;
 }
 
 .btn.btn-outstand{
@@ -153,6 +165,9 @@ table.dataTable tr > td{
 
 // table-hover ops
 .table-hover{
+  a:hover{
+    background:none !important;
+  }
   tr:hover{
     .ops{
     a{
@@ -649,4 +664,52 @@ table.dataTable tr > td{
     -webkit-animation: slideDown 3s 0.3s 1 ease forwards;
     -moz-transform:    translateY(-50px);
     -moz-animation:    slideDown 3s 0.3s 1 ease forwards;
+}
+
+
+.log{
+  margin-top:20px;
+  .prefix{
+    line-height:30px;
+  }
+  .text{
+    margin:0;
+    padding:8px 10px;
+    background:#fefefe;
+    border: 1px solid #e7e7e7;
+    border-bottom:1px solid #e2e2e2;
+    border-radius:8px;
+    word-break: break-all;
+    position: relative;
+    .remove{
+      position: absolute;
+      right:8px;
+      top:8px;
+    opacity:0;
+    }
+  }
+  // .text::before{
+  //   padding:0;
+  //   content: " ";
+  //   top:8px;
+  //   left:0;
+  //   position: absolute;
+  //   width:0;
+  //   height:0;
+  //   line-height: 0;
+  //   border:8px solid transparent;
+  //   border-right-color:#fefefe;
+  // }
+
+  &:hover{
+    cursor:pointer;
+    .text{
+      background: #eeffee;
+    }
+    .remove{opacity:1;
+      padding:3px;
+      &:hover{
+        background:none;
+      }}
+  }
 }

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       get 'update_status'
     end
   end
-  
+
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
@@ -48,8 +48,12 @@ Rails.application.routes.draw do
   get 'supervise/projects/edit/:id' => "supervise#edit_project", as: 'supervise_edit_project'
   put 'supervise/projects/:id' => "supervise#update_project"
   post 'supervise/projects' => "supervise#create_project"
-  delete 'supervise/projects/:id' => 'supervise#destroy_project'
+  delete 'supervise/projects/:id' => 'supervise#destroy_project', as: 'supervise_destroy_project'
   get 'supervise/projects/done' => "supervise#done_project", as: 'supervise_done_project'
+
+  get 'supervise/projects/:id' => "supervise#show_project", as: 'supervise_show_project'
+  post 'supervise/projects/:id/logs' => "supervise#create_project_log", as: 'supervise_create_project_logs'
+  delete 'supervise/logs/:id' => "supervise#destroy_project_log", as: 'supervise_destroy_project_logs'
 
   get 'supervise/group/new' => 'supervise#user_group_new'
   put 'supervise/groups' => 'supervise#user_group_update', as: 'supervise_group_update'

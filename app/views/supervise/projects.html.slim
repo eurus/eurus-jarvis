@@ -17,7 +17,7 @@
         tbody
           - @projects.each do |project|
             tr
-              td = project.name
+              td = link_to project.name, supervise_show_project_path(project)
               td style='max-width:400px' = project.content
               td = project.owner.try :realname
               td

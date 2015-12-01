@@ -1,8 +1,8 @@
 class SuperviseController < ApplicationController
   before_action :set_user, only: [:edit_user, :update_user, :destroy_user]
-  before_action :set_project, only: [:edit_project, :update_project, :destroy_project, :done_project]
+  before_action :set_project, only: [:edit_project, :update_project, :destroy_project, :done_project, :show_project, :create_project_log]
   before_action :set_buddies, only: [:users,:groups, :overtimes,:errands,:vacations,:projects]
- 
+
   def index
     authorize! :supervise, current_user
   end
@@ -100,6 +100,28 @@ class SuperviseController < ApplicationController
       format.html { redirect_to supervise_projects_url, notice: 'Project successfully finished!' }
     end
 
+  end
+
+  # project logs
+  def show_project
+    @project_logs = @project.project_logs.includes(:user)
+    @project_log = ProjectLog.new
+    authorize! :projects, current_user
+  end
+
+  def create_project_log
+    @project_log = ProjectLog.new(project_log_params)
+    @project_log.project = @project
+    @project_log.user = current_user
+    @project_log.save
+    redirect_to action: :show_project
+  end
+
+  def destroy_project_log
+    @project_log = ProjectLog.includes(:project).find(params[:id])
+    @pid = @project_log.project.id
+    @project_log.destroy!
+    redirect_to action: :show_project, id:@pid
   end
 
   # user operation without users_controller
@@ -321,8 +343,12 @@ class SuperviseController < ApplicationController
     params.require(:supervisor).permit(:occupation,:supervisor_id,buddies: [])
   end
 
+  def project_log_params
+    params.require(:project_log).permit(:category, :date, :project_id, :content)
+  end
+
   def set_project
-    @project = Project.find(params[:id])
+    @project = Project.includes(:owner).includes(:users).find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

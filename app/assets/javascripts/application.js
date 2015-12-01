@@ -127,6 +127,8 @@ function initPage() {
         }
         // "order": [[ 3, "desc" ]]
     });
+    if (! $.fn.dataTable.isDataTable('.datatable')){
+
     $('.datatable').DataTable({
         buttons:[
          'excel', 'pdf', 'print'
@@ -184,6 +186,7 @@ function initPage() {
             }
         }
     });
+    }
     // qiniu upload picture
     // powerd by 🍌
     sn = $('#summernote').summernote({

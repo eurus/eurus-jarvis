@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116025244) do
+ActiveRecord::Schema.define(version: 20151201063203) do
 
   create_table "articals", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -81,6 +81,19 @@ ActiveRecord::Schema.define(version: 20151116025244) do
     t.date     "done_at"
     t.integer  "creator_id",  limit: 4
   end
+
+  create_table "project_logs", force: :cascade do |t|
+    t.date     "date"
+    t.string   "category",   limit: 255
+    t.text     "content",    limit: 65535
+    t.integer  "project_id", limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "user_id",    limit: 4
+  end
+
+  add_index "project_logs", ["project_id"], name: "index_project_logs_on_project_id", using: :btree
+  add_index "project_logs", ["user_id"], name: "index_project_logs_on_user_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -159,4 +172,6 @@ ActiveRecord::Schema.define(version: 20151116025244) do
     t.datetime "updated_at",               null: false
   end
 
+  add_foreign_key "project_logs", "projects"
+  add_foreign_key "project_logs", "users"
 end

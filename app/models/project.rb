@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   validates :name, :content, :status, presence: true
   paginates_per 10
   has_and_belongs_to_many :users
+  has_many :project_logs
   belongs_to :owner, class_name:'User'
 
   STATUS_LIST = ["启动", "规划", "执行", "收尾", "结束", "维护", "中止"]

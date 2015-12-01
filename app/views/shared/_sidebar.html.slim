@@ -12,7 +12,7 @@
         = fa_icon("user")+" 用户"
       = link_to supervise_groups_path , class: "list-group-item #{'active' if params[:action] == 'groups' or params[:action].start_with? 'user_group'}" do
         = fa_icon("group")+" 组织"
-      = link_to supervise_projects_path , class: "list-group-item #{'active' if params[:action] == 'projects' or params[:action].end_with? 'project'}" do
+      = link_to supervise_projects_path , class: "list-group-item #{'active' if params[:action] == 'projects' or params[:action].end_with? 'project' or params[:action].starts_with? 'project'}" do
         = fa_icon("building")+" 项目"
       - if can? :overtimes, :all
         = link_to supervise_overtimes_path , class: "list-group-item #{'active' if params['action'] == 'overtimes'}" do

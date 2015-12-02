@@ -8,10 +8,6 @@
   -if params[:controller] == 'supervise'
     .title management
     div.list-group.text-center
-      = link_to supervise_users_path , class: "list-group-item #{'active' if params[:action] == 'users' or params[:action].end_with? 'user'}" do
-        = fa_icon("user")+" 用户"
-      = link_to supervise_groups_path , class: "list-group-item #{'active' if params[:action] == 'groups' or params[:action].start_with? 'user_group'}" do
-        = fa_icon("group")+" 组织"
       = link_to supervise_projects_path , class: "list-group-item #{'active' if params[:action] == 'projects' or params[:action].end_with? 'project' or params[:action].starts_with? 'project'}" do
         = fa_icon("building")+" 项目"
       - if can? :overtimes, :all
@@ -23,6 +19,13 @@
       - if can? :vacations, :all
         = link_to supervise_vacations_path , class: "list-group-item #{'active' if params['action'] == 'vacations'}" do
           = fa_icon("bed")+" 假期"
+      = link_to supervise_groups_path , class: "list-group-item #{'active' if params[:action] == 'groups' or params[:action].start_with? 'user_group'}" do
+        = fa_icon("group")+" 组织"
+
+
+      = link_to supervise_users_path , class: "list-group-item #{'active' if params[:action] == 'users' or params[:action].end_with? 'user'}" do
+        = fa_icon("user")+" 用户"
+
     .pl-20.pr-20
       = link_to fa_icon('plus')+ "新增员工", supervise_users_new_path,class: "btn btn-outstand btn-block" if current_user.role == 'ceo' && params[:action] == 'users'
       = link_to fa_icon('plus')+'新建组织', supervise_group_new_path,class: 'btn btn-outstand btn-block' if (ceo? or director?) && params[:action] == 'groups'
@@ -52,7 +55,7 @@
       = link_to articals_path , class: "list-group-item #{'active' if params['controller'] == 'articals'}" do
         =fa_icon("book") +" 文章"
       - if can? :users, :all
-        = link_to supervise_users_path , class: "list-group-item #{'active' if params['controller'] == 'supervise'}" do
+        = link_to supervise_projects_path , class: "list-group-item #{'active' if params['controller'] == 'supervise'}" do
           =fa_icon("cog") +" 管理"
 
     div.pl-20.pr-20

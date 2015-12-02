@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = (Project.includes(:users).includes(:owner).where(owner: current_user.id) + current_user.projects).uniq
+    @projects = (Project.includes(:users).includes(:owner).includes(:errands).where(owner: current_user.id) + current_user.projects.includes(:owner).includes(:users).includes(:errands)).uniq
   end
 
   # # GET /projects/new

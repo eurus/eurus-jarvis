@@ -20,7 +20,7 @@ div
         label 成员
         select#buddies name='buddies[]' multiple='multiple'
           -@col.each do |u|
-            = content_tag(:option, "#{u.realname} #{u.username.capitalize}", value: u.id, selected:false)
+            = content_tag(:option, "#{u.fullname}", value: u.id, selected:false)
       .form-groups
         = f.label "简介"
         = f.text_area :content,class: "form-control", rows:'5'

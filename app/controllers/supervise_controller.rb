@@ -37,7 +37,7 @@ class SuperviseController < ApplicationController
   def projects
     # @projects = Project.all
     uids = (User.dfs current_user).map{|u| u.id}
-    @projects = Project.includes(:owner).includes(:users).where(owner_id: uids)
+    @projects = Project.includes(:owner).includes(:users).includes(:errands).where(owner_id: uids)
     authorize! :projects, current_user
   end
 

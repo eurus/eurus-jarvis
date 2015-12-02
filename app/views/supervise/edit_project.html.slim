@@ -12,7 +12,7 @@ div
         = f.text_field :name,class: "form-control"
       .form-groups
         = f.label "负责人"
-        = f.select :owner_id,(@col).collect {|p| [ "#{p.realname}(#{p.username})", p.id ]},{}, {class:'form-control'}
+        = f.select :owner_id,(@col).collect {|p| [ p.fullname, p.id ]},{}, {class:'form-control'}
       .form-groups
         = f.label "状态"
         = f.select :status, Project::STATUS_LIST,{}, {class:'form-control'}
@@ -21,7 +21,7 @@ div
         label 成员
         select#buddies name='buddies[]' multiple='multiple'
           -@col.each do |u|
-            = content_tag(:option, "#{u.realname} #{u.username.capitalize}", value: u.id, selected: @project.include_uid?(u.id))
+            = content_tag(:option, "#{u.fullname}", value: u.id, selected: @project.include_uid?(u.id))
       .form-groups
         = f.label "简介"
         = f.text_area :content,class: "form-control", rows:'5'

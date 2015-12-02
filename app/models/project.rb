@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_many :project_logs
   belongs_to :owner, class_name:'User'
+  has_many :errands
 
   STATUS_LIST = ["启动", "规划", "执行", "收尾", "结束", "维护", "中止"]
 
@@ -26,6 +27,10 @@ class Project < ActiveRecord::Base
   def status_no
     dict = {:'启动'=>1, :'规划'=> 2, :'执行'=>3, :'收尾'=> 4, :'中止'=>6, :'维护'=>5, :'结束'=>99}
     dict[status.to_sym]
+  end
+
+  def errand_total
+    if errands.length > 0 then errands.map(&:fee).reduce(:+) if errands else 0 end
   end
 
   def include_uid?(user_id)

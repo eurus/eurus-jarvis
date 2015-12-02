@@ -6,7 +6,24 @@ class Project < ActiveRecord::Base
   belongs_to :owner, class_name:'User'
   has_many :errands
 
+  attr_accessor :current_user
+
   STATUS_LIST = ["启动", "规划", "执行", "收尾", "结束", "维护", "中止"]
+
+  after_update :status_change, :if => :status_changed?
+  before_update :status_done_at
+
+  def status_done_at
+    if self.status == '结束'
+      self.done_at = Date.today
+    end
+  end
+
+  def status_change
+    pl = ProjectLog.new(date: Date.today, project:self, user:self.current_user, category: '记录',
+      content: "项目状态变更为： #{self.status}")
+    pl.save
+  end
 
   def self.done
     where(status: "done",
@@ -30,10 +47,12 @@ class Project < ActiveRecord::Base
   end
 
   def errand_total
-    if errands.length > 0 then errands.map(&:fee).reduce(:+) if errands else 0 end
-  end
+    total = if errands.length > 0 then errands.map(&:fee).reduce(:+) if errands else 0 end
+    (total * 100).to_i / 100.0
+    end
 
-  def include_uid?(user_id)
-    (users.map(&:id) + [owner_id]).include? user_id
+    def include_uid?(user_id)
+      (users.map(&:id) + [owner_id]).include? user_id
+    end
+
   end
-end

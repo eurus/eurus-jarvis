@@ -20,7 +20,7 @@
               th 简介
               th 负责人
               th 成员
-              th 累积差旅
+              th.sum_up.rmb 累积差旅
               th 状态
               th.hidden.asc
           tbody
@@ -34,7 +34,7 @@
                     button.project-btn.btn.btn-default value="#{project.id}" data-toggle="modal" data-target="#projectM" = project.users.try :count
                   -else
                     span
-                td = project.errand_total
+                td = "￥ #{project.errand_total}"
                 td class=" text-center #{project.status_class}" = project.status_explain
                 td = project.status_no
         - @projects.each do |project|

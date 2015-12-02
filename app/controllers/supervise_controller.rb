@@ -72,6 +72,7 @@ class SuperviseController < ApplicationController
     uids = params[:buddies].map { |e| e.to_i }
     @project.users.delete_all
     @project.users << User.find(uids)
+    @project.current_user = current_user # temporary field
     @project.save
 
     respond_to do |format|

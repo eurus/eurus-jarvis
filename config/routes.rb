@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   resources :feedbacks
   resources :weeklies
   resources :articals
-  resources :projects
+  resources :projects do
+    member do
+      post 'create_log', as: 'create_log'
+    end
+  end
   resources :vacations
   resources :errands
   resources :plans do

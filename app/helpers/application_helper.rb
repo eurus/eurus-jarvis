@@ -11,6 +11,10 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+  def glyphicon_span(glyphicon, text)
+    content_tag(:span, '', class:"glyphicon glyphicon-#{glyphicon}")+content_tag(:span, text, class:'ml-10')
+  end
+
   def notice_tag(msg="")
     if msg && msg != ''
       content_tag(:div, '', class:'alert alert-info', role:'alert') do

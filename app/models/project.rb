@@ -19,12 +19,12 @@ class Project < ActiveRecord::Base
   end
 
   def status_class
-    dict = {:'收尾'=> 'info', :'执行'=>'success', :'规划'=> 'warning', :'中止'=>'danger', :'启动'=>'', :'维护'=>''}
+    dict = {:'收尾'=> 'info', :'执行'=>'success', :'规划'=> 'warning', :'中止'=>'danger', :'启动'=>'', :'维护'=>'', :'结束'=>''}
     dict[status.to_sym]
   end
 
   def status_no
-    dict = {:'收尾'=> 4, :'执行'=>3, :'规划'=> 2, :'中止'=>0, :'启动'=>1, :'维护'=>5}
+    dict = {:'启动'=>1, :'规划'=> 2, :'执行'=>3, :'收尾'=> 4, :'中止'=>6, :'维护'=>5, :'结束'=>99}
     dict[status.to_sym]
   end
 

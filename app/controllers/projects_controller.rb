@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:done]
+  before_action :set_project, only: [:done, :show, :create_log]
 
   # GET /projects
   # GET /projects.json
@@ -18,9 +18,18 @@ class ProjectsController < ApplicationController
   #   set_local
   # end
 
-  # def show
+  def show
+    @project_logs = @project.project_logs.includes(:user)
+    @project_log = ProjectLog.new
+  end
 
-  # end
+  def create_log
+    @project_log = ProjectLog.new(project_log_params)
+    @project_log.project = @project
+    @project_log.user = current_user
+    @project_log.save
+    redirect_to action: :show
+  end
   # # POST /projects
   # # POST /projects.json
   # def create
@@ -94,4 +103,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+  def project_log_params
+    params.require(:project_log).permit(:category, :date, :project_id, :content)
+  end
 end

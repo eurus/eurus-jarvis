@@ -3,6 +3,7 @@ class Ability
 
   def initialize(user)
     user ||= User.new
+    can :project_logs, :all
     if user.ceo?
       can :users, :all
       can :groups, :all

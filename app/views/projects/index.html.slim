@@ -6,8 +6,7 @@
       li
         a href='#' 项目
       li.active  所有项目
-.banner
-  .title 项目日志
+
 .p-20.pt-15
   .panel
     .panel-body
@@ -25,12 +24,15 @@
           tbody
             - @projects.each do |project|
               tr
-                td= project.name
+                td= link_to project.name, project_path(project)
                 td style="max-width:500px" = project.content
                 td = project.owner.try :realname
                 td
-                  button.project-btn.btn.btn-default value="#{project.id}" data-toggle="modal" data-target="#projectM" = project.users.try :count
-                td = project.status
+                  -if project.users.try(:count) > 0
+                    button.project-btn.btn.btn-default value="#{project.id}" data-toggle="modal" data-target="#projectM" = project.users.try :count
+                  -else
+                    span
+                td class=" text-center #{project.status_class}" = project.status_explain
         - @projects.each do |project|
           div.hidden id= "project#{project.id}"
             - project.users.try :each do |x|

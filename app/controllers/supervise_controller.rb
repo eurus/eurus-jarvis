@@ -76,7 +76,7 @@ class SuperviseController < ApplicationController
 
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to supervise_projects_url, notice: 'Project was successfully updated.' }
+        format.html { redirect_to action: :show_project, notice: 'Project was successfully updated.' }
       else
         format.html { render :edit_project , locals: {col: set_local }}
       end
@@ -91,10 +91,9 @@ class SuperviseController < ApplicationController
   end
 
   def done_project
-    @project.status = 'done'
+    @project.status = '结束'
     @project.done_at = Date.current
     @project.save
-
 
     respond_to do |format|
       format.html { redirect_to supervise_projects_url, notice: 'Project successfully finished!' }

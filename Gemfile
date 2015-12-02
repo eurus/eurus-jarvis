@@ -49,6 +49,19 @@ group :development, :test do
   # gem 'ruby-growl'
   gem 'bullet'
 end
+
+group :development do
+ 
+  gem 'guard-bundler'
+  gem 'guard-rails'
+  gem 'guard-rspec'
+  
+  gem 'rb-fchange', :require=>false
+  gem 'rb-fsevent', :require=>false
+  gem 'rb-inotify', :require=>false
+  gem 'spring-commands-rspec'
+
+end
 # slim template
 gem "slim-rails"
 # cascading waterfall

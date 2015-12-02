@@ -129,9 +129,10 @@ function initPage() {
     });
     if (! $.fn.dataTable.isDataTable('.datatable')){
 
-    $('.datatable').DataTable({
-        buttons:[
-         'excel', 'pdf', 'print'
+        $('.datatable').DataTable({
+            buttons:[
+            {extend: 'excel', text: 'Excel', exportOptions: { modifier: { selected: true }}}
+            , 'print'
         ],
         "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"<"inline-block mr-20"B><"inline-block"f>><"clearfix">>>t<"row"<"col-sm-12 text-center"<"total-footer">>><"row view-pager"<"col-sm-12"<"pagination-wrapper"p>>>',
         "aoColumns": dontSort,

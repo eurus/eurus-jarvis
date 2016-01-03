@@ -23,7 +23,7 @@ module DashboardHelper
   end
   def sabbatical_gone
     days = 0
-    current_user.vacations.where("approve = true and cut = '年假' and created_at <= ?", Date.current.end_of_year).map{|v|
+    current_user.vacations.where("approve = true and cut = '年假' and created_at <= ? and created_at >= ?", Date.current.end_of_year,Date.current.beginning_of_year).map{|v|
         v.duration
     }.reduce(:+) || 0
   end

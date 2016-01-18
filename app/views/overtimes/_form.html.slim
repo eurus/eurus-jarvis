@@ -21,7 +21,7 @@
         = f.number_field :duration, class: "form-control", placeholder: "0.5的整数倍"
     .form-group
       = f.label "相关项目"
-      = f.select :project_id, Project.all.collect {|p| [ p.name, p.id ]}, {}, {class:'form-control'}
+      = f.select :project_id, @projects.collect {|p| [ p.name, p.id ]}, {}, {class:'form-control'}
     .form-groups
       = f.label "加班内容"
       = f.text_field :content,class: "form-control"

@@ -10,10 +10,12 @@ class OvertimesController < ApplicationController
   # GET /overtimes/new
   def new
     @overtime = Overtime.new
+    @projects = (current_user.projects + current_user.owned_projects).uniq
   end
 
   # GET /overtimes/1/edit
   def edit
+    @projects = (current_user.projects + current_user.owned_projects).uniq
   end
 
   # POST /overtimes

@@ -11,10 +11,12 @@ class ErrandsController < ApplicationController
   # GET /errands/new
   def new
     @errand = Errand.new
+    @projects = (current_user.projects + current_user.owned_projects).uniq
   end
 
   # GET /errands/1/edit
   def edit
+    @projects = (current_user.projects + current_user.owned_projects).uniq
   end
 
   # POST /errands

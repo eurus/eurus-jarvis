@@ -165,8 +165,8 @@ class User < ActiveRecord::Base
   def sabbatical_used
     days = 0
     vacations.where("approve = true and cut = '年假' and created_at <= ? and created_at >= ?",
-      Lunar.last_spring_festival,
-      Lunar.next_spring_festival).map{|v|
+      Lunar.next_spring_festival,
+      Lunar.last_spring_festival).map{|v|
         v.duration
     }.reduce(:+) || 0
   end

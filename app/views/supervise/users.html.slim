@@ -14,6 +14,7 @@
             th 生日
             th 累积差旅
             th 完成项目
+            th 剩余/总年假
             th.no_sort
         tbody
           - @users.each do |u|
@@ -34,6 +35,7 @@
               td = u.try :birthday
               td = "￥#{u.total_fee} / #{u.total_errand_day_count} 天"
               td = u.projects.done.count
+              td = "#{u.sabbatical_total - u.sabbatical_used} / #{u.sabbatical_total}"
               td.ops
                 - if current_user.role == 'ceo' || current_user.role == 'director'
                   a href="/supervise/users/edit/#{u.id}"

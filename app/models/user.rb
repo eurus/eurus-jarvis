@@ -1,3 +1,5 @@
+require 'lunar'
+
 class User < ActiveRecord::Base
   attr_accessor :login
   USERROLE = %w{ ceo director pm staff intern}
@@ -139,5 +141,33 @@ class User < ActiveRecord::Base
     else
       100 + (sum / 3.0).round
     end
+  end
+
+  def sabbatical_total
+    if join_at
+      time_diff = (Date.current - join_at - 365).to_i
+      if time_diff > 0
+        if time_diff >  360
+          6
+        else
+          year_length = Lunar.lunar_year_length
+          d = Lunar.next_spring_festival(join_at+1.years) - (join_at + 1.years)
+          return ((d / year_length) * 6).round
+        end
+      else
+        0
+      end
+    else
+      0
+    end
+  end
+
+  def sabbatical_used
+    days = 0
+    vacations.where("approve = true and cut = '年假' and created_at <= ? and created_at >= ?",
+      Lunar.last_spring_festival,
+      Lunar.next_spring_festival).map{|v|
+        v.duration
+    }.reduce(:+) || 0
   end
 end

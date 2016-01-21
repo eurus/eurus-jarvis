@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   layout :layout_by_resource
   before_action :configure_permitted_parameters, if: :devise_controller?
-  
+
   before_filter :cors_preflight_check
   after_filter :cors_set_access_control_headers
 
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
       render :text => '', :content_type => 'text/plain'
     end
   end
- 
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :notice => exception.message
   end
@@ -49,4 +49,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :email, :password, :remember_me) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
   end
+
+
 end

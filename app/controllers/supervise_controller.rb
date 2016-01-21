@@ -227,7 +227,7 @@ class SuperviseController < ApplicationController
     @supervisor.save
     # find each buddy and set thier supervisor id to
     # params supervisor_id
-    supervisor_params[:buddies]
+    params[:buddies]
     .delete_if {|e| e == "" or e == "#{supervisor_params[:supervisor_id]}"}
     .map do |u|
       u = User.find(u.to_i)

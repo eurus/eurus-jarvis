@@ -86,7 +86,7 @@ namespace :deploy do
   desc "Redeploy the whole application"
   task :redeploy do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
-      invoke 'unicorn:stop'
+      # invoke 'unicorn:stop'
     end
   end
 
@@ -94,6 +94,7 @@ namespace :deploy do
   # after 'deploy:migrate', "deploy:china_region"
   after 'deploy:migrate','deploy:asp'
   after 'deploy:redeploy',"deploy"
+  after 'deploy:redeploy',"stop"
   after 'deploy:redeploy',"start"
 end
 

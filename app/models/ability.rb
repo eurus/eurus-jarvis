@@ -25,7 +25,7 @@ class Ability
         can :issue, :all
       end
 
-      if user.occupation.split(",").include? 'office-assitant'
+      if user.occupation.split(",").include? 'office-assistant'
         can :groups, :all
         can :users, :all
         can :errands, :all

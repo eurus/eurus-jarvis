@@ -30,6 +30,7 @@ class Ability
         can :users, :all
         can :errands, :all
         can :projects, :all
+        can :vacations, :all
         can :check, :all
       end
 

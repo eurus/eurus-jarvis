@@ -1,0 +1,15 @@
+.banner
+  .title 八阿哥
+.p-20.pt-15
+  .panel
+    .panel-body
+      table.table.table-hover.datatable
+        thead
+          tr
+            th.col-md-2 项目名字
+            th.col-md-10 堆栈
+        tbody
+          - @bugs.each do |bug|
+            tr
+              td = bug.prject_name
+              td = bug.trace

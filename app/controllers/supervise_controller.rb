@@ -7,6 +7,10 @@ class SuperviseController < ApplicationController
     authorize! :supervise, current_user
   end
 
+  def bughunter
+    @bugs = BugHunter.all
+  end
+
   def users
     @users = User.dfs(current_user)
     authorize! :users, current_user

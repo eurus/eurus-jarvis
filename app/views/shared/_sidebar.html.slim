@@ -26,6 +26,9 @@
       = link_to supervise_users_path , class: "list-group-item #{'active' if params[:action] == 'users' or params[:action].end_with? 'user'}" do
         = fa_icon("user")+" 用户"
 
+      = link_to supervise_bughunter_path , class: "list-group-item #{'active' if params[:action] == 'bughunter' or params[:action].end_with? 'bughunter'}" do
+        = fa_icon("bug")+" BugHunter"
+
     .pl-20.pr-20
       = link_to fa_icon('plus')+ "新增员工", supervise_users_new_path,class: "btn btn-outstand btn-block" if current_user.role == 'ceo' && params[:action] == 'users'
       = link_to fa_icon('plus')+'新建组织', supervise_group_new_path,class: 'btn btn-outstand btn-block' if (ceo? or director?) && params[:action] == 'groups'

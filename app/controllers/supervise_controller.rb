@@ -11,6 +11,10 @@ class SuperviseController < ApplicationController
     @bugs = BugHunter.all
   end
 
+  def bughunter_show
+    @bug = BugHunter.find params[:id]
+  end
+
   def users
     @users = User.dfs(current_user)
     authorize! :users, current_user

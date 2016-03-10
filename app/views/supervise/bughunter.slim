@@ -3,13 +3,17 @@
 .p-20.pt-15
   .panel
     .panel-body
-      table.table.table-hover.datatable
+      table.table.table-hover
         thead
           tr
             th.col-md-2 项目名字
-            th.col-md-10 堆栈
+            th.col-md-7 堆栈
+            th.col-md-2 时间
+            th.col-md-1
         tbody
           - @bugs.each do |bug|
             tr
               td = bug.project_name
               td = bug.trace
+              td = bug.created_at.strftime("%Y-%m-%d")
+              td = link_to fa_icon('eye'),bugshow_path(bug)

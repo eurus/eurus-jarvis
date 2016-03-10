@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   # supervise actions
   get 'supervise/index'
   get 'supervise/bughunter'
+  get 'supervise/bughunter/:id', to: 'supervise#bughunter_show',as: 'bugshow'
   get 'supervise/users' => 'supervise#users'
   get 'supervise/projects' => 'supervise#projects'
   get 'supervise/overtimes' => 'supervise#overtimes'

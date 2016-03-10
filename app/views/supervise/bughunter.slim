@@ -14,6 +14,6 @@
           - @bugs.each do |bug|
             tr
               td = bug.try :project_name
-              td = bug.try :trace[0..100]
+              td = bug.trace[0..50] rescue ''
               td = bug.created_at.strftime("%Y-%m-%d %H:%M:%S")
               td = link_to fa_icon('eye'),bugshow_path(bug)

@@ -69,8 +69,7 @@ Rails.application.routes.draw do
   get 'issuerecord/:id' => 'supervise#issue_record_by_type',as: 'issuerecord'
 
   scope :jarvis do
-    get 'wiki' => 'jarviscore#wiki'
-    post 'wiki' => 'jarviscore#wiki'
+    post 'bughunter' => 'jarviscore#bughunter'
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

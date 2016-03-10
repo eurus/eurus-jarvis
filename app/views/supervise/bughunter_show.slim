@@ -7,5 +7,4 @@
       h4 = @bug.created_at.strftime("%Y-%m-%d")
     .panel-body
       pre = @bug.try :trace 
-    .panel-footer
       = link_to '返回',supervise_bughunter_path, class:"btn btn-primary"

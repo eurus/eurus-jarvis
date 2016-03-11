@@ -6,7 +6,7 @@ GIT
       railties (>= 3.1)
 
 GEM
-  remote: https://ruby.taobao.org/
+  remote: https://gems.ruby-china.org/
   specs:
     actionmailer (4.2.3)
       actionpack (= 4.2.3)
@@ -165,6 +165,8 @@ GEM
     listen (3.0.3)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
+    local_time (1.0.3)
+      coffee-rails
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.9)
@@ -380,6 +382,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
+  local_time
   masonry-rails
   mini_magick
   momentjs-rails

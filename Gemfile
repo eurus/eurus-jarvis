@@ -1,4 +1,4 @@
-source 'https://ruby.taobao.org'
+source 'https://gems.ruby-china.org/'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -114,3 +114,4 @@ gem 'rucaptcha'
 gem 'wechat'
 gem 'cancancan'
 gem 'bootstrap-tagsinput-rails'
+gem 'local_time'

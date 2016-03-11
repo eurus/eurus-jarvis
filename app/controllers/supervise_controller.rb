@@ -8,7 +8,7 @@ class SuperviseController < ApplicationController
   end
 
   def bughunter
-    @bugs = BugHunter.all
+    @bugs = BugHunter.all.order(created: :desc)
   end
 
   def bughunter_show

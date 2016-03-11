@@ -17,3 +17,5 @@
               td = bug.trace[0..50] rescue ''
               td = bug.created_at.strftime("%Y-%m-%d %H:%M:%S")
               td = link_to fa_icon('eye'),bugshow_path(bug)
+.row.text-center
+  = paginate @bugs,theme: 'twitter-bootstrap-3'

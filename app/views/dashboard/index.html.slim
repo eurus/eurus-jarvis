@@ -1,25 +1,25 @@
 .p-15.pt-20
   .col-md-6
     .row
-      .col-md-6
+      .col-sm-6
         .panel.panel-board.board-green
           .panel-body
             =fa_icon 'plane',class: 'heading'
             .num = "￥#{get_errand current_user}"
             .hint 累积差旅
-      .col-md-6
+      .col-sm-6
         .panel.panel-board
           .panel-body
             =fa_icon 'check-square-o', class:'heading'
             .num = get_done current_user
             .hint  本年完成项目
-      .col-md-6
+      .col-sm-6
         .panel.panel-board
           .panel-body
             =fa_icon 'calendar',class: 'heading'
             .num = "#{current_user.sabbatical_total - current_user.sabbatical_used}/#{current_user.sabbatical_total }"
             .hint 剩余年假 / 总年假
-      .col-md-6
+      .col-sm-6
         .panel.panel-board.board-blue
           .panel-body
             =fa_icon 'twitter',class: 'heading'
@@ -29,14 +29,14 @@
 
   .col-md-3
     .row
-      .col-md-12#useful
+      .col-sm-6.col-md-12#useful
         .panel.panel-board.board-yellow.animated.shake
           .panel-body
             =fa_icon 'smile-o',class: 'heading'
             .num ="#{current_user.reliability}%"
             .hint 靠谱系数
 
-      .col-md-12
+      .col-sm-6.col-md-12
         .panel.panel-board
           .panel-body#weather
 

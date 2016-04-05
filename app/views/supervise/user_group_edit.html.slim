@@ -7,8 +7,6 @@
     = simple_form_for :sp, url: supervise_group_update_path,method: :put ,html: { multipart: true }do |f|
       .form-group
         = f.hidden_field :id , value:@supervisor.id
-        = f.label "职位"
-        = f.input :occupation,label: false, input_html:{value: @supervisor.occupation, class: "form-control"}
 
         = f.label "下属"
         select#buddies name='buddies[]' multiple='multiple' style='min-width:500px'

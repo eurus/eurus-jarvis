@@ -4,7 +4,8 @@ class Ability
   def initialize(user)
     user ||= User.new
     can :project_logs, :all
-    if user.occupation.split(",").include? 'office-assistant'
+
+    if user.username == 'anna'
       can :groups, :all
       can :users, :all
       can :errands, :all

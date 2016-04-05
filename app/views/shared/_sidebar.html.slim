@@ -57,7 +57,7 @@
 
       = link_to articals_path , class: "list-group-item #{'active' if params['controller'] == 'articals'}" do
         =fa_icon("book") +" 文章"
-      - if pm? or director? or ceo? or (current_user.occupation.split(",").include? 'office-assistant' rescue nil)
+      - if can? :projects, :all
         = link_to supervise_projects_path , class: "list-group-item #{'active' if params['controller'] == 'supervise'}" do
           =fa_icon("cog") +" 管理"
 

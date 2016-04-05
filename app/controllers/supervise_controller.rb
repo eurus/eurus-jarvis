@@ -192,7 +192,6 @@ class SuperviseController < ApplicationController
 
   def user_group_update
     @supervisor = User.find(params[:sp][:id])
-    @supervisor.occupation = params[:sp][:occupation]
     @supervisor.save
 
     selected_buddies = params[:buddies].delete_if{|e|e==""}.map { |e| e.to_i }
@@ -204,7 +203,6 @@ class SuperviseController < ApplicationController
     orphan_buddies = removed_buddies.map{|ruid|
       ru = User.find ruid
       User.dfs ru
-      ru.occupation = nil
       ru.role = 'staff' unless ru.role == 'intern'
       ru.supervisor_id = current_user.id
       ru.save
@@ -215,7 +213,6 @@ class SuperviseController < ApplicationController
 
     change_buddies.delete_if{|id| id.nil?}.each do |uid|
       u = User.find uid
-      u.occupation = nil
       u.role = 'staff' unless u.role == 'intern'
       u.supervisor_id = @supervisor.id
       u.save
@@ -233,7 +230,6 @@ class SuperviseController < ApplicationController
     @supervisor = User.find(supervisor_params[:supervisor_id])
     @supervisor.supervisor_id = current_user.id
     @supervisor.role = User::USERROLE[User::USERROLE.index(current_user.role) + 1]
-    @supervisor.occupation = supervisor_params[:occupation]
     @supervisor.save
     # find each buddy and set thier supervisor id to
     # params supervisor_id
@@ -255,7 +251,6 @@ class SuperviseController < ApplicationController
 
     (User.dfs @user).try :each do |u|
       u.role = 'staff' unless u.role == 'intern'
-      u.occupation = nil
       u.supervisor_id = current_user.id
       u.save
     end
@@ -345,12 +340,12 @@ class SuperviseController < ApplicationController
   def user_params
     params.require(:user).permit(
       :username,:user_number,:role,:birthday,
-      :nickname,:realname,:gender,:occupation,
+      :nickname,:realname,:gender,
     :join_at,:leave_at, :email,:supervisor_id)
   end
 
   def supervisor_params
-    params.require(:supervisor).permit(:occupation,:supervisor_id,buddies: [])
+    params.require(:supervisor).permit(:supervisor_id,buddies: [])
   end
 
   def project_log_params

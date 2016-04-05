@@ -57,7 +57,7 @@ module ApplicationHelper
   def user_tree_link(user)
     content_tag(:div, '', class:"elem #{user.role}") do
       concat image_tag("#{user.avatar_url(:thumb)}", class:'avatar img-responsive')
-      concat link_to(user.realname, '#', class:'title', data:{toggle:'tooltip', placement:'bottom'}, title:"#{user.role.upcase}  #{user.occupation}", )
+      concat link_to(user.realname, '#', class:'title', data:{toggle:'tooltip', placement:'bottom'}, title:"#{user.role.upcase}", )
       concat content_tag(:div, user.username.capitalize, class:'subtitle')
       unless (user.staff? or user.intern?) or user.id == current_user.id
         concat link_to(fa_icon('pencil-square-o'), edit_user_group_path(id:user.id), class:'op')

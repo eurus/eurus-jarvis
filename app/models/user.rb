@@ -3,7 +3,7 @@ require 'lunar'
 class User < ActiveRecord::Base
   attr_accessor :login
   USERROLE = %w{ ceo director pm staff intern}
-  OCCUPATION = %w{ office-manager team-leader tech-leader office-assitant }
+  RANK = ['Intern', 'Assistant Dev', 'Senior Dev', 'Project Manager', 'Director', 'VP', 'CEO']
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

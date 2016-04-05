@@ -340,7 +340,7 @@ class SuperviseController < ApplicationController
   def user_params
     params.require(:user).permit(
       :username,:user_number,:role,:birthday,
-      :nickname,:realname,:gender,
+      :nickname,:realname,:gender,:rank,
     :join_at,:leave_at, :email,:supervisor_id)
   end
 

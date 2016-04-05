@@ -145,11 +145,13 @@ class User < ActiveRecord::Base
 
   def sabbatical_total(start_date, end_date)
     if join_at
-      if (join_at+1.year >= end_date) and (join_at+1.year >= start_date)
+      if (join_at+1.year <= end_date) and (join_at+1.year >= start_date)
+          ap 'yeah'
           year_length = (end_date-start_date).to_i
           d = (end_date - (join_at + 1.years)).to_i
           return ((d*1.0 / year_length) * 6).round
       else
+        ap 'ohhhhhhhhhhhhhh'
         6
       end
     else

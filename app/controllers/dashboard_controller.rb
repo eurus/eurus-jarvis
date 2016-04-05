@@ -8,6 +8,8 @@ class DashboardController < ApplicationController
     @plan = Plan.where(user_id:current_user.id).first
     ##出差天数
     @errand_count = current_user.errands.this_year.map { |e| (e.end_at - e.start_at).to_f+1 }.reduce(:+) || 0
+    @start_date = Lunar.last_spring_festival
+    @end_date = Lunar.next_spring_festival
 
   end
 

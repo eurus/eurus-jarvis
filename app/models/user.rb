@@ -143,30 +143,25 @@ class User < ActiveRecord::Base
     end
   end
 
-  def sabbatical_total
+  def sabbatical_total(start_date, end_date)
     if join_at
-      time_diff = (Date.current - join_at - 365).to_i
-      if time_diff > 0
-        if time_diff >  360
-          6
-        else
-          year_length = Lunar.lunar_year_length
-          d = Lunar.next_spring_festival(join_at+1.years) - (join_at + 1.years)
-          return ((d / year_length) * 6).round
-        end
+      if (join_at+1.year >= end_date) and (join_at+1.year >= start_date)
+          year_length = (end_date-start_date).to_i
+          d = (end_date - (join_at + 1.years)).to_i
+          return ((d*1.0 / year_length) * 6).round
       else
-        0
+        6
       end
     else
       0
     end
   end
 
-  def sabbatical_used
+  def sabbatical_used(start_date, end_date)
     days = 0
     vacations.where("approve = true and cut = '年假' and created_at <= ? and created_at >= ?",
-      Lunar.next_spring_festival,
-      Lunar.last_spring_festival).map{|v|
+      end_date,
+      start_date).map{|v|
         v.duration
     }.reduce(:+) || 0
   end

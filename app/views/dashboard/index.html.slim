@@ -17,7 +17,7 @@
         .panel.panel-board
           .panel-body
             =fa_icon 'calendar',class: 'heading'
-            .num = "#{current_user.sabbatical_total - current_user.sabbatical_used}/#{current_user.sabbatical_total }"
+            .num = "#{current_user.sabbatical_total(@start_date, @end_date) - current_user.sabbatical_used(@start_date, @end_date)}/#{current_user.sabbatical_total(@start_date, @end_date) }"
             .hint 剩余年假 / 总年假
       .col-sm-6
         .panel.panel-board.board-blue

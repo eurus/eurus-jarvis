@@ -35,7 +35,7 @@
               td = u.try :birthday
               td = "￥#{u.total_fee} / #{u.total_errand_day_count} 天"
               td = u.projects.done.count
-              td = "#{u.sabbatical_total - u.sabbatical_used} / #{u.sabbatical_total}"
+              td = "#{u.sabbatical_total(@start_date, @end_date) - u.sabbatical_used(@start_date, @end_date)} / #{u.sabbatical_total(@start_date, @end_date)}"
               td.ops
                 - if current_user.role == 'ceo' || current_user.role == 'director'
                   a href="/supervise/users/edit/#{u.id}"

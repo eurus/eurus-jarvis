@@ -34,7 +34,7 @@ class Ability
         can :check, :all
       end
 
-      if user.role == 'pm' or 'derector'
+      if user.role == 'pm' or 'director'
         can :users, :all
         can :groups, :all
         can :projects, :all

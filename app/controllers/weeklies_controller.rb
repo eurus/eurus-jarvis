@@ -31,8 +31,8 @@ class WeekliesController < ApplicationController
     respond_to do |format|
       if @weekly.save
         # send email to current_user.manger
-        ap @sp = current_user.supervisor rescue User.ceo.first
-        ap @cc = User.where(role: ["ceo","director"]).pluck(:email)
+        @sp = (current_user.supervisor || User.ceo.first) rescue User.ceo.first
+        @cc = User.where(role: ["ceo","director"]).pluck(:email)
 
         NotifyMailer.weekly_report(@sp, @weekly,@cc).deliver_later
 

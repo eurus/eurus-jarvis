@@ -6,14 +6,13 @@
       table.table.table-hover.datatable
         thead
           tr
-            th 日期
+            th.desc 日期
             th.sum_up 天数
             th 申请人
             th 项目
             th 内容
             th 状态
-            th 审核时间
-            th 发放时间
+            th 备注
             th.no_sort
             th.hidden
 
@@ -28,8 +27,7 @@
               td
                 p.limit-text = overtime.content
               td id="tr-status-overtime-#{overtime.id}"  class="text-center #{issue_class overtime.approve, overtime.issue}" = issue_status overtime.approve, overtime.issue
-              td id="tr-approve-time-#{overtime.id}"= overtime.approve_time
-              td id="tr-issue-time-#{overtime.id}" = overtime.issue_time
+              td id="tr-status-explain-#{overtime.id}"= overtime.status_explain
               td.ops
                  -if can? :check, :all
                   = link_to fa_icon("check"), checkrecord_path(id: overtime.id, cut: 'overtime'), id: "check-overtime-#{overtime.id}",remote: true,data: {confirm:"确认同意 #{overtime.user.try :realname} 的加班申请？", text:"#{overtime.start_at}起，为期#{overtime.duration}天，项目：#{overtime.project.try :name}"} unless overtime.approve

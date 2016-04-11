@@ -8,6 +8,24 @@ class Errand < ActiveRecord::Base
   scope :this_year, -> {where(created_at: Time.current.beginning_of_year..Time.current.end_of_year)}
   default_scope {order(approve: :asc, issue: :asc)}
 
+  def status_explain
+    if issue
+      if issue_time
+        "#{issue_time.strftime('%Y-%m-%d')}  ▪ #{issue_by_username}"
+      else
+        ""
+      end
+    elsif approve
+      if approve_time
+        "#{approve_time.strftime('%Y-%m-%d')}  ▪ #{approve_by_username}"
+      else
+        ""
+      end
+    else
+      ""
+    end
+  end
+
   private
   def end_should_greater_than_start
     if self.end_at <  self.start_at

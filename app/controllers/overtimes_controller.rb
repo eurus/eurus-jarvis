@@ -25,7 +25,9 @@ class OvertimesController < ApplicationController
     @overtime.user_id = current_user.id
     respond_to do |format|
       if @overtime.save
+        NotifyMailer.overtime_created(current_user, @overtime).deliver_later
         format.html { redirect_to overtimes_url, notice: 'Overtime was successfully created.' }
+
 
       else
         format.html { render :new }

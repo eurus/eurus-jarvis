@@ -23,6 +23,9 @@ class VacationsController < ApplicationController
     @vacation.user_id = current_user.id
     respond_to do |format|
       if @vacation.save
+
+        NotifyMailer.vacation_created(current_user, @vacation).deliver_later
+
         format.html { redirect_to vacations_url, notice: 'Vacation was successfully created.' }
 
       else

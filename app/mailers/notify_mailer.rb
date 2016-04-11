@@ -26,6 +26,28 @@ class NotifyMailer < ApplicationMailer
     mail(to: @user.email,subject: "#{@creator.try :realname} 新建了#{@plan.cut}计划：#{@plan.title}")
   end
 
+  def vacation_created(creator, vacation)
+    cc = creator.supervisor_chain.map{|s| s.try :email}
+    @vacation = vacation
+    mail(to: creator.supervisor.email,
+      subject: "#{creator.try :realname}的 请假申请",
+      cc: cc )
+  end
+
+  def vacation_approved(vacation)
+    @vacation = vacation
+    mail(to: vacation.user.email,
+      subject: "请假申请已审核通过")
+  end
+
+  def overtime_created(creator, overtime)
+   cc = creator.supervisor_chain.map{|s| s.try :email}
+    @overtime = overtime
+    mail(to: creator.supervisor.try(:email)|| User.ceo.first,
+      subject: "#{creator.try :realname}的 加班申请",
+      cc: cc )
+  end
+
   def plan_overtime_warning(plan)
     @plan = plan
     mail(to:plan.creator.try(:email), cc: plan.user.try(:email), subject:"警告：#{plan.cut}计划已超期")

@@ -266,10 +266,12 @@ class SuperviseController < ApplicationController
       if obj
         obj.approve = true
         obj.approve_time = Date.current
+        obj.approve_by_username = current_user.username
         obj.save
+        NotifyMailer.vacation_approved(obj).deliver_later
         format.js{
           render 'check_record_by_type',
-          locals:{cut: params[:cut],id: obj.id,approve_time: obj.approve_time.strftime("%Y-%m-%d")}
+          locals:{cut: params[:cut],id: obj.id,approve_time: obj.approve_time.strftime("%Y-%m-%d"), status_explain:obj.status_explain}
         }
       else
         case params[:cut]
@@ -292,10 +294,13 @@ class SuperviseController < ApplicationController
         obj.issue = true
         obj.approve = true
         obj.issue_time = Date.current
+        obj.approve_time ||= Date.current
+        obj.approve_by_username ||=current_user.username
+        obj.issue_by_username = current_user.username
         obj.save
         format.js{
           render 'issue_record_by_type',
-          locals:{cut: params[:cut],id: obj.id,issue_time: obj.issue_time.strftime("%Y-%m-%d")}
+          locals:{cut: params[:cut],id: obj.id,issue_time: obj.issue_time.strftime("%Y-%m-%d"), status_explain: obj.status_explain}
         }
       else
         case params[:cut]

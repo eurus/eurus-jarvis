@@ -6,14 +6,13 @@
       table.table.table-hover.datatable
         thead
           tr
-            th 开始日期
+            th.desc 开始日期
             th 结束日期
             th 姓名
             th 项目
             th.sum_up.rmb 费用
             th 状态
-            th 审核时间
-            th 发放时间
+            th 备注
             th.no_sort
             th.hidden
         tbody
@@ -26,8 +25,7 @@
               td = "￥ #{errand.fee}"
               td id="tr-status-errand-#{errand.id}"  class="text-center #{issue_class errand.approve, errand.issue}"
                = issue_status errand.approve, errand.issue
-              td id="tr-approve-time-#{errand.id}" = errand.approve_time
-              td id="tr-issue-time-#{errand.id}"= errand.issue_time
+              td id="tr-status-explain-#{errand.id}" = errand.status_explain
               td.ops
                 -if can? :check, :all
                   = link_to fa_icon("check"),checkrecord_path(id: errand.id, cut: 'errand'),  data: {:confirm => "确认收到 #{errand.user.try :realname} 的差旅报销单？", text:"#{errand.start_at}至#{errand.end_at}，#{errand.project.try :name}"}, id: "check-errand-#{errand.id}",remote: true unless errand.approve

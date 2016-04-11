@@ -32,6 +32,16 @@ class User < ActiveRecord::Base
     User.find self.supervisor_id rescue nil
   end
 
+  def supervisor_chain
+    s = supervisor
+    res = []
+    while !s.nil? do
+      res.push s
+      s = s.supervisor
+    end
+    return res
+  end
+
   def fullname
     "#{username.capitalize}#{' '*(10-username.length)}#{realname}"
   end

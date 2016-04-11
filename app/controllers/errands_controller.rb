@@ -24,6 +24,7 @@ class ErrandsController < ApplicationController
   def create
     @errand = Errand.new(errand_params)
     @errand.user_id = current_user.id
+
     respond_to do |format|
       if @errand.save
         format.html { redirect_to errands_url, notice: 'Errand was successfully created.' }

@@ -32,7 +32,10 @@
               tr
                 td 生日
                 td = current_user.try :birthday
-             
+              tr
+                td 职称
+                td = current_user.try :rank
+
   .container
     .col-md-6.col-md-offset-3
       = simple_form_for @user, url: update_setting_path,method: :put ,html: { multipart: true }do |f|

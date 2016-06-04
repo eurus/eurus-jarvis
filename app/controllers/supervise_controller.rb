@@ -182,7 +182,8 @@ class SuperviseController < ApplicationController
   end
 
   def destroy_user
-    @user.destroy
+    @user.deleted = true
+    @user.save!
     respond_to do |format|
       format.html { redirect_to supervise_users_path, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }

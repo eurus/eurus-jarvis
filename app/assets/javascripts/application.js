@@ -40,7 +40,7 @@ $(window).bind('page:change', function() {
 });
 
 function initPage() {
-    $('.sidebar .list-group-item').click(function(){
+    $('.sidebar .list-group-item').click(function() {
         $(this).find('i.fa').remove();
         $(this).prepend('<i class="fa fa-spinner fa-spin fa-fw"></i>');
         return true;
@@ -125,92 +125,102 @@ function initPage() {
             var count = $(this).prevAll('th').size();
             order.push([count, "asc"]);
         }
+
+        if ($(this).hasClass('desc')) {
+            var count = $(this).prevAll('th').size();
+            order.push([count, "desc"]);
+        }
         // "order": [[ 3, "desc" ]]
     });
-    if (! $.fn.dataTable.isDataTable('.datatable')){
+    if (!$.fn.dataTable.isDataTable('.datatable')) {
 
         $('.datatable').DataTable({
-            buttons:[
-            {extend: 'excel', text: 'Excel', exportOptions: { modifier: { selected: true }}}
-            , 'print'
-        ],
-        "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"<"inline-block mr-20"B><"inline-block"f>><"clearfix">>>t<"row"<"col-sm-12 text-center"<"total-footer">>><"row view-pager"<"col-sm-12"<"pagination-wrapper"p>>>',
-        "aoColumns": dontSort,
-        "autoWidth": false,
-        "aaSorting": [],
-        "columnDefs": hidden,
-        order: order,
-        language:{
-        "sProcessing":   "处理中...",
-        "sLengthMenu":   "显示 _MENU_ 项结果",
-        "sZeroRecords":  "没有匹配结果",
-        "sInfo":         "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-        "sInfoEmpty":    "显示第 0 至 0 项结果，共 0 项",
-        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-        "sInfoPostFix":  "",
-        "sSearch":       "搜索:",
-        "sUrl":          "",
-        "sEmptyTable":     "表中数据为空",
-        "sLoadingRecords": "载入中...",
-        "sInfoThousands":  ",",
-        "oPaginate": {
-          "sFirst":    "首页",
-          "sPrevious": "上页",
-          "sNext":     "下页",
-          "sLast":     "末页"
-        },
-        "oAria": {
-          "sSortAscending":  ": 以升序排列此列",
-          "sSortDescending": ": 以降序排列此列"
-        }
-      },
-        "footerCallback": function(row, data, start, end, display) {
-            if (sumIndex >= 0) {
-                var api = this.api();
-
-                // Remove the formatting to get integer data for summation
-                var intVal = function(i) {
-                    return typeof i === 'string' ?
-                        i.replace(/[￥ ]/g, '') * 1 :
-                        typeof i === 'number' ?
-                        i : 0;
-                };
-
-                // Total over all pages
-                total = api
-                    .column(sumIndex)
-                    .data()
-                    .reduce(function(a, b) {
-                        return intVal(a) + intVal(b);
-                    });
-
-                // Total over this page
-                pageTotal = api
-                    .column(sumIndex, {
-                        page: 'current'
-                    })
-                    .data()
-                    .reduce(function(a, b) {
-                        return intVal(a) + intVal(b);
-                    }, 0);
-                var totalStr = '';
-                if (sumType == 'rmb') {
-                    pageTotal = parseInt(pageTotal * 100) / 100.0;
-                    total = parseInt(total * 100) / 100.0;
-                    totalStr = '本页小计: ￥' + pageTotal + ' / 总计: ￥' + total;
-                } else {
-                    pageTotal = parseInt(pageTotal * 10) / 10.0;
-                    total = parseInt(total * 10) / 10.0;
-                    totalStr = '本页小计: ' + pageTotal + ' / 总计: ' + total;
-
+            buttons: [{
+                extend: 'excel',
+                text: 'Excel',
+                exportOptions: {
+                    modifier: {
+                        selected: true
+                    }
                 }
+            }, 'print'],
+            "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"<"inline-block mr-20"B><"inline-block"f>><"clearfix">>>t<"row"<"col-sm-12 text-center"<"total-footer">>><"row view-pager"<"col-sm-12"<"pagination-wrapper"p>>>',
+            "aoColumns": dontSort,
+            "autoWidth": false,
+            "aaSorting": [],
+            "columnDefs": hidden,
+            order: order,
+            language: {
+                "sProcessing": "处理中...",
+                "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                },
+                "oAria": {
+                    "sSortAscending": ": 以升序排列此列",
+                    "sSortDescending": ": 以降序排列此列"
+                }
+            },
+            "footerCallback": function(row, data, start, end, display) {
+                if (sumIndex >= 0) {
+                    var api = this.api();
 
-                $('.total-footer').html(totalStr);
-                // Update footer
-                // $( api.column( sumIndex ).footer() ).html(totalStr);
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function(i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[￥ ]/g, '') * 1 :
+                            typeof i === 'number' ?
+                            i : 0;
+                    };
+
+                    // Total over all pages
+                    total = api
+                        .column(sumIndex)
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        });
+
+                    // Total over this page
+                    pageTotal = api
+                        .column(sumIndex, {
+                            page: 'current'
+                        })
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+                    var totalStr = '';
+                    if (sumType == 'rmb') {
+                        pageTotal = parseInt(pageTotal * 100) / 100.0;
+                        total = parseInt(total * 100) / 100.0;
+                        totalStr = '本页小计: ￥' + pageTotal + ' / 总计: ￥' + total;
+                    } else {
+                        pageTotal = parseInt(pageTotal * 10) / 10.0;
+                        total = parseInt(total * 10) / 10.0;
+                        totalStr = '本页小计: ' + pageTotal + ' / 总计: ' + total;
+
+                    }
+
+                    $('.total-footer').html(totalStr);
+                    // Update footer
+                    // $( api.column( sumIndex ).footer() ).html(totalStr);
+                }
             }
-        }
-    });
+        });
     }
     // qiniu upload picture
     // powerd by 🍌
@@ -239,23 +249,23 @@ function initPage() {
     });
 
     var config = {
-        height: 400,
-        toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'italic', 'underline', 'clear']],
-            ['fontsize', ['fontsize']],
-            ['fontname', ['fontname']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']],
-            ['table', ['table']],
-            ['insert', ['link', 'hr']],
-            ['view', ['fullscreen', 'codeview']],
-            ['help', ['help']],
-        ]
-    }
-    // $('#weekly_sumary').summernote(config);
-    // $('#weekly_hope').summernote(config);
+            height: 400,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontsize', ['fontsize']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['table', ['table']],
+                ['insert', ['link', 'hr']],
+                ['view', ['fullscreen', 'codeview']],
+                ['help', ['help']],
+            ]
+        }
+        // $('#weekly_sumary').summernote(config);
+        // $('#weekly_hope').summernote(config);
 }
 
 function sendFile(file, editor) {

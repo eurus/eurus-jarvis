@@ -24,7 +24,7 @@
               td = vacation.duration
               td = vacation.user.try :realname
               td = vacation.cut
-              td = vacation.content
+              td.col-sm-4 = vacation.content
               td id="tr-status-vacation-#{vacation.id}" class="text-center #{'warning' if vacation.approve}" = status vacation.try :approve
               td id="tr-status-explain-#{vacation.id}" = vacation.status_explain
               td.ops

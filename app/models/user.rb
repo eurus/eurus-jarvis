@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   paginates_per 10
 
-  default_scope { where(deleted: false) }
+  # default_scope { where(deleted: false) }
   scope :ceo, -> { where(role: "ceo") }
   scope :director, -> { where(role: "director") }
   scope :pm, -> { where(role: "pm") }

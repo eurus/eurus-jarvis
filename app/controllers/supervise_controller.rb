@@ -16,7 +16,7 @@ class SuperviseController < ApplicationController
   end
 
   def users
-    @users = User.dfs(current_user)
+    @users = User.dfs(current_user).collect {|u| u.deleted==false}
     @start_date = Lunar.last_spring_festival
     @end_date = Lunar.next_spring_festival
     authorize! :users, current_user

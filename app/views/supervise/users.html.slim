@@ -20,7 +20,11 @@
           - @users.each do |u|
             tr
               td
-                =image_tag "#{u.avatar_url(:thumb)}", class:'img-circle pull-left animated jello' if u.avatar?
+                -if u.avatar?
+                  - if u.locked_at?
+                    =image_tag "#{u.avatar_url(:thumb)}", class:'img-circle pull-left animated jello gray'
+                  - else
+                    =image_tag "#{u.avatar_url(:thumb)}", class:'img-circle pull-left animated jello '
                 div.ml-10.mt-5.pull-left
                   - if u.try(:gender) == "男"
                     span.ml-5=fa_icon 'mars'

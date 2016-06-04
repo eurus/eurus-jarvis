@@ -40,5 +40,7 @@
                 - if current_user.role == 'ceo' || current_user.role == 'director'
                   a href="/supervise/users/edit/#{u.id}"
                     = fa_icon('pencil-square-o')
+                  = link_to fa_icon('lock'), "/supervise/users/#{u.id}/lock", method: :delete unless u.locked_at?
+                  = link_to fa_icon('unlock'), "/supervise/users/#{u.id}/unlock", method: :delete if u.locked_at?
                   = link_to fa_icon("trash"), "/supervise/users/#{u.id}",data: {:confirm => "确定删除账号：#{u.try :realname} ？"}, :method => :delete if not current_user.id == u.id
 

@@ -48,6 +48,8 @@ Rails.application.routes.draw do
   put 'supervise/users/:id' => "supervise#update_user"
   post 'supervise/users' => "supervise#create_user"
   delete 'supervise/users/:id' => 'supervise#destroy_user'
+  delete 'supervise/users/:id/lock' => 'supervise#lock_user'
+  delete 'supervise/users/:id/unlock' => 'supervise#unlock_user'
 
   # supervise projects
   get 'supervise/projects/new' => "supervise#new_project"

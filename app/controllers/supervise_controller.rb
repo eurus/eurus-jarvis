@@ -1,5 +1,5 @@
 class SuperviseController < ApplicationController
-  before_action :set_user, only: [:edit_user, :update_user, :destroy_user]
+  before_action :set_user, only: [:edit_user, :update_user, :destroy_user, :lock_user]
   before_action :set_project, only: [:edit_project, :update_project, :destroy_project, :done_project, :show_project, :create_project_log]
   before_action :set_buddies, only: [:users,:groups, :overtimes,:errands,:vacations,:projects]
 
@@ -140,6 +140,16 @@ class SuperviseController < ApplicationController
   end
 
   def edit_user
+  end
+
+  def lock_user
+    @user.lock_access!
+    redirect_to supervise_users_path
+  end
+
+  def unlock_user
+    @user.unlock_access!
+    redirect_to supervise_users_path
   end
 
   def create_user

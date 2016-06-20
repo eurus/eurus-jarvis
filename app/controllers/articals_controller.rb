@@ -4,7 +4,15 @@ class ArticalsController < ApplicationController
   # GET /articals
   # GET /articals.json
   def index
-    @articals = Artical.all.order(created_at: :desc).page params[:page]
+    if params[:search]
+      @articals = Artical.search do
+        fulltext params[:search]
+      end
+      puts @articals
+      @articals = Kaminari.paginate_array(@articals.hits.map(&:artical)).page(params[:page])
+    else
+      @articals = Artical.all.order(created_at: :desc).page params[:page]
+    end
   end
 
   # GET /articals/1
@@ -69,9 +77,9 @@ class ArticalsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def artical_params
-    params.require(:artical).permit(:title, :content, :user_id, :origin)
+    params.require(:artical).permit(:title, :content_html, :content, :user_id)
   end
-  
+
   def uptoken
     put_policy = Qiniu::Auth::PutPolicy.new("jarvis")
     @uptoken = Qiniu::Auth.generate_uptoken(put_policy)

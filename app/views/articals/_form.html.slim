@@ -1,25 +1,34 @@
+
+script src="//cdn.bootcss.com/marked/0.3.5/marked.min.js"
 .row
   .banner
     .title 文章
-.col-md-3
-.col-md-6
+.col-md-12
+
   = simple_form_for(@artical) do |f|
     -if @artical.errors.any?
       ul
         - @artical.errors.full_messages.each do |msg|
-          li = msg 
+          li = msg
 
     .form-groups
       = f.label "标题"
       = f.text_field :title,class: "form-control"
-    .form-groups
-      = f.label "来源"
-      = f.text_field :origin,class: "form-control"
-    .form-group
-      = f.label "内容"
-      = f.text_area :content,id: 'summernote',token: @uptoken, urlhead: 'http://7xl7it.com1.z0.glb.clouddn.com/',class:"form-control"
+    .row
+      .col-md-6
+        = f.label "内容",class:'mt-20'
+        = f.text_area :content, token: @uptoken, urlhead: 'http://7xl7it.com1.z0.glb.clouddn.com/', class:"markdown-src form-control", rows:'30'
+        =f.hidden_field :content_html, type: :hidden
+      .col-md-6
+        =f.label "预览", class:'mt-20'
+        .markdown-dist
 
-    .form-actions
-      = f.submit '保存',class:"btn btn-block btn-primary"
-      = link_to "返回", articals_path,class: "btn btn-default btn-block"
+    .row.mt-20
+      .col-md-3
+        .plupload-wrapper
+          button.btn.btn-info.btn-block#pickfiles(data-token="#{@uptoken}" data-url="http://7xl7it.com1.z0.glb.clouddn.com/") 上传一张图片
+      .col-md-3
+        = link_to "返回", articals_path,class: "btn btn-default btn-block"
+      .col-md-6
+        = f.submit '保存',class:"btn btn-block btn-primary"
 .col-md-3

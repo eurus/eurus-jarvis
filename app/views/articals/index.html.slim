@@ -7,6 +7,13 @@ div
         li
           a href='#' 文章
         li.active  所有文章
+    .col-md-4.pull-right
+      .input-group
+        input.form-control#artical-search-input
+        span.input-group-btn
+          button.btn.btn-default#artical-search-btn
+            i.glyphicon.glyphicon-search
+
   .row.p-40.pt-15
     - @articals.try :each do |a|
       .col-md-6
@@ -18,8 +25,7 @@ div
               = link_to fa_icon('pencil-square-o'), edit_artical_path(a)
               = link_to fa_icon('times'), a, data: {:confirm => 'Are you sure?'}, :method => :delete
           .panel-body
-            span = a.try :origin
-            span = a.try :user_id
-            
+            span = raw a.try :content_html
+
 .row.text-center
   = paginate @articals,theme: 'twitter-bootstrap-3'

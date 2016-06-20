@@ -4,6 +4,11 @@ class Artical < ActiveRecord::Base
 
   paginates_per 6
 
+  searchable do
+    text :title
+    text :content
+  end
+
   def send_to_all
     access_token = File.open("public/token","rb") do |file|
       JSON.parse(file.read)["access_token"]

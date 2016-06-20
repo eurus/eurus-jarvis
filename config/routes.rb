@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   mount RuCaptcha::Engine => "/rucaptcha"
 
   resources :overtimes
-  resources :feedbacks
   resources :weeklies
   resources :articals
   resources :projects do

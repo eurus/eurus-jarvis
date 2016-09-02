@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :articals
   resources :projects do
     member do
+      post 'webhook'
       post 'create_log', as: 'create_log'
     end
   end

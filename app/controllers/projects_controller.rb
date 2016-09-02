@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:done, :show, :create_log]
+  before_action :set_project, only: [:done, :show, :webhook]
+  skip_before_action :verify_authenticity_token, only: [:webhook]
+  skip_before_action :authenticate_user!, :only => [:webhook]
 
   # GET /projects
   # GET /projects.json
@@ -17,6 +19,13 @@ class ProjectsController < ApplicationController
   # def edit
   #   set_local
   # end
+  #
+
+  def webhook
+    content = "<h4>#{params[:verb]}  #{params[:url]}</h4><p>Params: #{params[:params]}</p><p>Session Attribute: #{params[:session]}</p><p>Exception: #{params[:exception]}</p>"
+    @project_logs = ProjectLog.create(project: @project, category: 'ERROR', content: content, date: Date.today)
+    render json: 'success'
+  end
 
   def show
     @project_logs = @project.project_logs.includes(:user)

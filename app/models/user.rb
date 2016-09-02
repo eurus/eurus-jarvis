@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
   scope :stuff, -> { where(role: "stuff") }
   scope :intern, -> { where(role: "intern") }
 
+  default_scope { where(locked_at:nil) }
+
   def supervisor
     User.find self.supervisor_id rescue nil
   end

@@ -24,13 +24,19 @@
     .col-xs-12
       - @project_logs.each do |project_log|
         .row.log
-          .col-md-3.prefix
-            .fl.ml-10 =project_log.date
-            =image_tag project_log.user.try(:avatar), class:'fl ml-20 avatar-small'
-            .fl.ml-10=project_log.category
-          .col-md-9
+          .col-md-12
             .text
-              =project_log.content
+              .clearfix
+                .pull-left.mr-5
+                  - if not project_log.user.nil?
+                    =image_tag project_log.user.try(:avatar), class:'fl ml-20 avatar-small', title: project_log.user.try(:fullname)
+                  - else
+                    =image_tag "https://admin.eurus.cn/uploads/user/15/thumb_jarvis.png", class: 'fl ml-20 avatar-small', title: 'Jarvis'
+                .pull-left.pt-10=project_log.date
+                b.pull-right.pt-10.pr-20=project_log.category
+              hr.mt-10.mb-20
+              .pl-20.pr-20
+                ==project_log.content
               =link_to content_tag(:span, '', class:'glyphicon glyphicon-remove'), supervise_destroy_project_logs_path(project_log.id), method: :delete, class:'remove'
 
 .col-md-3

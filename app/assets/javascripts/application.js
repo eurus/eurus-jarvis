@@ -32,6 +32,7 @@
 //= require moment
 //= require bootstrap-tagsinput
 //= require moment/zh-cn
+//= require pace/pace
 //= require_tree .
 
 

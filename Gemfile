@@ -116,6 +116,7 @@ gem 'wechat'
 gem 'cancancan'
 gem 'bootstrap-tagsinput-rails'
 gem 'local_time'
+gem 'pace-rails'
 
 # search
 gem 'sunspot_rails'

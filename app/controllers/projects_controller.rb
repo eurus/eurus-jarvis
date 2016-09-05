@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
   #
 
   def webhook
-    content = "<h4>#{params[:verb]}  #{params[:url]}</h4><p>Params: <pre>#{params[:params]}</pre></p><p>Session Attribute: <pre>#{params[:session]}</pre></p><p>Exception: <pre>#{params[:exception]}</pre></p>"
+    content = "<h4>#{params[:verb]}  #{params[:url]}</h4><p>Server: <b>#{params[:mode]}</b><p><p>Params: <pre>#{params[:params]}</pre></p><p>Session Attribute: <pre>#{params[:session]}</pre></p><p>Exception: <pre>#{params[:exception]}</pre></p>"
     @project_logs = ProjectLog.create(project: @project, category: 'ERROR', content: content, date: Date.today)
     render json: 'success'
   end

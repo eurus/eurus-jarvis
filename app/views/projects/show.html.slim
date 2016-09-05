@@ -31,7 +31,7 @@
           .col-md-9
             .text
               =project_log.content
-              -if project_log.user.id == current_user.id or current_user.director? or @project.owner.id == current_user.id
+              -if project_log.user.try(:id) == current_user.id or current_user.director? or @project.owner.id == current_user.id
                 =link_to content_tag(:span, '', class:'glyphicon glyphicon-remove'), supervise_destroy_project_logs_path(project_log.id), method: :delete, class:'remove'
 
 .col-md-3
